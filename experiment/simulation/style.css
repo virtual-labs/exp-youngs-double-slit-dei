@@ -1,0 +1,335 @@
+#canvas {
+    background-color: black;
+    width: 100%;
+    height:  50vh;
+    max-width : 100%;
+    margin-top : -166px;
+}
+
+.body
+{
+  margin-top : -10px;
+}
+
+
+#footer
+{
+  background-color:rgba(0,0,0);
+  width:100%;
+  height: 40vh;
+  display:flex;
+  position : relative;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+  justify-content : center;
+}
+
+.textp
+{
+  font-size: 1.5vw;
+  color: white;
+  position:relative;
+  top: 12.5vh;
+  left: 11vw;
+ 
+  width: fit-content;
+
+}
+.extra
+{
+  font-size: 1.5vw;
+  color: white;
+  position:absolute;
+  top: 12.5vh;
+  left: 65vw;
+ 
+  width: fit-content;
+
+}
+
+.textq
+{
+  font-size: 1.5vw;
+  color: white;
+  position:relative;
+  top: 15vh;
+  left: 11vw;
+  width : fit-content;
+
+}
+.textr
+{
+  font-size: 1.5vw;
+  color: white;
+  position:relative;
+  top:-13vh;
+  left: 44vw;
+  width : fit-content;
+
+}
+.textio
+{
+  font-size: 1.5vw;
+  color: white;
+  position:relative;
+  top:-13vh;
+  left: 53vw;
+  width : fit-content;
+
+}
+#image7{
+  align-items: center;
+}
+
+.texts
+{
+  font-size: 1.2em;
+  
+  position:relative;
+  top:1vh;
+  font-weight : bold;
+  left: 3.2vw;
+  color : rgba(0, 0, 0, 0.758);
+  font-weight : 3em;
+  width : fit-content;
+
+}
+.textu
+{
+  font-size: 1.5vw;
+  
+  position:relative;
+  top:5vh;
+  left: 3.9vw;
+  color : white;
+  font-weight : 3em;
+  width : fit-content;
+
+}
+
+.textt
+{
+  font-size: 1.5vw;
+  
+  position:relative;
+  top:14vh;
+  left: 15vw;
+  color : white;
+  width : fit-content;
+  font-weight : 3em;
+
+}
+.texts1
+{
+  font-size: 1.5vw;
+  position:absolute;
+  top:12.5vh;
+  left:86vw;
+  color : white;
+  width : fit-content;
+  font-weight : 3em;
+
+}
+#image{
+  color : black;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color : yellow;
+  white-space : nowrap;
+  display: inline-block;
+  width : fit-content;
+  padding: relative;
+  margin : 0;
+  padding : 0 ;
+  height : 80px;
+  margin-top : 5px;
+  padding : auto;
+  align-items: center;
+  justify-content: center;
+  align-items: center;
+  
+  
+}
+#image7{
+  color: white;
+}
+
+.design{
+  display: flex;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+#image2{
+  color : black;
+  margin-top: 5px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color : yellow;
+  white-space : nowrap;
+  display: inline-block;
+  width : fit-content;
+  padding: relative;
+  margin : 0;
+  padding : 0 ;
+  height : 50px;
+  
+}
+#image3{
+  margin-top : 5px;
+  color : black;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color : yellow;
+  white-space : nowrap;
+  display: inline-block;
+  width : fit-content;
+  padding: relative;
+  margin : 0;
+  padding : 0 ;
+  height : 50px;
+  
+}
+
+#image4{
+  margin-top : 5px;
+  color : black;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color : yellow;
+  white-space : nowrap;
+  display: inline-block;
+  width : fit-content;
+  padding: relative;
+  margin : 0;
+  padding : 0 ;
+  height : 80px;
+  
+}
+
+#image5{
+  margin-top : 5px;
+  color : black;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color : yellow;
+  white-space : nowrap;
+  display: inline-block;
+  width : fit-content;
+  padding: relative;
+  margin : 0;
+  padding : 0 ;
+  height : 100px;
+  
+}
+#image6{
+  margin-top : 5px;
+  color : black;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color : yellow;
+  white-space : nowrap;
+  display: inline-block;
+  width : fit-content;
+  padding: relative;
+  margin : 0;
+  padding : 0 ;
+  height : 100px;
+  
+}
+
+
+#text1{
+  display:flex;
+  margin-top:5px;
+  color:white;
+  
+}
+#text2{
+  display:flex;
+  margin-top:5px;
+  color:white;
+  margin-left: 5px;
+  
+}
+#buttons{
+  text-align: center;
+  align-items: center;
+}
+
+#footer-content {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 130px; /* Add margin-top property */
+  margin-left: -30px;
+  white-space : nowrap;
+
+}
+.button-container {
+  display: inline-block; /* Display buttons and labels in a single line */
+  margin-right: 3px; /* Add margin between button-container elements */
+  margin-left:3px;
+}
+
+
+@media only screen and (max-width: 1000px) {
+  #footer-content {
+    flex-wrap: wrap;
+  }
+}
+#section1{
+  align-items: center;
+  margin-bottom:2px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color:cornflowerblue;
+  margin-top: -40px;
+}
+#play-btn, #pause-btn, #reset-btn, #download-btn {
+  font-size: 3px;
+  padding: 0px 0px;
+  text-align: center;
+  cursor: pointer;
+  display: inline-block;
+  border: 0px solid rgb(30, 30, 30);
+  text-decoration: none;
+  margin: 0px 0px;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  
+} 
+#styling{
+  display:flex;
+  justify-content:center;
+  margin-bottom : 0px;  
+  align-items: center;
+}
+
+
+
+#mode{
+  margin-top:auto;
+  margin-bottom:auto;
+  display:flex;
+}
+
+
+@media only screen and (max-width: 767px) {
+  #footer {
+    max-width: 100%;
+  }
+}
+.style{
+  color : white;
+}
