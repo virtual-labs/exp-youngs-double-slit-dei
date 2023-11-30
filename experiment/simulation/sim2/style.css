@@ -36,17 +36,6 @@
   width: fit-content;
 
 }
-.extra
-{
-  font-size: 1.5vw;
-  color: white;
-  position:absolute;
-  top: 12.5vh;
-  left: 65vw;
- 
-  width: fit-content;
-
-}
 
 .textq
 {
@@ -287,6 +276,24 @@
     flex-wrap: wrap;
   }
 }
+
+#back-to-home{
+  position:absolute;
+  margin-top:-50px;
+  font-size:20px;
+  scale:0.8;
+  transition: transform 0.3s, background-color 0.3s, color 0.3s; /* Add transitions for a smoother effect */
+  position:absolute;
+}
+#back-to-home:hover {
+  transform: scale(1.2); /* Scale the button on hover for a 3D effect */
+  background-color: cornflowerblue; /* Change background color to blue on hover */
+  color: black; /* Change text color to white on hover */
+}
+
+#back-to-home:active {
+  transform: scale(0.9); /* Scale the button when clicked for a pressed effect */
+}
 #section1{
   align-items: center;
   margin-bottom:2px;
@@ -316,7 +323,17 @@
   align-items: center;
 }
 
+.extra
+{
+  font-size: 1.5vw;
+  color: white;
+  position:absolute;
+  top: 12.5vh;
+  left: 65vw;
+ 
+  width: fit-content;
 
+}
 
 #mode{
   margin-top:auto;
