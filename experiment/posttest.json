@@ -2,20 +2,20 @@
   "version": 2.0,
   "questions": [
     {
-      "question": "This is a Sample Question 1?",
+      "question": "In Young’s Double Slit Experiment, if instead of monochromatic light white light is used, what would be the observation?",
       "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
+        "a": "The pattern will not be visible",
+        "b": "The shape of the pattern will change from hyperbolic to circular",
+        "c": "Colored fringes will be observed with a white bright fringe at the center",
+        "d": "The bright and dark fringes will change position"
       },
       "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
+        "a": "Explanation 1",
         "b": "Explanation 2",
-        "c": "Explanation 2",
+        "c": "Explanation 2" <a href='https://www.sanfoundry.com/engineering-physics-questions-answers-youngs-experiment/'>here</a>,
         "d": "Explanation 2"
       },
-      "correctAnswer": "a",
+      "correctAnswer": "c",
       "difficulty": "beginner"
     },
     {
