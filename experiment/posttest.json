@@ -10,11 +10,12 @@
         "d": "The bright and dark fringes will change position"
       },
       "explanations": {
-        "a": "Explanation 1",
-        "b": "Explanation 2",
-        "c": "Explanation 2" <a href='https://www.sanfoundry.com/engineering-physics-questions-answers-youngs-experiment/'>here</a>,
-        "d": "Explanation 2"
-      },
+      "a": "Explanation 1",
+      "b": "Explanation 2",
+      "c": "Explanation 2. You can find more details <a href='https://www.sanfoundry.com/engineering-physics-questions-answers-youngs-experiment/'>here</a>.",
+      "d": "Explanation 2"
+    },
+
       "correctAnswer": "c",
       "difficulty": "beginner"
     },
