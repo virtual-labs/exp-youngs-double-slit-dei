@@ -1,0 +1,68 @@
+===================================
+PARTICLE SELECTOR TEST INSTRUCTIONS
+===================================
+
+Open: DoubleSlit_Clean.html in browser
+
+EXPECTED BEHAVIOR:
+
+1. DEFAULT STATE (8 electrons):
+   - Dropdown shows "8 electrons" selected
+   - Screen is empty/black
+   - Press PLAY button
+   - Exactly 8 white dots appear randomly on screen
+   - Simulation AUTOMATICALLY PAUSES after 8th electron
+   - Pattern: Random scattered dots (like image 'a')
+
+2. SELECT 270 ELECTRONS:
+   - Change dropdown to "270 electrons"
+   - Screen clears automatically
+   - Simulation starts automatically after 200ms
+   - You see 270 white dots appearing
+   - FAINT fringe pattern starts emerging
+   - Simulation stops automatically at 270
+   - Pattern: More dots, slight vertical bands visible (like image 'b')
+
+3. SELECT 2000 ELECTRONS:
+   - Change dropdown to "2000 electrons"
+   - Screen clears, simulation starts
+   - 2000 dots appear gradually
+   - CLEAR interference fringes emerge
+   - Sharp vertical bands visible
+   - Pattern: Clear fringe pattern (like image 'c')
+
+4. SELECT 6000 ELECTRONS:
+   - Change dropdown to "6000 electrons"
+   - Screen clears, simulation starts
+   - 6000 dots fill screen
+   - VERY SHARP interference pattern
+   - Well-defined bright/dark bands
+   - Pattern: Sharp, dense fringes (like image 'd')
+
+5. SELECT 12000 ELECTRONS:
+   - Maximum sharpness
+   - Extremely well-defined fringes
+   - Pattern nearly continuous
+
+CONTROLS:
+- Dropdown: Auto-starts simulation when changed
+- PLAY: Continue if stopped
+- PAUSE: Stop adding particles
+- STEP: Add one group of particles
+- RESET TIME: Clear screen, reset counter
+- RESET: Full reset to 8 electrons
+
+TECHNICAL DETAILS:
+- Rate: 50 particles per display step
+- Counter tracks exact particle count
+- Auto-pause when target reached
+- Screen clears on dropdown change
+
+TEST VERIFICATION:
+✓ Dropdown defaults to 8
+✓ Auto-start works
+✓ Counter increments correctly
+✓ Simulation pauses at target
+✓ Screen clears on change
+✓ Fringes emerge gradually (8→270→2000→6000→12000)
+✓ Reset button restores to 8 electrons
