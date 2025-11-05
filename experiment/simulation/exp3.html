@@ -18,7 +18,8 @@
     /* Sidebar Navigation Styles */
     body {
       margin: 0;
-      padding-left: 280px; /* NO FLEX - just padding for sidebar */
+      padding-left: 280px;
+      /* NO FLEX - just padding for sidebar */
       font-family: Arial, sans-serif;
     }
 
@@ -84,7 +85,7 @@
       font-size: 14px;
       line-height: 1.6;
     }
-    
+
     .sidebar .edu-content h3 {
       margin: 0 0 10px 0;
       font-size: 18px;
@@ -96,7 +97,7 @@
         padding-left: 0;
         padding-top: 200px;
       }
-      
+
       .sidebar {
         width: 100%;
         height: auto;
@@ -104,7 +105,7 @@
       }
     }
   </style>
-  <script type="text/javascript">
+  <!-- <script type="text/javascript">
     function Matrix() { var e = Array.prototype.concat.apply([], arguments); e.length || (e = [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]), this.m = hasFloat32Array ? new Float32Array(e) : e } function Vector(e, t, n) { typeof e == "object" ? (this.x = e[0] || 0, this.y = e[1] || 0, this.z = e[2] || 0) : (this.x = e || 0, this.y = t || 0, this.z = n || 0) } var EJSS_DRAWING2D = EJSS_DRAWING2D || {}; EJSS_DRAWING2D.AnalyticCurve = {}, EJSS_DRAWING2D.analyticCurve = function (e) { }; var EJSS_DRAWING2D = EJSS_DRAWING2D || {}; EJSS_DRAWING2D.Arrow = {}, EJSS_DRAWING2D.arrow = function (e) { }, EJSS_DRAWING2D.ArrowSet = {}, EJSS_DRAWING2D.arrowSet = function (e) { }; var EJSS_DRAWING2D = EJSS_DRAWING2D || {}; EJSS_DRAWING2D.Axis = {}, EJSS_DRAWING2D.axis = function (e) { }; var EJSS_DRAWING2D = EJSS_DRAWING2D || {}; EJSS_DRAWING2D.ByteRaster = {}, EJSS_DRAWING2D.byteRaster = function (e) { }; var EJSS_DRAWING2D = EJSS_DRAWING2D || {}; EJSS_DRAWING2D.CellLattice = {}, EJSS_DRAWING2D.cellLattice = function (e) { }; var EJSS_DRAWING2D = EJSS_DRAWING2D || {}; EJSS_DRAWING2D.Cursor = {}, EJSS_DRAWING2D.cursor = function (e) { }; var EJSS_DRAWING2D = EJSS_DRAWING2D || {}; EJSS_DRAWING2D.Custom = {}, EJSS_DRAWING2D.custom = function (e) { }; var EJSS_DRAWING2D = EJSS_DRAWING2D || {}; EJSS_DRAWING2D.DrawingPanel = {}, EJSS_DRAWING2D.drawingPanel = function (e) { }; var EJSS_DRAWING2D = EJSS_DRAWING2D || {}; EJSS_DRAWING2D.Element = {}, EJSS_DRAWING2D.element = function (e) { }; var EJSS_DRAWING2D = EJSS_DRAWING2D || {}; EJSS_DRAWING2D.ElementSet = {}, EJSS_DRAWING2D.elementSet = function (e, t) { }; var EJSS_DRAWING2D = EJSS_DRAWING2D || {}; EJSS_DRAWING2D.Grid = {}, EJSS_DRAWING2D.grid = function (e) { }; var EJSS_DRAWING2D = EJSS_DRAWING2D || {}; EJSS_DRAWING2D.Group = {}, EJSS_DRAWING2D.group = function (e) { }, EJSS_DRAWING2D.GroupSet = {}, EJSS_DRAWING2D.groupSet = function (e) { }; var EJSS_DRAWING2D = EJSS_DRAWING2D || {}; EJSS_DRAWING2D.Histogram = {}, EJSS_DRAWING2D.histogram = function (e) { }; var EJSS_DRAWING2D = EJSS_DRAWING2D || {}; EJSS_DRAWING2D.Image = {}, EJSS_DRAWING2D.image = function (e) { }; var EJSS_DRAWING2D = EJSS_DRAWING2D || {}; EJSS_DRAWING2D.ImageSet = {}, EJSS_DRAWING2D.imageSet = function (e) { }; var EJSS_CANVASGRAPHICS = EJSS_CANVASGRAPHICS || {}; EJSS_CANVASGRAPHICS.byteRaster = function (e, t) { if (t.getDataChanged()) { var n = t.getData(), r = t.getColorMapper().getColors(), i = n.length, s = n[0].length, o = t.getColorMapper().getNumberOfColors(), u = t.getPixelPosition(), a = t.getPixelSizes(), f = t.getRelativePositionOffset(a), l = u[0] + f[0], c = u[1] + f[1], h = Math.abs(a[0] / 2), p = Math.abs(a[1] / 2), d = e.canvas.id; EJSS_SVGGRAPHICS.Utils.ImageDataCanvas(i, s, o, n, r, function (t) { var n = document.getElementById(d); e = n.getContext("2d"), e.putImageData(t, l - p, c - p) }), t.setDataChanged(!1) } }; var EJSS_CANVASGRAPHICS = EJSS_CANVASGRAPHICS || {}; EJSS_CANVASGRAPHICS.ellipse = function (e, t) { var n = t.getPixelPosition(), r = t.getPixelSizes(), i = t.getRelativePositionOffset(r), s = n[0] + i[0], o = n[1] + i[1], u = Math.abs(r[0]), a = Math.abs(r[1]), f = .5522848, l = s - u / 2, c = o - a / 2; ox = u / 2 * f, oy = a / 2 * f, xe = l + u, ye = c + a, e.beginPath(), e.moveTo(l, o), e.bezierCurveTo(l, o - oy, s - ox, c, s, c), e.bezierCurveTo(s + ox, c, xe, o - oy, xe, o), e.bezierCurveTo(xe, o + oy, s + ox, ye, s, ye), e.bezierCurveTo(s - ox, ye, l, o + oy, l, o); var h = t.getStyle(); h.getDrawFill() && (e.fillStyle = h.getFillColor(), e.fill()), h.getDrawLines() && (e.lineWidth = h.getLineWidth(), e.strokeStyle = h.getLineColor(), e.stroke()) }; var EJSS_CANVASGRAPHICS = EJSS_CANVASGRAPHICS || {}; EJSS_CANVASGRAPHICS.point = function (e, t) { var n = t.getPixelPosition(), r = t.getPixelSizes(), i = t.getRelativePositionOffset(r), s = n[0] + i[0], o = n[1] + i[1]; e.beginPath(), e.arc(s, o, 2, 0, 2 * Math.PI); var u = t.getStyle(); e.fillStyle = u.getFillColor(), e.fill() }; var EJSS_CANVASGRAPHICS = EJSS_CANVASGRAPHICS || {}; EJSS_CANVASGRAPHICS.rectangle = function (e, t) {
       var n = t.getPixelPosition(), r = t.getPixelSizes(), i = t.getRelativePositionOffset(r), s = n[0] + i[0], o = n[1] + i[1], u = Math.abs(r[0]), a = Math.abs(r[1]); e.beginPath(), e.rect(s - u / 2, o - a / 2, u, a); var f = t.getStyle(); f.getDrawFill() && (e.fillStyle = f.getFillColor(), e.fill()), f.getDrawLines() && (e.lineWidth = f.getLineWidth(), e.strokeStyle =
         f.getLineColor(), e.stroke())
@@ -588,7 +589,7 @@
     }
 
 
-    //--><!]]></script>
+  </script> -->
 </head>
 
 <body>
@@ -602,38 +603,40 @@
     </nav>
     <div class="edu-content">
       <h3>🔬 Quantum Physics</h3>
-      <p>In quantum mechanics, particles exhibit wave-like properties, creating an interference pattern even when sent one at a time!</p>
+      <p>In quantum mechanics, particles exhibit wave-like properties, creating an interference pattern even when sent
+        one at a time!</p>
     </div>
   </div>
 
   <!-- EjsS Content - Direct body child, NO wrapper -->
   <div role="button" id="_topFrame" style="text-align:center"></div>
 
-    <script type="text/javascript">
-      var _model;
-      window.addEventListener('load',
-        function () {
-          _model = new DoubleSlitWaveParticleDuality("_topFrame", "_ejs_library/", null);
+  <script type="text/javascript">
+    var _model;
+    window.addEventListener('load',
+      function () {
+        _model = new DoubleSlitWaveParticleDuality("_topFrame", "_ejs_library/", null);
 
-          // Hide narrative panel after initialization
-          setTimeout(function () {
-            var narrative = document.getElementById('narrativePanel');
-            if (narrative) {
-              narrative.style.display = 'none';
-              narrative.style.visibility = 'hidden';
-            }
-          }, 100);
+        // Hide narrative panel after initialization
+        setTimeout(function () {
+          var narrative = document.getElementById('narrativePanel');
+          if (narrative) {
+            narrative.style.display = 'none';
+            narrative.style.visibility = 'hidden';
+          }
+        }, 100);
 
-          TextResizeDetector.TARGET_ELEMENT_ID = '_topFrame';
-          TextResizeDetector.USER_INIT_FUNC = function () {
-            var iBase = TextResizeDetector.addEventListener(function (e, args) {
-              _model._fontResized(args[0].iBase, args[0].iSize, args[0].iDelta);
-            }, null);
-            _model._fontResized(iBase);
-          };
-        }, false);
-      window.addEventListener('resize', function () { _model._resized(window.innerWidth, window.innerHeight); }, false);
-    </script>
+        TextResizeDetector.TARGET_ELEMENT_ID = '_topFrame';
+        TextResizeDetector.USER_INIT_FUNC = function () {
+          var iBase = TextResizeDetector.addEventListener(function (e, args) {
+            _model._fontResized(args[0].iBase, args[0].iSize, args[0].iDelta);
+          }, null);
+          _model._fontResized(iBase);
+        };
+      }, false);
+    window.addEventListener('resize', function () { _model._resized(window.innerWidth, window.innerHeight); }, false);
+  </script>
+  <script src="./exp3.js"></script>
 </body>
 
 </html>
