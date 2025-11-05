@@ -5026,13 +5026,11 @@ var EJSS_INTERFACE = EJSS_INTERFACE || {};
       t.getStyle().setPadding("0px"),
       t.getStyle().setMargin("0px"),
       t.getStyle().setTextAlign("TEXTA_CENTER"),
-      t
-        .getStyle()
-        .setCSS({
-          display: "block",
-          "margin-left": "auto",
-          "margin-right": "auto",
-        }),
+      t.getStyle().setCSS({
+        display: "block",
+        "margin-left": "auto",
+        "margin-right": "auto",
+      }),
       (t.getDOMElement().ontouchstart = function (e) {
         var t = document.getElementsByTagName("input");
         for (var n = 0; t.length > n; n++) t[n].disabled = !1;
@@ -5710,15 +5708,13 @@ var EJSS_INTERFACE = EJSS_INTERFACE || {};
       t.getStyle().setPadding("0px"),
       t.getStyle().setMargin("0px"),
       t.getStyle().setTextAlign("TEXTA_CENTER"),
-      t
-        .getStyle()
-        .setCSS({
-          "page-break-inside": "avoid",
-          display: "inline-block",
-          "margin-left": "auto",
-          "margin-right": "auto",
-          position: "absolute",
-        }),
+      t.getStyle().setCSS({
+        "page-break-inside": "avoid",
+        display: "inline-block",
+        "margin-left": "auto",
+        "margin-right": "auto",
+        position: "absolute",
+      }),
       (t.getDOMElement().ontouchstart = function (e) {
         var t = document.getElementsByTagName("input");
         for (var n = 0; t.length > n; n++) t[n].disabled = !1;
