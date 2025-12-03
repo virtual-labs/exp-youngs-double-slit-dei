@@ -72,14 +72,14 @@
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     }
 
-    .sidebar nav a.active {
+    .sidebar > .edu-content a.active {
       background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
       font-weight: bold;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     }
     
     /* Educational content styling */
-    .sidebar .edu-content a.active {
+    .sidebar .edu-content a.item-active {
       background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
       font-weight: bold;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
@@ -98,6 +98,16 @@
     .sidebar .edu-content h3 {
       margin: 0 0 10px 0;
       font-size: 18px;
+    }
+    .edu-content a{
+      text-decoration: none;color: white;
+      padding: 10px 50px;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+      background: rgba(255, 255, 255, 0.1);
+      font-size: 16px;
+      text-align: center;
+      font-weight: 500;
     }
 
     /* Responsive Design */
@@ -201,26 +211,52 @@
       transform: translateY(-1px) !important;
     }
 
-    /* Radio buttons container */
+    /* HIDE RADIO BUTTONS (both, left, right) */
     fieldset {
-      background: white !important;
-      border: 2px solid #e0e7ff !important;
-      border-radius: 10px !important;
-      padding: 15px !important;
-      margin: 10px 5px !important;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
+      display: none !important;
+      visibility: hidden !important;
+    }
+    
+    /* Hide radioPanel and titlePanel from JS */
+    #radioPanel,
+    #titlePanel {
+      display: none !important;
+      visibility: hidden !important;
     }
 
-    /* Radio button labels */
-    fieldset label {
-      color: #4a5568 !important;
-      font-weight: 500 !important;
-      cursor: pointer !important;
-      transition: color 0.3s ease !important;
+    /* Plot Panel with side boxes */
+    #plotPanel {
+      background-color: yellowgreen;
+      position: relative !important;
+      display: block !important;
+      /* justify-content: center !important;
+      align-items: center !important; */
+      
     }
 
-    fieldset label:hover {
-      color: #667eea !important;
+    /* Left and Right Slit Boxes */
+    #plotPanel::before,
+    #plotPanel::after {
+      content: '' !important;
+      position: absolute !important;
+      /* top: 5% !important; */
+      height: 90% !important;
+      /* background: red !important; */
+      z-index: 5 !important;
+    }
+
+    #plotPanel::before {
+      /* width: 500px; */
+      left: 170px !important;
+      width: 270px !important;
+
+      background-color: black;
+    }
+
+    #plotPanel::after {
+      right: 171px !important;
+      width: 320px !important;
+      background-color: black;
     }
 
     /* SVG Canvas border (simulation screen) - NEON STYLE */
@@ -236,6 +272,7 @@
       margin: 15px auto !important;
       display: block !important;
       position: relative !important;
+      z-index: 1 !important;
     }
 
     /* Screen frame effect */
@@ -573,6 +610,7 @@
       _model._userSerialize = function () {
         return {
           mode: mode,
+          observe: observe,
           rate: rate,
           lambda: lambda,
           D: D,
@@ -593,6 +631,7 @@
 
       _model._userUnserialize = function (json) {
         if (json.mode) mode = json.mode;
+        if (json.observe !== undefined) observe = json.observe;
         if (json.rate) rate = json.rate;
         if (json.lambda) lambda = json.lambda;
         if (json.D) D = json.D;
@@ -617,6 +656,7 @@
 
       _model.addToReset(function () {
         mode = 0; // EjsS Model.Variables.Var Table.mode
+        observe = true; // Detector ON by default (collapses wave function)
         rate = 50; // EjsS Model.Variables.Var Table.rate (medium speed for particle visualization)
         targetParticleCount = 8; // Reset to default 8 electrons
         currentParticleCount = 0; // Reset counter
@@ -642,13 +682,51 @@
       });
 
       function getHit(x) {  // > CustomCode.Detector Hit:1
-        var pd = Math.cos(Math.PI * x * d / lambda) * Math.cos(Math.PI * x * d / lambda);  // double slit  // > CustomCode.Detector Hit:2
+        var pd = Math.cos(Math.PI * x * d / lambda) * Math.cos(Math.PI * x * d / lambda);  // double slit interference  // > CustomCode.Detector Hit:2
         var beta = Math.PI * D * x / lambda;  // > CustomCode.Detector Hit:3
-        var ps = (beta === 0) ? 1 : Math.sin(beta) * Math.sin(beta) / beta / beta; // single slit  // > CustomCode.Detector Hit:4
-        if (mode === 0) {  // > CustomCode.Detector Hit:5
-          return pd * ps > Math.random();  // > CustomCode.Detector Hit:6
-        } else {  // > CustomCode.Detector Hit:7
-          return ps > Math.random();  // > CustomCode.Detector Hit:8
+        var ps = (beta === 0) ? 1 : Math.sin(beta) * Math.sin(beta) / beta / beta; // single slit diffraction  // > CustomCode.Detector Hit:4
+        
+        // QUANTUM DETECTOR LOGIC:
+        // Detector ON (observe=true): ONLY 2 central bright bands (classical)
+        // Detector OFF (observe=false): Multiple interference fringes (quantum)
+        
+        if (mode === 0) {  // Both slits open
+          if (observe) {
+            // 🔍 DETECTOR ON: Classical behavior - ONLY 2 NARROW VERTICAL LINES
+            // When detector observes which slit particle goes through → wave collapses
+            // Result: Particles cluster at 2 specific positions (NO interference)
+            
+            // Define 2 precise peak positions (close to center)
+            var leftLineCenter = -3;   // Left line position
+            var rightLineCenter = 3;   // Right line position
+            var bandwidth = 1.5;       // Very narrow line width
+            
+            // Calculate distance from each line center
+            var distFromLeft = Math.abs(x - leftLineCenter);
+            var distFromRight = Math.abs(x - rightLineCenter);
+            
+            // Strict Gaussian peaks - VERY sharp and narrow
+            var leftPeak = Math.exp(-Math.pow(distFromLeft, 2) / (2 * bandwidth * bandwidth));
+            var rightPeak = Math.exp(-Math.pow(distFromRight, 2) / (2 * bandwidth * bandwidth));
+            
+            // Combine peaks
+            var probability = leftPeak + rightPeak;
+            
+            // VERY HIGH threshold - only accept if very close to peak centers
+            var threshold = 0.5;
+            
+            // Accept ONLY if probability is high enough
+            if (probability > threshold) {
+              return probability > Math.random();  // ✅ Accepted - forms 2 lines
+            } else {
+              return false;  // ❌ Rejected - too far from peaks
+            }
+          } else {
+            // 🌊 DETECTOR OFF: Quantum interference - Multiple fringes
+            return pd * ps > Math.random();  // Full interference pattern
+          }
+        } else {  // Single slit (left or right)
+          return ps > Math.random();  // Single slit diffraction
         }  // > CustomCode.Detector Hit:9
       }  // > CustomCode.Detector Hit:10
 
@@ -664,9 +742,7 @@
 
       _model.addToInitialization(function () {
         if (!__pagesEnabled["Create Image Array"]) return;
-        _view.bothRadio.setChecked(mode === 0);  // > Initialization.Create Image Array:1
-        _view.leftRadio.setChecked(mode === 1);  // > Initialization.Create Image Array:2
-        _view.rightRadio.setChecked(mode === 2);  // > Initialization.Create Image Array:3
+        mode = 0;  // Always use both slits (no radio buttons)
         canvas = _view.canvas;  // > Initialization.Create Image Array:4
         canvas.setWidth(plotWidth);  // > Initialization.Create Image Array:5
         canvas.setHeight(plotHeight);  // > Initialization.Create Image Array:6
@@ -741,9 +817,16 @@
             case -10: break; // make Lint happy
             default:
             case 0:
-              _view.bothRadio.setAction("OnCheckOn", function () { mode = 0; }); // HtmlView Page setting action 'OnCheckOn' for element 'bothRadio'
-              _view.leftRadio.setAction("OnCheckOn", function () { mode = 1; }); // HtmlView Page setting action 'OnCheckOn' for element 'leftRadio'
-              _view.rightRadio.setAction("OnCheckOn", function () { mode = 2; }); // HtmlView Page setting action 'OnCheckOn' for element 'rightRadio'
+              _view.detectorCheckbox.linkProperty("Checked", function () { return observe; }, function (_v) { observe = _v; }); // Link detector checkbox to observe variable
+              _view.detectorCheckbox.setAction("OnChange", function () { 
+                observe = _view.detectorCheckbox.getChecked(); 
+                // Update checkbox text based on state
+                if (observe) {
+                  _view.detectorCheckbox.setText("🔍 Detector ON (Wave Collapses → 2 Peaks)");
+                } else {
+                  _view.detectorCheckbox.setText("🔍 Detector OFF (Quantum Interference)");
+                }
+              }); // Toggle observe variable on checkbox change
               _view.canvas.linkProperty("Height", function () { return plotHeight; }, function (_v) { plotHeight = _v; }); // HtmlView Page linking property 'Height' for element 'canvas'
               _view.canvas.linkProperty("Width", function () { return plotWidth; }, function (_v) { plotWidth = _v; }); // HtmlView Page linking property 'Width' for element 'canvas'
               _view.runPauseButton.setAction("OffClick", _pause); // HtmlView Page setting action 'OffClick' for element 'runPauseButton'
@@ -819,22 +902,60 @@
         _view._9(EJSS_INTERFACE.wrappedPanel, "wrappedPanel", _view._topFrame) // EJsS HtmlView.HtmlView Page: declaration of element 'wrappedPanel'
           ;
 
-        _view._9(EJSS_INTERFACE.panel, "radioPanel", _view.wrappedPanel) // EJsS HtmlView.HtmlView Page: declaration of element 'radioPanel'
+        _view._9(EJSS_INTERFACE.panel, "titlePanel", _view.wrappedPanel) // Title panel
+          .setProperty("CSS", { "text-align": "center", "padding": "15px 0", "margin-bottom": "10px" })
           ;
 
-        _view._9(EJSS_INTERFACE.radioButton, "bothRadio", _view.radioPanel) // EJsS HtmlView.HtmlView Page: declaration of element 'bothRadio'
-          .setProperty("Text", "both") // EJsS HtmlView.HtmlView Page: setting property 'Text' for element 'bothRadio'
+        _view._9(EJSS_INTERFACE.label, "titleLabel", _view.titlePanel) // Title label
+          .setProperty("Text", "Quantum Particle with Detector")
+          .setProperty("CSS", { 
+            "font-size": "24px", 
+            "font-weight": "bold", 
+            "color": "#00ff41",
+            "text-shadow": "0 0 10px #00ff41, 0 0 20px #00ff41",
+            "display": "block",
+            "text-align": "center"
+          })
           ;
 
-        _view._9(EJSS_INTERFACE.radioButton, "leftRadio", _view.radioPanel) // EJsS HtmlView.HtmlView Page: declaration of element 'leftRadio'
-          .setProperty("Text", "left") // EJsS HtmlView.HtmlView Page: setting property 'Text' for element 'leftRadio'
+        _view._9(EJSS_INTERFACE.panel, "detectorPanel", _view.wrappedPanel) // Detector control panel
+          .setProperty("CSS", { "margin-top": "10px" })
           ;
 
-        _view._9(EJSS_INTERFACE.radioButton, "rightRadio", _view.radioPanel) // EJsS HtmlView.HtmlView Page: declaration of element 'rightRadio'
-          .setProperty("Text", "right") // EJsS HtmlView.HtmlView Page: setting property 'Text' for element 'rightRadio'
+        _view._9(EJSS_INTERFACE.checkBox, "detectorCheckbox", _view.detectorPanel) // Detector ON/OFF checkbox
+          .setProperty("Text", "🔍 Detector ON (Wave Collapses)")
+          .setProperty("Checked", true) // Default ON
+          .setProperty("CSS", { "color": "#00ff41", "font-weight": "bold", "font-size": "14px" })
           ;
 
         _view._9(EJSS_INTERFACE.panel, "plotPanel", _view.wrappedPanel) // EJsS HtmlView.HtmlView Page: declaration of element 'plotPanel'
+          .setProperty("CSS", { "display": "flex", "justify-content": "center", "align-items": "center", "position": "relative" })
+          ;
+
+        _view._9(EJSS_INTERFACE.panel, "leftSlitBox", _view.plotPanel) // Left slit indicator box
+          .setProperty("CSS", { 
+            "position": "absolute", 
+            "left": "0", 
+            "top": "0", 
+            "width": "30px", 
+            "height": "100%", 
+            "background": "red",
+            "border": "2px solid #667eea",
+            "z-index": "100"
+          })
+          ;
+
+        _view._9(EJSS_INTERFACE.panel, "rightSlitBox", _view.plotPanel) // Right slit indicator box
+          .setProperty("CSS", { 
+            "position": "absolute", 
+            "right": "0", 
+            "top": "0", 
+            "width": "30px", 
+            "height": "100%", 
+            "background": "red",
+            "border": "2px solid #667eea",
+            "z-index": "100"
+          })
           ;
 
         _view._9(EJSS_INTERFACE.canvas, "canvas", _view.plotPanel) // EJsS HtmlView.HtmlView Page: declaration of element 'canvas'
@@ -959,21 +1080,21 @@
     <nav>
       <a href="index.html">Experiment 1<br />Classical Particles: sand</a>
       <a href="exp2.html">Experiment 2<br />Classical Wave: Water</a>
-      <a href="exp3.html" class="active">Experiment 3<br />Quantum Object: Electron or Photon</a>
+      <a href="exp3.html" >Experiment 3<br />Quantum Object: Electron or Photon</a>
     </nav>
     <div class="edu-content">
       <h3>🔬 Quantum Physics</h3>
       <p>In quantum mechanics, particles exhibit wave-like properties, creating an interference pattern even when sent
         one at a time!</p>
-        <a href="exp3withdetector.html" style="text-decoration: none;color: white;
-      padding: 10px 50px;
-      border-radius: 10px;
-      transition: all 0.3s ease;
-      background: rgba(255, 255, 255, 0.1);
-      font-size: 16px;
-      text-align: center;
-      font-weight: 500;">with Detector</a>
+        <a href="exp3withdetector.html"  class="active">with Detector</a>
       </div>
+  </div>
+
+  <!-- Simulation Title Header -->
+  <div style="text-align: center; padding: 25px 0 15px 0; margin: 0; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+    <h1 style="font-size: 32px; font-weight: bold; color: #ffffff; padding-left: 20px; text-shadow: 0 0 15px rgba(255,255,255,0.5), 0 0 30px rgba(255,255,255,0.3); margin: 0; letter-spacing: 2px;">
+      ⚛️ Quantum Particle with Detector
+    </h1>
   </div>
 
   <!-- EjsS Content - Direct body child, NO wrapper -->
