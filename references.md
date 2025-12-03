@@ -1,0 +1,2 @@
+- Demonstration of Single-Electron Buildup of an Interference Pattern" – Tonomura et al., American Journal of Physics (1989).
+- Hecht, Optics, 4th Edition
