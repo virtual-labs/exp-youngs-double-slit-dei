@@ -1,1 +1,1 @@
-## Quantum nature of light with Young’s double slit experiment
+## Quantum nature of Light with Young’s Double slit experiment
