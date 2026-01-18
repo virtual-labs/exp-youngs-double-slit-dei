@@ -136,43 +136,27 @@ function stopGifAnimation() {
     animationGif.src = canvas.toDataURL();
 }
 
-let animationTimer = null;
-const GIF_DURATION = 8000; // Duration of GIF animation in milliseconds (adjust as needed)
-
 function startAnimation() {
     isRunning = true;
     isPaused = false;
     animationGif.classList.remove("paused", "stopped");
-
-    // Hide graph button when starting
-    document.getElementById("showGraphBtn").classList.remove("visible");
-
-    // Hide graph if visible
-    if (isGraphVisible) {
-        toggleGraph();
-    }
 
     // Restart GIF animation
     animationGif.src = "";
     setTimeout(() => {
         animationGif.src = originalGifSrc;
     }, 10);
+}
 
-    // Clear any existing timer
-    if (animationTimer) {
-        clearTimeout(animationTimer);
+function stopAnimation() {
+    if (isRunning) {
+        isRunning = false;
+        isPaused = true;
+        animationGif.classList.add("paused");
+
+        // Immediately freeze GIF at current frame
+        stopGifAnimation();
     }
-
-    // Set timer to show graph button when animation completes
-    animationTimer = setTimeout(() => {
-        if (isRunning) {
-            isRunning = false;
-            animationGif.classList.add("paused");
-            stopGifAnimation();
-            // Show the graph button after animation finishes
-            document.getElementById("showGraphBtn").classList.add("visible");
-        }
-    }, GIF_DURATION);
 }
 
 function resetAnimation() {
@@ -180,12 +164,6 @@ function resetAnimation() {
     isPaused = false;
     animationGif.classList.remove("paused");
     animationGif.classList.add("stopped");
-
-    // Clear animation timer
-    if (animationTimer) {
-        clearTimeout(animationTimer);
-        animationTimer = null;
-    }
 
     // Reset to initial static frame
     animationGif.src = "";
@@ -200,9 +178,6 @@ function resetAnimation() {
     if (isGraphVisible) {
         toggleGraph();
     }
-
-    // Hide the graph button on reset
-    document.getElementById("showGraphBtn").classList.remove("visible");
 }
 
 function toggleGraph() {
@@ -220,8 +195,8 @@ function toggleGraph() {
 }
 
 document.getElementById("startBtn").addEventListener("click", startAnimation);
+document.getElementById("stopBtn").addEventListener("click", stopAnimation);
 document.getElementById("resetBtn").addEventListener("click", resetAnimation);
 document.getElementById("showGraphBtn").addEventListener("click", toggleGraph);
 
 generateIntensityData();
-
