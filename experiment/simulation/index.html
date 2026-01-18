@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,7 @@
         * {
             box-sizing: border-box;
         }
-        
+
         body {
             margin: 0;
             padding: 0;
@@ -17,33 +18,33 @@
             background: linear-gradient(to bottom, #f5f5f5, #e0e0e0);
             font-family: Arial, sans-serif;
         }
-        
+
         /* Sidebar Navigation */
         .sidebar {
             width: 280px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             padding: 30px 20px;
-            box-shadow: 4px 0 15px rgba(0,0,0,0.3);
+            box-shadow: 4px 0 15px rgba(0, 0, 0, 0.3);
             position: fixed;
             height: 100vh;
             overflow-y: auto;
             z-index: 1000;
         }
-        
+
         .sidebar h2 {
             font-size: 24px;
             margin-bottom: 30px;
             text-align: center;
             color: white;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
-        
+
         .sidebar .nav-item {
             display: block;
             padding: 15px 20px;
             margin-bottom: 15px;
-            background: rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 10px;
             text-decoration: none;
             color: white;
@@ -53,31 +54,31 @@
             border: 2px solid transparent;
             text-align: center;
         }
-        
+
         .sidebar .nav-item:hover {
-            background: rgba(255,255,255,0.2);
+            background: rgba(255, 255, 255, 0.2);
             transform: translateX(5px);
-            border-color: rgba(255,255,255,0.5);
+            border-color: rgba(255, 255, 255, 0.5);
         }
-        
+
         .sidebar .nav-item.active {
             background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
             border-color: white;
         }
-        
+
         .sidebar .nav-item .experiment-number {
             display: block;
             font-size: 20px;
             font-weight: bold;
             margin-bottom: 5px;
         }
-        
+
         .sidebar .nav-item .experiment-type {
             font-size: 14px;
             opacity: 0.9;
         }
-        
+
         /* Main Content Area */
         .main-content {
             margin-left: 280px;
@@ -89,32 +90,32 @@
             justify-content: center;
             min-height: 100vh;
         }
-        
+
         .container {
             text-align: center;
             background: white;
             padding: 40px;
             border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
             max-width: 900px;
             width: 100%;
         }
-        
+
         h1 {
             color: #2c3e50;
             margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
-        
+
         #animationContainer {
             border: 3px solid #ecf0f1;
             border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
             background: #f0f0f0;
             overflow: hidden;
             position: relative;
         }
-        
+
         #animationGif {
             display: block;
             width: 800px;
@@ -122,16 +123,16 @@
             max-height: 600px;
             object-fit: contain;
         }
-        
+
         #intensityGraph {
             margin-bottom: 20px;
             border: 3px solid #333;
             border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
             background: white;
             display: none;
         }
-        
+
         .controls {
             margin-top: 20px;
             display: flex;
@@ -139,7 +140,7 @@
             flex-wrap: wrap;
             justify-content: center;
         }
-        
+
         button {
             padding: 12px 30px;
             font-size: 16px;
@@ -148,53 +149,58 @@
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.3s;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
         }
-        
+
         #startBtn {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
         }
-        
+
         #startBtn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 8px rgba(0,0,0,0.4);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
         }
-        
+
         #startBtn:active {
             transform: translateY(0);
         }
-        
+
         #stopBtn {
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             color: white;
         }
-        
+
         #stopBtn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 8px rgba(0,0,0,0.4);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
         }
-        
+
         #resetBtn {
             background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
             color: white;
         }
-        
+
         #resetBtn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 8px rgba(0,0,0,0.4);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
         }
-        
+
         #showGraphBtn {
             background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
             color: white;
+            display: none;
         }
-        
+
+        #showGraphBtn.visible {
+            display: inline-block;
+        }
+
         #showGraphBtn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 8px rgba(0,0,0,0.4);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
         }
-        
+
         .info {
             color: #34495e;
             margin-top: 15px;
@@ -202,16 +208,17 @@
             font-size: 14px;
             max-width: 600px;
         }
-        
+
         #animationGif.paused {
             filter: grayscale(30%) brightness(0.9);
         }
-        
+
         #animationGif.stopped {
             opacity: 0.7;
         }
     </style>
 </head>
+
 <body>
     <!-- Sidebar Navigation -->
     <div class="sidebar">
@@ -229,31 +236,53 @@
             <span class="experiment-type">Quantum Object: Electron or Photon</span>
         </a>
     </div>
-    
+
     <!-- Main Content -->
     <div class="main-content">
         <div class="container">
             <h1>Double Slit Sand Simulation</h1>
-            
+
             <div id="animationContainer">
                 <img id="animationGif" src="image/Animation part.gif" alt="Double Slit Animation">
             </div>
-            
+
             <canvas id="intensityGraph" width="800" height="300"></canvas>
-            
+
             <div class="controls">
                 <button id="startBtn">Start Sand Flow</button>
-                <button id="stopBtn">Stop Sand Flow</button>
                 <button id="resetBtn">Reset Simulation</button>
                 <button id="showGraphBtn">Show Graph</button>
             </div>
-            
+
             <div class="info">
-                <p>Click Start Sand Flow to begin the animation. Show Graph displays the intensity distribution pattern!</p>
+                <p>Click Start Sand Flow to begin the animation. Show Graph displays the intensity distribution pattern!
+                </p>
             </div>
         </div>
+
+        <!-- Procedure Section -->
+        <div
+            style="max-width: 900px; width: 100%; margin: 20px auto; padding: 25px; background: linear-gradient(135deg, #f8f9ff 0%, #ffffff 100%); border-radius: 15px; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.15); border: 2px solid #667eea;">
+            <h3 style="color: #667eea; margin-bottom: 15px; font-size: 20px;">📋 Procedure</h3>
+            <ol style="margin: 0 0 0 20px; line-height: 2.5; color: #555; font-size: 14px;">
+                <li><strong>Start Sand Flow:</strong> Click the "Start Sand Flow" button to begin dropping sand
+                    particles through the double slits.</li>
+                <li><strong>Observe Particle Behavior:</strong> Watch as individual sand grains pass through either the
+                    left or right slit, behaving as classical particles.</li>
+                <li><strong>Notice the Pattern:</strong> As more particles accumulate, observe how they form two
+                    distinct piles behind each slit.</li>
+                <li><strong>Stop the Animation:</strong> Click "Stop Sand Flow" to pause the simulation and freeze the
+                    current state.</li>
+                <li><strong>View the Graph:</strong> After stopping, click "Show Graph" to see the intensity
+                    distribution showing two separate peaks.</li>
+                <li><strong>Classical Behavior:</strong> Notice that unlike waves, classical particles create two bands
+                    - no interference pattern occurs.</li>
+                <li><strong>Reset:</strong> Click "Reset Simulation" to clear the sand and start a new experiment.</li>
+            </ol>
+        </div>
     </div>
-    
+
     <script src="./scripts/simulation.js"></script>
 </body>
+
 </html>

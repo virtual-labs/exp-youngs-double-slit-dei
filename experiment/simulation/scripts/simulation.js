@@ -11,7 +11,7 @@ let intensityData = [];
 let originalGifSrc = "image/Animation part.gif";
 
 // Initialize - show static GIF on load
-window.addEventListener('load', function() {
+window.addEventListener('load', function () {
     stopGifAnimation();
     animationGif.classList.add('stopped');
 });
@@ -22,19 +22,19 @@ function generateIntensityData() {
     const width = graphCanvas.width;
     const centerX = width / 2;
     const slitSeparation = 180; // Distance between two peaks
-    
+
     for (let x = 0; x < width; x++) {
         const position = x - centerX;
-        
+
         // Two separate gaussian peaks - classical particle behavior
         const peak1X = -slitSeparation / 2;
         const peak2X = slitSeparation / 2;
         const sigma = 60; // Width of each peak
-        
+
         // Calculate intensity for each peak
         const intensity1 = Math.exp(-Math.pow(position - peak1X, 2) / (2 * sigma * sigma));
         const intensity2 = Math.exp(-Math.pow(position - peak2X, 2) / (2 * sigma * sigma));
-        
+
         // Total intensity is sum of both peaks (no interference, classical behavior)
         const totalIntensity = intensity1 + intensity2;
         intensityData.push(totalIntensity);
@@ -44,80 +44,80 @@ function generateIntensityData() {
 // Draw intensity graph
 function drawIntensityGraph() {
     if (!isGraphVisible || intensityData.length === 0) return;
-    
+
     const width = graphCanvas.width;
     const height = graphCanvas.height;
     const padding = 50;
     const graphHeight = height - 2 * padding;
-    
+
     graphCtx.fillStyle = "white";
     graphCtx.fillRect(0, 0, width, height);
-    
+
     graphCtx.strokeStyle = "#333";
     graphCtx.lineWidth = 2;
     graphCtx.strokeRect(0, 0, width, height);
-    
+
     graphCtx.fillStyle = "#2c3e50";
     graphCtx.font = "bold 18px Arial";
     graphCtx.textAlign = "center";
     graphCtx.fillText("Intensity Distribution Graph", width / 2, 30);
-    
+
     graphCtx.strokeStyle = "#34495e";
     graphCtx.lineWidth = 2;
-    
+
     graphCtx.beginPath();
     graphCtx.moveTo(padding, padding);
     graphCtx.lineTo(padding, height - padding);
     graphCtx.stroke();
-    
+
     graphCtx.beginPath();
     graphCtx.moveTo(padding, height - padding);
     graphCtx.lineTo(width - padding, height - padding);
     graphCtx.stroke();
-    
+
     graphCtx.fillStyle = "#2c3e50";
     graphCtx.font = "14px Arial";
     graphCtx.textAlign = "center";
     graphCtx.fillText("Position", width / 2, height - 10);
-    
+
     graphCtx.save();
     graphCtx.translate(15, height / 2);
     graphCtx.rotate(-Math.PI / 2);
     graphCtx.fillText("Intensity", 0, 0);
     graphCtx.restore();
-    
+
     const maxIntensity = Math.max(...intensityData);
-    
+
     graphCtx.strokeStyle = "#e74c3c";
     graphCtx.fillStyle = "rgba(231, 76, 60, 0.2)";
     graphCtx.lineWidth = 3;
-    
+
     graphCtx.beginPath();
     const graphWidth = width - 2 * padding;
-    
+
     for (let i = 0; i < intensityData.length; i++) {
         const x = padding + (i / intensityData.length) * graphWidth;
         const normalizedIntensity = intensityData[i] / maxIntensity;
         const y = height - padding - (normalizedIntensity * graphHeight);
-        
+
         if (i === 0) {
             graphCtx.moveTo(x, y);
         } else {
             graphCtx.lineTo(x, y);
         }
     }
-    
+
     graphCtx.lineTo(width - padding, height - padding);
     graphCtx.lineTo(padding, height - padding);
     graphCtx.closePath();
     graphCtx.fill();
-    
+
     graphCtx.beginPath();
     for (let i = 0; i < intensityData.length; i++) {
         const x = padding + (i / intensityData.length) * graphWidth;
         const normalizedIntensity = intensityData[i] / maxIntensity;
         const y = height - padding - (normalizedIntensity * graphHeight);
-        
+
         if (i === 0) {
             graphCtx.moveTo(x, y);
         } else {
@@ -136,27 +136,43 @@ function stopGifAnimation() {
     animationGif.src = canvas.toDataURL();
 }
 
+let animationTimer = null;
+const GIF_DURATION = 8000; // Duration of GIF animation in milliseconds (adjust as needed)
+
 function startAnimation() {
     isRunning = true;
     isPaused = false;
     animationGif.classList.remove("paused", "stopped");
-    
+
+    // Hide graph button when starting
+    document.getElementById("showGraphBtn").classList.remove("visible");
+
+    // Hide graph if visible
+    if (isGraphVisible) {
+        toggleGraph();
+    }
+
     // Restart GIF animation
     animationGif.src = "";
     setTimeout(() => {
         animationGif.src = originalGifSrc;
     }, 10);
-}
 
-function stopAnimation() {
-    if (isRunning) {
-        isRunning = false;
-        isPaused = true;
-        animationGif.classList.add("paused");
-        
-        // Immediately freeze GIF at current frame
-        stopGifAnimation();
+    // Clear any existing timer
+    if (animationTimer) {
+        clearTimeout(animationTimer);
     }
+
+    // Set timer to show graph button when animation completes
+    animationTimer = setTimeout(() => {
+        if (isRunning) {
+            isRunning = false;
+            animationGif.classList.add("paused");
+            stopGifAnimation();
+            // Show the graph button after animation finishes
+            document.getElementById("showGraphBtn").classList.add("visible");
+        }
+    }, GIF_DURATION);
 }
 
 function resetAnimation() {
@@ -164,7 +180,13 @@ function resetAnimation() {
     isPaused = false;
     animationGif.classList.remove("paused");
     animationGif.classList.add("stopped");
-    
+
+    // Clear animation timer
+    if (animationTimer) {
+        clearTimeout(animationTimer);
+        animationTimer = null;
+    }
+
     // Reset to initial static frame
     animationGif.src = "";
     setTimeout(() => {
@@ -173,16 +195,19 @@ function resetAnimation() {
             stopGifAnimation();
         }, 100);
     }, 10);
-    
+
     // Hide graph on reset
     if (isGraphVisible) {
         toggleGraph();
     }
+
+    // Hide the graph button on reset
+    document.getElementById("showGraphBtn").classList.remove("visible");
 }
 
 function toggleGraph() {
     isGraphVisible = !isGraphVisible;
-    
+
     if (isGraphVisible) {
         graphCanvas.style.display = "block";
         generateIntensityData();
@@ -195,8 +220,8 @@ function toggleGraph() {
 }
 
 document.getElementById("startBtn").addEventListener("click", startAnimation);
-document.getElementById("stopBtn").addEventListener("click", stopAnimation);
 document.getElementById("resetBtn").addEventListener("click", resetAnimation);
 document.getElementById("showGraphBtn").addEventListener("click", toggleGraph);
 
 generateIntensityData();
+
