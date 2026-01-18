@@ -2,36 +2,56 @@
   "version": 2.0,
   "questions": [
     {
-      "question": "In Young’s Double Slit Experiment, if instead of monochromatic light white light is used, what would be the observation?",
+      "question": "1. What happens to the diffraction pattern when slit width decreases?",
       "answers": {
-        "a": "The pattern will not be visible",
-        "b": "The shape of the pattern will change from hyperbolic to circular",
-        "c": "Colored fringes will be observed with a white bright fringe at the center",
-        "d": "The bright and dark fringes will change position"
+        "a": "Pattern disappears",
+        "b": "Fringe width increases",
+        "c": "Fringe width decreases",
+        "d": "Intensity becomes zero"
       },
-      "explanations": {
-      "a": "Explanation 1",
-      "b": "Explanation 2",
-      "c": "Explanation 2. You can find more details <a href='https://www.sanfoundry.com/engineering-physics-questions-answers-youngs-experiment/'>here</a>.",
-      "d": "Explanation 2"
-    },
-
-      "correctAnswer": "c",
+      "correctAnswer": "b",
       "difficulty": "beginner"
     },
     {
-      "question": "This is a Sample Question 2?",
+      "question": "2. In double-slit interference, what happens if slit separation is doubled?",
       "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
+        "a": "Fringe width becomes half",
+        "b": "Fringe width doubles",
+        "c": "No change",
+        "d": "Brightness increases"
       },
-      "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
+      "correctAnswer": "a",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "3. Which experiment directly supports wave nature of matter?",
+      "answers": {
+        "a": "Photoelectric effect",
+        "b": "Electron double-slit experiment",
+        "c": "Compton scattering",
+        "d": "Newton’s rings"
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "4. In single-slit diffraction, minima occur when:",
+      "answers": {
+        "a": "a sinθ = λ/2",
+        "b": "a sinθ = mλ",
+        "c": "d sinθ = λ",
+        "d": "θ = 0"
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "5. What happens when you try to observe which slit an electron passes through?",
+      "answers": {
+        "a": "Interference pattern becomes sharper",
+        "b": "Electrons stop moving",
+        "c": "Interference pattern disappears",
+        "d": "More maxima are formed"
       },
       "correctAnswer": "c",
       "difficulty": "beginner"

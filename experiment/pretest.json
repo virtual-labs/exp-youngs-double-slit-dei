@@ -2,35 +2,56 @@
   "version": 2.0,
   "questions": [
     {
-      "question": "This is a Sample Question 1?",
+      "question": "1. What causes diffraction of light?",
       "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
+        "a": "Reflection from a mirror",
+        "b": "Bending of light around obstacles or slits",
+        "c": "Absorption by a surface",
+        "d": "Refraction through a lens"
       },
-      "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
-      },
-      "correctAnswer": "a",
+      "correctAnswer": "b",
       "difficulty": "beginner"
     },
     {
-      "question": "This is a Sample Question 2?",
+      "question": "2. In a single-slit diffraction pattern, the central maximum is:",
       "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
+        "a": "Narrower than all other fringes",
+        "b": "Wider and brighter than other fringes",
+        "c": "Absent",
+        "d": "Equal in width to other fringes"
       },
-      "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "3. In Young’s double-slit experiment, fringe width increases when:",
+      "answers": {
+        "a": "Wavelength decreases",
+        "b": "Distance between slits increases",
+        "c": "Screen distance increases",
+        "d": "Light intensity increases"
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "4. In Fraunhofer diffraction, the source and screen are:",
+      "answers": {
+        "a": "Very close to the slit",
+        "b": "At infinite or very large distance",
+        "c": "Moving with constant speed",
+        "d": "Placed inside a lens"
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "5. What pattern is observed for electrons in a double-slit experiment?",
+      "answers": {
+        "a": "No pattern",
+        "b": "Random hits only",
+        "c": "Interference pattern similar to light",
+        "d": "Only two bright spots"
       },
       "correctAnswer": "c",
       "difficulty": "beginner"
