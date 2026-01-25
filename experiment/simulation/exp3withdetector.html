@@ -37,20 +37,83 @@
       box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
       overflow-y: auto;
       box-sizing: border-box;
+      transition: width 0.3s ease, padding 0.3s ease;
+    }
+
+    /* Sidebar Toggle Button */
+    .sidebar-toggle {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      width: 35px;
+      height: 35px;
+      background: rgba(255, 255, 255, 0.2);
+      border: 2px solid rgba(255, 255, 255, 0.5);
+      border-radius: 8px;
+      color: white;
+      font-size: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      z-index: 1001;
+    }
+
+    .sidebar-toggle:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: scale(1.1);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Collapsed Sidebar State */
+    .sidebar.collapsed {
+      width: 80px;
+      padding: 20px 10px;
+    }
+
+    .sidebar.collapsed h2 {
+      display: none;
+    }
+
+    .sidebar.collapsed nav {
+      margin-top: 50px;
+    }
+
+    .sidebar.collapsed nav a {
+      padding: 12px 5px;
+      font-size: 11px;
+      line-height: 1.2;
+    }
+
+    .sidebar.collapsed nav a .exp-desc {
+      display: none;
+    }
+
+    .sidebar.collapsed .edu-content {
+      display: none;
+    }
+
+    body.sidebar-collapsed {
+      padding-left: 80px;
     }
 
     .sidebar h2 {
       color: white;
       text-align: center;
       margin-bottom: 30px;
+      margin-top: 30px;
       font-size: 24px;
       font-weight: bold;
+      transition: opacity 0.3s ease;
     }
 
     .sidebar nav {
       display: flex;
       flex-direction: column;
       gap: 15px;
+      margin-top: 50px;
     }
 
     .sidebar nav a {
@@ -64,7 +127,7 @@
       text-align: center;
       font-weight: 500;
     }
-    
+
 
     .sidebar nav a:hover {
       background: rgba(255, 255, 255, 0.2);
@@ -72,12 +135,16 @@
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     }
 
-    .sidebar > .edu-content a.active {
+    .sidebar.collapsed nav a:hover {
+      transform: translateX(0);
+    }
+
+    .sidebar>.edu-content a.active {
       background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
       font-weight: bold;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     }
-    
+
     /* Educational content styling */
     .sidebar .edu-content a.item-active {
       background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
@@ -85,6 +152,7 @@
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 
     }
+
     .sidebar .edu-content {
       margin-top: 30px;
       padding: 15px;
@@ -93,14 +161,17 @@
       color: white;
       font-size: 14px;
       line-height: 1.6;
+      transition: opacity 0.3s ease;
     }
 
     .sidebar .edu-content h3 {
       margin: 0 0 10px 0;
       font-size: 18px;
     }
-    .edu-content a{
-      text-decoration: none;color: white;
+
+    .edu-content a {
+      text-decoration: none;
+      color: white;
       padding: 10px 50px;
       border-radius: 10px;
       transition: all 0.3s ease;
@@ -216,7 +287,7 @@
       display: none !important;
       visibility: hidden !important;
     }
-    
+
     /* Hide radioPanel and titlePanel from JS */
     #radioPanel,
     #titlePanel {
@@ -231,7 +302,7 @@
       display: block !important;
       /* justify-content: center !important;
       align-items: center !important; */
-      
+
     }
 
     /* Left and Right Slit Boxes */
@@ -1075,24 +1146,30 @@
 
 <body>
   <!-- Sidebar Navigation -->
-  <div class="sidebar">
+  <div class="sidebar" id="sidebar">
+    <button class="sidebar-toggle" id="sidebarToggle">☰</button>
     <h2>Double Slit Experiments</h2>
     <nav>
-      <a href="index.html">Experiment 1<br />Classical Particles: sand</a>
-      <a href="exp2.html">Experiment 2<br />Classical Wave: Water</a>
-      <a href="exp3.html" >Experiment 3<br />Quantum Object: Electron or Photon</a>
+      <a href="index.html"><span class="exp-num">Exp 1</span><span class="exp-desc"><br />Classical Particles:
+          sand</span></a>
+      <a href="exp2.html"><span class="exp-num">Exp 2</span><span class="exp-desc"><br />Classical Wave:
+          Water</span></a>
+      <a href="exp3.html"><span class="exp-num">Exp 3</span><span class="exp-desc"><br />Quantum Object: Electron or
+          Photon</span></a>
     </nav>
     <div class="edu-content">
       <h3>🔬 Quantum Physics</h3>
       <p>In quantum mechanics, particles exhibit wave-like properties, creating an interference pattern even when sent
         one at a time!</p>
-        <a href="exp3withdetector.html"  class="active">with Detector</a>
-      </div>
+      <a href="exp3withdetector.html" style="padding: 10px 20px;" class="active"> Exp 3.1 with Detector</a>
+    </div>
   </div>
 
   <!-- Simulation Title Header -->
-  <div style="text-align: center; padding: 25px 0 15px 0; margin: 0; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-    <h1 style="font-size: 32px; font-weight: bold; color: #ffffff; padding-left: 20px; text-shadow: 0 0 15px rgba(255,255,255,0.5), 0 0 30px rgba(255,255,255,0.3); margin: 0; letter-spacing: 2px;">
+  <div
+    style="text-align: center; padding: 25px 0 15px 0; margin: 0; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+    <h1
+      style="font-size: 32px; font-weight: bold; color: #ffffff; padding-left: 20px; text-shadow: 0 0 15px rgba(255,255,255,0.5), 0 0 30px rgba(255,255,255,0.3); margin: 0; letter-spacing: 2px;">
       ⚛️ Quantum Particle with Detector
     </h1>
   </div>
@@ -1126,6 +1203,42 @@
     window.addEventListener('resize', function () { _model._resized(window.innerWidth, window.innerHeight); }, false);
   </script>
   <script src="./scripts/exp3.js"></script>
+
+  <!-- Procedure Section -->
+  <div
+    style="max-width: 900px; margin: 20px auto; padding: 20px; background: linear-gradient(135deg, #f8f9ff 0%, #ffffff 100%); border-radius: 15px; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.15); border: 2px solid #667eea;">
+    <h3 style="color: #667eea; margin-bottom: 15px; font-size: 20px;">📋 Procedure</h3>
+    <ol style="margin: 0 0 0 20px; line-height: 3; color: #555; font-size: 14px;">
+      <li><strong>Start the Simulation:</strong> Click the "Play" button to begin emitting quantum particles.</li>
+      <li><strong>Without Detector:</strong> First observe particles without the detector - an interference pattern
+        forms.</li>
+      <li><strong>Enable Detector:</strong> Turn on the "which-path" detector to observe which slit each particle passes
+        through.</li>
+      <li><strong>Observe the Change:</strong> Notice how the interference pattern disappears when the detector is
+        active!</li>
+      <li><strong>Quantum Mystery:</strong> This demonstrates that observation affects quantum behavior - the wave
+        function "collapses".</li>
+      <li><strong>Toggle Detector:</strong> Switch the detector on/off to see the dramatic difference in patterns.</li>
+      <li><strong>Reset:</strong> Use the "Reset" button to clear accumulated data and restart the experiment.</li>
+    </ol>
+  </div>
+
+  <script>
+    // Sidebar Toggle Functionality
+    document.getElementById('sidebarToggle').addEventListener('click', function () {
+      const sidebar = document.getElementById('sidebar');
+      const body = document.body;
+
+      sidebar.classList.toggle('collapsed');
+      body.classList.toggle('sidebar-collapsed');
+
+      if (sidebar.classList.contains('collapsed')) {
+        this.textContent = '→';
+      } else {
+        this.textContent = '☰';
+      }
+    });
+  </script>
 </body>
 
 </html>

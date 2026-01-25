@@ -11301,7 +11301,6 @@ function DoubleSlitWaveParticleDuality_View_0(_topFrame) {
 
     _view
       ._9(EJSS_INTERFACE.button, "resetTime", _view.buttonPanel) // EJsS HtmlView.HtmlView Page: declaration of element 'resetTime'
-      .setProperty("Tooltip", "Clears the detector") // EJsS HtmlView.HtmlView Page: setting property 'Tooltip' for element 'resetTime'
       .setProperty(
         "ImageUrl",
         "/org/opensourcephysics/resources/controls/images/reset1.gif"
