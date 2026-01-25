@@ -14,6 +14,8 @@ let originalGifSrc = "image/Animation part.gif";
 window.addEventListener('load', function () {
     stopGifAnimation();
     animationGif.classList.add('stopped');
+    // Generate intensity data but don't show graph yet
+    generateIntensityData();
 });
 
 // Generate intensity data for double-slit pattern (classical - two peaks like image)
@@ -41,9 +43,8 @@ function generateIntensityData() {
     }
 }
 
-// Draw intensity graph
 function drawIntensityGraph() {
-    if (!isGraphVisible || intensityData.length === 0) return;
+    if (intensityData.length === 0) return;
 
     const width = graphCanvas.width;
     const height = graphCanvas.height;
@@ -181,22 +182,23 @@ function resetAnimation() {
 }
 
 function toggleGraph() {
+    const graphContainer = document.getElementById("graphContainer");
     isGraphVisible = !isGraphVisible;
 
     if (isGraphVisible) {
-        graphCanvas.style.display = "block";
+        graphContainer.classList.add("visible");
         generateIntensityData();
         drawIntensityGraph();
         document.getElementById("showGraphBtn").textContent = "Hide Graph";
+        // Also start the simulation when showing graph
+        startAnimation();
     } else {
-        graphCanvas.style.display = "none";
+        graphContainer.classList.remove("visible");
         document.getElementById("showGraphBtn").textContent = "Show Graph";
     }
 }
 
 document.getElementById("startBtn").addEventListener("click", startAnimation);
-document.getElementById("stopBtn").addEventListener("click", stopAnimation);
-document.getElementById("resetBtn").addEventListener("click", resetAnimation);
 document.getElementById("showGraphBtn").addEventListener("click", toggleGraph);
 
 generateIntensityData();

@@ -31,14 +31,75 @@
             height: 100vh;
             overflow-y: auto;
             z-index: 1000;
+            transition: width 0.3s ease, padding 0.3s ease;
+        }
+
+        /* Sidebar Toggle Button */
+        .sidebar-toggle {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 35px;
+            height: 35px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 8px;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+
+        .sidebar-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Collapsed Sidebar State */
+        .sidebar.collapsed {
+            width: 80px;
+            padding: 30px 10px;
+        }
+
+        .sidebar.collapsed h2 {
+            display: none;
+        }
+
+        .sidebar.collapsed .nav-item {
+            padding: 15px 10px;
+        }
+
+        .sidebar.collapsed .nav-item:first-of-type {
+            margin-top: 50px;
+        }
+
+        .sidebar.collapsed .nav-item .experiment-number {
+            font-size: 14px;
+            margin-bottom: 0;
+        }
+
+        .sidebar.collapsed .nav-item .experiment-type {
+            display: none;
+        }
+
+        .sidebar.collapsed .nav-item:hover {
+            transform: translateX(0);
         }
 
         .sidebar h2 {
             font-size: 24px;
             margin-bottom: 30px;
+            margin-top: 30px;
             text-align: center;
             color: white;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            transition: opacity 0.3s ease;
         }
 
         .sidebar .nav-item {
@@ -73,11 +134,13 @@
             font-size: 20px;
             font-weight: bold;
             margin-bottom: 5px;
+            transition: font-size 0.3s ease;
         }
 
         .sidebar .nav-item .experiment-type {
             font-size: 14px;
             opacity: 0.9;
+            transition: opacity 0.3s ease;
         }
 
         /* Main Content Area */
@@ -88,6 +151,11 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            transition: margin-left 0.3s ease;
+        }
+
+        .main-content.expanded {
+            margin-left: 80px;
         }
 
         .header {
@@ -304,18 +372,19 @@
 
 <body>
     <!-- Sidebar Navigation -->
-    <div class="sidebar">
+    <div class="sidebar" id="sidebar">
+        <button class="sidebar-toggle" id="sidebarToggle" title="Toggle Sidebar">☰</button>
         <h2>Double Slit Experiments</h2>
         <a href="index.html" class="nav-item">
-            <span class="experiment-number">Experiment 1</span>
+            <span class="experiment-number">Exp 1</span>
             <span class="experiment-type">Classical Particles: sand</span>
         </a>
         <a href="exp2.html" class="nav-item active">
-            <span class="experiment-number">Experiment 2</span>
+            <span class="experiment-number">Exp 2</span>
             <span class="experiment-type">Classical Wave: Water</span>
         </a>
         <a href="exp3.html" class="nav-item">
-            <span class="experiment-number">Experiment 3</span>
+            <span class="experiment-number">Exp 3</span>
             <span class="experiment-type">Quantum Object: Electron or Photon</span>
         </a>
     </div>
@@ -948,6 +1017,24 @@
             drawScene();
         </script>
     </div>
+    <script>
+        // Sidebar Toggle Functionality
+        document.getElementById('sidebarToggle').addEventListener('click', function () {
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.querySelector('.main-content');
+
+            sidebar.classList.toggle('collapsed');
+            mainContent.classList.toggle('expanded');
+
+            if (sidebar.classList.contains('collapsed')) {
+                this.textContent = '→';
+                this.title = 'Expand Sidebar';
+            } else {
+                this.textContent = '☰';
+                this.title = 'Collapse Sidebar';
+            }
+        });
+    </script>
 </body>
 
 </html>

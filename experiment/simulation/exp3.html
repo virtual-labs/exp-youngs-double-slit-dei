@@ -37,20 +37,83 @@
       box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
       overflow-y: auto;
       box-sizing: border-box;
+      transition: width 0.3s ease, padding 0.3s ease;
+    }
+
+    /* Sidebar Toggle Button */
+    .sidebar-toggle {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      width: 35px;
+      height: 35px;
+      background: rgba(255, 255, 255, 0.2);
+      border: 2px solid rgba(255, 255, 255, 0.5);
+      border-radius: 8px;
+      color: white;
+      font-size: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      z-index: 1001;
+    }
+
+    .sidebar-toggle:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: scale(1.1);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Collapsed Sidebar State */
+    .sidebar.collapsed {
+      width: 80px;
+      padding: 20px 10px;
+    }
+
+    .sidebar.collapsed h2 {
+      display: none;
+    }
+
+    .sidebar.collapsed nav {
+      margin-top: 50px;
+    }
+
+    .sidebar.collapsed nav a {
+      padding: 12px 5px;
+      font-size: 11px;
+      line-height: 1.2;
+    }
+
+    .sidebar.collapsed nav a .exp-desc {
+      display: none;
+    }
+
+    .sidebar.collapsed .edu-content {
+      display: none;
+    }
+
+    body.sidebar-collapsed {
+      padding-left: 80px;
     }
 
     .sidebar h2 {
       color: white;
       text-align: center;
       margin-bottom: 30px;
+      margin-top: 30px;
       font-size: 24px;
       font-weight: bold;
+      transition: opacity 0.3s ease;
     }
 
     .sidebar nav {
       display: flex;
       flex-direction: column;
       gap: 15px;
+      margin-top: 50px;
     }
 
     .sidebar nav a {
@@ -70,6 +133,10 @@
       background: rgba(255, 255, 255, 0.2);
       transform: translateX(5px);
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .sidebar.collapsed nav a:hover {
+      transform: translateX(0);
     }
 
     .sidebar nav a.active {
@@ -94,6 +161,7 @@
       color: white;
       font-size: 14px;
       line-height: 1.6;
+      transition: opacity 0.3s ease;
     }
 
     .sidebar .edu-content h3 {
@@ -960,25 +1028,31 @@
 
 <body>
   <!-- Sidebar Navigation -->
-  <div class="sidebar">
+  <div class="sidebar" id="sidebar">
+    <button class="sidebar-toggle" id="sidebarToggle">☰</button>
     <h2>Double Slit Experiments</h2>
     <nav>
-      <a href="index.html">Experiment 1<br />Classical Particles: sand</a>
-      <a href="exp2.html">Experiment 2<br />Classical Wave: Water</a>
-      <a href="exp3.html" class="active">Experiment 3<br />Quantum Object: Electron or Photon</a>
+      <a href="index.html"><span class="exp-num">Exp 1</span><span class="exp-desc"><br />Classical Particles:
+          sand</span></a>
+      <a href="exp2.html"><span class="exp-num">Exp 2</span><span class="exp-desc"><br />Classical Wave:
+          Water</span></a>
+      <a href="exp3.html" class="active"><span class="exp-num">Exp 3</span><span class="exp-desc"><br />Quantum Object:
+          Electron or Photon</span></a>
     </nav>
     <div class="edu-content">
       <h3>🔬 Quantum Physics</h3>
       <p>In quantum mechanics, particles exhibit wave-like properties, creating an interference pattern even when sent
         one at a time!</p>
-      <a href="exp3withdetector.html" style="text-decoration: none;color: white;
-      padding: 10px 50px;
+      <a href="exp3withdetector.html" style="text-decoration: none;">
+        <p style="text-decoration: none;color: white;
+      padding: 10px 15px;
       border-radius: 10px;
       transition: all 0.3s ease;
       background: rgba(255, 255, 255, 0.1);
       font-size: 16px;
       text-align: center;
-      font-weight: 500;">with Detector</a>
+      font-weight: 500;">Exp 3.1 with Detector</p>
+      </a>
     </div>
   </div>
 
@@ -1032,6 +1106,23 @@
       <li><strong>Reset:</strong> Use the "Reset" button to clear accumulated particles and start fresh.</li>
     </ol>
   </div>
+
+  <script>
+    // Sidebar Toggle Functionality
+    document.getElementById('sidebarToggle').addEventListener('click', function () {
+      const sidebar = document.getElementById('sidebar');
+      const body = document.body;
+
+      sidebar.classList.toggle('collapsed');
+      body.classList.toggle('sidebar-collapsed');
+
+      if (sidebar.classList.contains('collapsed')) {
+        this.textContent = '→';
+      } else {
+        this.textContent = '☰';
+      }
+    });
+  </script>
 </body>
 
 </html>
