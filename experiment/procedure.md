@@ -27,7 +27,7 @@ To observe how particles such as sand pass through two slits and form a distribu
 
 > **Expected Observation:** The screen shows two independent piles of sand, representing classical particle behavior — **No Wave Interference**.
 
-![Fig. 1 Intensity distribution graph for Classical Particle (Sand)](image/procedure_fig1.png)
+![Fig. 1 Intensity distribution graph for Classical Particle (Sand)](images/procedure_fig1.png)
 *Fig 1. Intensity distribution graph for Classical Particle (Sand)*
 
 ---
@@ -56,7 +56,7 @@ To observe interference patterns produced by water waves passing through two sli
 
 > **Expected Observation:** A clear interference pattern appears, proving that water behaves as a **Classical Wave**.
 
-![Fig. 2 Intensity distribution graph for Classical Wave (Water)](image/procedure_fig2.png)
+![Fig. 2 Intensity distribution graph for Classical Wave (Water)](images/procedure_fig2.png)
 *Fig 2. Intensity distribution graph for Classical Wave (Water)*
 
 ---
@@ -81,7 +81,7 @@ To observe interference produced by quantum particles even when fired one at a t
 > **Expected Observation:** Even though particles hit the screen one by one, the accumulated pattern shows interference fringes.
 > **Evidence of Wave–Particle Duality.**
 
-![Fig. 3 Interference Pattern by Quantum Particles (Electrons)](image/procedure_fig3.png)
+![Fig. 3 Interference Pattern by Quantum Particles (Electrons)](images/procedure_fig3.png)
 *Fig 3. Interference Pattern by Quantum Particles (Electrons)*
 
 ---
@@ -105,7 +105,7 @@ To study the effect of observation on quantum interference (The Observer Effect)
 
 > **Expected Observation:** When the slit is measured, the interference disappears. This proves the **Observer Effect** — measurement collapses the wave function.
 
-![Fig. 4 Final Pattern of Quantum Particles with Detector](image/procedure_fig4.png)
+![Fig. 4 Final Pattern of Quantum Particles with Detector](images/procedure_fig4.png)
 *Fig 4. Final Pattern of Quantum Particles with Detector*
 
 ---
