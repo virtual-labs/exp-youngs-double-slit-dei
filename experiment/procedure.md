@@ -71,7 +71,7 @@ To observe interference patterns produced by water waves passing through two sli
 
 ---
 
-## 3. Experiment 3: Quantum Object – Electron or Photon
+## 3. Experiment: Quantum Object – Electron or Photon
 
 ### **Objective**
 To observe interference produced by quantum particles even when fired one at a time.
