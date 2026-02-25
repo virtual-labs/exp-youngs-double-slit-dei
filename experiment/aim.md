@@ -1,16 +1,13 @@
-To study the diffraction and interference of light using the following three physical models:
+To study the behaviour of classical particles, classical waves, and quantum objects towards the double slit by using the following three physical models:
 
-### 1. Single-Slit Diffraction
+### 1. Double-Slit Diffraction (Classical Particles: Sand)
 
-(Classical Particles: Sand)
 To observe how particles passing through a narrow opening form a spread-out pattern, illustrating the idea of diffraction in a classical context.
 
-### 2. Double-Slit (Young’s) Interference
+### 2. Double-Slit (Young's) Interference (Classical Wave: Water)
 
-(Classical Wave: Water)
 To investigate how water waves passing through two slits interfere to form a pattern of alternating constructive and destructive interference.
 
-### 3. Quantum Interpretation
+### 3. Quantum Interpretation (Quantum Object: Electron or Photon)
 
-(Quantum Object: Electron or Photon)
-To explore how quantum particles such as electrons or photons exhibit wave–particle duality, and reproduce interference patterns—even when fired one at a time.
+To explore how quantum particles such as electrons or photons exhibit wave–particle duality and reproduce interference patterns—even when fired one at a time.

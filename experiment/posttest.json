@@ -1,57 +1,112 @@
-{
+﻿{
   "version": 2.0,
   "questions": [
     {
-      "question": "1. What happens to the diffraction pattern when slit width decreases?",
+      "question": "1. In the double-slit experiment with sand, the pattern observed on the screen consists of:",
       "answers": {
-        "a": "Pattern disappears",
-        "b": "Fringe width increases",
-        "c": "Fringe width decreases",
-        "d": "Intensity becomes zero"
+        "a": "Interference fringes",
+        "b": "Diffraction rings",
+        "c": "Two separate piles",
+        "d": "A single central maximum"
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "2. The appearance of bright and dark fringes in the water-wave experiment is due to:",
+      "answers": {
+        "a": "Reflection",
+        "b": "Refraction",
+        "c": "Interference of waves",
+        "d": "Polarization"
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "3. In the quantum double-slit experiment, an interference pattern is observed even when particles are released one at a time because:",
+      "answers": {
+        "a": "Particles collide with each other",
+        "b": "Particles behave only as classical objects",
+        "c": "Each particle behaves as a wave of probability",
+        "d": "The detector amplifies intensity"
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "4. What happens to the interference pattern when a slit detector is turned ON in the quantum experiment?",
+      "answers": {
+        "a": "Fringe width increases",
+        "b": "Interference becomes sharper",
+        "c": "Interference disappears",
+        "d": "Central maximum becomes brighter"
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "5. Which experiment best demonstrates the observer effect?",
+      "answers": {
+        "a": "Sand through double slit",
+        "b": "Water wave interference",
+        "c": "Quantum particles without detector",
+        "d": "Quantum particles with detector"
+      },
+      "correctAnswer": "d",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "6. In a double-slit experiment, the condition for destructive interference (dark fringe) is:",
+      "answers": {
+        "a": "path difference = m\u03bb",
+        "b": "path difference = (2m+1)\u03bb/2",
+        "c": "path difference = 2m\u03bb",
+        "d": "path difference = m\u03bb/2"
       },
       "correctAnswer": "b",
       "difficulty": "beginner"
     },
     {
-      "question": "2. In double-slit interference, what happens if slit separation is doubled?",
+      "question": "7. What is the primary significance of Young's double-slit experiment?",
       "answers": {
-        "a": "Fringe width becomes half",
-        "b": "Fringe width doubles",
-        "c": "No change",
-        "d": "Brightness increases"
-      },
-      "correctAnswer": "a",
-      "difficulty": "beginner"
-    },
-    {
-      "question": "3. Which experiment directly supports wave nature of matter?",
-      "answers": {
-        "a": "Photoelectric effect",
-        "b": "Electron double-slit experiment",
-        "c": "Compton scattering",
-        "d": "Newton’s rings"
+        "a": "It proves the particle nature of light",
+        "b": "It confirms the wave nature of light",
+        "c": "It measures the speed of light",
+        "d": "It explains the absorption of light"
       },
       "correctAnswer": "b",
       "difficulty": "beginner"
     },
     {
-      "question": "4. In single-slit diffraction, minima occur when:",
+      "question": "8. When electrons are fired through a double slit one at a time WITHOUT a detector, the final accumulated pattern is:",
       "answers": {
-        "a": "a sinθ = λ/2",
-        "b": "a sinθ = mλ",
-        "c": "d sinθ = λ",
-        "d": "θ = 0"
+        "a": "Two bright spots like sand piles",
+        "b": "A random distribution with no order",
+        "c": "An interference fringe pattern",
+        "d": "A single central bright fringe"
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "9. Which concept explains why measuring which slit the electron passes through destroys the interference pattern?",
+      "answers": {
+        "a": "Conservation of energy",
+        "b": "Wave function collapse / Observer effect",
+        "c": "Doppler effect",
+        "d": "Compton scattering"
       },
       "correctAnswer": "b",
       "difficulty": "beginner"
     },
     {
-      "question": "5. What happens when you try to observe which slit an electron passes through?",
+      "question": "10. What distinguishes quantum objects from classical particles in the double-slit experiment?",
       "answers": {
-        "a": "Interference pattern becomes sharper",
-        "b": "Electrons stop moving",
-        "c": "Interference pattern disappears",
-        "d": "More maxima are formed"
+        "a": "Classical particles always produce interference fringes",
+        "b": "Quantum objects always show two piles without a detector",
+        "c": "Quantum objects exhibit wave-particle duality, producing interference without a detector",
+        "d": "Classical particles produce only dark fringes"
       },
       "correctAnswer": "c",
       "difficulty": "beginner"
