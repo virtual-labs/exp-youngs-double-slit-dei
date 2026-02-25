@@ -1,4 +1,5 @@
-﻿## Wave Nature of Light
+﻿
+### Wave Nature of Light
 
 Light exhibits a **dual nature** — it behaves both as:
 
@@ -7,7 +8,7 @@ Light exhibits a **dual nature** — it behaves both as:
 
 When light interacts with obstacles or openings comparable to its wavelength (**λ**), it bends around the edges. This phenomenon is known as **diffraction**.
 
-![Fig. 1 Diffraction Pattern by Single-slit](image/theory_fig1.png)
+![Fig. 1 Diffraction Pattern by Single-slit](images/theory_fig1.png)
 *Fig. 1 Diffraction Pattern by Single-slit*
 
 ### Key properties of waves that light exhibits:
@@ -57,7 +58,7 @@ If the screen is at distance **D** from the slit:
 
 When coherent light passes through two slits separated by distance **d**, the waves overlap and interfere.
 
-![Fig. 2 Young's double slit interference](image/theory_fig2.png)
+![Fig. 2 Young's double slit interference](images/theory_fig2.png)
 *Fig. 2 Young's double slit interference*
 
 ### 1. Fringe Width
@@ -80,7 +81,7 @@ When coherent light passes through two slits separated by distance **d**, the wa
 
 > **Δ (Path difference) = (2n + 1) · λ/2**  &nbsp;&nbsp;&nbsp; — (5)
 
-![Fig. 3 Destructive and constructive interference](image/theory_fig3.png)
+![Fig. 3 Destructive and constructive interference](images/theory_fig3.png)
 *Fig. 3 Destructive and constructive interference*
 
 ### 3. Significance
