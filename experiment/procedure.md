@@ -16,12 +16,12 @@ To observe how particles such as sand pass through two slits and form a distribu
     * Two slits (**Slit 1** and **Slit 2**).
     * A screen at the bottom.
 3.  **Action:** Click **Start Sand Flow**.
-    * *Observation:* Sand begins to fall through both slits.
-4.  **Watch:** Observe how the sand accumulates on the screen.
-5.  **Analyze:** Click **Show Graph** to view the Intensity Distribution Graph.
+4. **Observation:** Sand begins to fall through both slits.
+5.  **Watch:** Observe how the sand accumulates on the screen.
+6.  **Analyze:** Click **Show Graph** to view the Intensity Distribution Graph.
     * You will see **two hump-shaped distributions**.
     * There are **no interference fringes** because sand behaves like classical particles.
-6.  **Controls:**
+7.  **Controls:**
     * Click **Stop Sand Flow** to end.
     * Click **Reset Simulation** to run again.
 
@@ -56,7 +56,7 @@ To observe interference patterns produced by water waves passing through two sli
     * Slit Separation
     * Slit Width
 6.  **Analyze:** Click **Show Intensity Graph** to display the interference pattern.
-    * *Observation:* Alternating bright and dark fringes with a symmetric pattern.
+7. **Observation:** Alternating bright and dark fringes with a symmetric pattern is observed as shown in fig.2.
 7.  **Controls:** Click **Stop** to pause or **Reset** to start over.
 
 > **Expected Observation:** A clear interference pattern appears, proving that water behaves as a **Classical Wave**.
@@ -81,7 +81,7 @@ To observe interference produced by quantum particles even when fired one at a t
 2.  **Observe the Setup:** You will see a black screen where particle hits will appear.
 3.  **Configure:**
     * **Particle Count:** Choose the number of particles using the "Electrons" dropdown.
-    * **Adjust Parameters:** Change Slit Separation ($d$) or Screen Distance ($D$) if available.
+    * **Adjust Parameters:** Change Slit Separation **d** or Screen Distance **D** if available.
 4.  **Action:** Click the **Play** button to start releasing electrons/photons.
 5.  **Watch:**
     * Observe individual dots appearing randomly.
@@ -108,7 +108,7 @@ To study the effect of observation on quantum interference (The Observer Effect)
 
 ### **Steps**
 1.  **Open Experiment:** Select "Quantum Particle with Detector".
-2.  **Observe the Setup:** Detectors are now placed at the slits to track *which* slit each particle passes through.
+2.  **Observe the Setup:** Detectors are now placed at the slits to track which slit each particle passes through.
 3.  **Configure:** 
     * Choose the number of particles.
     * Adjust other parameters (if needed).

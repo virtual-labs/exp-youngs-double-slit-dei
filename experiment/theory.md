@@ -73,12 +73,12 @@ When coherent light passes through two slits separated by distance **d**, the wa
 
 ### 1. Fringe Width
 
-> **β = λD / d**  &nbsp;&nbsp;&nbsp; — (3)
+> **β = λx / d**  &nbsp;&nbsp;&nbsp; — (3)
 
 **Where:**
 * **β** → fringe width
 * **λ** → wavelength
-* **D** → screen distance
+* **x** → screen distance
 * **d** → distance between slits
 
 ### 2. Interference Pattern
@@ -112,13 +112,12 @@ This modern experiment shows that matter also behaves like waves (matter waves o
 
 ### 1. Key Observations
 
-* **Electrons fired one at a time still produce an interference pattern.**
-    * → Shows electrons behave like **probability waves**.
-* **If we measure which slit the electron passes through (with detector):**
+* Electrons fired one at a time still produce an interference pattern, which shows electrons behave like probability waves.
+* If we measure which slit the electron passes through **(with detector):**
     * The interference pattern *disappears*.
     * Only two clump patterns remain (each corresponding to one slit).
     * The electron behaves like a classical particle.
-    * → Measurement collapses the wave function.
+    * Measurement collapses the wave function.
 
 **Wave–Particle Duality:**
 * Electrons behave like **particles** when detected.
