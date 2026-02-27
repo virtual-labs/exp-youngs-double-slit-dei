@@ -15,7 +15,8 @@
 5. Feynman, R. P., Leighton, R. B., & Sands, M. (1965). *The Feynman Lectures on Physics, Vol. III: Quantum Mechanics*. Addison-Wesley.  
    (Chapters 1–3: Path integral formulation and the iconic explanation of the double-slit experiment.)
 
-6. Ghatak, A. K., & Lokanathan, S. (2004). *Quantum Mechanics: Theory and Applications* (5th ed.). Macmillan Publishers India Limited.
+6. Ghatak, A. K., & Lokanathan, S. (2004). *Quantum Mechanics: Theory and Applications* (5th ed.). Macmillan Publishers India Limited.</br>
+(Chapter 3: particles and waves and the uncertainty principle)
 
 ---
 

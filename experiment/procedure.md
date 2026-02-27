@@ -10,7 +10,7 @@ This guide outlines the steps to perform virtual experiments comparing Classical
 To observe how particles such as sand pass through two slits and form a distribution pattern on the screen.
 
 ### **Steps**
-1.  **Open Experiment:** Select "Experiment 1: Classical Particles – Sand".
+1.  **Begin the Experiment:** Select "Experiment 1: Classical Particles – Sand".
 2.  **Observe the Setup:**
     * A sand container at the top.
     * Two slits (**Slit 1** and **Slit 2**).
@@ -43,7 +43,7 @@ To observe how particles such as sand pass through two slits and form a distribu
 To observe interference patterns produced by water waves passing through two slits.
 
 ### **Steps**
-1.  **Open Experiment:** Select "Experiment 2: Classical Wave – Water".
+1.  **Begin the Experiment:** Select "Experiment 2: Classical Wave – Water".
 2.  **Observe the Setup:**
     * A wave source (needle).
     * A barrier with two slits.
@@ -56,7 +56,7 @@ To observe interference patterns produced by water waves passing through two sli
     * Slit Separation
     * Slit Width
 6.  **Analyze:** Click **Show Intensity Graph** to display the interference pattern.
-7. **Observation:** Alternating bright and dark fringes with a symmetric pattern is observed as shown in fig.2.
+7. **Observation:** Alternating bright and dark fringes with a symmetric pattern are observed as shown in fig.2.
 7.  **Controls:** Click **Stop** to pause or **Reset** to start over.
 
 > **Expected Observation:** A clear interference pattern appears, proving that water behaves as a **Classical Wave**.
@@ -77,7 +77,7 @@ To observe interference patterns produced by water waves passing through two sli
 To observe interference produced by quantum particles even when fired one at a time.
 
 ### **Steps**
-1.  **Open Experiment:** Select "Experiment 3: Quantum Object – Electron or Photon".
+1.  **Begin the Experiment:** Select "Experiment 3: Quantum Object – Electron or Photon".
 2.  **Observe the Setup:** You will see a black screen where particle hits will appear.
 3.  **Configure:**
     * **Particle Count:** Choose the number of particles using the "Electrons" dropdown.
@@ -88,7 +88,7 @@ To observe interference produced by quantum particles even when fired one at a t
     * As more particles accumulate, a **wave-like interference pattern** emerges.
 6.  **Controls:** Use Pause, Step-forward, or Restart for detailed observation.
 
-> **Expected Observation:** Even though particles hit the screen one by one, the accumulated pattern shows interference fringes.
+> **Expected Observation:** Even though particles hit the screen one by one, the accumulated pattern shows interference-like fringes.
 > **Evidence of Wave–Particle Duality.**
 
 <div align="center">
@@ -107,7 +107,7 @@ To observe interference produced by quantum particles even when fired one at a t
 To study the effect of observation on quantum interference (The Observer Effect).
 
 ### **Steps**
-1.  **Open Experiment:** Select "Quantum Particle with Detector".
+1.  **Begin the Experiment:** Select "Quantum Particle with Detector".
 2.  **Observe the Setup:** Detectors are now placed at the slits to track which slit each particle passes through.
 3.  **Configure:** 
     * Choose the number of particles.
@@ -118,7 +118,7 @@ To study the effect of observation on quantum interference (The Observer Effect)
     * Only **two bright particle clusters** appear on the screen.
 6.  **Analyze:** After sufficient particles, observe that the final pattern resembles the "Sand" experiment.
 
-> **Expected Observation:** When the slit is measured, the interference disappears. This proves the **Observer Effect** — measurement collapses the wave function.
+> **Expected Observation:** When the particle is observed, the interference disappears. This proves the **Observer Effect** — measurement collapses the wave function and exhibits classical behaviour.
 
 <div align="center">
 
