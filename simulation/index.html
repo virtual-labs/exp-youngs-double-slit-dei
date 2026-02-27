@@ -1,0 +1,421 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Double Slit Sand Simulation</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            min-height: 100vh;
+            background: linear-gradient(to bottom, #f5f5f5, #e0e0e0);
+            font-family: Arial, sans-serif;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            width: 280px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px 20px;
+            box-shadow: 4px 0 15px rgba(0, 0, 0, 0.3);
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 1000;
+            transition: width 0.3s ease, padding 0.3s ease;
+        }
+
+        /* Sidebar Toggle Button */
+        .sidebar-toggle {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 35px;
+            height: 35px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 8px;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+
+        .sidebar-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Collapsed Sidebar State */
+        .sidebar.collapsed {
+            width: 80px;
+            padding: 30px 10px;
+        }
+
+        .sidebar.collapsed h2 {
+            display: none;
+        }
+
+        .sidebar.collapsed .nav-item {
+            padding: 15px 10px;
+        }
+
+        .sidebar.collapsed .nav-item:first-of-type {
+            margin-top: 50px;
+        }
+
+        .sidebar.collapsed .nav-item .experiment-number {
+            font-size: 14px;
+            margin-bottom: 0;
+        }
+
+        .sidebar.collapsed .nav-item .experiment-type {
+            display: none;
+        }
+
+        .sidebar h2 {
+            font-size: 24px;
+            margin-bottom: 30px;
+            margin-top: 30px;
+            text-align: center;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            transition: opacity 0.3s ease;
+        }
+
+        .sidebar .nav-item {
+            display: block;
+            padding: 15px 20px;
+            margin-bottom: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            text-align: center;
+        }
+
+        .sidebar .nav-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(5px);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .sidebar.collapsed .nav-item:hover {
+            transform: translateX(0);
+        }
+
+        .sidebar .nav-item.active {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            border-color: white;
+        }
+
+        .sidebar .nav-item .experiment-number {
+            display: block;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            transition: font-size 0.3s ease;
+        }
+
+        .sidebar .nav-item .experiment-type {
+            font-size: 14px;
+            opacity: 0.9;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Main Content Area - adjusts with sidebar */
+        .main-content {
+            margin-left: 280px;
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            transition: margin-left 0.3s ease;
+        }
+
+        .main-content.expanded {
+            margin-left: 80px;
+        }
+
+        .container {
+            text-align: center;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        /* Side by side layout for simulation and graph */
+        .simulation-wrapper {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: stretch;
+            flex-wrap: wrap;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        #animationContainer {
+            flex: 1;
+            min-width: 400px;
+            max-width: 600px;
+            border: 3px solid #667eea;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+            background: #f0f0f0;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #animationGif {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .graph-container {
+            flex: 1;
+            min-width: 300px;
+            max-width: 500px;
+            border: 3px solid #667eea;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+            background: white;
+            padding: 10px;
+            display: none;
+        }
+
+        .graph-container.visible {
+            display: block;
+        }
+
+        #intensityGraph {
+            border: none;
+            border-radius: 10px;
+            background: white;
+            width: 100%;
+            height: auto;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 900px) {
+            .simulation-wrapper {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            #animationContainer,
+            .graph-container {
+                max-width: 100%;
+                width: 100%;
+            }
+        }
+
+        .controls {
+            margin-top: 20px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        button {
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        #startBtn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        #startBtn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        #startBtn:active {
+            transform: translateY(0);
+        }
+
+        #stopBtn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        #stopBtn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        #resetBtn {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+        }
+
+        #resetBtn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        #showGraphBtn {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+        }
+
+        #showGraphBtn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        .info {
+            color: #34495e;
+            margin-top: 15px;
+            text-align: center;
+            font-size: 14px;
+            max-width: 600px;
+        }
+
+        #animationGif.paused {
+            filter: grayscale(30%) brightness(0.9);
+        }
+
+        #animationGif.stopped {
+            opacity: 0.7;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Sidebar Navigation -->
+    <div class="sidebar" id="sidebar">
+        <button class="sidebar-toggle" id="sidebarToggle" title="Toggle Sidebar">☰</button>
+        <h2>Double Slit Experiments</h2>
+        <a href="index.html" class="nav-item active">
+            <span class="experiment-number">Exp 1</span>
+            <span class="experiment-type">Classical Particles: Sand</span>
+        </a>
+        <a href="exp2.html" class="nav-item">
+            <span class="experiment-number">Exp 2</span>
+            <span class="experiment-type">Classical Wave: Water</span>
+        </a>
+        <a href="exp3.html" class="nav-item">
+            <span class="experiment-number">Exp 3</span>
+            <span class="experiment-type">Quantum Object: Electron or Photon</span>
+        </a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+            <h1>Double Slit Sand Simulation</h1>
+
+            <div class="simulation-wrapper">
+                <!-- Left side: Animation -->
+                <div id="animationContainer">
+                    <img id="animationGif" src="image/Animation part.gif" alt="Double Slit Animation">
+                </div>
+
+                <!-- Right side: Graph -->
+                <div class="graph-container" id="graphContainer">
+                    <h3 style="color: #667eea; margin: 0 0 10px 0; font-size: 16px;">📊 Intensity Graph</h3>
+                    <canvas id="intensityGraph" width="400" height="200"></canvas>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button id="startBtn">Start Sand Flow</button>
+                <button id="showGraphBtn">Show Graph</button>
+            </div>
+
+            <div class="info">
+                <p>Click "Start Sand Flow" to begin the animation. Click "Show Graph" to display the intensity
+                    distribution pattern!</p>
+            </div>
+        </div>
+
+        <!-- Procedure Section -->
+        <div
+            style="max-width: 900px; margin: 20px auto; padding: 20px; background: linear-gradient(135deg, #f8f9ff 0%, #ffffff 100%); border-radius: 15px; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.15); border: 2px solid #667eea;">
+            <h3 style="color: #667eea; margin-bottom: 15px; font-size: 20px;">📋 Procedure</h3>
+            <ol style="margin: 0 0 0 20px; line-height: 2.5; color: #555; font-size: 14px;">
+                <li><strong>Start the Simulation:</strong> Click "Start Sand Flow" to begin dropping sand particles
+                    through the double slits.</li>
+                <li><strong>Observe Particle Behavior:</strong> Watch as individual sand grains fall and pass through
+                    one slit or the other.</li>
+                <li><strong>Notice the Pattern:</strong> Observe how sand accumulates at the bottom, forming two
+                    distinct piles under each slit.</li>
+                <li><strong>Classical Behavior:</strong> Unlike waves, classical particles (sand) do not show
+                    interference - they simply pile up where they land.</li>
+                <li><strong>View the Graph:</strong> The intensity distribution graph on the right shows two
+                    peaks corresponding to each slit.</li>
+                <li><strong>Compare:</strong> This pattern is different from wave interference (Experiment 2) and
+                    quantum behavior (Experiment 3).</li>
+            </ol>
+        </div>
+    </div>
+
+    <script src="./scripts/simulation.js"></script>
+    <script>
+        // Sidebar Toggle Functionality
+        document.getElementById('sidebarToggle').addEventListener('click', function () {
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.querySelector('.main-content');
+
+            sidebar.classList.toggle('collapsed');
+            mainContent.classList.toggle('expanded');
+
+            // Change toggle button icon
+            if (sidebar.classList.contains('collapsed')) {
+                this.textContent = '→';
+                this.title = 'Expand Sidebar';
+            } else {
+                this.textContent = '☰';
+                this.title = 'Collapse Sidebar';
+            }
+        });
+    </script>
+<script src="../assets/js/iframeResize.js"></script>
+        
+        </body>
+
+</html>

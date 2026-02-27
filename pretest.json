@@ -1,0 +1,115 @@
+﻿{
+  "version": 2.0,
+  "questions": [
+    {
+      "question": "1. Which phenomenon is illustrated when sand particles pass through a narrow slit and form a spread-out pattern?",
+      "answers": {
+        "a": "Interference",
+        "b": "Polarization",
+        "c": "Diffraction",
+        "d": "Superposition"
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "2. In single-slit diffraction, the condition for the mth dark fringe (minimum) is:",
+      "answers": {
+        "a": "a sin\u03b8 = (2m+1)\u03bb/2",
+        "b": "a sin\u03b8 = m\u03bb",
+        "c": "a cos\u03b8 = m\u03bb",
+        "d": "a tan\u03b8 = m\u03bb"
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "3. In Young's double-slit experiment, fringe width increases when:",
+      "answers": {
+        "a": "Wavelength decreases",
+        "b": "Distance between slits increases",
+        "c": "Screen distance increases",
+        "d": "Light intensity increases"
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "4. What happens to the interference pattern in the electron double-slit experiment when the path of electrons is observed?",
+      "answers": {
+        "a": "The fringes become brighter",
+        "b": "The fringe width increases",
+        "c": "The interference pattern disappears",
+        "d": "The wavelength decreases"
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "5. The observation that electrons show interference even when fired one at a time supports the concept of:",
+      "answers": {
+        "a": "Classical mechanics",
+        "b": "Newton's corpuscular theory",
+        "c": "Wave-particle duality",
+        "d": "Polarization"
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "6. In Young's double-slit experiment, fringe width \u03b2 = \u03bbD/d. If slit separation d is halved, what happens to the fringe width?",
+      "answers": {
+        "a": "Fringe width doubles",
+        "b": "Fringe width halves",
+        "c": "No change",
+        "d": "Fringe width becomes zero"
+      },
+      "correctAnswer": "a",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "7. Which principle states that every point on a wavefront acts as a source of secondary wavelets?",
+      "answers": {
+        "a": "Snell's Law",
+        "b": "Huygens' Principle",
+        "c": "Newton's Law",
+        "d": "Bragg's Law"
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "8. What type of interference produces bright fringes in Young's double-slit experiment?",
+      "answers": {
+        "a": "Partial interference",
+        "b": "Destructive interference",
+        "c": "Constructive interference",
+        "d": "Polarized interference"
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "9. De Broglie's hypothesis states that matter particles have an associated:",
+      "answers": {
+        "a": "Colour",
+        "b": "Wavelength",
+        "c": "Temperature",
+        "d": "Electrical resistance"
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "10. In the electron double-slit experiment, before enough electrons are collected, the screen shows:",
+      "answers": {
+        "a": "A complete interference pattern immediately",
+        "b": "Random individual dots",
+        "c": "Two bright bands only",
+        "d": "Nothing at all"
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    }
+  ]
+}

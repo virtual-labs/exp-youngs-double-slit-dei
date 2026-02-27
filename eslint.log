@@ -1,0 +1,740 @@
+
+/home/runner/work/exp-youngs-double-slit-dei/exp-youngs-double-slit-dei/experiment/simulation/scripts/common_script.js
+  1:5  warning  '_isEPub' is assigned a value but never used  no-unused-vars
+
+/home/runner/work/exp-youngs-double-slit-dei/exp-youngs-double-slit-dei/experiment/simulation/scripts/exp3.js
+     13:45  warning  'e' is defined but never used                                      no-unused-vars
+     14:5   warning  'EJSS_DRAWING2D' is already defined                                no-redeclare
+     16:37  warning  'e' is defined but never used                                      no-unused-vars
+     18:40  warning  'e' is defined but never used                                      no-unused-vars
+     19:5   warning  'EJSS_DRAWING2D' is already defined                                no-redeclare
+     20:62  warning  'e' is defined but never used                                      no-unused-vars
+     21:5   warning  'EJSS_DRAWING2D' is already defined                                no-redeclare
+     22:74  warning  'e' is defined but never used                                      no-unused-vars
+     23:5   warning  'EJSS_DRAWING2D' is already defined                                no-redeclare
+     25:43  warning  'e' is defined but never used                                      no-unused-vars
+     26:5   warning  'EJSS_DRAWING2D' is already defined                                no-redeclare
+     27:66  warning  'e' is defined but never used                                      no-unused-vars
+     28:5   warning  'EJSS_DRAWING2D' is already defined                                no-redeclare
+     29:66  warning  'e' is defined but never used                                      no-unused-vars
+     30:5   warning  'EJSS_DRAWING2D' is already defined                                no-redeclare
+     32:44  warning  'e' is defined but never used                                      no-unused-vars
+     33:5   warning  'EJSS_DRAWING2D' is already defined                                no-redeclare
+     34:68  warning  'e' is defined but never used                                      no-unused-vars
+     35:5   warning  'EJSS_DRAWING2D' is already defined                                no-redeclare
+     37:42  warning  'e' is defined but never used                                      no-unused-vars
+     37:45  warning  't' is defined but never used                                      no-unused-vars
+     38:5   warning  'EJSS_DRAWING2D' is already defined                                no-redeclare
+     39:62  warning  'e' is defined but never used                                      no-unused-vars
+     40:5   warning  'EJSS_DRAWING2D' is already defined                                no-redeclare
+     42:37  warning  'e' is defined but never used                                      no-unused-vars
+     44:40  warning  'e' is defined but never used                                      no-unused-vars
+     45:5   warning  'EJSS_DRAWING2D' is already defined                                no-redeclare
+     46:72  warning  'e' is defined but never used                                      no-unused-vars
+     47:5   warning  'EJSS_DRAWING2D' is already defined                                no-redeclare
+     48:64  warning  'e' is defined but never used                                      no-unused-vars
+     49:5   warning  'EJSS_DRAWING2D' is already defined                                no-redeclare
+     50:70  warning  'e' is defined but never used                                      no-unused-vars
+     64:7   warning  'h' is assigned a value but never used                             no-unused-vars
+     74:5   warning  'EJSS_CANVASGRAPHICS' is already defined                           no-redeclare
+     86:4   warning  'ox' is not defined                                                no-undef
+     87:6   warning  'oy' is not defined                                                no-undef
+     88:6   warning  'xe' is not defined                                                no-undef
+     89:6   warning  'ye' is not defined                                                no-undef
+     92:28  warning  'oy' is not defined                                                no-undef
+     92:36  warning  'ox' is not defined                                                no-undef
+     93:25  warning  'ox' is not defined                                                no-undef
+     93:32  warning  'xe' is not defined                                                no-undef
+     93:40  warning  'oy' is not defined                                                no-undef
+     93:44  warning  'xe' is not defined                                                no-undef
+     94:21  warning  'xe' is not defined                                                no-undef
+     94:29  warning  'oy' is not defined                                                no-undef
+     94:37  warning  'ox' is not defined                                                no-undef
+     94:41  warning  'ye' is not defined                                                no-undef
+     94:48  warning  'ye' is not defined                                                no-undef
+     95:25  warning  'ox' is not defined                                                no-undef
+     95:29  warning  'ye' is not defined                                                no-undef
+     95:40  warning  'oy' is not defined                                                no-undef
+    103:5   warning  'EJSS_CANVASGRAPHICS' is already defined                           no-redeclare
+    114:5   warning  'EJSS_CANVASGRAPHICS' is already defined                           no-redeclare
+    131:5   warning  'EJSS_CANVASGRAPHICS' is already defined                           no-redeclare
+    161:5   warning  'EJSS_CANVASGRAPHICS' is already defined                           no-redeclare
+    178:5   warning  'EJSS_CANVASGRAPHICS' is already defined                           no-redeclare
+    212:7   warning  'm' is already defined                                             no-redeclare
+    217:45  warning  'e' is defined but never used                                      no-unused-vars
+    219:44  warning  'e' is defined but never used                                      no-unused-vars
+    219:47  warning  't' is defined but never used                                      no-unused-vars
+    220:5   warning  'EJSS_SVGGRAPHICS' is already defined                              no-redeclare
+    221:36  warning  'e' is defined but never used                                      no-unused-vars
+    221:39  warning  't' is defined but never used                                      no-unused-vars
+    222:5   warning  'EJSS_SVGGRAPHICS' is already defined                              no-redeclare
+    223:35  warning  'e' is defined but never used                                      no-unused-vars
+    223:38  warning  't' is defined but never used                                      no-unused-vars
+    224:5   warning  'EJSS_SVGGRAPHICS' is already defined                              no-redeclare
+    225:41  warning  'e' is defined but never used                                      no-unused-vars
+    225:44  warning  't' is defined but never used                                      no-unused-vars
+    226:5   warning  'EJSS_SVGGRAPHICS' is already defined                              no-redeclare
+    227:42  warning  'e' is defined but never used                                      no-unused-vars
+    227:45  warning  't' is defined but never used                                      no-unused-vars
+    228:5   warning  'EJSS_SVGGRAPHICS' is already defined                              no-redeclare
+    229:37  warning  'e' is defined but never used                                      no-unused-vars
+    229:40  warning  't' is defined but never used                                      no-unused-vars
+    230:5   warning  'EJSS_SVGGRAPHICS' is already defined                              no-redeclare
+    231:38  warning  'e' is defined but never used                                      no-unused-vars
+    231:41  warning  't' is defined but never used                                      no-unused-vars
+    232:5   warning  'EJSS_SVGGRAPHICS' is already defined                              no-redeclare
+    233:35  warning  'e' is defined but never used                                      no-unused-vars
+    233:38  warning  't' is defined but never used                                      no-unused-vars
+    234:5   warning  'EJSS_SVGGRAPHICS' is already defined                              no-redeclare
+    235:36  warning  'e' is defined but never used                                      no-unused-vars
+    235:39  warning  't' is defined but never used                                      no-unused-vars
+    236:5   warning  'EJSS_SVGGRAPHICS' is already defined                              no-redeclare
+    237:41  warning  'e' is defined but never used                                      no-unused-vars
+    237:44  warning  't' is defined but never used                                      no-unused-vars
+    282:9   warning  'o' is already defined                                             no-redeclare
+    297:7   warning  'y' is already defined                                             no-redeclare
+    334:11  warning  'k' is already defined                                             no-redeclare
+    336:11  warning  'L' is already defined                                             no-redeclare
+    336:14  warning  'A' is already defined                                             no-redeclare
+    341:11  warning  'O' is already defined                                             no-redeclare
+    348:5   warning  'EJSS_SVGGRAPHICS' is already defined                              no-redeclare
+    349:36  warning  'e' is defined but never used                                      no-unused-vars
+    349:39  warning  't' is defined but never used                                      no-unused-vars
+    350:5   warning  'EJSS_SVGGRAPHICS' is already defined                              no-redeclare
+    351:35  warning  'e' is defined but never used                                      no-unused-vars
+    351:38  warning  't' is defined but never used                                      no-unused-vars
+    352:5   warning  'EJSS_SVGGRAPHICS' is already defined                              no-redeclare
+    353:35  warning  'e' is defined but never used                                      no-unused-vars
+    353:38  warning  't' is defined but never used                                      no-unused-vars
+    354:5   warning  'EJSS_SVGGRAPHICS' is already defined                              no-redeclare
+    355:36  warning  'e' is defined but never used                                      no-unused-vars
+    355:39  warning  't' is defined but never used                                      no-unused-vars
+    356:5   warning  'EJSS_SVGGRAPHICS' is already defined                              no-redeclare
+    357:38  warning  'e' is defined but never used                                      no-unused-vars
+    357:41  warning  't' is defined but never used                                      no-unused-vars
+    358:5   warning  'EJSS_SVGGRAPHICS' is already defined                              no-redeclare
+    359:40  warning  'e' is defined but never used                                      no-unused-vars
+    359:43  warning  't' is defined but never used                                      no-unused-vars
+    360:5   warning  'EJSS_SVGGRAPHICS' is already defined                              no-redeclare
+    361:45  warning  'e' is defined but never used                                      no-unused-vars
+    361:48  warning  't' is defined but never used                                      no-unused-vars
+    362:5   warning  'EJSS_SVGGRAPHICS' is already defined                              no-redeclare
+    363:38  warning  'e' is defined but never used                                      no-unused-vars
+    363:41  warning  't' is defined but never used                                      no-unused-vars
+    364:5   warning  'EJSS_SVGGRAPHICS' is already defined                              no-redeclare
+    365:37  warning  'e' is defined but never used                                      no-unused-vars
+    365:40  warning  't' is defined but never used                                      no-unused-vars
+    366:5   warning  'EJSS_SVGGRAPHICS' is already defined                              no-redeclare
+    367:35  warning  'e' is defined but never used                                      no-unused-vars
+    367:38  warning  't' is defined but never used                                      no-unused-vars
+    368:5   warning  'EJSS_SVGGRAPHICS' is already defined                              no-redeclare
+    369:35  warning  'e' is defined but never used                                      no-unused-vars
+    369:38  warning  't' is defined but never used                                      no-unused-vars
+    370:5   warning  'EJSS_SVGGRAPHICS' is already defined                              no-redeclare
+    371:36  warning  'e' is defined but never used                                      no-unused-vars
+    371:39  warning  't' is defined but never used                                      no-unused-vars
+    372:5   warning  'EJSS_SVGGRAPHICS' is already defined                              no-redeclare
+    373:36  warning  'e' is defined but never used                                      no-unused-vars
+    373:39  warning  't' is defined but never used                                      no-unused-vars
+    374:5   warning  'EJSS_SVGGRAPHICS' is already defined                              no-redeclare
+    422:5   warning  'EJSS_SVGGRAPHICS' is already defined                              no-redeclare
+    472:11  warning  'e' is already defined                                             no-redeclare
+    479:11  warning  'e' is already defined                                             no-redeclare
+    496:7   warning  'u' is assigned a value but never used                             no-unused-vars
+    504:13  warning  'l' is already defined                                             no-redeclare
+    508:16  warning  'rgb' is not defined                                               no-undef
+    510:16  warning  'rgb' is not defined                                               no-undef
+    511:22  warning  'rgb' is not defined                                               no-undef
+    511:29  warning  'rgb' is not defined                                               no-undef
+    511:36  warning  'rgb' is not defined                                               no-undef
+    517:11  warning  'e' is already defined                                             no-redeclare
+    524:11  warning  'e' is already defined                                             no-redeclare
+    546:16  warning  'rgb' is not defined                                               no-undef
+    548:16  warning  'rgb' is not defined                                               no-undef
+    549:22  warning  'rgb' is not defined                                               no-undef
+    549:29  warning  'rgb' is not defined                                               no-undef
+    549:36  warning  'rgb' is not defined                                               no-undef
+    584:5   warning  'EJSS_SVGGRAPHICS' is already defined                              no-redeclare
+    585:36  warning  'e' is defined but never used                                      no-unused-vars
+    585:39  warning  't' is defined but never used                                      no-unused-vars
+    586:5   warning  'EJSS_SVGGRAPHICS' is already defined                              no-redeclare
+    587:34  warning  'e' is defined but never used                                      no-unused-vars
+    587:37  warning  't' is defined but never used                                      no-unused-vars
+    588:5   warning  'EJSS_SVGGRAPHICS' is already defined                              no-redeclare
+    589:36  warning  'e' is defined but never used                                      no-unused-vars
+    589:39  warning  't' is defined but never used                                      no-unused-vars
+    590:5   warning  'EJSS_GRAPHICS' is already defined                                 no-redeclare
+    606:16  warning  'l' is already defined                                             no-redeclare
+    840:20  warning  'f' is already defined                                             no-redeclare
+   1132:20  warning  'u' is already defined                                             no-redeclare
+   1324:5   warning  'EJSS_DRAWING2D' is already defined                                no-redeclare
+   1325:70  warning  'e' is defined but never used                                      no-unused-vars
+   1326:5   warning  'EJSS_DRAWING2D' is already defined                                no-redeclare
+   1327:62  warning  'e' is defined but never used                                      no-unused-vars
+   1328:5   warning  'EJSS_DRAWING2D' is already defined                                no-redeclare
+   1329:62  warning  'e' is defined but never used                                      no-unused-vars
+   1330:5   warning  'EJSS_DRAWING2D' is already defined                                no-redeclare
+   1332:45  warning  'e' is defined but never used                                      no-unused-vars
+   1333:5   warning  'EJSS_DRAWING2D' is already defined                                no-redeclare
+   1335:39  warning  'e' is defined but never used                                      no-unused-vars
+   1337:42  warning  'e' is defined but never used                                      no-unused-vars
+   1338:5   warning  'EJSS_DRAWING2D' is already defined                                no-redeclare
+   1340:39  warning  'e' is defined but never used                                      no-unused-vars
+   1351:5   warning  'EJSS_DRAWING2D' is already defined                                no-redeclare
+   1353:37  warning  'e' is defined but never used                                      no-unused-vars
+   1355:40  warning  'e' is defined but never used                                      no-unused-vars
+   1356:5   warning  'EJSS_DRAWING2D' is already defined                                no-redeclare
+   1555:18  warning  'r' is already defined                                             no-redeclare
+   1555:25  warning  'u' is already defined                                             no-redeclare
+   1562:37  warning  'e' is defined but never used                                      no-unused-vars
+   1568:5   warning  'EJSS_DRAWING2D' is already defined                                no-redeclare
+   1569:66  warning  'e' is defined but never used                                      no-unused-vars
+   1570:5   warning  'EJSS_DRAWING2D' is already defined                                no-redeclare
+   1571:72  warning  'e' is defined but never used                                      no-unused-vars
+   1572:5   warning  'EJSS_DRAWING2D' is already defined                                no-redeclare
+   1573:62  warning  'e' is defined but never used                                      no-unused-vars
+   1574:5   warning  'EJSS_DRAWING2D' is already defined                                no-redeclare
+   1576:36  warning  'e' is defined but never used                                      no-unused-vars
+   1578:39  warning  'e' is defined but never used                                      no-unused-vars
+   1579:5   warning  'EJSS_DRAWING2D' is already defined                                no-redeclare
+   1581:37  warning  'e' is defined but never used                                      no-unused-vars
+   1583:40  warning  'e' is defined but never used                                      no-unused-vars
+   1584:5   warning  'EJSS_DRAWING2D' is already defined                                no-redeclare
+   1586:37  warning  'e' is defined but never used                                      no-unused-vars
+   1588:40  warning  'e' is defined but never used                                      no-unused-vars
+   1589:5   warning  'EJSS_DRAWING2D' is already defined                                no-redeclare
+   1642:5   warning  'EJSS_DRAWING2D' is already defined                                no-redeclare
+   1733:15  warning  'h' is already defined                                             no-redeclare
+   1805:40  warning  'colors' is not defined                                            no-undef
+   1806:20  warning  'colors' is not defined                                            no-undef
+   1807:20  warning  'i' is already defined                                             no-redeclare
+   1807:24  warning  'colors' is not defined                                            no-undef
+   1807:43  warning  'numColors' is not defined                                         no-undef
+   1808:20  warning  'colors' is not defined                                            no-undef
+   1808:27  warning  'colors' is not defined                                            no-undef
+   1809:11  warning  'colors' is not defined                                            no-undef
+   1837:5   warning  'EJSS_DRAWING2D' is already defined                                no-redeclare
+   1848:36  warning  'e' is defined but never used                                      no-unused-vars
+   1849:9   warning  't' is assigned a value but never used                             no-unused-vars
+   1930:26  warning  'mLineWidth' is not defined                                        no-undef
+   1942:5   warning  'EJSS_DRAWING2D' is already defined                                no-redeclare
+   2080:5   warning  'x' is assigned a value but never used                             no-unused-vars
+   2081:7   warning  Unexpected control character(s) in regular expression: \x00        no-control-regex
+   2081:7   warning  Unexpected combined character in character class                   no-misleading-character-class
+   2083:7   warning  Unexpected control character(s) in regular expression: \x00, \x1f  no-control-regex
+   2083:7   warning  Unexpected combined character in character class                   no-misleading-character-class
+   2083:11  warning  Unnecessary escape character: \'                                   no-useless-escape
+   2310:17  warning  'a' is already defined                                             no-redeclare
+   2322:19  warning  'a' is already defined                                             no-redeclare
+   2582:5   warning  'EJSS_DRAWING2D' is already defined                                no-redeclare
+   2683:5   warning  'EJSS_DRAWING2D' is already defined                                no-redeclare
+   2689:9   warning  's' is assigned a value but never used                             no-unused-vars
+   2709:13  warning  'o' is already defined                                             no-redeclare
+   2710:11  warning  'u' is already defined                                             no-redeclare
+   2711:11  warning  'a' is already defined                                             no-redeclare
+   2835:21  warning  'c' is already defined                                             no-redeclare
+   2845:15  warning  'd' is already defined                                             no-redeclare
+   3002:5   warning  'EJSS_DRAWING2D' is already defined                                no-redeclare
+   3018:37  warning  'e' is defined but never used                                      no-unused-vars
+   3105:5   warning  'EJSS_DRAWING2D' is already defined                                no-redeclare
+   3147:12  warning  'radians' is not defined                                           no-undef
+   3235:5   warning  'EJSS_DRAWING2D' is already defined                                no-redeclare
+   3236:64  warning  'e' is defined but never used                                      no-unused-vars
+   3237:5   warning  'EJSS_DRAWING2D' is already defined                                no-redeclare
+   3238:60  warning  'e' is defined but never used                                      no-unused-vars
+   3239:5   warning  'EJSS_DRAWING2D' is already defined                                no-redeclare
+   3241:43  warning  'e' is defined but never used                                      no-unused-vars
+   3244:45  warning  'e' is defined but never used                                      no-unused-vars
+   3245:5   warning  'EJSS_DRAWING3D' is already defined                                no-redeclare
+   3247:47  warning  'e' is defined but never used                                      no-unused-vars
+   3248:5   warning  'EJSS_DRAWING3D' is already defined                                no-redeclare
+   3250:37  warning  'e' is defined but never used                                      no-unused-vars
+   3252:40  warning  'e' is defined but never used                                      no-unused-vars
+   3253:5   warning  'EJSS_DRAWING3D' is already defined                                no-redeclare
+   3255:37  warning  'e' is defined but never used                                      no-unused-vars
+   3257:40  warning  'e' is defined but never used                                      no-unused-vars
+   3258:5   warning  'EJSS_DRAWING3D' is already defined                                no-redeclare
+   3260:35  warning  'e' is defined but never used                                      no-unused-vars
+   3262:38  warning  'e' is defined but never used                                      no-unused-vars
+   3263:5   warning  'EJSS_DRAWING3D' is already defined                                no-redeclare
+   3265:36  warning  'e' is defined but never used                                      no-unused-vars
+   3267:39  warning  'e' is defined but never used                                      no-unused-vars
+   3268:5   warning  'EJSS_DRAWING3D' is already defined                                no-redeclare
+   3270:40  warning  'e' is defined but never used                                      no-unused-vars
+   3272:43  warning  'e' is defined but never used                                      no-unused-vars
+   3273:5   warning  'EJSS_DRAWING3D' is already defined                                no-redeclare
+   3274:62  warning  'e' is defined but never used                                      no-unused-vars
+   3275:5   warning  'EJSS_DRAWING3D' is already defined                                no-redeclare
+   3277:44  warning  'e' is defined but never used                                      no-unused-vars
+   3278:5   warning  'EJSS_DRAWING3D' is already defined                                no-redeclare
+   3279:68  warning  'e' is defined but never used                                      no-unused-vars
+   3280:5   warning  'EJSS_DRAWING3D' is already defined                                no-redeclare
+   3282:42  warning  'e' is defined but never used                                      no-unused-vars
+   3282:45  warning  't' is defined but never used                                      no-unused-vars
+   3283:5   warning  'EJSS_DRAWING3D' is already defined                                no-redeclare
+   3285:41  warning  'e' is defined but never used                                      no-unused-vars
+   3287:44  warning  'e' is defined but never used                                      no-unused-vars
+   3288:5   warning  'EJSS_DRAWING3D' is already defined                                no-redeclare
+   3289:64  warning  'e' is defined but never used                                      no-unused-vars
+   3290:5   warning  'EJSS_DRAWING3D' is already defined                                no-redeclare
+   3418:23  warning  'e' is defined but never used                                      no-unused-vars
+   3441:5   warning  'EJSS_DRAWING3D' is already defined                                no-redeclare
+   3456:37  warning  'e' is defined but never used                                      no-unused-vars
+   3457:9   warning  't' is assigned a value but never used                             no-unused-vars
+   3549:5   warning  'EJSS_DRAWING3D' is already defined                                no-redeclare
+   3559:41  warning  'e' is defined but never used                                      no-unused-vars
+   3563:41  warning  'e' is defined but never used                                      no-unused-vars
+   3567:41  warning  'e' is defined but never used                                      no-unused-vars
+   3571:46  warning  'e' is defined but never used                                      no-unused-vars
+   3622:46  warning  'e' is defined but never used                                      no-unused-vars
+   3622:49  warning  't' is defined but never used                                      no-unused-vars
+   3623:5   warning  'EJSS_WEBGLGRAPHICS' is already defined                            no-redeclare
+   3624:48  warning  'e' is defined but never used                                      no-unused-vars
+   3624:51  warning  't' is defined but never used                                      no-unused-vars
+   3625:5   warning  'EJSS_WEBGLGRAPHICS' is already defined                            no-redeclare
+   3626:38  warning  'e' is defined but never used                                      no-unused-vars
+   3626:41  warning  't' is defined but never used                                      no-unused-vars
+   3627:5   warning  'EJSS_WEBGLGRAPHICS' is already defined                            no-redeclare
+   3628:38  warning  'e' is defined but never used                                      no-unused-vars
+   3628:41  warning  't' is defined but never used                                      no-unused-vars
+   3629:5   warning  'EJSS_WEBGLGRAPHICS' is already defined                            no-redeclare
+   3630:36  warning  'e' is defined but never used                                      no-unused-vars
+   3630:39  warning  't' is defined but never used                                      no-unused-vars
+   3631:5   warning  'EJSS_WEBGLGRAPHICS' is already defined                            no-redeclare
+   3632:41  warning  'e' is defined but never used                                      no-unused-vars
+   3632:44  warning  't' is defined but never used                                      no-unused-vars
+   3633:5   warning  'EJSS_WEBGLGRAPHICS' is already defined                            no-redeclare
+   3634:42  warning  'e' is defined but never used                                      no-unused-vars
+   3634:45  warning  't' is defined but never used                                      no-unused-vars
+   4008:5   warning  'EJSS_WEBGLGRAPHICS' is already defined                            no-redeclare
+   4009:38  warning  'e' is defined but never used                                      no-unused-vars
+   4009:41  warning  't' is defined but never used                                      no-unused-vars
+   4009:44  warning  'n' is defined but never used                                      no-unused-vars
+   4013:7   warning  'n' is assigned a value but never used                             no-unused-vars
+   4029:7   warning  't' is already defined                                             no-redeclare
+   4030:7   warning  'n' is already defined                                             no-redeclare
+   4062:5   warning  'EJSS_WEBGLGRAPHICS' is already defined                            no-redeclare
+   4063:38  warning  'e' is defined but never used                                      no-unused-vars
+   4063:41  warning  't' is defined but never used                                      no-unused-vars
+   4064:5   warning  'EJSS_WEBGLGRAPHICS' is already defined                            no-redeclare
+   4065:40  warning  'e' is defined but never used                                      no-unused-vars
+   4065:43  warning  't' is defined but never used                                      no-unused-vars
+   4066:5   warning  'EJSS_WEBGLGRAPHICS' is already defined                            no-redeclare
+   4068:42  warning  'e' is defined but never used                                      no-unused-vars
+   4068:45  warning  't' is defined but never used                                      no-unused-vars
+   4068:48  warning  'n' is defined but never used                                      no-unused-vars
+   4068:51  warning  'r' is defined but never used                                      no-unused-vars
+   4069:5   warning  'EJSS_WEBGLGRAPHICS' is already defined                            no-redeclare
+   4070:39  warning  'e' is defined but never used                                      no-unused-vars
+   4070:42  warning  't' is defined but never used                                      no-unused-vars
+   4071:5   warning  'EJSS_WEBGLGRAPHICS' is already defined                            no-redeclare
+   4072:40  warning  'e' is defined but never used                                      no-unused-vars
+   4072:43  warning  't' is defined but never used                                      no-unused-vars
+   4073:5   warning  'EJSS_WEBGLGRAPHICS' is already defined                            no-redeclare
+   4074:37  warning  'e' is defined but never used                                      no-unused-vars
+   4074:40  warning  't' is defined but never used                                      no-unused-vars
+   4075:5   warning  'EJSS_WEBGLGRAPHICS' is already defined                            no-redeclare
+   4077:43  warning  'e' is defined but never used                                      no-unused-vars
+   4077:46  warning  't' is defined but never used                                      no-unused-vars
+   4077:49  warning  'n' is defined but never used                                      no-unused-vars
+   4077:52  warning  'r' is defined but never used                                      no-unused-vars
+   4078:5   warning  'EJSS_WEBGLGRAPHICS' is already defined                            no-redeclare
+   4079:38  warning  'e' is defined but never used                                      no-unused-vars
+   4079:41  warning  't' is defined but never used                                      no-unused-vars
+   4080:5   warning  'EJSS_WEBGLGRAPHICS' is already defined                            no-redeclare
+   4083:13  warning  'result' is not defined                                            no-undef
+   4083:44  warning  'result' is not defined                                            no-undef
+   4259:5   warning  'EJSS_GRAPHICS' is already defined                                 no-redeclare
+   4261:44  warning  'e' is defined but never used                                      no-unused-vars
+   4262:5   warning  'EJSS_DRAWING3D' is already defined                                no-redeclare
+   4264:37  warning  'e' is defined but never used                                      no-unused-vars
+   4266:40  warning  'e' is defined but never used                                      no-unused-vars
+   4267:5   warning  'EJSS_DRAWING3D' is already defined                                no-redeclare
+   4269:39  warning  'e' is defined but never used                                      no-unused-vars
+   4271:42  warning  'e' is defined but never used                                      no-unused-vars
+   4272:5   warning  'EJSS_DRAWING3D' is already defined                                no-redeclare
+   4274:38  warning  'e' is defined but never used                                      no-unused-vars
+   4276:41  warning  'e' is defined but never used                                      no-unused-vars
+   4277:5   warning  'EJSS_DRAWING3D' is already defined                                no-redeclare
+   4279:38  warning  'e' is defined but never used                                      no-unused-vars
+   4281:41  warning  'e' is defined but never used                                      no-unused-vars
+   4282:5   warning  'EJSS_DRAWING3D' is already defined                                no-redeclare
+   4284:39  warning  'e' is defined but never used                                      no-unused-vars
+   4286:42  warning  'e' is defined but never used                                      no-unused-vars
+   4287:5   warning  'EJSS_DRAWING3D' is already defined                                no-redeclare
+   4289:43  warning  'e' is defined but never used                                      no-unused-vars
+   4291:46  warning  'e' is defined but never used                                      no-unused-vars
+   4292:5   warning  'EJSS_DRAWING3D' is already defined                                no-redeclare
+   4294:36  warning  'e' is defined but never used                                      no-unused-vars
+   4296:39  warning  'e' is defined but never used                                      no-unused-vars
+   4297:5   warning  'EJSS_DRAWING3D' is already defined                                no-redeclare
+   4299:37  warning  'e' is defined but never used                                      no-unused-vars
+   4301:40  warning  'e' is defined but never used                                      no-unused-vars
+   4303:74  warning  'e' is defined but never used                                      no-unused-vars
+   4304:5   warning  'EJSS_INTERFACE' is already defined                                no-redeclare
+   4305:64  warning  'e' is defined but never used                                      no-unused-vars
+   4306:5   warning  'EJSS_INTERFACE' is already defined                                no-redeclare
+   4397:7   warning  'n' is assigned a value but never used                             no-unused-vars
+   4399:8   warning  'mElement' is not defined                                          no-undef
+   4472:5   warning  'EJSS_INTERFACE' is already defined                                no-redeclare
+   4552:5   warning  'EJSS_INTERFACE' is already defined                                no-redeclare
+   4603:7   warning  'a' is assigned a value but never used                             no-unused-vars
+   4676:5   warning  'EJSS_INTERFACE' is already defined                                no-redeclare
+   4677:70  warning  'e' is defined but never used                                      no-unused-vars
+   4678:5   warning  'EJSS_INTERFACE' is already defined                                no-redeclare
+   4679:70  warning  'e' is defined but never used                                      no-unused-vars
+   4680:5   warning  'EJSS_INTERFACE' is already defined                                no-redeclare
+   4681:72  warning  'e' is defined but never used                                      no-unused-vars
+   4682:5   warning  'EJSS_INTERFACE' is already defined                                no-redeclare
+   4796:5   warning  'EJSS_INTERFACE' is already defined                                no-redeclare
+   4798:45  warning  'e' is defined but never used                                      no-unused-vars
+   4799:5   warning  'EJSS_INTERFACE' is already defined                                no-redeclare
+   4800:62  warning  'e' is defined but never used                                      no-unused-vars
+   4801:5   warning  'EJSS_INTERFACE' is already defined                                no-redeclare
+   4802:64  warning  'e' is defined but never used                                      no-unused-vars
+   4803:5   warning  'EJSS_INTERFACE' is already defined                                no-redeclare
+   4849:5   warning  'EJSS_INTERFACE' is already defined                                no-redeclare
+   4850:64  warning  'e' is defined but never used                                      no-unused-vars
+   4851:5   warning  'EJSS_INTERFACE' is already defined                                no-redeclare
+   4852:66  warning  'e' is defined but never used                                      no-unused-vars
+   4853:5   warning  'EJSS_INTERFACE' is already defined                                no-redeclare
+   4854:64  warning  'e' is defined but never used                                      no-unused-vars
+   4855:5   warning  'EJSS_INTERFACE' is already defined                                no-redeclare
+   4856:74  warning  'e' is defined but never used                                      no-unused-vars
+   4857:5   warning  'EJSS_INTERFACE' is already defined                                no-redeclare
+   4899:9   warning  '_isEPub' is not defined                                           no-undef
+   4950:15  warning  'o' is already defined                                             no-redeclare
+   4974:46  warning  'e' is defined but never used                                      no-unused-vars
+   4988:5   warning  'EJSS_INTERFACE' is already defined                                no-redeclare
+   4997:7   warning  'n' is assigned a value but never used                             no-unused-vars
+   5034:51  warning  'e' is defined but never used                                      no-unused-vars
+   5041:5   warning  'EJSS_INTERFACE' is already defined                                no-redeclare
+   5043:45  warning  'e' is defined but never used                                      no-unused-vars
+   5044:5   warning  'EJSS_INTERFACE' is already defined                                no-redeclare
+   5164:37  warning  'e' is defined but never used                                      no-unused-vars
+   5183:5   warning  'EJSS_INTERFACE' is already defined                                no-redeclare
+   5184:72  warning  'e' is defined but never used                                      no-unused-vars
+   5185:5   warning  'EJSS_INTERFACE' is already defined                                no-redeclare
+   5186:66  warning  'e' is defined but never used                                      no-unused-vars
+   5187:5   warning  'EJSS_INTERFACE' is already defined                                no-redeclare
+   5227:14  warning  'elem' is not defined                                              no-undef
+   5228:21  warning  'elem' is not defined                                              no-undef
+   5239:11  warning  'l' is already defined                                             no-redeclare
+   5240:14  warning  'elem' is not defined                                              no-undef
+   5241:15  warning  'c' is already defined                                             no-redeclare
+   5241:21  warning  'elem' is not defined                                              no-undef
+   5243:17  warning  'h' is already defined                                             no-redeclare
+   5244:15  warning  'p' is already defined                                             no-redeclare
+   5245:15  warning  'd' is already defined                                             no-redeclare
+   5252:13  warning  'd' is already defined                                             no-redeclare
+   5487:5   warning  'EJSS_INTERFACE' is already defined                                no-redeclare
+   5497:7   warning  'n' is assigned a value but never used                             no-unused-vars
+   5543:5   warning  'EJSS_INTERFACE' is already defined                                no-redeclare
+   5544:70  warning  'e' is defined but never used                                      no-unused-vars
+   5545:5   warning  'EJSS_INTERFACE' is already defined                                no-redeclare
+   5546:72  warning  'e' is defined but never used                                      no-unused-vars
+   5547:5   warning  'EJSS_INTERFACE' is already defined                                no-redeclare
+   5645:5   warning  'EJSS_INTERFACE' is already defined                                no-redeclare
+   5646:64  warning  'e' is defined but never used                                      no-unused-vars
+   5647:5   warning  'EJSS_INTERFACE' is already defined                                no-redeclare
+   5649:43  warning  'e' is defined but never used                                      no-unused-vars
+   5650:5   warning  'EJSS_INTERFACE' is already defined                                no-redeclare
+   5718:51  warning  'e' is defined but never used                                      no-unused-vars
+   5751:7   warning  'd' is assigned a value but never used                             no-unused-vars
+   5906:13  warning  'i' is assigned a value but never used                             no-unused-vars
+   5924:15  warning  'i' is already defined                                             no-redeclare
+   5987:9   warning  'setRunningMode' is not defined                                    no-undef
+   6135:18  warning  's' is already defined                                             no-redeclare
+   6136:15  warning  'o' is already defined                                             no-redeclare
+   6264:5   warning  'EJSS_ODE_INTERPOLATION' is already defined                        no-redeclare
+   6315:5   warning  'EJSS_ODE_INTERPOLATION' is already defined                        no-redeclare
+   6333:5   warning  'EJSS_ODE_INTERPOLATION' is already defined                        no-redeclare
+   6336:62  warning  'bState' is not defined                                            no-undef
+   6361:5   warning  'EJSS_ODE_INTERPOLATION' is already defined                        no-redeclare
+   6364:62  warning  'bState' is not defined                                            no-undef
+   6406:5   warning  'EJSS_ODE_INTERPOLATION' is already defined                        no-redeclare
+   6427:5   warning  'EJSS_ODE_INTERPOLATION' is already defined                        no-redeclare
+   6455:5   warning  'EJSS_ODE_INTERPOLATION' is already defined                        no-redeclare
+   6484:5   warning  'EJSS_ODE_INTERPOLATION' is already defined                        no-redeclare
+   6544:5   warning  'EJSS_ODE_INTERPOLATION' is already defined                        no-redeclare
+   6562:5   warning  'EJSS_ODE_INTERPOLATION' is already defined                        no-redeclare
+   6576:34  warning  'e' is defined but never used                                      no-unused-vars
+   6576:37  warning  't' is defined but never used                                      no-unused-vars
+   6579:45  warning  'n' is defined but never used                                      no-unused-vars
+   6579:48  warning  'r' is defined but never used                                      no-unused-vars
+   6585:5   warning  'EJSS_ODE_INTERPOLATION' is already defined                        no-redeclare
+   6588:62  warning  'bState' is not defined                                            no-undef
+   6589:11  warning  'bState' is not defined                                            no-undef
+   6589:18  warning  'bState' is not defined                                            no-undef
+   6601:27  warning  'mDeltaTime' is not defined                                        no-undef
+   6615:5   warning  'EJSS_ODE_INTERPOLATION' is already defined                        no-redeclare
+   6634:13  warning  't' is assigned a value but never used                             no-unused-vars
+   6667:11  warning  'clearAll' is not defined                                          no-undef
+   6681:20  warning  's' is already defined                                             no-redeclare
+   6682:17  warning  'o' is already defined                                             no-redeclare
+   6697:20  warning  's' is already defined                                             no-redeclare
+   6698:17  warning  'o' is already defined                                             no-redeclare
+   6865:23  warning  'h' is already defined                                             no-redeclare
+   6924:24  warning  'N' is already defined                                             no-redeclare
+   6933:23  warning  'N' is already defined                                             no-redeclare
+   6967:13  warning  'r' is already defined                                             no-redeclare
+   6992:25  warning  'r' is defined but never used                                      no-unused-vars
+   7077:15  warning  'f' is already defined                                             no-redeclare
+   7166:9   warning  'setTolerances' is not defined                                     no-undef
+   7474:19  warning  'h' is already defined                                             no-redeclare
+   7495:19  warning  'h' is already defined                                             no-redeclare
+   7506:15  warning  'v' is already defined                                             no-redeclare
+   7535:19  warning  'h' is already defined                                             no-redeclare
+   7543:17  warning  'y' is already defined                                             no-redeclare
+   7576:5   warning  'EJSS_ODE_SOLVERS' is already defined                              no-redeclare
+   7609:11  warning  'c' is assigned a value but never used                             no-unused-vars
+   7628:11  warning  'h' is assigned a value but never used                             no-unused-vars
+   7666:13  warning  't' is assigned a value but never used                             no-unused-vars
+   7691:5   warning  'EJSS_ODE_SOLVERS' is already defined                              no-redeclare
+   7744:13  warning  'a' is assigned a value but never used                             no-unused-vars
+   7750:11  warning  'd' is assigned a value but never used                             no-unused-vars
+   7789:13  warning  'f' is assigned a value but never used                             no-unused-vars
+   7795:11  warning  'v' is assigned a value but never used                             no-unused-vars
+   7922:5   warning  'EJSS_ODE_SOLVERS' is already defined                              no-redeclare
+   7953:5   warning  'EJSS_ODE_SOLVERS' is already defined                              no-redeclare
+   7961:5   warning  'EJSS_ODE_SOLVERS' is already defined                              no-redeclare
+   8063:5   warning  'EJSS_ODE_SOLVERS' is already defined                              no-redeclare
+   8087:46  warning  'e' is defined but never used                                      no-unused-vars
+   8087:49  warning  't' is defined but never used                                      no-unused-vars
+   8090:53  warning  'e' is defined but never used                                      no-unused-vars
+   8090:56  warning  't' is defined but never used                                      no-unused-vars
+   8090:59  warning  'n' is defined but never used                                      no-unused-vars
+   8193:43  warning  'e' is defined but never used                                      no-unused-vars
+   8194:36  warning  'e' is defined but never used                                      no-unused-vars
+   8194:39  warning  't' is defined but never used                                      no-unused-vars
+   8294:5   warning  'EJSS_ODE_SOLVERS' is already defined                              no-redeclare
+   8373:35  warning  'finalState' is not defined                                        no-undef
+   8374:40  warning  'finalState' is not defined                                        no-undef
+   8392:38  warning  'finalState' is not defined                                        no-undef
+   8393:17  warning  'finalState' is not defined                                        no-undef
+   8393:29  warning  'finalRate' is not defined                                         no-undef
+   8396:13  warning  'c' is already defined                                             no-redeclare
+   8397:11  warning  'd' is already defined                                             no-redeclare
+   8397:16  warning  'finalRate' is not defined                                         no-undef
+   8425:43  warning  'e' is defined but never used                                      no-unused-vars
+   8456:10  warning  'mFinalTime' is not defined                                        no-undef
+   8457:12  warning  'mErrorCode' is not defined                                        no-undef
+   8463:9   warning  'mErrorCode' is not defined                                        no-undef
+   8527:5   warning  'EJSS_ODE_SOLVERS' is already defined                              no-redeclare
+   8549:15  warning  'c' is already defined                                             no-redeclare
+   8550:20  warning  'h' is already defined                                             no-redeclare
+   8551:17  warning  'p' is already defined                                             no-redeclare
+   8584:15  warning  'h' is already defined                                             no-redeclare
+   8584:19  warning  'evaluate' is not defined                                          no-undef
+   8627:15  warning  'l' is already defined                                             no-redeclare
+   8637:31  warning  'mCurrentEventData' is not defined                                 no-undef
+   8645:5   warning  'EJSS_ODE_SOLVERS' is already defined                              no-redeclare
+   8798:9   warning  'mHAfter' is not defined                                           no-undef
+   8801:16  warning  'mHAfter' is not defined                                           no-undef
+   8838:5   warning  'EJSS_ODE_SOLVERS' is already defined                              no-redeclare
+   8867:11  warning  'mMaxMessages' is not defined                                      no-undef
+   8867:32  warning  'mMaxMessages' is not defined                                      no-undef
+   8898:15  warning  'enableExceptions' is not defined                                  no-undef
+   8899:11  warning  'mMaxMessages' is not defined                                      no-undef
+   8899:32  warning  'mMaxMessages' is not defined                                      no-undef
+   8905:7   warning  'i' is assigned a value but never used                             no-unused-vars
+   8930:10  warning  'mMaxMessages' is not defined                                      no-undef
+   8938:10  warning  'mMaxMessages' is not defined                                      no-undef
+   8945:9   warning  'mMaxMessages' is not defined                                      no-undef
+   9073:17  warning  'w' is already defined                                             no-redeclare
+   9089:5   warning  'EJSS_ODE_SOLVERS' is already defined                              no-redeclare
+   9106:5   warning  'EJSS_ODE_SOLVERS' is already defined                              no-redeclare
+   9129:16  warning  'a' is already defined                                             no-redeclare
+   9129:23  warning  'f' is already defined                                             no-redeclare
+   9131:16  warning  'a' is already defined                                             no-redeclare
+   9131:23  warning  'f' is already defined                                             no-redeclare
+   9133:16  warning  'a' is already defined                                             no-redeclare
+   9133:23  warning  'f' is already defined                                             no-redeclare
+   9140:5   warning  'EJSS_ODE_SOLVERS' is already defined                              no-redeclare
+   9144:7   warning  'n' is assigned a value but never used                             no-unused-vars
+   9146:7   warning  'i' is defined but never used                                      no-unused-vars
+   9147:7   warning  's' is assigned a value but never used                             no-unused-vars
+   9149:7   warning  'u' is assigned a value but never used                             no-unused-vars
+   9150:7   warning  'a' is assigned a value but never used                             no-unused-vars
+   9151:7   warning  'f' is assigned a value but never used                             no-unused-vars
+   9152:7   warning  'l' is defined but never used                                      no-unused-vars
+   9153:7   warning  'c' is defined but never used                                      no-unused-vars
+   9154:7   warning  'h' is defined but never used                                      no-unused-vars
+   9155:7   warning  'p' is defined but never used                                      no-unused-vars
+   9156:7   warning  'd' is assigned a value but never used                             no-unused-vars
+   9157:7   warning  'v' is assigned a value but never used                             no-unused-vars
+   9158:7   warning  'm' is assigned a value but never used                             no-unused-vars
+   9159:7   warning  'g' is defined but never used                                      no-unused-vars
+   9160:7   warning  'y' is defined but never used                                      no-unused-vars
+   9166:46  warning  'e' is defined but never used                                      no-unused-vars
+   9166:49  warning  't' is defined but never used                                      no-unused-vars
+   9169:53  warning  'e' is defined but never used                                      no-unused-vars
+   9169:56  warning  't' is defined but never used                                      no-unused-vars
+   9169:59  warning  'n' is defined but never used                                      no-unused-vars
+   9196:5   warning  'EJSS_CORE' is already defined                                     no-redeclare
+   9280:5   warning  'c' is assigned a value but never used                             no-unused-vars
+   9288:5   warning  'b' is assigned a value but never used                             no-unused-vars
+   9289:5   warning  'w' is assigned a value but never used                             no-unused-vars
+   9338:6   warning  'super_registerVariable' is not defined                            no-undef
+   9339:6   warning  'super_registerAction' is not defined                              no-undef
+   9340:6   warning  'super_startUp' is not defined                                     no-undef
+   9342:7   warning  'super_startUp' is not defined                                     no-undef
+   9345:7   warning  'super_registerVariable' is not defined                            no-undef
+   9368:7   warning  'super_registerAction' is not defined                              no-undef
+   9404:7   warning  '_view' is not defined                                             no-undef
+   9405:9   warning  '_view' is not defined                                             no-undef
+   9408:7   warning  '_view' is not defined                                             no-undef
+   9409:9   warning  '_view' is not defined                                             no-undef
+   9459:5   warning  'EJSS_TOOLS' is already defined                                    no-redeclare
+   9543:5   warning  'EJSS_TOOLS' is already defined                                    no-redeclare
+   9618:9   warning  't' is already defined                                             no-redeclare
+   9628:11  warning  't' is already defined                                             no-redeclare
+   9634:5   warning  'EJSS_TOOLS' is already defined                                    no-redeclare
+   9658:9   warning  'e' is already defined                                             no-redeclare
+   9710:17  warning  'e' is already defined                                             no-redeclare
+   9732:5   warning  'EJSS_TOOLS' is already defined                                    no-redeclare
+   9751:13  warning  'inherit' is not defined                                           no-undef
+   9761:5   warning  'EJSS_TOOLS' is already defined                                    no-redeclare
+   9839:5   warning  'EJSS_TOOLS' is already defined                                    no-redeclare
+   9858:15  warning  'InvalidParamsException' is not defined                            no-undef
+   9879:5   warning  'EJSS_TOOLS' is already defined                                    no-redeclare
+   9914:32  warning  'e' is defined but never used                                      no-unused-vars
+   9915:18  warning  'message' is not defined                                           no-undef
+   9917:35  warning  'message' is not defined                                           no-undef
+   9917:67  warning  'message' is not defined                                           no-undef
+   9928:7   warning  'a' is assigned a value but never used                             no-unused-vars
+   9979:5   warning  'EJSS_TOOLS' is already defined                                    no-redeclare
+  10026:4   warning  'sensors' is not defined                                           no-undef
+  10033:12  warning  'sensors' is not defined                                           no-undef
+  10038:12  warning  'sensors' is not defined                                           no-undef
+  10044:12  warning  'sensors' is not defined                                           no-undef
+  10049:12  warning  'sensors' is not defined                                           no-undef
+  10061:8   warning  'sensors' is not defined                                           no-undef
+  10066:10  warning  'sensors' is not defined                                           no-undef
+  10071:10  warning  'sensors' is not defined                                           no-undef
+  10076:10  warning  'sensors' is not defined                                           no-undef
+  10077:10  warning  'sensors' is not defined                                           no-undef
+  10078:10  warning  'sensors' is not defined                                           no-undef
+  10079:10  warning  'sensors' is not defined                                           no-undef
+  10105:11  warning  'sensors' is not defined                                           no-undef
+  10112:12  warning  'sensors' is not defined                                           no-undef
+  10115:14  warning  'sensors' is not defined                                           no-undef
+  10118:14  warning  'sensors' is not defined                                           no-undef
+  10121:14  warning  'sensors' is not defined                                           no-undef
+  10124:14  warning  'sensors' is not defined                                           no-undef
+  10127:14  warning  'sensors' is not defined                                           no-undef
+  10130:14  warning  'sensors' is not defined                                           no-undef
+  10133:14  warning  'sensors' is not defined                                           no-undef
+  10150:11  warning  'sensors' is not defined                                           no-undef
+  10163:16  warning  'sensors' is not defined                                           no-undef
+  10177:30  warning  'sensors' is not defined                                           no-undef
+  10194:11  warning  'sensors' is not defined                                           no-undef
+  10203:16  warning  'sensors' is not defined                                           no-undef
+  10216:30  warning  'sensors' is not defined                                           no-undef
+  10347:5   warning  'EJSS_CORE' is already defined                                     no-redeclare
+  10403:17  warning  '__base64Images' is not defined                                    no-undef
+  10544:44  warning  '_isEPub' is not defined                                           no-undef
+  10632:12  warning  'key' is not defined                                               no-undef
+  10632:24  warning  'key' is not defined                                               no-undef
+  10632:45  warning  'key' is not defined                                               no-undef
+  10632:54  warning  'key' is not defined                                               no-undef
+  10636:12  warning  'key' is not defined                                               no-undef
+  10637:11  warning  'key' is not defined                                               no-undef
+  10637:21  warning  'key' is not defined                                               no-undef
+  10638:15  warning  'key' is not defined                                               no-undef
+  10638:34  warning  'key' is not defined                                               no-undef
+  10639:54  warning  'key' is not defined                                               no-undef
+  10795:37  warning  't' is defined but never used                                      no-unused-vars
+  10807:10  warning  'DoubleSlitWaveParticleDuality' is defined but never used          no-unused-vars
+  10810:7   warning  '_isPlaying' is assigned a value but never used                    no-unused-vars
+  10820:7   warning  '_tools' is assigned a value but never used                        no-unused-vars
+  10845:12  warning  '_update' is defined but never used                                no-unused-vars
+  10848:12  warning  '_initialize' is defined but never used                            no-unused-vars
+  10851:12  warning  '_setFPS' is defined but never used                                no-unused-vars
+  10854:12  warning  '_setDelay' is defined but never used                              no-unused-vars
+  10857:12  warning  '_setStepsPerDisplay' is defined but never used                    no-unused-vars
+  10860:12  warning  '_setUpdateView' is defined but never used                         no-unused-vars
+  10863:12  warning  '_setAutoplay' is defined but never used                           no-unused-vars
+  10866:12  warning  '_println' is defined but never used                               no-unused-vars
+  10870:12  warning  '_breakAfterThisPage' is defined but never used                    no-unused-vars
+  10878:12  warning  '_saveText' is defined but never used                              no-unused-vars
+  10882:12  warning  '_saveState' is defined but never used                             no-unused-vars
+  10886:12  warning  '_saveImage' is defined but never used                             no-unused-vars
+  10890:12  warning  '_readState' is defined but never used                             no-unused-vars
+  10894:12  warning  '_readText' is defined but never used                              no-unused-vars
+  10898:12  warning  '_getStringProperty' is defined but never used                     no-unused-vars
+  10904:12  warning  '_setPageEnabled' is defined but never used                        no-unused-vars
+  10928:12  warning  '_serialize' is defined but never used                             no-unused-vars
+  10951:12  warning  '_unserialize' is defined but never used                           no-unused-vars
+  10995:30  warning  '_isEPub' is not defined                                           no-undef
+  11041:9   warning  'ctx' is assigned a value but never used                           no-unused-vars
+
+/home/runner/work/exp-youngs-double-slit-dei/exp-youngs-double-slit-dei/experiment/simulation/scripts/simulation.js
+    8:5   warning  'isPaused' is assigned a value but never used  no-unused-vars
+  152:10  warning  'stopAnimation' is defined but never used      no-unused-vars
+  163:10  warning  'resetAnimation' is defined but never used     no-unused-vars
+
+/home/runner/work/exp-youngs-double-slit-dei/exp-youngs-double-slit-dei/experiment/simulation/scripts/textresizedetector.js
+   17:1   warning  'TextResizeDetector' is not defined  no-undef
+   23:1   warning  Mixed spaces and tabs                no-mixed-spaces-and-tabs
+   24:1   warning  Mixed spaces and tabs                no-mixed-spaces-and-tabs
+   25:1   warning  Mixed spaces and tabs                no-mixed-spaces-and-tabs
+   30:37  warning  'TextResizeDetector' is not defined  no-undef
+   34:23  warning  'TextResizeDetector' is not defined  no-undef
+   35:1   warning  Mixed spaces and tabs                no-mixed-spaces-and-tabs
+   37:1   warning  Mixed spaces and tabs                no-mixed-spaces-and-tabs
+   40:3   warning  Unnecessary semicolon                no-extra-semi
+   45:3   warning  Unnecessary semicolon                no-extra-semi
+   46:1   warning  Mixed spaces and tabs                no-mixed-spaces-and-tabs
+   47:1   warning  Mixed spaces and tabs                no-mixed-spaces-and-tabs
+   48:1   warning  Mixed spaces and tabs                no-mixed-spaces-and-tabs
+   48:19  warning  'TextResizeDetector' is not defined  no-undef
+   50:1   warning  Mixed spaces and tabs                no-mixed-spaces-and-tabs
+   52:5   warning  'aListnr' is not defined             no-undef
+   54:10  warning  'aListnr' is not defined             no-undef
+   55:6   warning  'aListnr' is not defined             no-undef
+   58:6   warning  'aListnr' is not defined             no-undef
+   58:23  warning  'aListnr' is not defined             no-undef
+   62:1   warning  Mixed spaces and tabs                no-mixed-spaces-and-tabs
+   63:1   warning  Mixed spaces and tabs                no-mixed-spaces-and-tabs
+   64:1   warning  Mixed spaces and tabs                no-mixed-spaces-and-tabs
+   64:4   warning  Unnecessary semicolon                no-extra-semi
+   67:8   warning  'TextResizeDetector' is not defined  no-undef
+   68:4   warning  'TextResizeDetector' is not defined  no-undef
+   71:31  warning  'TextResizeDetector' is not defined  no-undef
+   72:4   warning  'TextResizeDetector' is not defined  no-undef
+   73:8   warning  'TextResizeDetector' is not defined  no-undef
+   74:5   warning  'TextResizeDetector' is not defined  no-undef
+   76:4   warning  'TextResizeDetector' is not defined  no-undef
+   79:8   warning  'TextResizeDetector' is not defined  no-undef
+   80:1   warning  Mixed spaces and tabs                no-mixed-spaces-and-tabs
+   80:11  warning  'TextResizeDetector' is not defined  no-undef
+   87:1   warning  Mixed spaces and tabs                no-mixed-spaces-and-tabs
+   88:2   warning  Mixed spaces and tabs                no-mixed-spaces-and-tabs
+   93:2   warning  Mixed spaces and tabs                no-mixed-spaces-and-tabs
+   94:2   warning  Mixed spaces and tabs                no-mixed-spaces-and-tabs
+   95:2   warning  Mixed spaces and tabs                no-mixed-spaces-and-tabs
+   97:1   warning  Mixed spaces and tabs                no-mixed-spaces-and-tabs
+  103:1   warning  Mixed spaces and tabs                no-mixed-spaces-and-tabs
+  103:38  warning  'bScope' is defined but never used   no-unused-vars
+  115:1   warning  Mixed spaces and tabs                no-mixed-spaces-and-tabs
+  116:1   warning  Mixed spaces and tabs                no-mixed-spaces-and-tabs
+  117:1   warning  Mixed spaces and tabs                no-mixed-spaces-and-tabs
+  118:1   warning  Mixed spaces and tabs                no-mixed-spaces-and-tabs
+  124:1   warning  Mixed spaces and tabs                no-mixed-spaces-and-tabs
+  125:1   warning  Mixed spaces and tabs                no-mixed-spaces-and-tabs
+  125:11  warning  'iSize' is defined but never used    no-unused-vars
+  126:3   warning  Mixed spaces and tabs                no-mixed-spaces-and-tabs
+  127:2   warning  Mixed spaces and tabs                no-mixed-spaces-and-tabs
+  128:2   warning  Mixed spaces and tabs                no-mixed-spaces-and-tabs
+  129:1   warning  Mixed spaces and tabs                no-mixed-spaces-and-tabs
+  130:1   warning  Mixed spaces and tabs                no-mixed-spaces-and-tabs
+  133:1   warning  Mixed spaces and tabs                no-mixed-spaces-and-tabs
+  139:1   warning  Mixed spaces and tabs                no-mixed-spaces-and-tabs
+  142:1   warning  Mixed spaces and tabs                no-mixed-spaces-and-tabs
+  145:1   warning  'TextResizeDetector' is not defined  no-undef
+  146:1   warning  'TextResizeDetector' is not defined  no-undef
+
+✖ 728 problems (0 errors, 728 warnings)
+  0 errors and 3 warnings potentially fixable with the `--fix` option.
+

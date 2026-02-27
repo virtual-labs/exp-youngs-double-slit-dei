@@ -1,0 +1,11418 @@
+function Matrix() {
+  var e = Array.prototype.concat.apply([], arguments);
+  e.length || (e = [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]),
+    (this.m = hasFloat32Array ? new Float32Array(e) : e);
+}
+function Vector(e, t, n) {
+  typeof e == "object"
+    ? ((this.x = e[0] || 0), (this.y = e[1] || 0), (this.z = e[2] || 0))
+    : ((this.x = e || 0), (this.y = t || 0), (this.z = n || 0));
+}
+var EJSS_DRAWING2D = EJSS_DRAWING2D || {};
+(EJSS_DRAWING2D.AnalyticCurve = {}),
+  (EJSS_DRAWING2D.analyticCurve = function (e) {});
+var EJSS_DRAWING2D = EJSS_DRAWING2D || {};
+(EJSS_DRAWING2D.Arrow = {}),
+  (EJSS_DRAWING2D.arrow = function (e) {}),
+  (EJSS_DRAWING2D.ArrowSet = {}),
+  (EJSS_DRAWING2D.arrowSet = function (e) {});
+var EJSS_DRAWING2D = EJSS_DRAWING2D || {};
+(EJSS_DRAWING2D.Axis = {}), (EJSS_DRAWING2D.axis = function (e) {});
+var EJSS_DRAWING2D = EJSS_DRAWING2D || {};
+(EJSS_DRAWING2D.ByteRaster = {}), (EJSS_DRAWING2D.byteRaster = function (e) {});
+var EJSS_DRAWING2D = EJSS_DRAWING2D || {};
+(EJSS_DRAWING2D.CellLattice = {}),
+  (EJSS_DRAWING2D.cellLattice = function (e) {});
+var EJSS_DRAWING2D = EJSS_DRAWING2D || {};
+(EJSS_DRAWING2D.Cursor = {}), (EJSS_DRAWING2D.cursor = function (e) {});
+var EJSS_DRAWING2D = EJSS_DRAWING2D || {};
+(EJSS_DRAWING2D.Custom = {}), (EJSS_DRAWING2D.custom = function (e) {});
+var EJSS_DRAWING2D = EJSS_DRAWING2D || {};
+(EJSS_DRAWING2D.DrawingPanel = {}),
+  (EJSS_DRAWING2D.drawingPanel = function (e) {});
+var EJSS_DRAWING2D = EJSS_DRAWING2D || {};
+(EJSS_DRAWING2D.Element = {}), (EJSS_DRAWING2D.element = function (e) {});
+var EJSS_DRAWING2D = EJSS_DRAWING2D || {};
+(EJSS_DRAWING2D.ElementSet = {}),
+  (EJSS_DRAWING2D.elementSet = function (e, t) {});
+var EJSS_DRAWING2D = EJSS_DRAWING2D || {};
+(EJSS_DRAWING2D.Grid = {}), (EJSS_DRAWING2D.grid = function (e) {});
+var EJSS_DRAWING2D = EJSS_DRAWING2D || {};
+(EJSS_DRAWING2D.Group = {}),
+  (EJSS_DRAWING2D.group = function (e) {}),
+  (EJSS_DRAWING2D.GroupSet = {}),
+  (EJSS_DRAWING2D.groupSet = function (e) {});
+var EJSS_DRAWING2D = EJSS_DRAWING2D || {};
+(EJSS_DRAWING2D.Histogram = {}), (EJSS_DRAWING2D.histogram = function (e) {});
+var EJSS_DRAWING2D = EJSS_DRAWING2D || {};
+(EJSS_DRAWING2D.Image = {}), (EJSS_DRAWING2D.image = function (e) {});
+var EJSS_DRAWING2D = EJSS_DRAWING2D || {};
+(EJSS_DRAWING2D.ImageSet = {}), (EJSS_DRAWING2D.imageSet = function (e) {});
+var EJSS_CANVASGRAPHICS = EJSS_CANVASGRAPHICS || {};
+EJSS_CANVASGRAPHICS.byteRaster = function (e, t) {
+  if (t.getDataChanged()) {
+    var n = t.getData(),
+      r = t.getColorMapper().getColors(),
+      i = n.length,
+      s = n[0].length,
+      o = t.getColorMapper().getNumberOfColors(),
+      u = t.getPixelPosition(),
+      a = t.getPixelSizes(),
+      f = t.getRelativePositionOffset(a),
+      l = u[0] + f[0],
+      c = u[1] + f[1],
+      h = Math.abs(a[0] / 2),
+      p = Math.abs(a[1] / 2),
+      d = e.canvas.id;
+    EJSS_SVGGRAPHICS.Utils.ImageDataCanvas(i, s, o, n, r, function (t) {
+      var n = document.getElementById(d);
+      (e = n.getContext("2d")), e.putImageData(t, l - p, c - p);
+    }),
+      t.setDataChanged(!1);
+  }
+};
+var EJSS_CANVASGRAPHICS = EJSS_CANVASGRAPHICS || {};
+EJSS_CANVASGRAPHICS.ellipse = function (e, t) {
+  var n = t.getPixelPosition(),
+    r = t.getPixelSizes(),
+    i = t.getRelativePositionOffset(r),
+    s = n[0] + i[0],
+    o = n[1] + i[1],
+    u = Math.abs(r[0]),
+    a = Math.abs(r[1]),
+    f = 0.5522848,
+    l = s - u / 2,
+    c = o - a / 2;
+  (ox = (u / 2) * f),
+    (oy = (a / 2) * f),
+    (xe = l + u),
+    (ye = c + a),
+    e.beginPath(),
+    e.moveTo(l, o),
+    e.bezierCurveTo(l, o - oy, s - ox, c, s, c),
+    e.bezierCurveTo(s + ox, c, xe, o - oy, xe, o),
+    e.bezierCurveTo(xe, o + oy, s + ox, ye, s, ye),
+    e.bezierCurveTo(s - ox, ye, l, o + oy, l, o);
+  var h = t.getStyle();
+  h.getDrawFill() && ((e.fillStyle = h.getFillColor()), e.fill()),
+    h.getDrawLines() &&
+      ((e.lineWidth = h.getLineWidth()),
+      (e.strokeStyle = h.getLineColor()),
+      e.stroke());
+};
+var EJSS_CANVASGRAPHICS = EJSS_CANVASGRAPHICS || {};
+EJSS_CANVASGRAPHICS.point = function (e, t) {
+  var n = t.getPixelPosition(),
+    r = t.getPixelSizes(),
+    i = t.getRelativePositionOffset(r),
+    s = n[0] + i[0],
+    o = n[1] + i[1];
+  e.beginPath(), e.arc(s, o, 2, 0, 2 * Math.PI);
+  var u = t.getStyle();
+  (e.fillStyle = u.getFillColor()), e.fill();
+};
+var EJSS_CANVASGRAPHICS = EJSS_CANVASGRAPHICS || {};
+EJSS_CANVASGRAPHICS.rectangle = function (e, t) {
+  var n = t.getPixelPosition(),
+    r = t.getPixelSizes(),
+    i = t.getRelativePositionOffset(r),
+    s = n[0] + i[0],
+    o = n[1] + i[1],
+    u = Math.abs(r[0]),
+    a = Math.abs(r[1]);
+  e.beginPath(), e.rect(s - u / 2, o - a / 2, u, a);
+  var f = t.getStyle();
+  f.getDrawFill() && ((e.fillStyle = f.getFillColor()), e.fill()),
+    f.getDrawLines() &&
+      ((e.lineWidth = f.getLineWidth()),
+      (e.strokeStyle = f.getLineColor()),
+      e.stroke());
+};
+var EJSS_CANVASGRAPHICS = EJSS_CANVASGRAPHICS || {};
+EJSS_CANVASGRAPHICS.roundRectangle = function (e, t) {
+  var n = t.getPixelPosition(),
+    r = t.getPixelSizes(),
+    i = t.getRelativePositionOffset(r),
+    s = n[0] + i[0],
+    o = n[1] + i[1],
+    u = Math.abs(r[0]),
+    a = Math.abs(r[1]),
+    f = s - u / 2,
+    l = o - a / 2,
+    c = Math.abs(t.getCornerRadius());
+  e.beginPath(),
+    e.moveTo(f + c, l),
+    e.lineTo(f + u - c, l),
+    e.quadraticCurveTo(f + u, l, f + u, l + c),
+    e.lineTo(f + u, l + a - c),
+    e.quadraticCurveTo(f + u, l + a, f + u - c, l + a),
+    e.lineTo(f + c, l + a),
+    e.quadraticCurveTo(f, l + a, f, l + a - c),
+    e.lineTo(f, l + c),
+    e.quadraticCurveTo(f, l, f + c, l),
+    e.closePath();
+  var h = t.getStyle();
+  h.getDrawFill() && ((e.fillStyle = h.getFillColor()), e.fill()),
+    h.getDrawLines() &&
+      ((e.lineWidth = h.getLineWidth()),
+      (e.strokeStyle = h.getLineColor()),
+      e.stroke());
+};
+var EJSS_CANVASGRAPHICS = EJSS_CANVASGRAPHICS || {};
+EJSS_CANVASGRAPHICS.segment = function (e, t) {
+  var n = t.getPixelPosition(),
+    r = t.getPixelSizes(),
+    i = t.getRelativePositionOffset(r),
+    s = n[0] + i[0],
+    o = n[1] + i[1],
+    u = Math.abs(r[0] / 2),
+    a = Math.abs(r[1] / 2);
+  e.beginPath(), e.moveTo(s - u, o - a), e.lineTo(s + u, o + a);
+  var f = t.getStyle();
+  f.getDrawFill() && ((e.fillStyle = f.getFillColor()), e.fill()),
+    f.getDrawLines() &&
+      ((e.lineWidth = f.getLineWidth()),
+      (e.strokeStyle = f.getLineColor()),
+      e.stroke());
+};
+var EJSS_CANVASGRAPHICS = EJSS_CANVASGRAPHICS || {};
+EJSS_CANVASGRAPHICS.trail = function (e, t) {
+  function n(t, n, r, i, s, o, u) {
+    if (n <= 0) return;
+    e.beginPath();
+    for (var a = 0; a < n; a++) {
+      var f = t[a],
+        l = i + f[0] * o,
+        c = s + f[1] * u,
+        h = f[2];
+      a == 0 || h == 0 ? e.moveTo(l, c) : e.lineTo(l, c);
+    }
+    r.getDrawLines() &&
+      ((e.lineWidth = r.getLineWidth()),
+      (e.strokeStyle = r.getLineColor()),
+      e.stroke());
+  }
+  var r = t.getPixelPosition(),
+    i = t.getPixelSizes(),
+    s = t.getRelativePositionOffset(i),
+    o = r[0] + s[0],
+    u = r[1] + s[1],
+    a = i[0] / 2,
+    f = i[1] / 2,
+    l = o - a,
+    c = u - f,
+    h = i[0],
+    p = i[1],
+    d = t.getSegmentsCount();
+  if (d > 0)
+    for (var v = 0; v < d; v++) {
+      var m = t.getSegmentPoints(v).length;
+      n(t.getSegmentPoints(v), m, t.getSegmentStyle(v), l, c, h, p);
+    }
+  var m = t.getCurrentPoints().length;
+  n(t.getCurrentPoints(), m, t.getStyle(), l, c, h, p);
+};
+var EJSS_GRAPHICS = EJSS_GRAPHICS || {};
+(EJSS_GRAPHICS.CanvasGraphics = {}),
+  (EJSS_GRAPHICS.canvasGraphics = function (e) {});
+var EJSS_SVGGRAPHICS = EJSS_SVGGRAPHICS || {};
+EJSS_SVGGRAPHICS.analyticCurve = function (e, t) {};
+var EJSS_SVGGRAPHICS = EJSS_SVGGRAPHICS || {};
+EJSS_SVGGRAPHICS.arrow = function (e, t) {};
+var EJSS_SVGGRAPHICS = EJSS_SVGGRAPHICS || {};
+EJSS_SVGGRAPHICS.axis = function (e, t) {};
+var EJSS_SVGGRAPHICS = EJSS_SVGGRAPHICS || {};
+EJSS_SVGGRAPHICS.byteRaster = function (e, t) {};
+var EJSS_SVGGRAPHICS = EJSS_SVGGRAPHICS || {};
+EJSS_SVGGRAPHICS.cellLattice = function (e, t) {};
+var EJSS_SVGGRAPHICS = EJSS_SVGGRAPHICS || {};
+EJSS_SVGGRAPHICS.cursor = function (e, t) {};
+var EJSS_SVGGRAPHICS = EJSS_SVGGRAPHICS || {};
+EJSS_SVGGRAPHICS.ellipse = function (e, t) {};
+var EJSS_SVGGRAPHICS = EJSS_SVGGRAPHICS || {};
+EJSS_SVGGRAPHICS.grid = function (e, t) {};
+var EJSS_SVGGRAPHICS = EJSS_SVGGRAPHICS || {};
+EJSS_SVGGRAPHICS.group = function (e, t) {};
+var EJSS_SVGGRAPHICS = EJSS_SVGGRAPHICS || {};
+(EJSS_SVGGRAPHICS.histogram = function (e, t) {}),
+  (EJSS_SVGGRAPHICS.histogramOld = function (e, t) {
+    function n(e, t, n, r, i, s) {
+      e.setAttribute(
+        "d",
+        "M " +
+          t +
+          " " +
+          i +
+          " L " +
+          t +
+          " " +
+          r +
+          " L " +
+          n +
+          " " +
+          r +
+          " L " +
+          n +
+          " " +
+          i +
+          " z"
+      ),
+        s.getDrawFill()
+          ? e.setAttribute("fill", s.getFillColor())
+          : e.setAttribute("fill", "none"),
+        s.getDrawLines()
+          ? (e.setAttribute("stroke", s.getLineColor()),
+            e.setAttribute("stroke-width", s.getLineWidth()))
+          : (e.setAttribute("stroke", "none"),
+            e.setAttribute("stroke-width", 0)),
+        e.setAttribute("shapeRendering", s.getShapeRendering());
+    }
+    var r,
+      i = t.getGroup();
+    i !== null ? (r = e.getElementById(i.getName())) : (r = e);
+    var s = e.getElementById(t.getName());
+    if (s === null)
+      (s = document.createElementNS("http://www.w3.org/2000/svg", "g")),
+        s.setAttribute("id", t.getName()),
+        r.appendChild(s);
+    else {
+      var o = e.getElementById(t.getName() + ".bars");
+      s.removeChild(o);
+    }
+    var o = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    o.setAttribute("id", t.getName() + ".bars"), s.appendChild(o);
+    var u = t.getPixelPosition(),
+      a = t.getPixelSizes(),
+      f = t.getRelativePositionOffset(a),
+      l = u[0] + f[0],
+      c = u[1] + f[1],
+      h = a[0] / 2,
+      p = a[1] / 2,
+      d = t.getStyle(),
+      v = t.getFixBin(),
+      m = t.getNormalized(),
+      g = t.getDiscrete(),
+      y = t.getInput(),
+      b = t.getBinWidth(),
+      y = y.sort(function (e, t) {
+        return e - t;
+      }),
+      w,
+      E = b / 2;
+    b == 0
+      ? (w = y[0])
+      : v - E > y[0]
+      ? (w = v - (Math.floor((v - E - y[0]) / b) + 1) * b)
+      : v + E < y[0]
+      ? (w = v + Math.floor((y[0] - v - E) / b) * b)
+      : (w = v);
+    var S = t.getGroupPanel().getPixelPositionWorldOrigin()[1],
+      x = w,
+      T = 0,
+      N = y.length;
+    for (var C = 0; C < y.length; C++)
+      if (y[C] <= x + E) T++;
+      else {
+        if (T > 0) {
+          var k = document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "path"
+          );
+          k.setAttribute("id", t.getName() + ".bar" + C), o.appendChild(k);
+          var L, A;
+          g
+            ? (L = A = l - h + x * a[0])
+            : ((L = l - h + (x - E) * a[0]), (A = l - h + (x + E) * a[0])),
+            m && (T /= N);
+          var O = c - p + T * a[1];
+          n(k, L, A, O, S, d);
+        }
+        b == 0 ? (x = y[C]) : (x += (Math.floor((y[C] - x - E) / b) + 1) * b),
+          (T = 1);
+      }
+    if (T > 0) {
+      var k = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      k.setAttribute("id", t.getName() + ".bar" + C), o.appendChild(k);
+      var L, A;
+      g
+        ? (L = A = l - h + x * a[0])
+        : ((L = l - h + (x - E) * a[0]), (A = l - h + (x + E) * a[0])),
+        m && (T /= N);
+      var O = c - p + T * a[1];
+      n(k, L, A, O, S, d);
+    }
+    var M = d.getAttributes();
+    for (var _ in M) s.setAttribute(_, M[_]);
+    return s;
+  });
+var EJSS_SVGGRAPHICS = EJSS_SVGGRAPHICS || {};
+EJSS_SVGGRAPHICS.image = function (e, t) {};
+var EJSS_SVGGRAPHICS = EJSS_SVGGRAPHICS || {};
+EJSS_SVGGRAPHICS.mesh = function (e, t) {};
+var EJSS_SVGGRAPHICS = EJSS_SVGGRAPHICS || {};
+EJSS_SVGGRAPHICS.pipe = function (e, t) {};
+var EJSS_SVGGRAPHICS = EJSS_SVGGRAPHICS || {};
+EJSS_SVGGRAPHICS.point = function (e, t) {};
+var EJSS_SVGGRAPHICS = EJSS_SVGGRAPHICS || {};
+EJSS_SVGGRAPHICS.polygon = function (e, t) {};
+var EJSS_SVGGRAPHICS = EJSS_SVGGRAPHICS || {};
+EJSS_SVGGRAPHICS.rectangle = function (e, t) {};
+var EJSS_SVGGRAPHICS = EJSS_SVGGRAPHICS || {};
+EJSS_SVGGRAPHICS.roundRectangle = function (e, t) {};
+var EJSS_SVGGRAPHICS = EJSS_SVGGRAPHICS || {};
+EJSS_SVGGRAPHICS.segment = function (e, t) {};
+var EJSS_SVGGRAPHICS = EJSS_SVGGRAPHICS || {};
+EJSS_SVGGRAPHICS.spring = function (e, t) {};
+var EJSS_SVGGRAPHICS = EJSS_SVGGRAPHICS || {};
+EJSS_SVGGRAPHICS.tank = function (e, t) {};
+var EJSS_SVGGRAPHICS = EJSS_SVGGRAPHICS || {};
+EJSS_SVGGRAPHICS.text = function (e, t) {};
+var EJSS_SVGGRAPHICS = EJSS_SVGGRAPHICS || {};
+EJSS_SVGGRAPHICS.trace = function (e, t) {};
+var EJSS_SVGGRAPHICS = EJSS_SVGGRAPHICS || {};
+EJSS_SVGGRAPHICS.trail = function (e, t) {};
+var EJSS_SVGGRAPHICS = EJSS_SVGGRAPHICS || {};
+EJSS_SVGGRAPHICS.trail_original = function (e, t) {
+  function n(e, t, n, r, i) {
+    var s = "";
+    for (var o = 0; o < e.length; o++) {
+      var u = e[o],
+        a = t + u[0] * r,
+        f = n + u[1] * i,
+        l = u[2];
+      o == 0 || l == 0
+        ? (s += " M " + a + " " + f)
+        : (s += " L " + a + " " + f);
+    }
+    return s;
+  }
+  var r,
+    i = t.getGroup();
+  i !== null ? (r = e.getElementById(i.getName())) : (r = e);
+  var s = e.getElementById(t.getName());
+  s === null &&
+    ((s = document.createElementNS("http://www.w3.org/2000/svg", "path")),
+    s.setAttribute("id", t.getName()),
+    r.appendChild(s));
+  var o = t.getPixelPosition(),
+    u = t.getPixelSizes(),
+    a = t.getRelativePositionOffset(u),
+    f = o[0] + a[0],
+    l = o[1] + a[1],
+    c = u[0] / 2,
+    h = u[1] / 2;
+  t.addTmpPoints();
+  var p = n(t.getPoints(), f - c, l - h, u[0], u[1]);
+  if (p !== "") {
+    s.setAttribute("d", p);
+    var d = t.getStyle();
+    d.getDrawFill()
+      ? s.setAttribute("fill", d.getFillColor())
+      : s.setAttribute("fill", "none"),
+      d.getDrawLines()
+        ? (s.setAttribute("stroke", d.getLineColor()),
+          s.setAttribute("stroke-width", d.getLineWidth()))
+        : (s.setAttribute("stroke", "none"), s.setAttribute("stroke-width", 0)),
+      s.setAttribute("shapeRendering", d.getShapeRendering());
+    var v = d.getAttributes();
+    for (var m in v) s.setAttribute(m, v[m]);
+  }
+  return s;
+};
+var EJSS_SVGGRAPHICS = EJSS_SVGGRAPHICS || {};
+(EJSS_SVGGRAPHICS.Utils = {}),
+  (EJSS_SVGGRAPHICS.Utils.crispValue = function (e) {
+    return Math.round(+e.toFixed(4) + 0.5) - 0.5;
+  }),
+  (EJSS_SVGGRAPHICS.Utils.crispTop = function (e) {
+    return Math.round(+e.toFixed(4) + 0.5) - 0.5;
+  }),
+  (EJSS_SVGGRAPHICS.Utils.round = function (e) {
+    return +e.toFixed(4);
+  }),
+  (EJSS_SVGGRAPHICS.Utils.hsl2rgb = function (e) {
+    var t = e[0],
+      n = e[1],
+      r = e[2],
+      i = (1 - Math.abs(2 * r - 1)) * n,
+      s = t / 60,
+      o = i * (1 - Math.abs((s % 2) - 1)),
+      u,
+      a,
+      f;
+    t === undefined || isNaN(t) || t === null
+      ? (u = a = f = 0)
+      : s >= 0 && s < 1
+      ? ((u = i), (a = o), (f = 0))
+      : s >= 1 && s < 2
+      ? ((u = o), (a = i), (f = 0))
+      : s >= 2 && s < 3
+      ? ((u = 0), (a = i), (f = o))
+      : s >= 3 && s < 4
+      ? ((u = 0), (a = o), (f = i))
+      : s >= 4 && s < 5
+      ? ((u = o), (a = 0), (f = i))
+      : s >= 5 && s < 6 && ((u = i), (a = 0), (f = o));
+    var l = r - i / 2,
+      c,
+      h,
+      p;
+    return (
+      (c = (u + l) * 255),
+      (h = (a + l) * 255),
+      (p = (f + l) * 255),
+      (c = Math.round(c)),
+      (h = Math.round(h)),
+      (p = Math.round(p)),
+      { r: c, g: h, b: p }
+    );
+  }),
+  (EJSS_SVGGRAPHICS.Utils.PNGCanvasWorker = function (e) {
+    function t(e) {
+      var e = e
+        .substring(4, e.length - 1)
+        .replace(/ /g, "")
+        .split(",");
+      return { r: e[0], g: e[1], b: e[2] };
+    }
+    function n(e) {
+      var e = e
+        .substring(4, e.length - 1)
+        .replace(/ /g, "")
+        .replace(/%/g, "")
+        .split(",");
+      return { h: e[0], s: e[1] / 100, l: e[2] / 100 };
+    }
+    function r(e, t, n, r, i, s, o) {
+      (l = (t + n * e.width) * 4),
+        (e.data[l + 0] = r),
+        (e.data[l + 1] = i),
+        (e.data[l + 2] = s),
+        (e.data[l + 3] = o);
+    }
+    var i = e.data.params.imageData,
+      s = e.data.params.width,
+      o = e.data.params.height,
+      u = e.data.params.depth,
+      a = e.data.params.data,
+      f = e.data.params.colors,
+      l = e.data.id,
+      c = f[0],
+      h = f[f.length - 1];
+    for (var p = 0; p < s; p++)
+      for (var d = 0; d < o; d++) {
+        var l = a[p][o - d - 1],
+          v = l < 0 ? c : l < f.length ? f[l] : h;
+        typeof v == "undefined" && (v = c),
+          v.substring(0, 3) == "rgb"
+            ? (rgb = t(v))
+            : v.substring(0, 3) == "hsl" &&
+              (rgb = EJSS_SVGGRAPHICS.Utils.hsl2rgb(n(v))),
+          r(i, p, d, rgb.r, rgb.g, rgb.b, 255);
+      }
+    self.postMessage({ result: i, id: l });
+  }),
+  (EJSS_SVGGRAPHICS.Utils.PNGCanvasNoWorker = function (e, t, n, r, i, s) {
+    function o(e) {
+      var e = e
+        .substring(4, e.length - 1)
+        .replace(/ /g, "")
+        .split(",");
+      return { r: e[0], g: e[1], b: e[2] };
+    }
+    function u(e) {
+      var e = e
+        .substring(4, e.length - 1)
+        .replace(/ /g, "")
+        .replace(/%/g, "")
+        .split(",");
+      return { h: e[0], s: e[1] / 100, l: e[2] / 100 };
+    }
+    function a(e, t, n, r, i, s, o) {
+      (p = (t + n * e.width) * 4),
+        (e.data[p + 0] = r),
+        (e.data[p + 1] = i),
+        (e.data[p + 2] = s),
+        (e.data[p + 3] = o);
+    }
+    var f = s[0],
+      l = s[s.length - 1];
+    for (var c = 0; c < t; c++)
+      for (var h = 0; h < n; h++) {
+        var p = i[c][n - h - 1],
+          d = p < 0 ? f : p < s.length ? s[p] : l;
+        typeof d == "undefined" && (d = f),
+          d.substring(0, 3) == "rgb"
+            ? (rgb = o(d))
+            : d.substring(0, 3) == "hsl" &&
+              (rgb = EJSS_SVGGRAPHICS.Utils.hsl2rgb(u(d))),
+          a(e, c, h, rgb.r, rgb.g, rgb.b, 255);
+      }
+  }),
+  (EJSS_SVGGRAPHICS.Utils.PNGCanvas = function (e, t, n, r, i, s) {
+    var o = document.createElement("canvas");
+    o.setAttribute("width", e), o.setAttribute("height", t);
+    var u = o.getContext("2d"),
+      a = u.createImageData(e, t);
+    EJSS_TOOLS.Worker.runFunction
+      ? EJSS_TOOLS.Worker.runFunction(
+          "PNGCanvasWorker",
+          EJSS_SVGGRAPHICS.Utils.PNGCanvasWorker,
+          { imageData: a, width: e, height: t, depth: n, data: r, colors: i },
+          function (e) {
+            u.putImageData(e.result, 0, 0), s(o.toDataURL());
+          }
+        )
+      : (EJSS_SVGGRAPHICS.Utils.PNGCanvasNoWorker(a, e, t, n, r, i),
+        u.putImageData(a, 0, 0),
+        s(o.toDataURL()));
+  }),
+  (EJSS_SVGGRAPHICS.Utils.ImageDataCanvas = function (e, t, n, r, i, s) {
+    var o = document.createElement("canvas");
+    o.setAttribute("width", e), o.setAttribute("height", t);
+    var u = o.getContext("2d"),
+      a = u.createImageData(e, t);
+    EJSS_TOOLS.Worker.runFunction(
+      "PNGCanvasWorker",
+      EJSS_SVGGRAPHICS.Utils.PNGCanvasWorker,
+      { imageData: a, width: e, height: t, depth: n, data: r, colors: i },
+      function (e) {
+        s(e);
+      }
+    );
+  });
+var EJSS_SVGGRAPHICS = EJSS_SVGGRAPHICS || {};
+EJSS_SVGGRAPHICS.video = function (e, t) {};
+var EJSS_SVGGRAPHICS = EJSS_SVGGRAPHICS || {};
+EJSS_SVGGRAPHICS.web = function (e, t) {};
+var EJSS_SVGGRAPHICS = EJSS_SVGGRAPHICS || {};
+EJSS_SVGGRAPHICS.wheel = function (e, t) {};
+var EJSS_GRAPHICS = EJSS_GRAPHICS || {};
+(EJSS_GRAPHICS.SvgGraphics = {
+  getOffsetRect: function (e) {
+    var t,
+      n,
+      r,
+      i,
+      s = e.getAttribute("width"),
+      o = e.getAttribute("height");
+    t = parseFloat(s);
+    var u = !isNaN(t) && isFinite(s);
+    n = parseFloat(o);
+    var a = !isNaN(n) && isFinite(o);
+    if (e.getBoundingClientRect) {
+      var f = e.getElementById ? e.getElementById(".myPanel") : null;
+      if (f && f.childElementCount > 0) var l = f.getBoundingClientRect();
+      else var l = e.getBoundingClientRect();
+      (r = l.top), (i = l.left), u || (t = l.width), a || (n = l.height);
+    } else if (e.offsetTop !== undefined)
+      (r = e.offsetTop),
+        (i = e.offsetLeft),
+        u || (t = e.offsetWidth),
+        a || (n = e.offsetHeight);
+    else {
+      var c = e.parentNode || document.getElementById(e.id).parentNode;
+      while (
+        c &&
+        !c.offsetTop &&
+        c &&
+        !c.previousElementSibling &&
+        !c.nextElementSibling
+      )
+        c = c.parentNode;
+      (r = c.offsetTop),
+        (i = c.offsetLeft),
+        u || (t = c.offsetWidth),
+        a || (n = c.offsetHeight);
+    }
+    var h = document.body,
+      p = document.documentElement,
+      d = p.clientTop || h.clientTop || 0,
+      v = p.clientLeft || h.clientLeft || 0;
+    return (
+      (r -= d),
+      (i -= v),
+      { top: r, left: i, width: t, height: n, bottom: r + n, right: i + t }
+    );
+  },
+}),
+  (EJSS_GRAPHICS.svgGraphics = function (e) {
+    var t = EJSS_INTERFACE.svgGraphics(e),
+      n = t.getDOMElement();
+    return (
+      (t.getEventContext = function () {
+        return n;
+      }),
+      (t.getWidth = function () {
+        return EJSS_GRAPHICS.SvgGraphics.getOffsetRect(n).width - 1;
+      }),
+      (t.getHeight = function () {
+        return EJSS_GRAPHICS.SvgGraphics.getOffsetRect(n).height - 1;
+      }),
+      (t.getOffsetLeft = function () {
+        return EJSS_GRAPHICS.SvgGraphics.getOffsetRect(n).left;
+      }),
+      (t.getOffsetTop = function () {
+        return EJSS_GRAPHICS.SvgGraphics.getOffsetRect(n).top;
+      }),
+      (t.remove = function (e) {
+        var t = n.getElementById(e);
+        return t !== null ? (n.removeChild(t), !0) : !1;
+      }),
+      (t.reset = function () {
+        while (n.firstChild) n.removeChild(n.firstChild);
+        var e = document.createElementNS("http://www.w3.org/2000/svg", "defs");
+        n.appendChild(e);
+      }),
+      (t.draw = function (e, r) {
+        for (var i = 0, s = e.length; i < s; i++) {
+          var o = e[i];
+          if (o.getElements) {
+            var u = o.getLastElements();
+            for (var a = 0, f = u.length; a < f; a++) {
+              var l = n.getElementById(u[a].getName());
+              l && l.parentNode.removeChild(l);
+            }
+          }
+          if (r || o.isChanged() || o.isGroupChanged() || o.isMustProject()) {
+            var c = t.drawElement(o);
+            typeof c != "undefined" && c != null && t.transformElement(o, c);
+          }
+        }
+      }),
+      (t.drawElement = function (e) {
+        var t = EJSS_DRAWING2D.Shape,
+          r = null;
+        switch (e._23()) {
+          case "ElementCustom":
+            var i = e.getFunction();
+            i && (r = i(n, e));
+            break;
+          case "ElementGroup":
+            r = EJSS_SVGGRAPHICS.group(n, e);
+            break;
+          case "ElementShape":
+            switch (e.getShapeType()) {
+              default:
+              case t.ELLIPSE:
+                r = EJSS_SVGGRAPHICS.ellipse(n, e);
+                break;
+              case t.RECTANGLE:
+                r = EJSS_SVGGRAPHICS.rectangle(n, e);
+                break;
+              case t.ROUND_RECTANGLE:
+                r = EJSS_SVGGRAPHICS.roundRectangle(n, e);
+                break;
+              case t.WHEEL:
+                r = EJSS_SVGGRAPHICS.wheel(n, e);
+                break;
+              case t.NONE:
+              case t.POINT:
+                r = EJSS_SVGGRAPHICS.point(n, e);
+            }
+            break;
+          case "ElementSegment":
+            r = EJSS_SVGGRAPHICS.segment(n, e);
+            break;
+          case "ElementImage":
+            r = EJSS_SVGGRAPHICS.image(n, e);
+            break;
+          case "ElementVideo":
+            r = EJSS_SVGGRAPHICS.video(n, e);
+            break;
+          case "ElementArrow":
+            r = EJSS_SVGGRAPHICS.arrow(n, e);
+            break;
+          case "ElementText":
+            r = EJSS_SVGGRAPHICS.text(n, e);
+            break;
+          case "ElementSpring":
+            r = EJSS_SVGGRAPHICS.spring(n, e);
+            break;
+          case "ElementTrail":
+            r = EJSS_SVGGRAPHICS.trail(n, e);
+            break;
+          case "ElementTrace":
+            r = EJSS_SVGGRAPHICS.trace(n, e);
+            break;
+          case "ElementGrid":
+            r = EJSS_SVGGRAPHICS.grid(n, e);
+            break;
+          case "ElementAxis":
+            r = EJSS_SVGGRAPHICS.axis(n, e);
+            break;
+          case "ElementWeb":
+            r = EJSS_SVGGRAPHICS.web(n, e);
+            break;
+          case "ElementCursor":
+            r = EJSS_SVGGRAPHICS.cursor(n, e);
+            break;
+          case "ElementPolygon":
+            r = EJSS_SVGGRAPHICS.polygon(n, e);
+            break;
+          case "ElementAnalyticCurve":
+            r = EJSS_SVGGRAPHICS.analyticCurve(n, e);
+            break;
+          case "ElementCellLattice":
+            r = EJSS_SVGGRAPHICS.cellLattice(n, e);
+            break;
+          case "ElementByteRaster":
+            r = EJSS_SVGGRAPHICS.byteRaster(n, e);
+            break;
+          case "ElementMesh":
+            r = EJSS_SVGGRAPHICS.mesh(n, e);
+            break;
+          case "ElementTank":
+            r = EJSS_SVGGRAPHICS.tank(n, e);
+            break;
+          case "ElementPipe":
+            r = EJSS_SVGGRAPHICS.pipe(n, e);
+            break;
+          case "ElementHistogram":
+            r = EJSS_SVGGRAPHICS.histogram(n, e);
+        }
+        return (
+          r &&
+            (e.isGroupVisible()
+              ? r.setAttribute("visibility", "visible")
+              : r.setAttribute("visibility", "hidden")),
+          r
+        );
+      }),
+      (t.transformElement = function (e, t) {
+        var n,
+          r = e.getTransformation();
+        if (Array.isArray(r))
+          n =
+            "matrix(" +
+            r[0] +
+            " " +
+            r[1] +
+            " " +
+            r[2] +
+            " " +
+            r[3] +
+            " " +
+            r[4] +
+            " " +
+            r[5] +
+            ")";
+        else if (typeof r == "string") n = r;
+        else if (typeof r == "number") {
+          var i = e.getPixelPosition(),
+            s = EJSS_TOOLS.Mathematics.degrees(-r);
+          n = "rotate(" + s + " " + i[0] + " " + i[1] + ")";
+        }
+        n && t.setAttribute("transform", n);
+      }),
+      (t._24 = function (e) {
+        var r = e.getGutters();
+        if (r.visible) {
+          var i = EJSS_SVGGRAPHICS.Utils,
+            s = n.getElementById(".myGutters"),
+            o = n.getElementById(".myOuterBorder"),
+            u = n.getElementById(".myInnerBorder");
+          s === null &&
+            ((s = document.createElementNS(
+              "http://www.w3.org/2000/svg",
+              "path"
+            )),
+            s.setAttribute("id", ".myGutters"),
+            s.setAttribute("stroke", "none"),
+            s.setAttribute("stroke-width", 0),
+            n.appendChild(s),
+            (o = document.createElementNS(
+              "http://www.w3.org/2000/svg",
+              "path"
+            )),
+            o.setAttribute("id", ".myOuterBorder"),
+            o.setAttribute("fill", "none"),
+            n.appendChild(o),
+            (u = document.createElementNS(
+              "http://www.w3.org/2000/svg",
+              "path"
+            )),
+            u.setAttribute("id", ".myInnerBorder"),
+            u.setAttribute("fill", "none"),
+            n.appendChild(u));
+          var a = e.getRealWorldCoordinates();
+          if (!e.getInvertedScaleY()) var f = e._26([a[1], a[3]]);
+          else var f = e._26([a[1], a[2]]);
+          var l = e.toPixelMod([a[1] - a[0], a[3] - a[2]]),
+            c = f[0],
+            h = f[1],
+            p = l[0],
+            d = l[1],
+            v = 0.5,
+            m = 0.5,
+            g = t.getWidth(),
+            y = t.getHeight(),
+            b = e.getGuttersStyle(),
+            w = e.getStyle();
+          w.getShapeRendering() == "crispEdges"
+            ? (s.setAttribute(
+                "d",
+                "M " +
+                  i.crispValue(v) +
+                  " " +
+                  i.crispValue(m) +
+                  " L " +
+                  i.crispValue(v) +
+                  " " +
+                  i.crispValue(m + y) +
+                  " L " +
+                  i.crispValue(v + g) +
+                  " " +
+                  i.crispValue(m + y) +
+                  " L " +
+                  i.crispValue(v + g) +
+                  " " +
+                  i.crispValue(m) +
+                  " L " +
+                  i.crispValue(v) +
+                  " " +
+                  i.crispValue(m) +
+                  " M " +
+                  i.crispValue(c - p) +
+                  " " +
+                  i.crispValue(h) +
+                  " L " +
+                  i.crispValue(c) +
+                  " " +
+                  i.crispValue(h) +
+                  " L " +
+                  i.crispValue(c) +
+                  " " +
+                  i.crispValue(h - d) +
+                  " L " +
+                  i.crispValue(c - p) +
+                  " " +
+                  i.crispValue(h - d) +
+                  " L " +
+                  i.crispValue(c - p) +
+                  " " +
+                  i.crispValue(h) +
+                  " z"
+              ),
+              o.setAttribute(
+                "d",
+                "M " +
+                  i.crispValue(v) +
+                  " " +
+                  i.crispValue(m) +
+                  " L " +
+                  i.crispValue(v) +
+                  " " +
+                  i.crispValue(m + y) +
+                  " L " +
+                  i.crispValue(v + g) +
+                  " " +
+                  i.crispValue(m + y) +
+                  " L " +
+                  i.crispValue(v + g) +
+                  " " +
+                  i.crispValue(m) +
+                  " L " +
+                  i.crispValue(v) +
+                  " " +
+                  i.crispValue(m) +
+                  " z"
+              ),
+              u.setAttribute(
+                "d",
+                "M " +
+                  i.crispValue(c - p) +
+                  " " +
+                  i.crispValue(h) +
+                  " L " +
+                  i.crispValue(c) +
+                  " " +
+                  i.crispValue(h) +
+                  " L " +
+                  i.crispValue(c) +
+                  " " +
+                  i.crispValue(h - d) +
+                  " L " +
+                  i.crispValue(c - p) +
+                  " " +
+                  i.crispValue(h - d) +
+                  " L " +
+                  i.crispValue(c - p) +
+                  " " +
+                  i.crispValue(h) +
+                  " z"
+              ))
+            : (s.setAttribute(
+                "d",
+                "M " +
+                  v +
+                  " " +
+                  m +
+                  " L " +
+                  v +
+                  " " +
+                  (m + y) +
+                  " L " +
+                  (v + g) +
+                  " " +
+                  (m + y) +
+                  " L " +
+                  (v + g) +
+                  " " +
+                  m +
+                  " L " +
+                  v +
+                  " " +
+                  m +
+                  " M " +
+                  (c - p) +
+                  " " +
+                  h +
+                  " L " +
+                  c +
+                  " " +
+                  h +
+                  " L " +
+                  c +
+                  " " +
+                  (h - d) +
+                  " L " +
+                  (c - p) +
+                  " " +
+                  (h - d) +
+                  " L " +
+                  (c - p) +
+                  " " +
+                  h +
+                  " z"
+              ),
+              o.setAttribute(
+                "d",
+                "M " +
+                  v +
+                  " " +
+                  m +
+                  " L " +
+                  v +
+                  " " +
+                  (m + y) +
+                  " L " +
+                  (v + g) +
+                  " " +
+                  (m + y) +
+                  " L " +
+                  (v + g) +
+                  " " +
+                  m +
+                  " L " +
+                  v +
+                  " " +
+                  m +
+                  " z"
+              ),
+              u.setAttribute(
+                "d",
+                "M " +
+                  (c - p) +
+                  " " +
+                  h +
+                  " L " +
+                  c +
+                  " " +
+                  h +
+                  " L " +
+                  c +
+                  " " +
+                  (h - d) +
+                  " L " +
+                  (c - p) +
+                  " " +
+                  (h - d) +
+                  " L " +
+                  (c - p) +
+                  " " +
+                  h +
+                  " z"
+              )),
+            b.getDrawFill()
+              ? s.setAttribute("fill", b.getFillColor())
+              : s.setAttribute("fill", "none"),
+            b.getDrawLines()
+              ? (o.setAttribute("stroke", b.getLineColor()),
+                o.setAttribute("stroke-width", b.getLineWidth()))
+              : (o.setAttribute("stroke", "none"),
+                o.setAttribute("stroke-width", 0)),
+            w.getDrawLines()
+              ? (u.setAttribute("stroke", w.getLineColor()),
+                u.setAttribute("stroke-width", w.getLineWidth()))
+              : (u.setAttribute("stroke", "none"),
+                u.setAttribute("stroke-width", 0)),
+            s.setAttribute("shapeRendering", w.getShapeRendering()),
+            o.setAttribute("shapeRendering", b.getShapeRendering()),
+            u.setAttribute("shapeRendering", w.getShapeRendering());
+        }
+      }),
+      (t.drawPanel = function (e) {
+        var r = EJSS_SVGGRAPHICS.Utils,
+          i = n.getElementById(".myPanel");
+        i === null &&
+          ((i = document.createElementNS("http://www.w3.org/2000/svg", "path")),
+          i.setAttribute("id", ".myPanel"),
+          n.appendChild(i));
+        var s = 0.5,
+          o = 0.5,
+          u = t.getWidth(),
+          a = t.getHeight(),
+          f = e.getStyle();
+        f.getShapeRendering() == "crispEdges"
+          ? i.setAttribute(
+              "d",
+              "M " +
+                r.crispValue(s) +
+                " " +
+                r.crispValue(o) +
+                " L " +
+                r.crispValue(s) +
+                " " +
+                r.crispValue(o + a) +
+                " L " +
+                r.crispValue(s + u) +
+                " " +
+                r.crispValue(o + a) +
+                " L " +
+                r.crispValue(s + u) +
+                " " +
+                r.crispValue(o) +
+                " z"
+            )
+          : i.setAttribute(
+              "d",
+              "M " +
+                s +
+                " " +
+                o +
+                " L " +
+                s +
+                " " +
+                (o + a) +
+                " L " +
+                (s + u) +
+                " " +
+                (o + a) +
+                " L " +
+                (s + u) +
+                " " +
+                o +
+                " z"
+            ),
+          f.getDrawFill()
+            ? i.setAttribute("fill", f.getFillColor())
+            : i.setAttribute("fill", "none"),
+          f.getDrawLines()
+            ? (i.setAttribute("stroke", f.getLineColor()),
+              i.setAttribute("stroke-width", f.getLineWidth()))
+            : (i.setAttribute("stroke", "none"),
+              i.setAttribute("stroke-width", 0)),
+          i.setAttribute("shapeRendering", f.getShapeRendering());
+      }),
+      (t._24OLD = function (e) {
+        var r = e.getGutters();
+        if (r.visible) {
+          var i = EJSS_SVGGRAPHICS.Utils,
+            s = n.getElementById(".myGutters");
+          s === null &&
+            ((s = document.createElementNS(
+              "http://www.w3.org/2000/svg",
+              "path"
+            )),
+            s.setAttribute("id", ".myGutters"),
+            n.appendChild(s));
+          var o = e.getRealWorldCoordinates();
+          if (!e.getInvertedScaleY()) var u = e._26([o[1], o[3]]);
+          else var u = e._26([o[1], o[2]]);
+          var a = e.toPixelMod([o[1] - o[0], o[3] - o[2]]),
+            f = u[0],
+            l = u[1],
+            c = a[0],
+            h = a[1],
+            p = 0.5,
+            d = 0.5,
+            v = t.getWidth(),
+            m = t.getHeight(),
+            g = e.getGuttersStyle(),
+            y = e.getStyle();
+          y.getShapeRendering() == "crispEdges"
+            ? s.setAttribute(
+                "d",
+                "M " +
+                  i.crispValue(p) +
+                  " " +
+                  i.crispValue(d) +
+                  " L " +
+                  i.crispValue(p) +
+                  " " +
+                  i.crispValue(d + m) +
+                  " L " +
+                  i.crispValue(p + v) +
+                  " " +
+                  i.crispValue(d + m) +
+                  " L " +
+                  i.crispValue(p + v) +
+                  " " +
+                  i.crispValue(d) +
+                  " L " +
+                  i.crispValue(p) +
+                  " " +
+                  i.crispValue(d) +
+                  " M " +
+                  i.crispValue(f - c) +
+                  " " +
+                  i.crispValue(l) +
+                  " L " +
+                  i.crispValue(f) +
+                  " " +
+                  i.crispValue(l) +
+                  " L " +
+                  i.crispValue(f) +
+                  " " +
+                  i.crispValue(l - h) +
+                  " L " +
+                  i.crispValue(f - c) +
+                  " " +
+                  i.crispValue(l - h) +
+                  " L " +
+                  i.crispValue(f - c) +
+                  " " +
+                  i.crispValue(l) +
+                  " z"
+              )
+            : s.setAttribute(
+                "d",
+                "M " +
+                  p +
+                  " " +
+                  d +
+                  " L " +
+                  p +
+                  " " +
+                  (d + m) +
+                  " L " +
+                  (p + v) +
+                  " " +
+                  (d + m) +
+                  " L " +
+                  (p + v) +
+                  " " +
+                  d +
+                  " L " +
+                  p +
+                  " " +
+                  d +
+                  " M " +
+                  (f - c) +
+                  " " +
+                  l +
+                  " L " +
+                  f +
+                  " " +
+                  l +
+                  " L " +
+                  f +
+                  " " +
+                  (l - h) +
+                  " L " +
+                  (f - c) +
+                  " " +
+                  (l - h) +
+                  " L " +
+                  (f - c) +
+                  " " +
+                  l +
+                  " z"
+              ),
+            g.getDrawFill()
+              ? s.setAttribute("fill", g.getFillColor())
+              : s.setAttribute("fill", "none"),
+            y.getDrawLines()
+              ? (s.setAttribute("stroke", y.getLineColor()),
+                s.setAttribute("stroke-width", y.getLineWidth()))
+              : (s.setAttribute("stroke", "none"),
+                s.setAttribute("stroke-width", 0)),
+            s.setAttribute("shapeRendering", y.getShapeRendering());
+        }
+      }),
+      (t.drawPanelNO = function (e) {
+        var r = EJSS_SVGGRAPHICS.Utils,
+          i = n.getElementById(".myPanel");
+        i === null &&
+          ((i = document.createElementNS("http://www.w3.org/2000/svg", "path")),
+          i.setAttribute("id", ".myPanel"),
+          n.appendChild(i));
+        var s = 0.5,
+          o = 0.5,
+          u = t.getWidth(),
+          a = t.getHeight(),
+          f = e.getStyle();
+        f.getShapeRendering() == "crispEdges"
+          ? i.setAttribute(
+              "d",
+              "M " +
+                r.crispValue(s) +
+                " " +
+                r.crispValue(o) +
+                " L " +
+                r.crispValue(s) +
+                " " +
+                r.crispValue(o + a) +
+                " L " +
+                r.crispValue(s + u) +
+                " " +
+                r.crispValue(o + a) +
+                " L " +
+                r.crispValue(s + u) +
+                " " +
+                r.crispValue(o) +
+                " z"
+            )
+          : i.setAttribute(
+              "d",
+              "M " +
+                s +
+                " " +
+                o +
+                " L " +
+                s +
+                " " +
+                (o + a) +
+                " L " +
+                (s + u) +
+                " " +
+                (o + a) +
+                " L " +
+                (s + u) +
+                " " +
+                o +
+                " z"
+            ),
+          f.getDrawFill()
+            ? i.setAttribute("fill", f.getFillColor())
+            : i.setAttribute("fill", "none"),
+          f.getDrawLines()
+            ? (i.setAttribute("stroke", f.getLineColor()),
+              i.setAttribute("stroke-width", f.getLineWidth()))
+            : (i.setAttribute("stroke", "none"),
+              i.setAttribute("stroke-width", 0)),
+          i.setAttribute("shapeRendering", f.getShapeRendering());
+      }),
+      (t.importSVG = function (e) {
+        var n = new XMLSerializer().serializeToString(t.getDOMElement()),
+          r = document.createElement("canvas");
+        (r.width = t.getWidth() + 1), (r.height = t.getHeight() + 1);
+        var i = r.getContext("2d"),
+          s = new Image();
+        return (
+          (s.src = "data:image/svg+xml;base64," + btoa(n)),
+          (s.onload = function () {
+            i.drawImage(s, 0, 0), e && e(r.toDataURL("image/png"));
+          }),
+          s.src
+        );
+      }),
+      t
+    );
+  });
+var EJSS_DRAWING2D = EJSS_DRAWING2D || {};
+(EJSS_DRAWING2D.InfoText = {}), (EJSS_DRAWING2D.infoText = function (e) {});
+var EJSS_DRAWING2D = EJSS_DRAWING2D || {};
+(EJSS_DRAWING2D.Mesh = {}), (EJSS_DRAWING2D.mesh = function (e) {});
+var EJSS_DRAWING2D = EJSS_DRAWING2D || {};
+(EJSS_DRAWING2D.Pipe = {}), (EJSS_DRAWING2D.pipe = function (e) {});
+var EJSS_DRAWING2D = EJSS_DRAWING2D || {};
+(EJSS_DRAWING2D.PlottingPanel = {}),
+  (EJSS_DRAWING2D.plottingPanel = function (e) {});
+var EJSS_DRAWING2D = EJSS_DRAWING2D || {};
+(EJSS_DRAWING2D.Polygon = {}),
+  (EJSS_DRAWING2D.polygon = function (e) {}),
+  (EJSS_DRAWING2D.PolygonSet = {}),
+  (EJSS_DRAWING2D.polygonSet = function (e) {});
+var EJSS_DRAWING2D = EJSS_DRAWING2D || {};
+(EJSS_DRAWING2D.Segment = {}),
+  (EJSS_DRAWING2D.segment = function (e) {}),
+  (EJSS_DRAWING2D.SegmentSet = {}),
+  (EJSS_DRAWING2D.segmentSet = function (e) {
+    var t = EJSS_DRAWING2D.elementSet(EJSS_DRAWING2D.segment, e);
+    return (
+      (t.registerProperties = function (e) {
+        EJSS_DRAWING2D.SegmentSet.registerProperties(t, e);
+      }),
+      t
+    );
+  });
+var EJSS_DRAWING2D = EJSS_DRAWING2D || {};
+(EJSS_DRAWING2D.Shape = {}),
+  (EJSS_DRAWING2D.shape = function (e) {}),
+  (EJSS_DRAWING2D.ShapeSet = {}),
+  (EJSS_DRAWING2D.shapeSet = function (e) {});
+var EJSS_DRAWING2D = EJSS_DRAWING2D || {};
+(EJSS_DRAWING2D.SimplePanel = {
+  GRAPHICS2D_SVG: "SVG",
+  GRAPHICS2D_CANVAS: "Canvas",
+  registerProperties: function (e, t) {
+    t.registerProperty("MinimumX", e.setWorldXMin, e.getWorldXMin),
+      t.registerProperty("MaximumX", e.setWorldXMax, e.getWorldXMax),
+      t.registerProperty("MinimumY", e.setWorldYMin, e.getWorldYMin),
+      t.registerProperty("MaximumY", e.setWorldYMax, e.getWorldYMax),
+      t.registerProperty(
+        "Bounds",
+        e.setWorldCoordinates,
+        e.getWorldCoordinates
+      ),
+      t.registerProperty("MarginX", e.setMarginX, e.getMarginX),
+      t.registerProperty("MarginY", e.setMarginY, e.getMarginY),
+      t.registerProperty(
+        "Parent",
+        e.getGraphics().setParent,
+        e.getGraphics().getParent
+      ),
+      t.registerProperty(
+        "Width",
+        e.getGraphics().setWidth,
+        e.getGraphics().getWidth
+      ),
+      t.registerProperty(
+        "Height",
+        e.getGraphics().setHeight,
+        e.getGraphics().getHeight
+      ),
+      t.registerProperty("Graphics", e.setGraphics),
+      t.registerProperty("Background", e.getStyle().setFillColor),
+      t.registerProperty("Foreground", e.getStyle().setLineColor),
+      t.registerProperty("LineColor", e.getStyle().setLineColor),
+      t.registerProperty("LineWidth", e.getStyle().setLineWidth),
+      t.registerProperty("DrawLines", e.getStyle().setDrawLines),
+      t.registerProperty("FillColor", e.getStyle().setFillColor),
+      t.registerProperty("DrawFill", e.getStyle().setDrawFill),
+      t.registerProperty("ShapeRendering", e.getStyle().setShapeRendering),
+      t.registerProperty(
+        "Visibility",
+        e.getGraphics().getStyle().setVisibility
+      ),
+      t.registerProperty("Display", e.getGraphics().getStyle().setDisplay),
+      t.registerProperty("CSS", e.getGraphics().getStyle().setCSS);
+  },
+}),
+  (EJSS_DRAWING2D.simplePanel = function (e) {
+    var t = {},
+      n = EJSS_GRAPHICS.svgGraphics(e),
+      r = EJSS_DRAWING2D.style(e),
+      i = [],
+      s = !1,
+      o = [],
+      u = {
+        xminPreferred: -1,
+        xmaxPreferred: 1,
+        yminPreferred: -1,
+        ymaxPreferred: 1,
+        xorigin: 0,
+        yorigin: 0,
+        xscale: 1,
+        yscale: 1,
+      },
+      a = !0,
+      f = !0;
+    return (
+      (t.getName = function () {
+        return e;
+      }),
+      (t.getGraphics = function () {
+        return n;
+      }),
+      (t.importGraphics = function (e) {
+        return n.importSVG(e);
+      }),
+      (t.getStyle = function () {
+        return r;
+      }),
+      (t.setGraphics = function (t) {
+        t == EJSS_DRAWING2D.SimplePanel.GRAPHICS2D_SVG
+          ? (n = EJSS_GRAPHICS.svgGraphics(e))
+          : t == EJSS_DRAWING2D.SimplePanel.GRAPHICS2D_CANVAS
+          ? console.log("WARNING: setGraphics() - Canvas not supported")
+          : console.log("WARNING: setGraphics() - Graphics not supported");
+      }),
+      (t.setWorldXMin = function (e) {
+        e !== u.xminPreferred && ((u.xminPreferred = e), (f = !0));
+      }),
+      (t.getWorldXMin = function () {
+        return u.xminPreferred;
+      }),
+      (t.setWorldXMax = function (e) {
+        e !== u.xmaxPreferred && ((u.xmaxPreferred = e), (f = !0));
+      }),
+      (t.getWorldXMax = function () {
+        return u.xmaxPreferred;
+      }),
+      (t.setWorldYMin = function (e) {
+        e !== u.yminPreferred && ((u.yminPreferred = e), (f = !0));
+      }),
+      (t.getWorldYMin = function () {
+        return u.yminPreferred;
+      }),
+      (t.setWorldYMax = function (e) {
+        e !== u.ymaxPreferred && ((u.ymaxPreferred = e), (f = !0));
+      }),
+      (t.getWorldYMax = function () {
+        return u.ymaxPreferred;
+      }),
+      (t.setWorldCoordinates = function (e) {
+        t.setWorldXMin(e[0]),
+          t.setWorldXMax(e[1]),
+          t.setWorldYMin(e[2]),
+          t.setWorldYMax(e[3]);
+      }),
+      (t.getWorldCoordinates = function () {
+        return [
+          t.getWorldXMin(),
+          t.getWorldXMax(),
+          t.getWorldYMin(),
+          t.getWorldYMax(),
+        ];
+      }),
+      (t.addElement = function (e, n) {
+        EJSS_TOOLS.addToArray(i, e, n),
+          e.setPanel(t),
+          e.dataCollected && o.push(e),
+          (s = !0);
+      }),
+      (t.removeElement = function (e) {
+        EJSS_TOOLS.removeFromArray(i, e),
+          e.setPanel(null),
+          e.dataCollected && EJSS_TOOLS.removeFromArray(o, e),
+          (s = !0);
+      }),
+      (t.getElements = function () {
+        return i;
+      }),
+      (t.indexOfElement = function (e) {
+        return i.indexOf(e);
+      }),
+      (t.toPixelAxisY = function (e) {
+        return u.yorigin - e - u.yscale * u.yminPreferred;
+      }),
+      (t.toPixelAxisX = function (e) {
+        return u.xorigin + e - u.xscale * u.xminPreferred;
+      }),
+      (t._26 = function (e) {
+        var t = [];
+        return (
+          (t[0] = u.xorigin + u.xscale * (e[0] - u.xminPreferred)),
+          (t[1] = u.yorigin + u.yscale * (e[1] - u.yminPreferred)),
+          t
+        );
+      }),
+      (t.toPixelMod = function (e) {
+        var t = [];
+        return (t[0] = e[0] * u.xscale), (t[1] = e[1] * u.yscale), t;
+      }),
+      (t.toPanelPosition = function (e) {
+        var t = [];
+        return (
+          (t[0] = u.xminPreferred + (e[0] - u.xorigin) / u.xscale),
+          (t[1] = u.yminPreferred + (e[1] - u.yorigin) / u.yscale),
+          t
+        );
+      }),
+      (t.toPanelMod = function (e) {
+        var t = [];
+        return (
+          (t[0] = u.xscale == 0 ? 0 : e[0] / u.xscale),
+          (t[1] = u.yscale == 0 ? 0 : e[1] / u.yscale),
+          t
+        );
+      }),
+      (t.getPixelPositionWorldOrigin = function () {
+        return [u.xorigin, u.yorigin];
+      }),
+      (t._27 = function () {
+        var e = n.getWidth(),
+          t = n.getHeight(),
+          r = e / (u.xmaxPreferred - u.xminPreferred),
+          i = t / (u.ymaxPreferred - u.yminPreferred);
+        (u.xscale = r),
+          (u.yscale = -i),
+          (u.xorigin = 0.5),
+          (u.yorigin = t + 0.5),
+          (f = !1);
+      }),
+      (t.reset = function () {
+        n.reset();
+      }),
+      (t.render = function () {
+        var e = !1;
+        s && (n.reset(), (e = !0), (s = !1));
+        for (var r = 0, u = o.length; r < u; r++) o[r].dataCollected();
+        f && t._27(), (a || e) && n.drawPanel(t), n.draw(i, e), (a = !1);
+        for (var r = 0, u = i.length; r < u; r++) i[r].setChanged(!1);
+      }),
+      (t.registerProperties = function (e) {
+        EJSS_DRAWING2D.SimplePanel.registerProperties(t, e);
+      }),
+      r.setLineColor("black"),
+      r.setFillColor("rgb(239,239,255)"),
+      r.setChangeListener(function (e) {
+        a = !0;
+      }),
+      t
+    );
+  });
+var EJSS_DRAWING2D = EJSS_DRAWING2D || {};
+(EJSS_DRAWING2D.Spring = {}), (EJSS_DRAWING2D.spring = function (e) {});
+var EJSS_DRAWING2D = EJSS_DRAWING2D || {};
+(EJSS_DRAWING2D.SpringSet = {}), (EJSS_DRAWING2D.springSet = function (e) {});
+var EJSS_DRAWING2D = EJSS_DRAWING2D || {};
+(EJSS_DRAWING2D.Tank = {}), (EJSS_DRAWING2D.tank = function (e) {});
+var EJSS_DRAWING2D = EJSS_DRAWING2D || {};
+(EJSS_DRAWING2D.Text = {}),
+  (EJSS_DRAWING2D.text = function (e) {}),
+  (EJSS_DRAWING2D.TextSet = {}),
+  (EJSS_DRAWING2D.textSet = function (e) {});
+var EJSS_DRAWING2D = EJSS_DRAWING2D || {};
+(EJSS_DRAWING2D.Trace = {}),
+  (EJSS_DRAWING2D.trace = function (e) {}),
+  (EJSS_DRAWING2D.TraceSet = {}),
+  (EJSS_DRAWING2D.traceSet = function (e) {});
+var EJSS_DRAWING2D = EJSS_DRAWING2D || {};
+(EJSS_DRAWING2D.Trail = {}),
+  (EJSS_DRAWING2D.trail = function (e) {}),
+  (EJSS_DRAWING2D.TrailSet = {}),
+  (EJSS_DRAWING2D.trailSet = function (e) {});
+var EJSS_DRAWING2D = EJSS_DRAWING2D || {};
+EJSS_DRAWING2D.colorCoded = function (e, t) {
+  var n = EJSS_DRAWING2D.colorMapper(e, t),
+    r = !1;
+  return (
+    (n.setSymmetricZ = function (e) {
+      r = e;
+    }),
+    (n.isSymmetricZ = function () {
+      return r;
+    }),
+    (n.setAutoscale = function (e) {
+      var t = Number.MAX_VALUE,
+        i = Number.MIN_VALUE;
+      for (var s = 0, o = e.length; s < o; s++) {
+        var u = e[s];
+        (i = Math.max(i, u)), (t = Math.min(t, u));
+      }
+      var a = i,
+        f = t;
+      r && ((a = Math.max(Math.abs(t), Math.abs(i))), (f = -a)),
+        n.setScale(f, a);
+    }),
+    (n.setAutoscaleArray2 = function (e) {
+      var t = Number.MAX_VALUE,
+        i = Number.MIN_VALUE;
+      for (var s = 0, o = e.length; s < o; s++)
+        for (var u = 0, a = e[s].length; u < a; u++) {
+          var f = e[s][u];
+          (i = Math.max(i, f)), (t = Math.min(t, f));
+        }
+      var l = i,
+        c = t;
+      r && ((l = Math.max(Math.abs(t), Math.abs(i))), (c = -l)),
+        n.setScale(c, l);
+    }),
+    (n.setAutoscaleArray3 = function (e) {
+      var t = Number.MAX_VALUE,
+        i = Number.MIN_VALUE;
+      for (var s = 0, o = e.length; s < o; s++)
+        for (var u = 0, a = e[s].length; u < a; u++)
+          for (var f = 0, l = e[s][u].length; f < l; f++) {
+            var c = e[s][u][f];
+            (i = Math.max(i, c)), (t = Math.min(t, c));
+          }
+      var h = i,
+        p = t;
+      r && ((h = Math.max(Math.abs(t), Math.abs(i))), (p = -h)),
+        n.setScale(p, h);
+    }),
+    n
+  );
+};
+var EJSS_DRAWING2D = EJSS_DRAWING2D || {};
+(EJSS_DRAWING2D.ColorMapper = {
+  CUSTOM: -1,
+  SPECTRUM: 0,
+  GRAYSCALE: 1,
+  DUALSHADE: 2,
+  RED: 3,
+  GREEN: 4,
+  BLUE: 5,
+  BLACK: 6,
+  WIREFRAME: 7,
+  NORENDER: 8,
+  REDBLUE_SHADE: 9,
+  getColorPalette: function (e, t) {
+    function n(e, t, n) {
+      var r = { h: Math.round(360 * e), s: t, b: n },
+        i = { r: 0, g: 0, b: 0 };
+      if (r.s === 0) return (i.r = i.g = i.b = r.h), i;
+      var s = Math.floor(r.h / 60),
+        o = r.h / 60 - s,
+        u = r.b * (1 - r.s),
+        a = r.b * (1 - o * r.s),
+        f = r.b * (1 - (1 - o) * r.s);
+      switch (s) {
+        case 0:
+          (i.r = r.b), (i.g = f), (i.b = u);
+          break;
+        case 1:
+          (i.r = a), (i.g = r.b), (i.b = u);
+          break;
+        case 2:
+          (i.r = u), (i.g = r.b), (i.b = f);
+          break;
+        case 3:
+          (i.r = u), (i.g = a), (i.b = r.b);
+          break;
+        case 4:
+          (i.r = f), (i.g = u), (i.b = r.b);
+          break;
+        case 5:
+          (i.r = r.b), (i.g = u), (i.b = a);
+      }
+      return (
+        (i.r = Math.round(i.r * 255)),
+        (i.g = Math.round(i.g * 255)),
+        (i.b = Math.round(i.b * 255)),
+        i
+      );
+    }
+    var r = EJSS_DRAWING2D.ColorMapper,
+      i = [];
+    e < 2 && (e = 2);
+    for (var s = 0; s < e; s++) {
+      var o = (s / (e - 1)) * 0.8,
+        u = 1,
+        a = 1,
+        f = 0,
+        l = 0,
+        c = 0;
+      switch (t) {
+        case r.REDBLUE_SHADE:
+          (f = Math.floor((Math.max(0, -e - 1 + s * 2) * 255) / (e - 1))),
+            (c = Math.floor((Math.max(0, e - 1 - s * 2) * 255) / (e - 1))),
+            (i[s] = "rgb(" + f + "," + l + "," + c + ")");
+          break;
+        case r.SPECTRUM:
+          o = 0.8 - o;
+          var h = n(o, u, a);
+          i[s] = "rgb(" + h.r + "," + h.g + "," + h.b + ")";
+          break;
+        case r.GRAYSCALE:
+        case r.BLACK:
+          (f = l = c = Math.floor((s * 255) / (e - 1))),
+            (i[s] = "rgb(" + f + "," + l + "," + c + ")");
+          break;
+        case r.RED:
+          (f = Math.floor((s * 255) / (e - 1))),
+            (i[s] = "rgb(" + f + "," + l + "," + c + ")");
+          break;
+        case r.GREEN:
+          (l = Math.floor((s * 255) / (e - 1))),
+            (i[s] = "rgb(" + f + "," + l + "," + c + ")");
+          break;
+        case r.BLUE:
+          (c = Math.floor((s * 255) / (e - 1))),
+            (i[s] = "rgb(" + f + "," + l + "," + c + ")");
+          break;
+        case r.DUALSHADE:
+        default:
+          var p = s / (e - 1);
+          (o = 0.8 * (1 - p)), (a = 0.2 + 1.6 * Math.abs(0.5 - p));
+          var h = n(o, u, a);
+          i[s] = "rgb(" + h.r + "," + h.g + "," + h.b + ")";
+      }
+    }
+    return i;
+  },
+}),
+  (EJSS_DRAWING2D.colorMapper = function (e, t) {
+    var n = EJSS_DRAWING2D.ColorMapper,
+      r = {},
+      i = [],
+      s = "darkgray",
+      o = "lightgray",
+      u = -1,
+      a = 1,
+      f,
+      l,
+      c;
+    return (
+      (r.setChangeListener = function (e) {
+        f = e;
+      }),
+      (r.setPaletteType = function (t) {
+        typeof t == "string" &&
+          (t = EJSS_DRAWING2D.ColorMapper[t.toUpperCase()]),
+          (l = t),
+          (s = "darkgray"),
+          (o = "lightgray");
+        if (
+          l == EJSS_DRAWING2D.ColorMapper.GRAYSCALE ||
+          l == EJSS_DRAWING2D.ColorMapper.BLACK
+        )
+          (s = "rgb(64,64,128)"), (o = "rgb(255,191,191)");
+        (e = Math.max(2, e)), (i = n.getColorPalette(e, l)), f && f("palette");
+      }),
+      (r.getColors = function () {
+        return i;
+      }),
+      (r.getFloorColor = function () {
+        return s;
+      }),
+      (r.getCeilColor = function () {
+        return o;
+      }),
+      (r.getNumColors = function () {
+        return e;
+      }),
+      (r.setFloorCeilColor = function (e, t) {
+        (s = e), (o = t);
+      }),
+      (r.setScale = function (e, t) {
+        (u = e), (a = t), (c = new Array(i.length + 1));
+        var n = (a - u) / i.length;
+        for (var r = 0, s = i.length; r < s; r++) c[r] = u + r * n;
+        c[i.length] = a;
+      }),
+      (r.getPaletteType = function () {
+        return l;
+      }),
+      (r.setColorPalette = function (t) {
+        (s = "darkgray"),
+          (o = "lightgray"),
+          (i = t),
+          (e = t.length),
+          (l = EJSS_DRAWING2D.ColorMapper.CUSTOM),
+          f && f("colors");
+      }),
+      (r.setNumberOfColors = function (t) {
+        if (t == e) return;
+        e = t;
+        if (l == EJSS_DRAWING2D.ColorMapper.CUSTOM) {
+          var n = [];
+          for (var i = 0, s = Math.min(colors.length, e); i < s; i++)
+            n[i] = colors[i];
+          for (var i = colors.length; i < numColors; i++)
+            n[i] = colors[colors.length - 1];
+          colors = n;
+        } else r.setPaletteType(l);
+        f && f("numColors");
+      }),
+      (r.getNumberOfColors = function () {
+        return e;
+      }),
+      (r.doubleToIndex = function (e) {
+        if (u - e > Number.MIN_VALUE) return -1;
+        if (e - a > Number.MIN_VALUE) return i.length;
+        var t = 0;
+        return (
+          a != u && (t = Math.floor((i.length * (e - u)) / (a - u))),
+          (t = Math.max(0, t)),
+          Math.min(t, i.length - 1)
+        );
+      }),
+      (r.indexToColor = function (e) {
+        return e < 0 ? s : e >= i.length ? o : i[e];
+      }),
+      (r.getColorThresholds = function () {
+        return c;
+      }),
+      r.setPaletteType(t),
+      r.setScale(-1, 1),
+      r
+    );
+  });
+var EJSS_DRAWING2D = EJSS_DRAWING2D || {};
+(EJSS_DRAWING2D.Font = {
+  copyTo: function (e, t) {
+    t.setFontFamily(e.getFontFamily()),
+      t.setFontSize(e.getFontSizeString()),
+      t.setLetterSpacing(e.getLetterSpacing()),
+      t.setOutlineColor(e.getOutlineColor()),
+      t.setFontWeight(e.getFontWeight()),
+      t.setFillColor(e.getFillColor());
+  },
+}),
+  (EJSS_DRAWING2D.font = function (e) {
+    var t = EJSS_DRAWING2D.Font,
+      n = {},
+      r = "Arial",
+      i = "20",
+      s = "normal",
+      o = "none",
+      u = "normal",
+      a = "black",
+      f = "none",
+      l;
+    return (
+      (n.setChangeListener = function (e) {
+        l = e;
+      }),
+      (n.setFontFamily = function (e) {
+        r != e && ((r = e), l && l("fontFamily"));
+      }),
+      (n.getFontFamily = function () {
+        return r;
+      }),
+      (n.setFontSize = function (e) {
+        i != e && ((i = e), l && l("fontSize"));
+      }),
+      (n.getFontSize = function () {
+        var e;
+        return (
+          isNaN(i)
+            ? i.indexOf("em") != -1
+              ? (e = +i.substr(0, i.indexOf("em")) * 10)
+              : i.indexOf("px") != -1
+              ? (e = +i.substr(0, i.indexOf("px")))
+              : (e = 0)
+            : (e = +i),
+          e
+        );
+      }),
+      (n.getFontSizeString = function () {
+        return i;
+      }),
+      (n.setLetterSpacing = function (e) {
+        s != e && ((s = e), l && l("letterSpacing"));
+      }),
+      (n.getLetterSpacing = function () {
+        return s;
+      }),
+      (n.getNumberLetterSpacing = function () {
+        var e;
+        return (
+          isNaN(s)
+            ? s.indexOf("px") != -1
+              ? (e = +s.substr(0, s.indexOf("px")))
+              : (e = 1)
+            : (e = +s),
+          e
+        );
+      }),
+      (n.setOutlineColor = function (e) {
+        o != e && ((o = e), l && l("lineColor"));
+      }),
+      (n.getOutlineColor = function () {
+        return o;
+      }),
+      (n.setFontWeight = function (e) {
+        u != e && ((u = e), l && l("fontWeight"));
+      }),
+      (n.getFontWeight = function () {
+        return u;
+      }),
+      (n.setFillColor = function (e) {
+        a != e && ((a = e), l && l("fillColor"));
+      }),
+      (n.getFillColor = function () {
+        return a;
+      }),
+      (n.setFontStyle = function (e) {
+        f != e && ((f = e), l && l("fontstyle"));
+      }),
+      (n.getFontStyle = function () {
+        return f;
+      }),
+      (n.getFont = function () {
+        return f + " " + mLineWidth + " " + i + " " + r;
+      }),
+      (n.setFont = function (e) {
+        if (typeof e != "string" || e.length <= 0) return;
+        var t = e.split(" ");
+        (f = t[0]), (u = t[1]);
+        var n = t[2].split("/");
+        (i = n[0]), t[3] && (r = e.substring(e.indexOf(t[3])));
+      }),
+      n
+    );
+  });
+var EJSS_DRAWING2D = EJSS_DRAWING2D || {};
+EJSS_DRAWING2D.functionsParser = function () {
+  function e(e) {
+    function t() {}
+    return (t.prototype = e), new t();
+  }
+  function t(e, t, n, r) {
+    (this.type_ = e),
+      (this.index_ = t || 0),
+      (this.prio_ = n || 0),
+      (this.number_ = r !== undefined && r !== null ? r : 0),
+      (this.toString = function () {
+        switch (this.type_) {
+          case y:
+            return this.number_;
+          case b:
+          case w:
+          case E:
+            return this.index_;
+          case S:
+            return "CALL";
+          default:
+            return "Invalid Token";
+        }
+      });
+  }
+  function n(e, t, n, r) {
+    (this.tokens = e), (this.ops1 = t), (this.ops2 = n), (this.functions = r);
+  }
+  function r(e) {
+    return typeof e == "string"
+      ? ((T.lastIndex = 0),
+        T.test(e)
+          ? "'" +
+            e.replace(T, function (e) {
+              var t = N[e];
+              return typeof t == "string"
+                ? t
+                : "\\u" + ("0000" + e.charCodeAt(0).toString(16)).slice(-4);
+            }) +
+            "'"
+          : "'" + e + "'")
+      : e;
+  }
+  function i(e, t) {
+    return Number(e) + Number(t);
+  }
+  function s(e, t) {
+    return e - t;
+  }
+  function o(e, t) {
+    return e * t;
+  }
+  function u(e, t) {
+    return e / t;
+  }
+  function a(e, t) {
+    return e % t;
+  }
+  function f(e, t) {
+    return "" + e + t;
+  }
+  function l(e) {
+    return -e;
+  }
+  function c(e) {
+    return Math.random() * (e || 1);
+  }
+  function h(e) {
+    e = Math.floor(e);
+    var t = e;
+    while (e > 1) t *= --e;
+    return t;
+  }
+  function p(e, t) {
+    return Math.sqrt(e * e + t * t);
+  }
+  function d(e) {
+    return e < 0 ? 0 : 1;
+  }
+  function v(e, t) {
+    return Object.prototype.toString.call(e) != "[object Array]"
+      ? [e, t]
+      : ((e = e.slice()), e.push(t), e);
+  }
+  function m() {
+    (this.success = !1),
+      (this.errormsg = ""),
+      (this.expression = ""),
+      (this.pos = 0),
+      (this.tokennumber = 0),
+      (this.tokenprio = 0),
+      (this.tokenindex = 0),
+      (this.tmpprio = 0),
+      (this.ops1 = {
+        sin: Math.sin,
+        cos: Math.cos,
+        tan: Math.tan,
+        asin: Math.asin,
+        acos: Math.acos,
+        atan: Math.atan,
+        sqrt: Math.sqrt,
+        log: Math.log,
+        abs: Math.abs,
+        ceil: Math.ceil,
+        floor: Math.floor,
+        round: Math.round,
+        "-": l,
+        exp: Math.exp,
+      }),
+      (this.ops2 = {
+        "+": i,
+        "-": s,
+        "*": o,
+        "/": u,
+        "%": a,
+        "^": Math.pow,
+        ",": v,
+        "||": f,
+      }),
+      (this.functions = {
+        random: c,
+        fac: h,
+        min: Math.min,
+        max: Math.max,
+        pyt: p,
+        step: d,
+        pow: Math.pow,
+        atan2: Math.atan2,
+      }),
+      (this.consts = { E: Math.E, pi: Math.PI, PI: Math.PI });
+  }
+  var g = {},
+    y = 0,
+    b = 1,
+    w = 2,
+    E = 3,
+    S = 4,
+    x =
+      /[\u0000\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g,
+    T =
+      /[\\\'\x00-\x1f\x7f-\x9f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g,
+    N = {
+      "\b": "\\b",
+      "	": "\\t",
+      "\n": "\\n",
+      "\f": "\\f",
+      "\r": "\\r",
+      "'": "\\'",
+      "\\": "\\\\",
+    };
+  (n.prototype = {
+    simplify: function (r) {
+      r = r || {};
+      var i = [],
+        s = [],
+        o,
+        u,
+        a,
+        f = this.tokens.length,
+        l,
+        c = 0;
+      for (c = 0; c < f; c++) {
+        l = this.tokens[c];
+        var h = l.type_;
+        if (h === y) i.push(l);
+        else if (h === E && l.index_ in r)
+          (l = new t(y, 0, 0, r[l.index_])), i.push(l);
+        else if (h === w && i.length > 1)
+          (u = i.pop()),
+            (o = i.pop()),
+            (a = this.ops2[l.index_]),
+            (l = new t(y, 0, 0, a(o.number_, u.number_))),
+            i.push(l);
+        else if (h === b && i.length > 0)
+          (o = i.pop()),
+            (a = this.ops1[l.index_]),
+            (l = new t(y, 0, 0, a(o.number_))),
+            i.push(l);
+        else {
+          while (i.length > 0) s.push(i.shift());
+          s.push(l);
+        }
+      }
+      while (i.length > 0) s.push(i.shift());
+      return new n(s, e(this.ops1), e(this.ops2), e(this.functions));
+    },
+    substitute: function (r, i) {
+      i instanceof n || (i = new m().parse(String(i)));
+      var s = [],
+        o = this.tokens.length,
+        u,
+        a = 0;
+      for (a = 0; a < o; a++) {
+        u = this.tokens[a];
+        var f = u.type_;
+        if (f === E && u.index_ === r)
+          for (var l = 0; l < i.tokens.length; l++) {
+            var c = i.tokens[l],
+              h = new t(c.type_, c.index_, c.prio_, c.number_);
+            s.push(h);
+          }
+        else s.push(u);
+      }
+      var p = new n(s, e(this.ops1), e(this.ops2), e(this.functions));
+      return p;
+    },
+    evaluate: function (e) {
+      e = e || {};
+      var t = [],
+        n,
+        r,
+        i,
+        s = this.tokens.length,
+        o,
+        u = 0;
+      for (u = 0; u < s; u++) {
+        o = this.tokens[u];
+        var a = o.type_;
+        if (a === y) t.push(o.number_);
+        else if (a === w)
+          (r = t.pop()),
+            (n = t.pop()),
+            (i = this.ops2[o.index_]),
+            t.push(i(n, r));
+        else if (a === E)
+          if (o.index_ in e) t.push(e[o.index_]);
+          else {
+            if (!(o.index_ in this.functions))
+              throw new Error("undefined variable: " + o.index_);
+            t.push(this.functions[o.index_]);
+          }
+        else if (a === b)
+          (n = t.pop()), (i = this.ops1[o.index_]), t.push(i(n));
+        else {
+          if (a !== S) throw new Error("invalid Expression");
+          (n = t.pop()), (i = t.pop());
+          if (!i.apply || !i.call) throw new Error(i + " is not a function");
+          Object.prototype.toString.call(n) == "[object Array]"
+            ? t.push(i.apply(undefined, n))
+            : t.push(i.call(undefined, n));
+        }
+      }
+      if (t.length > 1) throw new Error("invalid Expression (parity)");
+      return t[0];
+    },
+    toString: function (e) {
+      var t = [],
+        n,
+        i,
+        s,
+        o = this.tokens.length,
+        u,
+        a = 0;
+      for (a = 0; a < o; a++) {
+        u = this.tokens[a];
+        var f = u.type_;
+        if (f === y) t.push(r(u.number_));
+        else if (f === w)
+          (i = t.pop()),
+            (n = t.pop()),
+            (s = u.index_),
+            e && s == "^"
+              ? t.push("Math.pow(" + n + "," + i + ")")
+              : t.push("(" + n + s + i + ")");
+        else if (f === E) t.push(u.index_);
+        else if (f === b)
+          (n = t.pop()),
+            (s = u.index_),
+            s === "-" ? t.push("(" + s + n + ")") : t.push(s + "(" + n + ")");
+        else {
+          if (f !== S) throw new Error("invalid Expression");
+          (n = t.pop()), (s = t.pop()), t.push(s + "(" + n + ")");
+        }
+      }
+      if (t.length > 1) throw new Error("invalid Expression (parity)");
+      return t[0];
+    },
+    variables: function () {
+      var e = this.tokens.length,
+        t = [];
+      for (var n = 0; n < e; n++) {
+        var r = this.tokens[n];
+        r.type_ === E && t.indexOf(r.index_) == -1 && t.push(r.index_);
+      }
+      return t;
+    },
+    toJSFunction: function (e, t) {
+      var n = new Function(
+        e,
+        "with(Parser.values) { return " + this.simplify(t).toString(!0) + "; }"
+      );
+      return n;
+    },
+  }),
+    (g.parse = function (e) {
+      return new m().parse(e);
+    }),
+    (g.evaluate = function (e, t) {
+      return m.parse(e).evaluate(t);
+    }),
+    (m.Expression = n),
+    (m.values = {
+      sin: Math.sin,
+      cos: Math.cos,
+      tan: Math.tan,
+      asin: Math.asin,
+      acos: Math.acos,
+      atan: Math.atan,
+      sqrt: Math.sqrt,
+      log: Math.log,
+      abs: Math.abs,
+      ceil: Math.ceil,
+      floor: Math.floor,
+      round: Math.round,
+      random: c,
+      fac: h,
+      exp: Math.exp,
+      min: Math.min,
+      max: Math.max,
+      pyt: p,
+      step: d,
+      pow: Math.pow,
+      atan2: Math.atan2,
+      E: Math.E,
+      pi: Math.PI,
+      PI: Math.PI,
+    });
+  var C = 1,
+    k = 2,
+    L = 4,
+    A = 8,
+    O = 16,
+    M = 32,
+    _ = 64,
+    D = 128,
+    P = 256;
+  return (
+    (m.prototype = {
+      parse: function (r) {
+        (this.errormsg = ""), (this.success = !0);
+        var i = [],
+          s = [];
+        this.tmpprio = 0;
+        var o = C | A | L | _,
+          u = 0;
+        (this.expression = r), (this.pos = 0);
+        while (this.pos < this.expression.length)
+          if (this.isOperator())
+            this.isSign() && o & _
+              ? (this.isNegativeSign() &&
+                  ((this.tokenprio = 2),
+                  (this.tokenindex = "-"),
+                  u++,
+                  this.addfunc(s, i, b)),
+                (o = C | A | L | _))
+              : this.isComment() ||
+                ((o & k) === 0 &&
+                  this.error_parsing(this.pos, "unexpected operator"),
+                (u += 2),
+                this.addfunc(s, i, w),
+                (o = C | A | L | _));
+          else if (this.isNumber()) {
+            (o & C) === 0 && this.error_parsing(this.pos, "unexpected number");
+            var a = new t(y, 0, 0, this.tokennumber);
+            s.push(a), (o = k | O | M);
+          } else if (this.isString()) {
+            (o & C) === 0 && this.error_parsing(this.pos, "unexpected string");
+            var a = new t(y, 0, 0, this.tokennumber);
+            s.push(a), (o = k | O | M);
+          } else if (this.isLeftParenth())
+            (o & A) === 0 && this.error_parsing(this.pos, 'unexpected "("'),
+              o & D &&
+                ((u += 2),
+                (this.tokenprio = -2),
+                (this.tokenindex = -1),
+                this.addfunc(s, i, S)),
+              (o = C | A | L | _ | P);
+          else if (this.isRightParenth()) {
+            if (o & P) {
+              var a = new t(y, 0, 0, []);
+              s.push(a);
+            } else
+              (o & O) === 0 && this.error_parsing(this.pos, 'unexpected ")"');
+            o = k | O | M | A | D;
+          } else if (this.isComma())
+            (o & M) === 0 && this.error_parsing(this.pos, 'unexpected ","'),
+              this.addfunc(s, i, w),
+              (u += 2),
+              (o = C | A | L | _);
+          else if (this.isConst()) {
+            (o & C) === 0 &&
+              this.error_parsing(this.pos, "unexpected constant");
+            var f = new t(y, 0, 0, this.tokennumber);
+            s.push(f), (o = k | O | M);
+          } else if (this.isOp2())
+            (o & L) === 0 &&
+              this.error_parsing(this.pos, "unexpected function"),
+              this.addfunc(s, i, w),
+              (u += 2),
+              (o = A);
+          else if (this.isOp1())
+            (o & L) === 0 &&
+              this.error_parsing(this.pos, "unexpected function"),
+              this.addfunc(s, i, b),
+              u++,
+              (o = A);
+          else if (this.isVar()) {
+            (o & C) === 0 &&
+              this.error_parsing(this.pos, "unexpected variable");
+            var l = new t(E, this.tokenindex, 0, 0);
+            s.push(l), (o = k | O | M | A | D);
+          } else
+            this.isWhite() ||
+              (this.errormsg === ""
+                ? this.error_parsing(this.pos, "unknown character")
+                : this.error_parsing(this.pos, this.errormsg));
+        (this.tmpprio < 0 || this.tmpprio >= 10) &&
+          this.error_parsing(this.pos, 'unmatched "()"');
+        while (i.length > 0) {
+          var c = i.pop();
+          s.push(c);
+        }
+        return (
+          u + 1 !== s.length && this.error_parsing(this.pos, "parity"),
+          new n(s, e(this.ops1), e(this.ops2), e(this.functions))
+        );
+      },
+      evaluate: function (e, t) {
+        return this.parse(e).evaluate(t);
+      },
+      error_parsing: function (e, t) {
+        throw (
+          ((this.success = !1),
+          (this.errormsg = "parse error [column " + e + "]: " + t),
+          new Error(this.errormsg))
+        );
+      },
+      addfunc: function (e, n, r) {
+        var i = new t(r, this.tokenindex, this.tokenprio + this.tmpprio, 0);
+        while (n.length > 0) {
+          if (!(i.prio_ <= n[n.length - 1].prio_)) break;
+          e.push(n.pop());
+        }
+        n.push(i);
+      },
+      isNumber: function () {
+        var e = !1,
+          t = "";
+        while (this.pos < this.expression.length) {
+          var n = this.expression.charCodeAt(this.pos);
+          if (!((n >= 48 && n <= 57) || n === 46)) break;
+          (t += this.expression.charAt(this.pos)),
+            this.pos++,
+            (this.tokennumber = parseFloat(t)),
+            (e = !0);
+        }
+        return e;
+      },
+      unescape: function (e, t) {
+        var n = [],
+          r = !1;
+        for (var i = 0; i < e.length; i++) {
+          var s = e.charAt(i);
+          if (r) {
+            switch (s) {
+              case "'":
+                n.push("'");
+                break;
+              case "\\":
+                n.push("\\");
+                break;
+              case "/":
+                n.push("/");
+                break;
+              case "b":
+                n.push("\b");
+                break;
+              case "f":
+                n.push("\f");
+                break;
+              case "n":
+                n.push("\n");
+                break;
+              case "r":
+                n.push("\r");
+                break;
+              case "t":
+                n.push("	");
+                break;
+              case "u":
+                var o = parseInt(e.substring(i + 1, i + 5), 16);
+                n.push(String.fromCharCode(o)), (i += 4);
+                break;
+              default:
+                throw this.error_parsing(
+                  t + i,
+                  "Illegal escape sequence: '\\" + s + "'"
+                );
+            }
+            r = !1;
+          } else s == "\\" ? (r = !0) : n.push(s);
+        }
+        return n.join("");
+      },
+      isString: function () {
+        var e = !1,
+          t = "",
+          n = this.pos;
+        if (
+          this.pos < this.expression.length &&
+          this.expression.charAt(this.pos) == "'"
+        ) {
+          this.pos++;
+          while (this.pos < this.expression.length) {
+            var r = this.expression.charAt(this.pos);
+            if (r == "'" && t.slice(-1) != "\\") {
+              this.pos++, (this.tokennumber = this.unescape(t, n)), (e = !0);
+              break;
+            }
+            (t += this.expression.charAt(this.pos)), this.pos++;
+          }
+        }
+        return e;
+      },
+      isConst: function () {
+        var e;
+        for (var t in this.consts) {
+          var n = t.length;
+          e = this.expression.substr(this.pos, n);
+          if (t === e)
+            return (this.tokennumber = this.consts[t]), (this.pos += n), !0;
+        }
+        return !1;
+      },
+      isOperator: function () {
+        var e = this.expression.charCodeAt(this.pos);
+        if (e === 43) (this.tokenprio = 0), (this.tokenindex = "+");
+        else if (e === 45) (this.tokenprio = 0), (this.tokenindex = "-");
+        else if (e === 124) {
+          if (this.expression.charCodeAt(this.pos + 1) !== 124) return !1;
+          this.pos++, (this.tokenprio = 0), (this.tokenindex = "||");
+        } else if (e === 42) (this.tokenprio = 1), (this.tokenindex = "*");
+        else if (e === 47) (this.tokenprio = 2), (this.tokenindex = "/");
+        else if (e === 37) (this.tokenprio = 2), (this.tokenindex = "%");
+        else {
+          if (e !== 94) return !1;
+          (this.tokenprio = 3), (this.tokenindex = "^");
+        }
+        return this.pos++, !0;
+      },
+      isSign: function () {
+        var e = this.expression.charCodeAt(this.pos - 1);
+        return e === 45 || e === 43 ? !0 : !1;
+      },
+      isPositiveSign: function () {
+        var e = this.expression.charCodeAt(this.pos - 1);
+        return e === 43 ? !0 : !1;
+      },
+      isNegativeSign: function () {
+        var e = this.expression.charCodeAt(this.pos - 1);
+        return e === 45 ? !0 : !1;
+      },
+      isLeftParenth: function () {
+        var e = this.expression.charCodeAt(this.pos);
+        return e === 40 ? (this.pos++, (this.tmpprio += 10), !0) : !1;
+      },
+      isRightParenth: function () {
+        var e = this.expression.charCodeAt(this.pos);
+        return e === 41 ? (this.pos++, (this.tmpprio -= 10), !0) : !1;
+      },
+      isComma: function () {
+        var e = this.expression.charCodeAt(this.pos);
+        return e === 44
+          ? (this.pos++, (this.tokenprio = -1), (this.tokenindex = ","), !0)
+          : !1;
+      },
+      isWhite: function () {
+        var e = this.expression.charCodeAt(this.pos);
+        return e === 32 || e === 9 || e === 10 || e === 13
+          ? (this.pos++, !0)
+          : !1;
+      },
+      isOp1: function () {
+        var e = "";
+        for (var t = this.pos; t < this.expression.length; t++) {
+          var n = this.expression.charAt(t);
+          if (n.toUpperCase() === n.toLowerCase())
+            if (t === this.pos || (n != "_" && (n < "0" || n > "9"))) break;
+          e += n;
+        }
+        return e.length > 0 && e in this.ops1
+          ? ((this.tokenindex = e),
+            (this.tokenprio = 5),
+            (this.pos += e.length),
+            !0)
+          : !1;
+      },
+      isOp2: function () {
+        var e = "";
+        for (var t = this.pos; t < this.expression.length; t++) {
+          var n = this.expression.charAt(t);
+          if (n.toUpperCase() === n.toLowerCase())
+            if (t === this.pos || (n != "_" && (n < "0" || n > "9"))) break;
+          e += n;
+        }
+        return e.length > 0 && e in this.ops2
+          ? ((this.tokenindex = e),
+            (this.tokenprio = 5),
+            (this.pos += e.length),
+            !0)
+          : !1;
+      },
+      isVar: function () {
+        var e = "";
+        for (var t = this.pos; t < this.expression.length; t++) {
+          var n = this.expression.charAt(t);
+          if (n.toUpperCase() === n.toLowerCase())
+            if (t === this.pos || (n != "_" && (n < "0" || n > "9"))) break;
+          e += n;
+        }
+        return e.length > 0
+          ? ((this.tokenindex = e),
+            (this.tokenprio = 4),
+            (this.pos += e.length),
+            !0)
+          : !1;
+      },
+      isComment: function () {
+        var e = this.expression.charCodeAt(this.pos - 1);
+        return e === 47 && this.expression.charCodeAt(this.pos) === 42
+          ? ((this.pos = this.expression.indexOf("*/", this.pos) + 2),
+            this.pos === 1 && (this.pos = this.expression.length),
+            !0)
+          : !1;
+      },
+    }),
+    g
+  );
+};
+var EJSS_DRAWING2D = EJSS_DRAWING2D || {};
+(EJSS_DRAWING2D.InteractionTarget = {
+  ENABLED_NONE: 0,
+  ENABLED_ANY: 1,
+  ENABLED_X: 2,
+  ENABLED_Y: 3,
+  ENABLED_NO_MOVE: 4,
+  SENSITIVITY_BOTH: 0,
+  SENSITIVITY_HORIZONTAL: 1,
+  SENSITIVITY_VERTICAL: 2,
+  SENSITIVITY_ANY: 3,
+  copyTo: function (e, t) {
+    t.setMotionEnabled(e.getMotionEnabled()),
+      t.setAffectsGroup(e.getAffectsGroup()),
+      t.setActionCommand(e.getActionCommand()),
+      t.setDataObject(e.getDataObject()),
+      t.setSensitivity(e.getSensitivity());
+  },
+}),
+  (EJSS_DRAWING2D.interactionTarget = function (e, t, n) {
+    var r = EJSS_DRAWING2D.InteractionTarget,
+      i = {},
+      s = EJSS_DRAWING2D.Element,
+      o = r.ENABLED_NONE,
+      u = !1,
+      a = null,
+      f = null,
+      l = 20,
+      c = r.SENSITIVITY_BOTH;
+    return (
+      (i.getElement = function () {
+        return e;
+      }),
+      (i.getType = function () {
+        return t;
+      }),
+      (i.setMotionEnabled = function (e) {
+        typeof e == "string" ? (o = r[e.toUpperCase()]) : (o = e);
+      }),
+      (i.getMotionEnabled = function () {
+        return o;
+      }),
+      (i.setSensitivityType = function (e) {
+        typeof e == "string" ? (c = r[e.toUpperCase()]) : (c = e);
+      }),
+      (i.getSensitivityType = function () {
+        return c;
+      }),
+      (i.isEnabled = function () {
+        return o != r.ENABLED_NONE;
+      }),
+      (i.setPositionOffset = function (e) {
+        n = e;
+      }),
+      (i.getPixelPosition = function () {
+        var t = e.getPixelPosition(),
+          r = e.getPixelSizes(),
+          i = e.getRelativePositionOffset(r),
+          o = t[0] + i[0],
+          u = t[1] + i[1],
+          a = e.getPanel().getInvertedScaleY(),
+          f = s.getRelativePositionOffset(n, r[0], r[1], a);
+        return [o - f[0], u - f[1]];
+      }),
+      (i.getPosition = function () {
+        var t = e.getAbsolutePosition(),
+          r = e.getAbsoluteSize(),
+          i = e.getPanel().getInvertedScaleY(),
+          o = s.getRelativePositionOffset(n, r[0], r[1], i),
+          u = e.getRelativePositionOffset(r),
+          a = t[0] + u[0] - o[0],
+          f = t[1] + u[1] - o[1];
+        return [a, f];
+      }),
+      (i.setAffectsGroup = function (e) {
+        u = e;
+      }),
+      (i.getAffectsGroup = function () {
+        return u;
+      }),
+      (i.setSensitivity = function (e) {
+        l = e;
+      }),
+      (i.getSensitivity = function () {
+        return l;
+      }),
+      (i.setActionCommand = function (e) {
+        a = e;
+      }),
+      (i.getActionCommand = function () {
+        return a;
+      }),
+      (i.setDataObject = function (e) {
+        f = e;
+      }),
+      (i.getDataObject = function () {
+        return f;
+      }),
+      i
+    );
+  });
+var EJSS_DRAWING2D = EJSS_DRAWING2D || {};
+(EJSS_DRAWING2D.PanelInteraction = { TARGET_POSITION: 0, TARGET_SIZE: 1 }),
+  (EJSS_DRAWING2D.panelInteraction = function (e) {
+    function t(e, t, n) {
+      var r = EJSS_DRAWING2D.InteractionTarget,
+        i = EJSS_DRAWING2D.PanelInteraction,
+        s = EJSS_DRAWING2D.Element;
+      if (t.getType() === i.TARGET_POSITION) {
+        var o = t.getPosition(),
+          u = n[0] - o[0],
+          a = n[1] - o[1];
+        switch (t.getMotionEnabled()) {
+          case r.ENABLED_ANY:
+            e.setX(e.getX() + u),
+              e.setY(e.getY() + a),
+              e.getController().propertiesChanged("Position", "X", "Y");
+            break;
+          case r.ENABLED_X:
+            e.setX(e.getX() + u),
+              e.getController().propertiesChanged("Position", "X");
+            break;
+          case r.ENABLED_Y:
+            e.setY(e.getY() + a),
+              e.getController().propertiesChanged("Position", "Y");
+        }
+      } else if (t.getType() === i.TARGET_SIZE) {
+        var o = t.getPosition(),
+          u = n[0] - o[0],
+          a = n[1] - o[1],
+          f = t.getElement(),
+          l = f.getAbsoluteSize();
+        l[0] === 0 && (l[0] = 1e-5), l[1] === 0 && (l[1] = 1e-5);
+        var c = [u / l[0], a / l[1]];
+        switch (t.getMotionEnabled()) {
+          case r.ENABLED_ANY:
+            e.setSizeX(e.getSizeX() + e.getSizeX() * c[0]),
+              e.setSizeY(e.getSizeY() + e.getSizeY() * c[1]),
+              e.getController().propertiesChanged("Size", "SizeX", "SizeY");
+            break;
+          case r.ENABLED_X:
+            e.setSizeX(e.getSizeX() + e.getSizeX() * c[0]),
+              e.getController().propertiesChanged("Size", "SizeX");
+            break;
+          case r.ENABLED_Y:
+            e.setSizeY(e.getSizeY() + e.getSizeY() * c[1]),
+              e.getController().propertiesChanged("Size", "SizeY");
+        }
+      }
+    }
+    function n(t) {
+      var n = e.getGraphics().getOffsetLeft(),
+        r = e.getGraphics().getOffsetTop(),
+        i = [];
+      if (typeof t.changedTouches != "undefined")
+        for (var s = 0; s < t.changedTouches.length; s++)
+          (i[s] = []),
+            (i[s][0] = t.changedTouches[s].pageX - window.pageXOffset - n),
+            (i[s][1] = t.changedTouches[s].pageY - window.pageYOffset - r);
+      else
+        (i[0] = []),
+          (i[0][0] = (t.clientX || t.x) - n),
+          (i[0][1] = (t.clientY || t.y) - r);
+      return i;
+    }
+    var r = {},
+      i = EJSS_DRAWING2D.PanelInteraction,
+      s = !1,
+      o = !1,
+      u = [],
+      a = [],
+      f = null,
+      l = !1,
+      c = 0,
+      h = "move",
+      p = 0;
+    (r.getPanel = function () {
+      return e;
+    }),
+      (r.getEnabled = function () {
+        return s;
+      }),
+      (r.setStopGestures = function (e) {
+        o != e &&
+          ((o = e),
+          o
+            ? (r.setHandler("gesturestart", function (e) {
+                return e.preventDefault(), e.stopPropagation(), !1;
+              }),
+              r.setHandler("gesturechange", function (e) {
+                return e.preventDefault(), e.stopPropagation(), !1;
+              }),
+              r.setHandler("gestureend", function (e) {
+                return e.preventDefault(), e.stopPropagation(), !1;
+              }))
+            : (r.setHandler("gesturestart", function () {
+                return !0;
+              }),
+              r.setHandler("gesturechange", function () {
+                return !0;
+              }),
+              r.setHandler("gestureend", function () {
+                return !0;
+              })));
+      }),
+      (r.setEnabled = function (e) {
+        s != e &&
+          ((s = e),
+          s
+            ? (r.setHandler("move", r.handleMouseMoveEvent),
+              r.setHandler("down", r.handleMouseDownEvent),
+              r.setHandler("up", r.handleMouseUpEvent))
+            : (r.setHandler("move", function () {
+                return !0;
+              }),
+              r.setHandler("down", function () {
+                return !0;
+              }),
+              r.setHandler("up", function () {
+                return !0;
+              })));
+      }),
+      (r.setCursorTypeForMove = function (e) {
+        h = e;
+      }),
+      (r.getInteractionPoint = function () {
+        return u;
+      }),
+      (r.getInteractionBounds = function () {
+        return a.length == 0 || u.length == 0 ? [] : [a[0], u[0], a[1], u[1]];
+      }),
+      (r.getInteractionElement = function () {
+        return f;
+      }),
+      (r.getOrientation = function () {
+        return window.orientation;
+      }),
+      (r.handleMouseMoveEvent = function (i) {
+        o && (i.preventDefault(), i.stopPropagation());
+        var a = n(i);
+        u = e.toPanelPosition(a[a.length - 1]);
+        if (l)
+          if (f != null) {
+            var c = f.getAffectsGroup()
+              ? f.getElement().getGroup()
+              : f.getElement();
+            t(c, f, u),
+              c.getController().invokeAction("OnDrag"),
+              s && e.getController().invokeAction("OnMove");
+          } else
+            for (var p = 0; p < a.length; p++) {
+              var d = r.findInteractionTarget(e.getElements(), a[p]);
+              if (d != null) {
+                var c = d.getAffectsGroup()
+                    ? d.getElement().getGroup()
+                    : d.getElement(),
+                  v = e.toPanelPosition(a[p]);
+                t(c, d, v),
+                  c.getController().invokeAction("OnDrag"),
+                  s && e.getController().invokeAction("OnMove");
+              } else s && e.getController().invokeAction("OnDrag");
+            }
+        else {
+          var d = r.findInteractionTarget(e.getElements(), a[0]);
+          d === null
+            ? (f != null &&
+                f.getElement().getController().invokeAction("OnExit"),
+              s && e.getController().invokeAction("OnMove"),
+              (i.target.style.cursor = "default"))
+            : (f != d &&
+                (f != null &&
+                  f.getElement().getController().invokeAction("OnExit"),
+                d.getElement().getController().invokeAction("OnEnter")),
+              d.isEnabled()
+                ? (i.target.style.cursor = h)
+                : (i.target.style.cursor = "default")),
+            (f = d);
+        }
+        return e.getController().reportInteractions(), !1;
+      }),
+      (r.handleMouseDownEvent = function (t) {
+        (l = !0), o && (t.preventDefault(), t.stopPropagation());
+        var i = n(t);
+        (a = e.toPanelPosition(i[0])), (u = e.toPanelPosition(i[i.length - 1]));
+        var c = null;
+        for (var p = 0; p < i.length; p++)
+          (c = r.findInteractionTarget(e.getElements(), i[p])),
+            c !== null
+              ? (c.getElement().getController().invokeAction("OnPress"),
+                (t.target.style.cursor = h))
+              : s && e.getController().invokeAction("OnPress");
+        var d = typeof t.touches != "undefined" ? t.touches.length : 1;
+        return (
+          i.length == 1 && d == 1 ? (f = c) : (f = null),
+          e.getController().reportInteractions(),
+          !1
+        );
+      }),
+      (r.handleMouseUpEvent = function (t) {
+        (l = !1), o && (t.preventDefault(), t.stopPropagation());
+        var i = n(t);
+        u = e.toPanelPosition(i[i.length - 1]);
+        if (f != null) f.getElement().getController().invokeAction("OnRelease");
+        else
+          for (var a = 0; a < i.length; a++) {
+            var h = r.findInteractionTarget(e.getElements(), i[a]);
+            h !== null
+              ? h.getElement().getController().invokeAction("OnRelease")
+              : s && e.getController().invokeAction("OnRelease");
+          }
+        return (
+          t.timeStamp - c < 500 &&
+            e.getController().invokeAction("OnDoubleClick"),
+          (c = t.timeStamp),
+          (t.target.style.cursor = "default"),
+          e.getController().reportInteractions(),
+          !1
+        );
+      }),
+      (r.findInteractionTarget = function (t, n) {
+        var s = EJSS_DRAWING2D.InteractionTarget,
+          o = null;
+        for (var u = t.length - 1; u >= 0; u--) {
+          var a = t[u];
+          if (a.isGroupVisible())
+            if (a.getElements) {
+              o = r.findInteractionTarget(a.getElements(), n);
+              if (o !== null) return o;
+            } else {
+              var f = a.getInteractionTargets();
+              for (var l = 0; l < f.length; l++)
+                if (f[l].isEnabled()) {
+                  var c = f[l].getSensitivity();
+                  if (c > 0) {
+                    var h = f[l].getPixelPosition(),
+                      d = !1;
+                    switch (f[l].getSensitivityType()) {
+                      case s.SENSITIVITY_HORIZONTAL:
+                        d = Math.abs(h[1] - n[1]) < c;
+                        break;
+                      case s.SENSITIVITY_VERTICAL:
+                        d = Math.abs(h[0] - n[0]) < c;
+                        break;
+                      case s.SENSITIVITY_ANY:
+                        d =
+                          Math.abs(h[0] - n[0]) < c ||
+                          Math.abs(h[1] - n[1]) < c;
+                        break;
+                      default:
+                        d =
+                          Math.abs(h[0] - n[0]) < c &&
+                          Math.abs(h[1] - n[1]) < c;
+                    }
+                    if (d) return (p = u), f[l];
+                  }
+                }
+              o = a.getInteractionTarget(i.TARGET_POSITION);
+              if (o.isEnabled() && !o.getSensitivity()) {
+                var v = a.getBounds(),
+                  m = e.toPanelPosition(n);
+                if (
+                  v.left < m[0] &&
+                  v.right > m[0] &&
+                  v.bottom < m[1] &&
+                  v.top > m[1]
+                )
+                  return (p = u), o;
+              }
+            }
+        }
+        return null;
+      }),
+      (r.getIndexElement = function () {
+        return p;
+      }),
+      (r.setHandler = function (t, n) {
+        var r = e.getGraphics(),
+          i = r.getEventContext();
+        switch (t) {
+          case "move":
+            i.addEventListener("mousemove", n, !1),
+              i.addEventListener("touchmove", n, !1);
+            break;
+          case "down":
+            i.addEventListener("mousedown", n, !1),
+              i.addEventListener("touchstart", n, !1);
+            break;
+          case "up":
+            i.addEventListener("mouseup", n, !1),
+              i.addEventListener("touchend", n, !1);
+            break;
+          case "gesturestart":
+            i.addEventListener("gesturestart", n, !1);
+            break;
+          case "gesturechange":
+            i.addEventListener("gesturechange", n, !1);
+            break;
+          case "gestureend":
+            i.addEventListener("gestureend", n, !1);
+            break;
+          default:
+        }
+        return !1;
+      });
+    var d = window.onorientationchange;
+    window.onorientationchange = function () {
+      d && d(),
+        e.getController().invokeAction("OnOrientationChange"),
+        e.getController().reportInteractions();
+    };
+    var v = window.onresize;
+    return (
+      (window.onresize = function () {
+        v && v(),
+          e.getController().invokeAction("OnResize"),
+          e.getController().reportInteractions();
+      }),
+      r
+    );
+  });
+var EJSS_DRAWING2D = EJSS_DRAWING2D || {};
+(EJSS_DRAWING2D.Style = {
+  RENDER_AUTO: "auto",
+  RENDER_OPTSPEED: "optimizeSpeed",
+  RENDER_CRISPEDGES: "crispEdges",
+  RENDER_GEOPRECISION: "geometricPrecision",
+  copyTo: function (e, t) {
+    t.setDrawLines(e.getDrawLines()),
+      t.setLineColor(e.getLineColor()),
+      t.setLineWidth(e.getLineWidth()),
+      t.setDrawFill(e.getDrawFill()),
+      t.setFillColor(e.getFillColor()),
+      t.setAttributes(e.getAttributes()),
+      t.setShapeRendering(e.getShapeRendering());
+  },
+}),
+  (EJSS_DRAWING2D.style = function (e) {
+    var t = EJSS_DRAWING2D.Style,
+      n = {},
+      r = !0,
+      i = "black",
+      s = 0.5,
+      o = !0,
+      u = "none",
+      a = t.RENDER_AUTO,
+      f,
+      l = {};
+    return (
+      (n.setChangeListener = function (e) {
+        f = e;
+      }),
+      (n.setDrawLines = function (e) {
+        e != r && ((r = e), f && f("drawlines"));
+      }),
+      (n.getDrawLines = function () {
+        return r;
+      }),
+      (n.setLineColor = function (e) {
+        return (
+          typeof e != "string" &&
+            (e = EJSS_TOOLS.DisplayColors.getLineColor(e)),
+          e != i && ((i = e), f && f("linecolor")),
+          n
+        );
+      }),
+      (n.getLineColor = function () {
+        return i;
+      }),
+      (n.setLineWidth = function (e) {
+        e != s && ((s = e), f && f("linewidth"));
+      }),
+      (n.getLineWidth = function () {
+        return s;
+      }),
+      (n.setDrawFill = function (e) {
+        e != o && ((o = e), f && f("drawfill"));
+      }),
+      (n.getDrawFill = function () {
+        return o;
+      }),
+      (n.setFillColor = function (e) {
+        typeof e != "string" && (e = EJSS_TOOLS.DisplayColors.getLineColor(e)),
+          e != u && ((u = e), f && f("fillcolor"));
+      }),
+      (n.getFillColor = function () {
+        return u;
+      }),
+      (n.setShapeRendering = function (e) {
+        e.substring(0, 6) == "RENDER" && (e = t[e.toUpperCase()]),
+          a != e && ((a = e), f && f("shaperendering"));
+      }),
+      (n.getShapeRendering = function () {
+        return a;
+      }),
+      (n.setAttributes = function (e) {
+        e != l && ((l = e), f && f("attributes"));
+      }),
+      (n.getAttributes = function () {
+        return l;
+      }),
+      (n.serialize = function () {
+        return {
+          mDrawLines: r,
+          mLineColor: i,
+          mLineWidth: s,
+          mDrawFill: o,
+          mFillColor: u,
+          mShapeRendering: a,
+          mAttributes: l,
+        };
+      }),
+      (n.unserialize = function (e) {
+        (r = e.mDrawLines),
+          (i = e.mLineColor),
+          (s = e.mLineWidth),
+          (o = e.mDrawFill),
+          (u = e.mFillColor),
+          (a = e.mShapeRendering),
+          (l = e.mAttributes);
+      }),
+      n
+    );
+  });
+var EJSS_DRAWING2D = EJSS_DRAWING2D || {};
+(EJSS_DRAWING2D.Transformation = {
+  compare: function (e, t) {
+    return (
+      e.radians == t.radians &&
+      e.a == t.a &&
+      e.b == t.b &&
+      e.c == t.c &&
+      e.d == t.d &&
+      e.e == t.e &&
+      e.f == t.f
+    );
+  },
+}),
+  (EJSS_DRAWING2D.transformation = function (e) {
+    e = e || { a: 1, b: 0, c: 0, d: 1, e: 0, f: 0 };
+    var t = { a: e.a, c: e.c, e: e.e, b: e.b, d: e.d, f: e.f, radians: 0 };
+    return (
+      (t.toString = function () {
+        return (
+          "a=" +
+          t.a +
+          ", c=" +
+          t.c +
+          ", e=" +
+          t.e +
+          "\n" +
+          "b=" +
+          t.b +
+          ", d=" +
+          t.d +
+          ", f=" +
+          t.f
+        );
+      }),
+      (t.setToIdentity = function () {
+        (t.a = 1),
+          (t.c = 0),
+          (t.e = 0),
+          (t.b = 0),
+          (t.d = 1),
+          (t.f = 0),
+          (radians = 0);
+      }),
+      (t.setTransform = function (e) {
+        Array.isArray(e) && e.length > 5
+          ? ((t.a = e[0]),
+            (t.c = e[2]),
+            (t.e = e[4]),
+            (t.b = e[1]),
+            (t.d = e[3]),
+            (t.f = e[5]))
+          : ((t.a = e.a),
+            (t.c = e.c),
+            (t.e = e.e),
+            (t.b = e.b),
+            (t.d = e.d),
+            (t.f = e.f),
+            (t.radians = e.radians));
+      }),
+      (t.setToTranslation = function (e, n) {
+        (t.a = 1), (t.c = 0), (t.e = e), (t.b = 0), (t.d = 1), (t.f = n);
+      }),
+      (t.setToRotation = function (e) {
+        var n = Math.cos(e),
+          r = Math.sin(e);
+        (t.a = n),
+          (t.c = -r),
+          (t.e = 0),
+          (t.b = r),
+          (t.d = n),
+          (t.f = 0),
+          (t.radians = e);
+      }),
+      (t.getRotation = function () {
+        return t.radians;
+      }),
+      (t.translate = function (e, n) {
+        (t.e += e), (t.f += n);
+      }),
+      (t.scale = function (e, n) {
+        (t.a *= e), (t.b *= e), (t.c *= n), (t.d *= n);
+      }),
+      (t.concatenate = function (e) {
+        var n = t.a,
+          r = t.b,
+          i = t.c,
+          s = t.d,
+          o = t.e,
+          u = t.f;
+        (t.a = n * e.a + i * e.b),
+          (t.b = r * e.a + s * e.b),
+          (t.c = n * e.c + i * e.d),
+          (t.d = r * e.c + s * e.d),
+          (t.e = n * e.e + i * e.f + o),
+          (t.f = r * e.e + s * e.f + u),
+          (t.radians += e.radians);
+      }),
+      (t.transform = function (e) {
+        var n = e[0],
+          r = e[1];
+        return (
+          (e[0] = t.a * n + t.c * r + t.e), (e[1] = t.b * n + t.d * r + t.f), e
+        );
+      }),
+      (t.transformVector = function (e) {
+        var n = e[0],
+          r = e[1];
+        return (e[0] = t.a * n + t.c * r), (e[1] = t.b * n + t.d * r), e;
+      }),
+      (t.inverseTransform = function (e) {
+        var n = t.a,
+          r = t.b,
+          i = t.c,
+          s = t.d,
+          o = t.e,
+          u = t.f,
+          a = n * s - r * i;
+        if (a === 0) return null;
+        var f = e[0],
+          l = e[1];
+        return (
+          (e[0] = (s * f - i * l + (i * u - s * o)) / a),
+          (e[1] = (-r * f + n * l + (r * o - n * u)) / a),
+          e
+        );
+      }),
+      t
+    );
+  });
+var EJSS_DRAWING2D = EJSS_DRAWING2D || {};
+(EJSS_DRAWING2D.Video = {}), (EJSS_DRAWING2D.video = function (e) {});
+var EJSS_DRAWING2D = EJSS_DRAWING2D || {};
+(EJSS_DRAWING2D.Web = {}), (EJSS_DRAWING2D.web = function (e) {});
+var EJSS_DRAWING2D = EJSS_DRAWING2D || {};
+(EJSS_DRAWING2D.WebCamImage = {}),
+  (EJSS_DRAWING2D.webCamImage = function (e) {});
+var EJSS_DRAWING3D = EJSS_DRAWING3D || {};
+(EJSS_DRAWING3D.AnalyticCurve = {}),
+  (EJSS_DRAWING3D.analyticCurve = function (e) {});
+var EJSS_DRAWING3D = EJSS_DRAWING3D || {};
+(EJSS_DRAWING3D.AnalyticSurface = {}),
+  (EJSS_DRAWING3D.analyticSurface = function (e) {});
+var EJSS_DRAWING3D = EJSS_DRAWING3D || {};
+(EJSS_DRAWING3D.Arrow = {}),
+  (EJSS_DRAWING3D.arrow = function (e) {}),
+  (EJSS_DRAWING3D.ArrowSet = {}),
+  (EJSS_DRAWING3D.arrowSet = function (e) {});
+var EJSS_DRAWING3D = EJSS_DRAWING3D || {};
+(EJSS_DRAWING3D.Basic = {}),
+  (EJSS_DRAWING3D.basic = function (e) {}),
+  (EJSS_DRAWING3D.BasicSet = {}),
+  (EJSS_DRAWING3D.basicSet = function (e) {});
+var EJSS_DRAWING3D = EJSS_DRAWING3D || {};
+(EJSS_DRAWING3D.Box = {}),
+  (EJSS_DRAWING3D.box = function (e) {}),
+  (EJSS_DRAWING3D.BoxSet = {}),
+  (EJSS_DRAWING3D.boxSet = function (e) {});
+var EJSS_DRAWING3D = EJSS_DRAWING3D || {};
+(EJSS_DRAWING3D.Cone = {}),
+  (EJSS_DRAWING3D.cone = function (e) {}),
+  (EJSS_DRAWING3D.ConeSet = {}),
+  (EJSS_DRAWING3D.coneSet = function (e) {});
+var EJSS_DRAWING3D = EJSS_DRAWING3D || {};
+(EJSS_DRAWING3D.Cylinder = {}),
+  (EJSS_DRAWING3D.cylinder = function (e) {}),
+  (EJSS_DRAWING3D.CylinderSet = {}),
+  (EJSS_DRAWING3D.cylinderSet = function (e) {});
+var EJSS_DRAWING3D = EJSS_DRAWING3D || {};
+(EJSS_DRAWING3D.Disk = {}), (EJSS_DRAWING3D.disk = function (e) {});
+var EJSS_DRAWING3D = EJSS_DRAWING3D || {};
+(EJSS_DRAWING3D.DrawingPanel = {}),
+  (EJSS_DRAWING3D.drawingPanel = function (e) {});
+var EJSS_DRAWING3D = EJSS_DRAWING3D || {};
+(EJSS_DRAWING3D.Element = {}), (EJSS_DRAWING3D.element = function (e) {});
+var EJSS_DRAWING3D = EJSS_DRAWING3D || {};
+(EJSS_DRAWING3D.ElementSet = {}),
+  (EJSS_DRAWING3D.elementSet = function (e, t) {});
+var EJSS_DRAWING3D = EJSS_DRAWING3D || {};
+(EJSS_DRAWING3D.Ellipsoid = {}),
+  (EJSS_DRAWING3D.ellipsoid = function (e) {}),
+  (EJSS_DRAWING3D.EllipsoidSet = {}),
+  (EJSS_DRAWING3D.ellipsoidSet = function (e) {});
+var EJSS_DRAWING3D = EJSS_DRAWING3D || {};
+(EJSS_DRAWING3D.Group = {}), (EJSS_DRAWING3D.group = function (e) {});
+var EJSS_DRAWING3D = EJSS_DRAWING3D || {};
+EJSS_DRAWING3D.panelInteraction = function (e) {
+  function t(t) {
+    var n, r;
+    typeof t.changedTouches != "undefined" && t.changedTouches.length === 1
+      ? ((n = t.changedTouches[0].pageX), (r = t.changedTouches[0].pageY))
+      : ((n = t.x || t.clientX), (r = t.y || t.clientY));
+    var i = e.getGraphics().getOffsetLeft(),
+      s = e.getGraphics().getOffsetTop();
+    return [n - i, r - s];
+  }
+  var n = {},
+    r = !1,
+    i = [0, 0],
+    s = 0,
+    o = 0,
+    u = !1,
+    a = 0,
+    f = 0,
+    l = 0;
+  return (
+    (n.getPanel = function () {
+      return e;
+    }),
+    (n.getEnabled = function () {
+      return r;
+    }),
+    (n.setEnabled = function (e) {
+      r != e &&
+        ((r = e),
+        r
+          ? (n.setHandler("move", n.handleMouseMoveEvent),
+            n.setHandler("down", n.handleMouseDownEvent),
+            n.setHandler("up", n.handleMouseUpEvent),
+            n.setHandler("mousewheel", n.handleMouseWheelEvent),
+            n.setHandler("pinch", n.handlePinchGesture))
+          : (n.setHandler("move", function () {}),
+            n.setHandler("down", function () {}),
+            n.setHandler("up", function () {}),
+            n.setHandler("mousewheel", function () {}),
+            n.setHandler("pinch", function () {})));
+    }),
+    (n.getInteractionPoint = function () {
+      return i;
+    }),
+    (n.getInteractionDeltas = function () {
+      return [s, o];
+    }),
+    (n.getInteractionZoomDelta = function () {
+      return f / 3;
+    }),
+    (n.handleMouseWheelEvent = function (t) {
+      var n = typeof t.touches != "undefined" ? t.touches.length : 0;
+      n == 0 &&
+        (t.preventDefault(),
+        (f = Math.max(-1, Math.min(1, t.wheelDelta || -t.detail))),
+        e.getController().invokeAction("OnZoom"),
+        e.getController().reportInteractions());
+    }),
+    (n.handlePinchGesture = function (t) {
+      t.timeStamp - a > 100 &&
+        (t.preventDefault(),
+        t.scale < l ? (f = 1) : t.scale >= l && (f = -1),
+        (l = t.scale),
+        e.getController().invokeAction("OnZoom"),
+        e.getController().reportInteractions(),
+        (a = t.timeStamp));
+    }),
+    (n.handleMouseMoveEvent = function (n) {
+      var r = typeof n.touches != "undefined" ? n.touches.length : 1;
+      if (r == 1) {
+        var a = i[0],
+          f = i[1];
+        (i = t(n)),
+          (s = i[0] - a),
+          (o = i[1] - f),
+          u
+            ? (e.getController().invokeAction("OnDrag"),
+              (n.target.style.cursor = "move"))
+            : (n.target.style.cursor = "default"),
+          e.getController().reportInteractions();
+      }
+    }),
+    (n.handleMouseDownEvent = function (r) {
+      var s = typeof r.touches != "undefined" ? r.touches.length : 1;
+      s == 1 &&
+        ((u = !0),
+        (i = t(r)),
+        e.getController().invokeAction("OnPress"),
+        n.pick(i[0], i[1]),
+        r.preventDefault(),
+        e.getController().reportInteractions());
+    }),
+    (n.handleMouseUpEvent = function (n) {
+      var r = typeof n.touches != "undefined" ? n.touches.length : 1;
+      r == 1 &&
+        ((u = !1),
+        (i = t(n)),
+        e.getController().invokeAction("OnRelease"),
+        (n.target.style.cursor = "default"),
+        n.timeStamp - a < 500 &&
+          e.getController().invokeAction("OnDoubleClick"),
+        (a = n.timeStamp),
+        e.getController().reportInteractions());
+    }),
+    (n.setHandler = function (t, n) {
+      var r = e.getGraphics(),
+        i = r.getEventContext();
+      switch (t) {
+        case "move":
+          i.addEventListener("mousemove", n, !1),
+            i.addEventListener("touchmove", n, !1);
+          break;
+        default:
+        case "down":
+          i.addEventListener("mousedown", n, !1),
+            i.addEventListener("touchstart", n, !1);
+          break;
+        case "up":
+          i.addEventListener("mouseup", n, !1),
+            i.addEventListener("touchend", n, !1);
+          break;
+        case "mousewheel":
+          i.addEventListener("mousewheel", n, !1);
+          break;
+        case "pinch":
+          i.addEventListener(
+            "gesturestart",
+            function (e) {
+              l = 1;
+            },
+            !1
+          ),
+            i.addEventListener("gesturechange", n, !1);
+      }
+      return !1;
+    }),
+    (n.pick = function (t, n) {
+      var r = t - 1,
+        i = n - 1,
+        s = 1,
+        o = 1,
+        u = e.getGraphics().getContext();
+      if (!u) return;
+      var a = new Uint8Array(s * o * 4);
+      u.readPixels(r, i, s, o, u.RGBA, u.UNSIGNED_BYTE, a),
+        a.data && (a = a.data);
+    }),
+    n
+  );
+};
+var EJSS_DRAWING3D = EJSS_DRAWING3D || {};
+(EJSS_DRAWING3D.Style = {
+  copyTo: function (e, t) {
+    t.setClosedTop(e.getClosedTop()),
+      t.setClosedBottom(e.getClosedBottom()),
+      t.setClosedLeft(e.getClosedLeft()),
+      t.setClosedRight(e.getClosedRight()),
+      t.setDrawLines(e.getDrawLines()),
+      t.setLineColor(e.getLineColor()),
+      t.setLineWidth(e.getLineWidth()),
+      t.setDrawFill(e.getDrawFill()),
+      t.setFillColor(e.getFillColor()),
+      t.setTransparency(e.getTransparency());
+  },
+}),
+  (EJSS_DRAWING3D.style = function (e) {
+    var t = EJSS_DRAWING3D.Style,
+      n = {},
+      r = !0,
+      i = !0,
+      s = !0,
+      o = !0,
+      u = [0, 0, 0],
+      a = [0, 0, 0],
+      f = 0.5,
+      l = !1,
+      c = !0,
+      h = 0,
+      p,
+      d;
+    return (
+      (n.setProjChangeListener = function (e) {
+        p = e;
+      }),
+      (n.setMeshChangeListener = function (e) {
+        d = e;
+      }),
+      (n.setClosedTop = function (e) {
+        e != r && ((r = e), d && d("closedtop"));
+      }),
+      (n.getClosedTop = function () {
+        return r;
+      }),
+      (n.setClosedBottom = function (e) {
+        e != i && ((i = e), d && d("closedbottom"));
+      }),
+      (n.getClosedBottom = function () {
+        return i;
+      }),
+      (n.setClosedLeft = function (e) {
+        e != s && ((s = e), d && d("closedleft"));
+      }),
+      (n.getClosedLeft = function () {
+        return s;
+      }),
+      (n.setClosedRight = function (e) {
+        e != o && ((o = e), d && d("closedright"));
+      }),
+      (n.getClosedRight = function () {
+        return o;
+      }),
+      (n.setDrawLines = function (e) {
+        e != l && ((l = e), p && p("drawlines"));
+      }),
+      (n.getDrawLines = function () {
+        return l;
+      }),
+      (n.setLineColor = function (e) {
+        return (
+          typeof e == "string" &&
+            (e = EJSS_TOOLS.DisplayColors.getArrayColor(e)),
+          EJSS_TOOLS.compareArrays(e, u) ||
+            ((u = e.slice()), p && p("linecolor")),
+          n
+        );
+      }),
+      (n.getLineColor = function () {
+        return u;
+      }),
+      (n.setLineWidth = function (e) {
+        e != f && ((f = e), p && p("linewidth"));
+      }),
+      (n.getLineWidth = function () {
+        return f;
+      }),
+      (n.setDrawFill = function (e) {
+        e != c && ((c = e), p && p("drawfill"));
+      }),
+      (n.getDrawFill = function () {
+        return c;
+      }),
+      (n.setFillColor = function (e) {
+        typeof e == "string" && (e = EJSS_TOOLS.DisplayColors.getArrayColor(e)),
+          EJSS_TOOLS.compareArrays(e, a) ||
+            ((a = e.slice()), p && p("fillcolor"));
+      }),
+      (n.getFillColor = function () {
+        return a;
+      }),
+      (n.setTransparency = function (e) {
+        e != h && ((h = e), p && p("transparency"));
+      }),
+      (n.getTransparency = function () {
+        return h;
+      }),
+      n
+    );
+  });
+var EJSS_DRAWING3D = EJSS_DRAWING3D || {};
+(EJSS_DRAWING3D.Transformation = {
+  registerProperties: function (e, t) {
+    e.setController(t),
+      t.registerProperty("Parent", e.setParent, e.getParent),
+      t.registerProperty("Axis", e.setAxis, e.getAxis),
+      t.registerProperty("Angle", e.setAngle, e.getAngle),
+      t.registerProperty("Origin", e.setOrigin, e.getOrigin);
+  },
+}),
+  (EJSS_DRAWING3D.rotationX = function (e) {
+    var t = EJSS_DRAWING3D.transformation();
+    return t.setAxis([1, 0, 0]), t;
+  }),
+  (EJSS_DRAWING3D.rotationY = function (e) {
+    var t = EJSS_DRAWING3D.transformation();
+    return t.setAxis([0, 1, 0]), t;
+  }),
+  (EJSS_DRAWING3D.rotationZ = function (e) {
+    var t = EJSS_DRAWING3D.transformation();
+    return t.setAxis([0, 0, 1]), t;
+  }),
+  (EJSS_DRAWING3D.transformation = function (e) {
+    var t = {},
+      n = null,
+      r = [0, 0, 0, 1, 0, 0, 0],
+      i = { propertiesChanged: function () {}, invokeAction: function () {} };
+    return (
+      (t.getArray = function () {
+        return r;
+      }),
+      (t.setChanged = function (e) {
+        e && n.setProjChanged(!0);
+      }),
+      (t.setParent = function (e) {
+        n && n.removeExtraTransformation(t),
+          (n = e),
+          n && n.addExtraTransformation(t);
+      }),
+      (t.getParent = function () {
+        return n;
+      }),
+      (t.setAngle = function (e) {
+        r[0] = e;
+      }),
+      (t.getAngle = function () {
+        return r[0];
+      }),
+      (t.setAxis = function (e) {
+        (r[1] = e[0]), (r[2] = e[1]), (r[3] = e[2]);
+      }),
+      (t.getAxis = function () {
+        return r.slice(1, 4);
+      }),
+      (t.setOrigin = function (e) {
+        (r[4] = e[0]), (r[5] = e[1]), (r[6] = e[2]);
+      }),
+      (t.getOrigin = function () {
+        return r.slice(5);
+      }),
+      (t.getController = function () {
+        return i;
+      }),
+      (t.setController = function (e) {
+        i = e;
+      }),
+      (t.registerProperties = function (e) {
+        EJSS_DRAWING3D.Transformation.registerProperties(t, e);
+      }),
+      t
+    );
+  });
+var EJSS_WEBGLGRAPHICS = EJSS_WEBGLGRAPHICS || {};
+EJSS_WEBGLGRAPHICS.analyticCurve = function (e, t) {};
+var EJSS_WEBGLGRAPHICS = EJSS_WEBGLGRAPHICS || {};
+EJSS_WEBGLGRAPHICS.analyticSurface = function (e, t) {};
+var EJSS_WEBGLGRAPHICS = EJSS_WEBGLGRAPHICS || {};
+EJSS_WEBGLGRAPHICS.arrow = function (e, t) {};
+var EJSS_WEBGLGRAPHICS = EJSS_WEBGLGRAPHICS || {};
+EJSS_WEBGLGRAPHICS.basic = function (e, t) {};
+var EJSS_WEBGLGRAPHICS = EJSS_WEBGLGRAPHICS || {};
+EJSS_WEBGLGRAPHICS.box = function (e, t) {};
+var EJSS_WEBGLGRAPHICS = EJSS_WEBGLGRAPHICS || {};
+EJSS_WEBGLGRAPHICS.cylinder = function (e, t) {};
+var EJSS_WEBGLGRAPHICS = EJSS_WEBGLGRAPHICS || {};
+EJSS_WEBGLGRAPHICS.ellipsoid = function (e, t) {};
+var hasFloat32Array = typeof Float32Array != "undefined";
+(Matrix.prototype = {
+  inverse: function () {
+    return Matrix.inverse(this, new Matrix());
+  },
+  transpose: function () {
+    return Matrix.transpose(this, new Matrix());
+  },
+  multiply: function (e) {
+    return Matrix.multiply(this, e, new Matrix());
+  },
+  transformPoint: function (e) {
+    var t = this.m;
+    return new Vector(
+      t[0] * e.x + t[1] * e.y + t[2] * e.z + t[3],
+      t[4] * e.x + t[5] * e.y + t[6] * e.z + t[7],
+      t[8] * e.x + t[9] * e.y + t[10] * e.z + t[11]
+    ).divide(t[12] * e.x + t[13] * e.y + t[14] * e.z + t[15]);
+  },
+  transformVector: function (e) {
+    var t = this.m;
+    return new Vector(
+      t[0] * e.x + t[1] * e.y + t[2] * e.z,
+      t[4] * e.x + t[5] * e.y + t[6] * e.z,
+      t[8] * e.x + t[9] * e.y + t[10] * e.z
+    );
+  },
+}),
+  (Matrix.inverse = function (e, t) {
+    t = t || new Matrix();
+    var n = e.m,
+      r = t.m;
+    (r[0] =
+      n[5] * n[10] * n[15] -
+      n[5] * n[14] * n[11] -
+      n[6] * n[9] * n[15] +
+      n[6] * n[13] * n[11] +
+      n[7] * n[9] * n[14] -
+      n[7] * n[13] * n[10]),
+      (r[1] =
+        -n[1] * n[10] * n[15] +
+        n[1] * n[14] * n[11] +
+        n[2] * n[9] * n[15] -
+        n[2] * n[13] * n[11] -
+        n[3] * n[9] * n[14] +
+        n[3] * n[13] * n[10]),
+      (r[2] =
+        n[1] * n[6] * n[15] -
+        n[1] * n[14] * n[7] -
+        n[2] * n[5] * n[15] +
+        n[2] * n[13] * n[7] +
+        n[3] * n[5] * n[14] -
+        n[3] * n[13] * n[6]),
+      (r[3] =
+        -n[1] * n[6] * n[11] +
+        n[1] * n[10] * n[7] +
+        n[2] * n[5] * n[11] -
+        n[2] * n[9] * n[7] -
+        n[3] * n[5] * n[10] +
+        n[3] * n[9] * n[6]),
+      (r[4] =
+        -n[4] * n[10] * n[15] +
+        n[4] * n[14] * n[11] +
+        n[6] * n[8] * n[15] -
+        n[6] * n[12] * n[11] -
+        n[7] * n[8] * n[14] +
+        n[7] * n[12] * n[10]),
+      (r[5] =
+        n[0] * n[10] * n[15] -
+        n[0] * n[14] * n[11] -
+        n[2] * n[8] * n[15] +
+        n[2] * n[12] * n[11] +
+        n[3] * n[8] * n[14] -
+        n[3] * n[12] * n[10]),
+      (r[6] =
+        -n[0] * n[6] * n[15] +
+        n[0] * n[14] * n[7] +
+        n[2] * n[4] * n[15] -
+        n[2] * n[12] * n[7] -
+        n[3] * n[4] * n[14] +
+        n[3] * n[12] * n[6]),
+      (r[7] =
+        n[0] * n[6] * n[11] -
+        n[0] * n[10] * n[7] -
+        n[2] * n[4] * n[11] +
+        n[2] * n[8] * n[7] +
+        n[3] * n[4] * n[10] -
+        n[3] * n[8] * n[6]),
+      (r[8] =
+        n[4] * n[9] * n[15] -
+        n[4] * n[13] * n[11] -
+        n[5] * n[8] * n[15] +
+        n[5] * n[12] * n[11] +
+        n[7] * n[8] * n[13] -
+        n[7] * n[12] * n[9]),
+      (r[9] =
+        -n[0] * n[9] * n[15] +
+        n[0] * n[13] * n[11] +
+        n[1] * n[8] * n[15] -
+        n[1] * n[12] * n[11] -
+        n[3] * n[8] * n[13] +
+        n[3] * n[12] * n[9]),
+      (r[10] =
+        n[0] * n[5] * n[15] -
+        n[0] * n[13] * n[7] -
+        n[1] * n[4] * n[15] +
+        n[1] * n[12] * n[7] +
+        n[3] * n[4] * n[13] -
+        n[3] * n[12] * n[5]),
+      (r[11] =
+        -n[0] * n[5] * n[11] +
+        n[0] * n[9] * n[7] +
+        n[1] * n[4] * n[11] -
+        n[1] * n[8] * n[7] -
+        n[3] * n[4] * n[9] +
+        n[3] * n[8] * n[5]),
+      (r[12] =
+        -n[4] * n[9] * n[14] +
+        n[4] * n[13] * n[10] +
+        n[5] * n[8] * n[14] -
+        n[5] * n[12] * n[10] -
+        n[6] * n[8] * n[13] +
+        n[6] * n[12] * n[9]),
+      (r[13] =
+        n[0] * n[9] * n[14] -
+        n[0] * n[13] * n[10] -
+        n[1] * n[8] * n[14] +
+        n[1] * n[12] * n[10] +
+        n[2] * n[8] * n[13] -
+        n[2] * n[12] * n[9]),
+      (r[14] =
+        -n[0] * n[5] * n[14] +
+        n[0] * n[13] * n[6] +
+        n[1] * n[4] * n[14] -
+        n[1] * n[12] * n[6] -
+        n[2] * n[4] * n[13] +
+        n[2] * n[12] * n[5]),
+      (r[15] =
+        n[0] * n[5] * n[10] -
+        n[0] * n[9] * n[6] -
+        n[1] * n[4] * n[10] +
+        n[1] * n[8] * n[6] +
+        n[2] * n[4] * n[9] -
+        n[2] * n[8] * n[5]);
+    var i = n[0] * r[0] + n[1] * r[4] + n[2] * r[8] + n[3] * r[12];
+    for (var s = 0; s < 16; s++) r[s] /= i;
+    return t;
+  }),
+  (Matrix.transpose = function (e, t) {
+    t = t || new Matrix();
+    var n = e.m,
+      r = t.m;
+    return (
+      (r[0] = n[0]),
+      (r[1] = n[4]),
+      (r[2] = n[8]),
+      (r[3] = n[12]),
+      (r[4] = n[1]),
+      (r[5] = n[5]),
+      (r[6] = n[9]),
+      (r[7] = n[13]),
+      (r[8] = n[2]),
+      (r[9] = n[6]),
+      (r[10] = n[10]),
+      (r[11] = n[14]),
+      (r[12] = n[3]),
+      (r[13] = n[7]),
+      (r[14] = n[11]),
+      (r[15] = n[15]),
+      t
+    );
+  }),
+  (Matrix.multiply = function (e, t, n) {
+    n = n || new Matrix();
+    var r = e.m,
+      i = t.m,
+      s = n.m;
+    return (
+      (s[0] = r[0] * i[0] + r[1] * i[4] + r[2] * i[8] + r[3] * i[12]),
+      (s[1] = r[0] * i[1] + r[1] * i[5] + r[2] * i[9] + r[3] * i[13]),
+      (s[2] = r[0] * i[2] + r[1] * i[6] + r[2] * i[10] + r[3] * i[14]),
+      (s[3] = r[0] * i[3] + r[1] * i[7] + r[2] * i[11] + r[3] * i[15]),
+      (s[4] = r[4] * i[0] + r[5] * i[4] + r[6] * i[8] + r[7] * i[12]),
+      (s[5] = r[4] * i[1] + r[5] * i[5] + r[6] * i[9] + r[7] * i[13]),
+      (s[6] = r[4] * i[2] + r[5] * i[6] + r[6] * i[10] + r[7] * i[14]),
+      (s[7] = r[4] * i[3] + r[5] * i[7] + r[6] * i[11] + r[7] * i[15]),
+      (s[8] = r[8] * i[0] + r[9] * i[4] + r[10] * i[8] + r[11] * i[12]),
+      (s[9] = r[8] * i[1] + r[9] * i[5] + r[10] * i[9] + r[11] * i[13]),
+      (s[10] = r[8] * i[2] + r[9] * i[6] + r[10] * i[10] + r[11] * i[14]),
+      (s[11] = r[8] * i[3] + r[9] * i[7] + r[10] * i[11] + r[11] * i[15]),
+      (s[12] = r[12] * i[0] + r[13] * i[4] + r[14] * i[8] + r[15] * i[12]),
+      (s[13] = r[12] * i[1] + r[13] * i[5] + r[14] * i[9] + r[15] * i[13]),
+      (s[14] = r[12] * i[2] + r[13] * i[6] + r[14] * i[10] + r[15] * i[14]),
+      (s[15] = r[12] * i[3] + r[13] * i[7] + r[14] * i[11] + r[15] * i[15]),
+      n
+    );
+  }),
+  (Matrix.identity = function (e) {
+    e = e || new Matrix();
+    var t = e.m;
+    return (
+      (t[0] = t[5] = t[10] = t[15] = 1),
+      (t[1] =
+        t[2] =
+        t[3] =
+        t[4] =
+        t[6] =
+        t[7] =
+        t[8] =
+        t[9] =
+        t[11] =
+        t[12] =
+        t[13] =
+        t[14] =
+          0),
+      e
+    );
+  }),
+  (Matrix.perspective = function (e, t, n, r, i) {
+    var s = Math.tan((e * Math.PI) / 360) * n,
+      o = s * t;
+    return Matrix.frustum(-o, o, -s, s, n, r, i);
+  }),
+  (Matrix.frustum = function (e, t, n, r, i, s, o) {
+    o = o || new Matrix();
+    var u = o.m;
+    return (
+      (u[0] = (2 * i) / (t - e)),
+      (u[1] = 0),
+      (u[2] = (t + e) / (t - e)),
+      (u[3] = 0),
+      (u[4] = 0),
+      (u[5] = (2 * i) / (r - n)),
+      (u[6] = (r + n) / (r - n)),
+      (u[7] = 0),
+      (u[8] = 0),
+      (u[9] = 0),
+      (u[10] = -(s + i) / (s - i)),
+      (u[11] = (-2 * s * i) / (s - i)),
+      (u[12] = 0),
+      (u[13] = 0),
+      (u[14] = -1),
+      (u[15] = 0),
+      o
+    );
+  }),
+  (Matrix.ortho = function (e, t, n, r, i, s, o) {
+    o = o || new Matrix();
+    var u = o.m;
+    return (
+      (u[0] = 2 / (t - e)),
+      (u[1] = 0),
+      (u[2] = 0),
+      (u[3] = -(t + e) / (t - e)),
+      (u[4] = 0),
+      (u[5] = 2 / (r - n)),
+      (u[6] = 0),
+      (u[7] = -(r + n) / (r - n)),
+      (u[8] = 0),
+      (u[9] = 0),
+      (u[10] = -2 / (s - i)),
+      (u[11] = -(s + i) / (s - i)),
+      (u[12] = 0),
+      (u[13] = 0),
+      (u[14] = 0),
+      (u[15] = 1),
+      o
+    );
+  }),
+  (Matrix.scale = function (e, t, n, r) {
+    r = r || new Matrix();
+    var i = r.m;
+    return (
+      (i[0] = e),
+      (i[1] = 0),
+      (i[2] = 0),
+      (i[3] = 0),
+      (i[4] = 0),
+      (i[5] = t),
+      (i[6] = 0),
+      (i[7] = 0),
+      (i[8] = 0),
+      (i[9] = 0),
+      (i[10] = n),
+      (i[11] = 0),
+      (i[12] = 0),
+      (i[13] = 0),
+      (i[14] = 0),
+      (i[15] = 1),
+      r
+    );
+  }),
+  (Matrix.translate = function (e, t, n, r) {
+    r = r || new Matrix();
+    var i = r.m;
+    return (
+      (i[0] = 1),
+      (i[1] = 0),
+      (i[2] = 0),
+      (i[3] = e),
+      (i[4] = 0),
+      (i[5] = 1),
+      (i[6] = 0),
+      (i[7] = t),
+      (i[8] = 0),
+      (i[9] = 0),
+      (i[10] = 1),
+      (i[11] = n),
+      (i[12] = 0),
+      (i[13] = 0),
+      (i[14] = 0),
+      (i[15] = 1),
+      r
+    );
+  }),
+  (Matrix.rotate = function (e, t, n, r, i, s, o, u) {
+    if (!e || (!t && !n && !r)) return Matrix.identity(u);
+    u = u || new Matrix();
+    var a = u.m,
+      f = Math.sqrt(t * t + n * n + r * r);
+    (t /= f), (n /= f), (r /= f);
+    var l = Math.cos(e),
+      c = Math.sin(e),
+      h = 1 - l;
+    return (
+      (a[0] = t * t * h + l),
+      (a[1] = t * n * h - r * c),
+      (a[2] = t * r * h + n * c),
+      (a[3] = i - a[0] * i - a[1] * s - a[2] * o),
+      (a[4] = n * t * h + r * c),
+      (a[5] = n * n * h + l),
+      (a[6] = n * r * h - t * c),
+      (a[7] = s - a[4] * i - a[5] * s - a[6] * o),
+      (a[8] = r * t * h - n * c),
+      (a[9] = r * n * h + t * c),
+      (a[10] = r * r * h + l),
+      (a[11] = o - a[8] * i - a[9] * s - a[10] * o),
+      (a[12] = 0),
+      (a[13] = 0),
+      (a[14] = 0),
+      (a[15] = 1),
+      u
+    );
+  }),
+  (Matrix.lookAt = function (e, t, n, r, i, s, o, u, a, f) {
+    f = f || new Matrix();
+    var l = f.m,
+      c = new Vector(e, t, n),
+      h = new Vector(r, i, s),
+      p = new Vector(o, u, a),
+      d = c.subtract(h).unit(),
+      v = p.cross(d).unit(),
+      m = d.cross(v).unit();
+    return (
+      (l[0] = v.x),
+      (l[1] = v.y),
+      (l[2] = v.z),
+      (l[3] = -v.dot(c)),
+      (l[4] = m.x),
+      (l[5] = m.y),
+      (l[6] = m.z),
+      (l[7] = -m.dot(c)),
+      (l[8] = d.x),
+      (l[9] = d.y),
+      (l[10] = d.z),
+      (l[11] = -d.dot(c)),
+      (l[12] = 0),
+      (l[13] = 0),
+      (l[14] = 0),
+      (l[15] = 1),
+      f
+    );
+  });
+var EJSS_WEBGLGRAPHICS = EJSS_WEBGLGRAPHICS || {};
+(EJSS_WEBGLGRAPHICS.mesh = function (e, t, n) {}),
+  (EJSS_WEBGLGRAPHICS.indexer = function () {
+    var e = {},
+      t = [],
+      n = [],
+      r = {};
+    return (
+      (e.getUnique = function () {
+        return t;
+      }),
+      (e.add = function (e) {
+        var n = JSON.stringify(e);
+        return n in r || ((r[n] = t.length), t.push(e)), r[n];
+      }),
+      e
+    );
+  }),
+  (EJSS_WEBGLGRAPHICS.buffer = function (e, t, n) {
+    var r = {},
+      i = null,
+      t = t,
+      n = n,
+      s = "",
+      o = [];
+    return (
+      (r.setData = function (e) {
+        o = e;
+      }),
+      (r._0 = function (e) {
+        s = e;
+      }),
+      (r.getBuffer = function () {
+        return i;
+      }),
+      (r.getName = function () {
+        return s;
+      }),
+      (r.compile = function (r) {
+        var s = [];
+        for (var u = 0, a = 1e4; u < o.length; u += a)
+          s = Array.prototype.concat.apply(s, o.slice(u, u + a));
+        var f = o.length ? s.length / o.length : 0;
+        if (f != Math.round(f))
+          throw "buffer elements not of consistent size, average size is " + f;
+        (i = i || e.createBuffer()),
+          (i.length = s.length),
+          (i.spacing = f),
+          e.bindBuffer(t, i),
+          e.bufferData(t, new n(s), r || e.STATIC_DRAW);
+      }),
+      r
+    );
+  });
+var EJSS_WEBGLGRAPHICS = EJSS_WEBGLGRAPHICS || {};
+EJSS_WEBGLGRAPHICS.plane = function (e, t) {};
+var EJSS_WEBGLGRAPHICS = EJSS_WEBGLGRAPHICS || {};
+EJSS_WEBGLGRAPHICS.segment = function (e, t) {};
+var EJSS_WEBGLGRAPHICS = EJSS_WEBGLGRAPHICS || {};
+(EJSS_WEBGLGRAPHICS.Shader = {}),
+  (EJSS_WEBGLGRAPHICS.shader = function (e, t, n, r) {});
+var EJSS_WEBGLGRAPHICS = EJSS_WEBGLGRAPHICS || {};
+EJSS_WEBGLGRAPHICS.spring = function (e, t) {};
+var EJSS_WEBGLGRAPHICS = EJSS_WEBGLGRAPHICS || {};
+EJSS_WEBGLGRAPHICS.surface = function (e, t) {};
+var EJSS_WEBGLGRAPHICS = EJSS_WEBGLGRAPHICS || {};
+EJSS_WEBGLGRAPHICS.text = function (e, t) {};
+var EJSS_WEBGLGRAPHICS = EJSS_WEBGLGRAPHICS || {};
+(EJSS_WEBGLGRAPHICS.Texture = {}),
+  (EJSS_WEBGLGRAPHICS.texture = function (e, t, n, r) {});
+var EJSS_WEBGLGRAPHICS = EJSS_WEBGLGRAPHICS || {};
+EJSS_WEBGLGRAPHICS.trail = function (e, t) {};
+var EJSS_WEBGLGRAPHICS = EJSS_WEBGLGRAPHICS || {};
+(EJSS_WEBGLGRAPHICS.Utils = {}),
+  (EJSS_WEBGLGRAPHICS.Utils.regexMap = function (e, t, n) {
+    while ((result = e.exec(t)) != null) n(result);
+  }),
+  (EJSS_WEBGLGRAPHICS.Utils.isArray = function (e) {
+    var t = Object.prototype.toString.call(e);
+    return t == "[object Array]" || t == "[object Float32Array]";
+  }),
+  (EJSS_WEBGLGRAPHICS.Utils.isNumber = function (e) {
+    var t = Object.prototype.toString.call(e);
+    return t == "[object Number]" || t == "[object Boolean]";
+  }),
+  (Vector.prototype = {
+    setx: function (e) {
+      this.x = e;
+    },
+    sety: function (e) {
+      this.y = e;
+    },
+    setz: function (e) {
+      this.z = e;
+    },
+    getx: function () {
+      return this.x;
+    },
+    gety: function () {
+      return this.y;
+    },
+    getz: function () {
+      return this.z;
+    },
+    negative: function () {
+      return new Vector(-this.x, -this.y, -this.z);
+    },
+    add: function (e) {
+      return e instanceof Vector
+        ? new Vector(this.x + e.x, this.y + e.y, this.z + e.z)
+        : new Vector(this.x + e, this.y + e, this.z + e);
+    },
+    subtract: function (e) {
+      return e instanceof Vector
+        ? new Vector(this.x - e.x, this.y - e.y, this.z - e.z)
+        : new Vector(this.x - e, this.y - e, this.z - e);
+    },
+    multiply: function (e) {
+      return e instanceof Vector
+        ? new Vector(this.x * e.x, this.y * e.y, this.z * e.z)
+        : new Vector(this.x * e, this.y * e, this.z * e);
+    },
+    divide: function (e) {
+      return e instanceof Vector
+        ? new Vector(this.x / e.x, this.y / e.y, this.z / e.z)
+        : new Vector(this.x / e, this.y / e, this.z / e);
+    },
+    equals: function (e) {
+      return this.x == e.x && this.y == e.y && this.z == e.z;
+    },
+    dot: function (e) {
+      return this.x * e.x + this.y * e.y + this.z * e.z;
+    },
+    cross: function (e) {
+      return new Vector(
+        this.y * e.z - this.z * e.y,
+        this.z * e.x - this.x * e.z,
+        this.x * e.y - this.y * e.x
+      );
+    },
+    length: function () {
+      return Math.sqrt(this.dot(this));
+    },
+    unit: function () {
+      return this.divide(this.length());
+    },
+    min: function () {
+      return Math.min(Math.min(this.x, this.y), this.z);
+    },
+    max: function () {
+      return Math.max(Math.max(this.x, this.y), this.z);
+    },
+    angle: function (e) {
+      return Math.acos(this.dot(e) / (this.length() * e.length()));
+    },
+    toAngles: function () {
+      return {
+        theta: Math.atan2(this.z, this.x),
+        phi: Math.asin(this.y / this.length()),
+      };
+    },
+    toArray: function (e) {
+      return [this.x, this.y, this.z].slice(0, e || 3);
+    },
+    clone: function () {
+      return new Vector(this.x, this.y, this.z);
+    },
+    init: function (e, t, n) {
+      return (this.x = e), (this.y = t), (this.z = n), this;
+    },
+  }),
+  (Vector.negative = function (e, t) {
+    return (t.x = -e.x), (t.y = -e.y), (t.z = -e.z), t;
+  }),
+  (Vector.add = function (e, t, n) {
+    return (
+      t instanceof Vector
+        ? ((n.x = e.x + t.x), (n.y = e.y + t.y), (n.z = e.z + t.z))
+        : ((n.x = e.x + t), (n.y = e.y + t), (n.z = e.z + t)),
+      n
+    );
+  }),
+  (Vector.subtract = function (e, t, n) {
+    return (
+      t instanceof Vector
+        ? ((n.x = e.x - t.x), (n.y = e.y - t.y), (n.z = e.z - t.z))
+        : ((n.x = e.x - t), (n.y = e.y - t), (n.z = e.z - t)),
+      n
+    );
+  }),
+  (Vector.multiply = function (e, t, n) {
+    return (
+      t instanceof Vector
+        ? ((n.x = e.x * t.x), (n.y = e.y * t.y), (n.z = e.z * t.z))
+        : ((n.x = e.x * t), (n.y = e.y * t), (n.z = e.z * t)),
+      n
+    );
+  }),
+  (Vector.divide = function (e, t, n) {
+    return (
+      t instanceof Vector
+        ? ((n.x = e.x / t.x), (n.y = e.y / t.y), (n.z = e.z / t.z))
+        : ((n.x = e.x / t), (n.y = e.y / t), (n.z = e.z / t)),
+      n
+    );
+  }),
+  (Vector.cross = function (e, t, n) {
+    return (
+      (n.x = e.y * t.z - e.z * t.y),
+      (n.y = e.z * t.x - e.x * t.z),
+      (n.z = e.x * t.y - e.y * t.x),
+      n
+    );
+  }),
+  (Vector.unit = function (e, t) {
+    var n = e.length();
+    return (t.x = e.x / n), (t.y = e.y / n), (t.z = e.z / n), t;
+  }),
+  (Vector.fromAngles = function (e, t) {
+    return new Vector(
+      Math.cos(e) * Math.cos(t),
+      Math.sin(t),
+      Math.sin(e) * Math.cos(t)
+    );
+  }),
+  (Vector.randomDirection = function () {
+    return Vector.fromAngles(
+      Math.random() * Math.PI * 2,
+      Math.asin(Math.random() * 2 - 1)
+    );
+  }),
+  (Vector.min = function (e, t) {
+    return new Vector(
+      Math.min(e.x, t.x),
+      Math.min(e.y, t.y),
+      Math.min(e.z, t.z)
+    );
+  }),
+  (Vector.max = function (e, t) {
+    return new Vector(
+      Math.max(e.x, t.x),
+      Math.max(e.y, t.y),
+      Math.max(e.z, t.z)
+    );
+  }),
+  (Vector.lerp = function (e, t, n) {
+    return t.subtract(e).multiply(n).add(e);
+  }),
+  (Vector.fromArray = function (e) {
+    return new Vector(e[0], e[1], e[2]);
+  });
+var EJSS_GRAPHICS = EJSS_GRAPHICS || {};
+(EJSS_GRAPHICS.WebGLGraphics = {}),
+  (EJSS_GRAPHICS.webGLGraphics = function (e) {});
+var EJSS_DRAWING3D = EJSS_DRAWING3D || {};
+(EJSS_DRAWING3D.Plane = {}),
+  (EJSS_DRAWING3D.plane = function (e) {}),
+  (EJSS_DRAWING3D.PlaneSet = {}),
+  (EJSS_DRAWING3D.planeSet = function (e) {});
+var EJSS_DRAWING3D = EJSS_DRAWING3D || {};
+(EJSS_DRAWING3D.Segment = {}),
+  (EJSS_DRAWING3D.segment = function (e) {}),
+  (EJSS_DRAWING3D.SegmentSet = {}),
+  (EJSS_DRAWING3D.segmentSet = function (e) {});
+var EJSS_DRAWING3D = EJSS_DRAWING3D || {};
+(EJSS_DRAWING3D.Sphere = {}),
+  (EJSS_DRAWING3D.sphere = function (e) {}),
+  (EJSS_DRAWING3D.SphereSet = {}),
+  (EJSS_DRAWING3D.sphereSet = function (e) {});
+var EJSS_DRAWING3D = EJSS_DRAWING3D || {};
+(EJSS_DRAWING3D.Spring = {}),
+  (EJSS_DRAWING3D.spring = function (e) {}),
+  (EJSS_DRAWING3D.SpringSet = {}),
+  (EJSS_DRAWING3D.springSet = function (e) {});
+var EJSS_DRAWING3D = EJSS_DRAWING3D || {};
+(EJSS_DRAWING3D.Surface = {}),
+  (EJSS_DRAWING3D.surface = function (e) {}),
+  (EJSS_DRAWING3D.SurfaceSet = {}),
+  (EJSS_DRAWING3D.surfaceSet = function (e) {});
+var EJSS_DRAWING3D = EJSS_DRAWING3D || {};
+(EJSS_DRAWING3D.Tetrahedron = {}),
+  (EJSS_DRAWING3D.tetrahedron = function (e) {}),
+  (EJSS_DRAWING3D.TetrahedronSet = {}),
+  (EJSS_DRAWING3D.tetrahedronSet = function (e) {});
+var EJSS_DRAWING3D = EJSS_DRAWING3D || {};
+(EJSS_DRAWING3D.Text = {}),
+  (EJSS_DRAWING3D.text = function (e) {}),
+  (EJSS_DRAWING3D.TextSet = {}),
+  (EJSS_DRAWING3D.textSet = function (e) {});
+var EJSS_DRAWING3D = EJSS_DRAWING3D || {};
+(EJSS_DRAWING3D.Trail = {}),
+  (EJSS_DRAWING3D.trail = function (e) {}),
+  (EJSS_DRAWING3D.TrailSet = {}),
+  (EJSS_DRAWING3D.trailSet = function (e) {});
+var EJSS_INTERFACE = EJSS_INTERFACE || {};
+(EJSS_INTERFACE.ArrayPanel = {}), (EJSS_INTERFACE.arrayPanel = function (e) {});
+var EJSS_INTERFACE = EJSS_INTERFACE || {};
+(EJSS_INTERFACE.Audio = {}), (EJSS_INTERFACE.audio = function (e) {});
+var EJSS_INTERFACE = EJSS_INTERFACE || {};
+(EJSS_INTERFACE.BoxPanel = {
+  registerProperties: function (e, t) {
+    EJSS_INTERFACE.Panel.registerProperties(e, t);
+  },
+  showOkDialog: function (e, t, n) {
+    var r =
+        document.getElementById(".myBoxPanelOk") ||
+        EJSS_INTERFACE.boxPanel(".myBoxPanelOk").getDOMElement(),
+      i = document.getElementById(".myBoxPanelOk.back"),
+      s = document.getElementById(".myBoxPanelOk.msg");
+    (s.style.visibility = "visible"), (s.innerHTML = e + "<br/>");
+    var o = document.getElementById(".myBoxPanelOk.okbt");
+    (o.onclick = t),
+      (o.style.display = "inline"),
+      (r.style.width = n || "200px"),
+      (r.style.marginLeft = parseFloat(r.style.width) / -2 + "px"),
+      (r.style.visibility = "visible"),
+      (i.style.visibility = "visible");
+  },
+  showOkCancelDialog: function (e, t, n, r) {
+    var i =
+        document.getElementById(".myBoxPanelCancelOk") ||
+        EJSS_INTERFACE.boxPanel(".myBoxPanelCancelOk").getDOMElement(),
+      s = document.getElementById(".myBoxPanelCancelOk.back"),
+      o = document.getElementById(".myBoxPanelCancelOk.msg");
+    (o.style.visibility = "visible"), (o.innerHTML = e + "<br/>");
+    var u = document.getElementById(".myBoxPanelCancelOk.okbt");
+    (u.onclick = t), (u.style.display = "inline");
+    var a = document.getElementById(".myBoxPanelCancelOk.cancelbt");
+    (a.onclick = n),
+      (a.style.display = "inline"),
+      (i.style.width = r || "200px"),
+      (i.style.marginLeft = parseFloat(i.style.width) / -2 + "px"),
+      (i.style.visibility = "visible"),
+      (s.style.visibility = "visible");
+  },
+  showInputDialog: function (e, t, n, r) {
+    var i =
+        document.getElementById(".BoxPanelInput") ||
+        EJSS_INTERFACE.boxPanel(".BoxPanelInput").getDOMElement(),
+      s = document.getElementById(".BoxPanelInput.back"),
+      o = document.getElementById(".BoxPanelInput.msg");
+    (o.style.visibility = "visible"), (o.innerHTML = e);
+    var u = document.getElementById(".BoxPanelInput.input");
+    u.style.display = "inline";
+    var a = document.getElementById(".BoxPanelInput.okbt");
+    (a.onclick = function () {
+      t(u.value);
+    }),
+      (a.style.display = "inline");
+    var f = document.getElementById(".BoxPanelInput.cancelbt");
+    (f.onclick = n),
+      (f.style.display = "inline"),
+      (i.style.width = r || "200px"),
+      (i.style.marginLeft = parseFloat(i.style.width) / -2 + "px"),
+      (i.style.visibility = "visible"),
+      (s.style.visibility = "visible");
+  },
+  showSelectDialog: function (e, t, n, r, i, s) {
+    var o =
+        document.getElementById(".BoxPanelSelect") ||
+        EJSS_INTERFACE.boxPanel(".BoxPanelSelect").getDOMElement(),
+      u = document.getElementById(".BoxPanelSelect.back"),
+      a = document.getElementById(".BoxPanelSelect.msg");
+    (a.style.visibility = "visible"), (a.innerHTML = e);
+    var f = document.getElementById(".BoxPanelSelect.select");
+    f.innerHTML = "";
+    for (var l = 0; l < t.text.length; l++) {
+      var c = document.createElement("option");
+      c.value && c.value[l] && c.setAttribute("value", t.value[l]),
+        (c.innerHTML = t.text[l]),
+        f.appendChild(c);
+    }
+    i && (f.size = i), (f.style.display = "block"), (f.style.margin = "0 auto");
+    var h = document.getElementById(".BoxPanelSelect.okbt");
+    (h.onclick = function () {
+      n(t.value[f.selectedIndex]);
+    }),
+      (h.style.display = "inline");
+    var p = document.getElementById(".BoxPanelSelect.cancelbt");
+    (p.onclick = r),
+      (p.style.display = "inline"),
+      (o.style.width = s || "200px"),
+      (o.style.marginLeft = parseFloat(o.style.width) / -2 + "px"),
+      (o.style.visibility = "visible"),
+      (u.style.visibility = "visible");
+  },
+}),
+  (EJSS_INTERFACE.boxPanel = function (e) {
+    var t = EJSS_INTERFACE.panel(e),
+      n = EJSS_INTERFACE.boxPanel;
+    (t.setVisibility = function (e) {
+      (mElement.style.visibility = e), t.getStyle().setVisibility(e);
+    }),
+      (t.registerProperties = function (e) {
+        EJSS_INTERFACE.BoxPanel.registerProperties(t, e);
+      });
+    var r = document.createElement("div");
+    document.body.appendChild(r),
+      (r.className = "myBoxPanelBackground"),
+      (r.id = e + ".back"),
+      (r.style.backgroundColor = "rgba(255, 255, 255, 0.3)"),
+      (r.style.position = "fixed"),
+      (r.style.top = "1%"),
+      (r.style.left = "1%"),
+      (r.style.width = "98%"),
+      (r.style.height = "98%"),
+      (r.style.zIndex = "99998"),
+      (r.style.visibility = "hidden");
+    var i = document.createElement("span");
+    (i.id = e + ".msg"),
+      (i.style.visibility = "hidden"),
+      t.getDOMElement().appendChild(i);
+    var s = document.createElement("input");
+    (s.id = e + ".input"),
+      (s.type = "text"),
+      (s.style.display = "none"),
+      (s.size = "20"),
+      t.getDOMElement().appendChild(s);
+    var o = document.createElement("select");
+    (o.id = e + ".select"),
+      (o.style.display = "none"),
+      (o.size = "4"),
+      t.getDOMElement().appendChild(o);
+    var u = document.createElement("button");
+    (u.id = e + ".okbt"),
+      (u.innerHTML = "Ok"),
+      (u.style.verticalAlign = "middle"),
+      (u.style.display = "none"),
+      u.addEventListener("click", function () {
+        (document.getElementById(e).style.visibility = "hidden"),
+          (document.getElementById(e + ".back").style.visibility = "hidden"),
+          (document.getElementById(e + ".msg").style.visibility = "hidden"),
+          (document.getElementById(e + ".input").style.display = "none"),
+          (document.getElementById(e + ".okbt").style.display = "none"),
+          (document.getElementById(e + ".cancelbt").style.display = "none");
+      }),
+      t.getDOMElement().appendChild(u);
+    var a = document.createElement("button");
+    return (
+      (a.id = e + ".cancelbt"),
+      (a.innerHTML = "Cancel"),
+      (a.style.verticalAlign = "middle"),
+      (a.style.display = "none"),
+      a.addEventListener("click", function () {
+        (document.getElementById(e).style.visibility = "hidden"),
+          (document.getElementById(e + ".back").style.visibility = "hidden"),
+          (document.getElementById(e + ".msg").style.visibility = "hidden"),
+          (document.getElementById(e + ".input").style.display = "none"),
+          (document.getElementById(e + ".okbt").style.display = "none"),
+          (document.getElementById(e + ".cancelbt").style.display = "none");
+      }),
+      t.getDOMElement().appendChild(a),
+      (t.getDOMElement().className = "BoxPanel"),
+      t.getStyle().setCSS({ position: "fixed", top: "25%", left: "50%" }),
+      t.getStyle().setCSS({ zIndex: "99999", visibility: "hidden" }),
+      t.getStyle().setCSS({ marginLeft: "-250px", width: "500px" }),
+      t.getStyle().setCSS({ background: "lightgray" }),
+      t.getStyle().setCSS({ borderWidth: "1px" }),
+      t.getStyle().setCSS({ borderStyle: "solid" }),
+      t.getStyle().setCSS({ borderColor: "red" }),
+      t.getStyle().setCSS({ overflow: "hidden", wordWrap: "break-word" }),
+      t
+    );
+  });
+var EJSS_INTERFACE = EJSS_INTERFACE || {};
+(EJSS_INTERFACE.Button = {
+  registerProperties: function (e, t) {
+    EJSS_INTERFACE.Element.registerProperties(e, t),
+      t.registerProperty("Text", e.setText),
+      t.registerProperty("Disabled", e.setDisabled),
+      t.registerProperty("ImageUrl", e.setImageUrl),
+      t.registerAction("OnClick"),
+      t.registerAction("OnPress"),
+      t.registerAction("OnRelease");
+  },
+}),
+  (EJSS_INTERFACE.button = function (e) {
+    function t() {
+      (n.getDOMElement().innerHTML = ""),
+        r.length > 0 &&
+          (n.getDOMElement().innerHTML =
+            '<img style="vertical-align:inherit;" src="' + r + '"/>'),
+        i.length > 0 &&
+          (n.getDOMElement().innerHTML +=
+            '<span style="white-space:pre;vertical-align:inherit;">' +
+            i.toString() +
+            "</span>");
+    }
+    var n = EJSS_INTERFACE.element(e),
+      r = "",
+      i = "";
+    (n.setDisabled = function (e) {
+      n.getDOMElement().disabled = e;
+    }),
+      (n.getDisabled = function () {
+        return n.getDOMElement().disabled;
+      }),
+      (n.setText = function (e) {
+        if (i == e) return;
+        (i = e), t();
+      }),
+      (n.getText = function () {
+        return i;
+      }),
+      (n.setImageUrl = function (e) {
+        var i = n.getResourcePath(e);
+        if (i == r) return;
+        (r = i), t();
+      }),
+      (n.getImageUrl = function () {
+        return r;
+      }),
+      (n.registerProperties = function (e) {
+        EJSS_INTERFACE.Button.registerProperties(n, e);
+      });
+    var s = document.createElement("button");
+    return (
+      (s.id = e),
+      (s.style.verticalAlign = "middle"),
+      document.body.appendChild(s),
+      n.setDOMElement(s),
+      (n.getDOMElement().onclick = function () {
+        var e = n.getController();
+        return e && e.invokeAction("OnClick").reportInteractions(), !1;
+      }),
+      (n.getDOMElement().onmousedown = function () {
+        var e = n.getController();
+        return e && e.invokeAction("OnPress").reportInteractions(), !1;
+      }),
+      (n.getDOMElement().ontouchstart = function () {
+        var e = n.getController();
+        return e && e.invokeAction("OnPress").reportInteractions(), !1;
+      }),
+      (n.getDOMElement().onmouseup = function () {
+        var e = n.getController();
+        return e && e.invokeAction("OnRelease").reportInteractions(), !1;
+      }),
+      (n.getDOMElement().ontouchend = function () {
+        var e = n.getController();
+        return e && e.invokeAction("OnRelease").reportInteractions(), !1;
+      }),
+      n
+    );
+  });
+var EJSS_INTERFACE = EJSS_INTERFACE || {};
+(EJSS_INTERFACE.Canvas = {
+  registerProperties: function (e, t) {
+    EJSS_INTERFACE.Element.registerProperties(e, t),
+      t.registerProperty("Height", e.setHeight),
+      t.registerProperty("Width", e.setWidth),
+      t.registerProperty("ImageData", e.setImageData),
+      t.registerProperty("Enabled", e.setEnabled, e.isEnabled),
+      t.registerAction("OnPress", e.getMousePosition),
+      t.registerAction("OnDrag", e.getMousePosition),
+      t.registerAction("OnRelease", e.getMousePosition),
+      t.registerAction("OnEnter", e.getMousePosition),
+      t.registerAction("OnExit", e.getMousePosition),
+      t.registerAction("OnMove", e.getMousePosition);
+  },
+}),
+  (EJSS_INTERFACE.canvas = function (e) {
+    function t(e) {
+      var t = e.currentTarget,
+        n = EJSS_GRAPHICS.SvgGraphics.getOffsetRect(t);
+      return [e.clientX - n.left, e.clientY - n.top];
+    }
+    function n(e) {
+      var n = u.getController();
+      n && ((c = t(e)), n.invokeAction("OnPress").reportInteractions()),
+        (p = !0);
+    }
+    function r(e) {
+      var n = u.getController();
+      p && n && ((c = t(e)), n.invokeAction("OnRelease").reportInteractions()),
+        (p = !1);
+    }
+    function i(e) {
+      var n = u.getController();
+      (p = !1),
+        n && ((c = t(e)), n.invokeAction("OnEnter").reportInteractions());
+    }
+    function s(e) {
+      var n = u.getController();
+      (p = !1),
+        n && ((c = t(e)), n.invokeAction("OnExit").reportInteractions());
+    }
+    function o(e) {
+      var n = u.getController();
+      n &&
+        ((c = t(e)),
+        p
+          ? n.invokeAction("OnDrag").reportInteractions()
+          : n.invokeAction("OnMove").reportInteractions());
+    }
+    var u = EJSS_INTERFACE.element(e),
+      a = EJSS_INTERFACE.Canvas,
+      f = 0,
+      l = 0,
+      c = [0, 0],
+      h,
+      p = !1,
+      d;
+    (u.render = function () {
+      h && m.putImageData(h, 0, 0);
+    }),
+      (u.setImageData = function (e) {
+        h || (h = m.createImageData(l, f)), e.data && (e = e.data);
+        for (var t = 0; t < e.length; t++) h.data[t] = e[t];
+      }),
+      (u.clear = function () {
+        m.clearRect(0, 0, l, f);
+      }),
+      (u.setWidth = function (e) {
+        return l != e
+          ? ((l = e), (h = undefined), (u.getDOMElement().width = l), !0)
+          : !1;
+      }),
+      (u.getWidth = function () {
+        return l;
+      }),
+      (u.setHeight = function (e) {
+        return f != e
+          ? ((f = e), (h = undefined), (u.getDOMElement().height = f), !0)
+          : !1;
+      }),
+      (u.getHeight = function () {
+        return f;
+      }),
+      (u.getContext = function () {
+        return m;
+      }),
+      (u.registerProperties = function (e) {
+        EJSS_INTERFACE.Canvas.registerProperties(u, e);
+      }),
+      (u.setEnabled = function (e) {
+        d = e;
+        var t = u.getDOMElement();
+        d
+          ? ((t.onmousedown = n),
+            (t.ontouchstart = n),
+            (t.onmouseup = r),
+            (t.ontouchend = r),
+            (t.onmouseover = i),
+            (t.onmouseout = s),
+            (t.onmousemove = o),
+            (t.ontouchmove = o))
+          : ((t.onmousedown = undefined),
+            (t.ontouchstart = undefined),
+            (t.onmouseup = undefined),
+            (t.ontouchend = undefined),
+            (t.onmouseover = undefined),
+            (t.onmouseout = undefined),
+            (t.onmousemove = undefined),
+            (t.ontouchmove = undefined));
+      }),
+      (u.isEnabled = function () {
+        return d;
+      }),
+      (u.getMousePosition = function () {
+        return c;
+      });
+    var v = document.createElement("canvas");
+    v.id = e;
+    var m = v.getContext("2d");
+    return (
+      document.body.appendChild(v), u.setDOMElement(v), u.setEnabled(!0), u
+    );
+  });
+var EJSS_INTERFACE = EJSS_INTERFACE || {};
+(EJSS_INTERFACE.CheckBox = {}), (EJSS_INTERFACE.checkBox = function (e) {});
+var EJSS_INTERFACE = EJSS_INTERFACE || {};
+(EJSS_INTERFACE.ComboBox = {}), (EJSS_INTERFACE.comboBox = function (e) {});
+var EJSS_INTERFACE = EJSS_INTERFACE || {};
+(EJSS_INTERFACE.DataTable = {}), (EJSS_INTERFACE.dataTable = function (e) {});
+var EJSS_INTERFACE = EJSS_INTERFACE || {};
+(EJSS_INTERFACE.Element = {
+  registerProperties: function (e, t) {
+    e.setController(t),
+      t.registerProperty("Tooltip", e.setTitle),
+      t.registerProperty("Foreground", e.getStyle().setColor),
+      t.registerProperty("Background", e.getStyle().setBackgroundColor),
+      t.registerProperty("BackgroundImage", e.getStyle().setBackgroundImage),
+      t.registerProperty("BorderWidth", e.getStyle().setBorderWidth),
+      t.registerProperty("BorderColor", e.getStyle().setBorderColor),
+      t.registerProperty("BorderStyle", e.getStyle().setBorderStyle),
+      t.registerProperty("Padding", e.getStyle().setPadding),
+      t.registerProperty("Width", e.getStyle().setWidth, e.getStyle().getWidth),
+      t.registerProperty(
+        "Height",
+        e.getStyle().setHeight,
+        e.getStyle().getHeight
+      ),
+      t.registerProperty(
+        "LineHeight",
+        e.getStyle().setLineHeight,
+        e.getStyle().getLineHeight
+      ),
+      t.registerProperty("TextAlign", e.getStyle().setTextAlign),
+      t.registerProperty("VerticalAlign", e.getStyle().setVerticalAlign),
+      t.registerProperty("Visibility", e.getStyle().setVisibility),
+      t.registerProperty("Display", e.getStyle().setDisplay),
+      t.registerProperty("Disabled", e.setDisabled),
+      t.registerProperty("Float", e.getStyle().setFloat),
+      t.registerProperty("Position", e.getStyle().setPosition),
+      t.registerProperty("Left", e.getStyle().setLeft),
+      t.registerProperty("Top", e.getStyle().setTop),
+      t.registerProperty("Bottom", e.getStyle().setBottom),
+      t.registerProperty("Overflow", e.getStyle().setOverflow),
+      t.registerProperty("BoxShadow", e.getStyle().setShadow),
+      t.registerProperty("Margin", e.getStyle().setMargin),
+      t.registerProperty("Parent", e.setParent),
+      t.registerProperty("ClassName", e.setClassName),
+      t.registerProperty("CSS", e.getStyle().setCSS),
+      t.registerProperty("Font", e.getStyle().setFont),
+      t.registerProperty("FontFamily", e.getStyle().setFontFamily),
+      t.registerProperty("FontSize", e.getStyle().setFontSize),
+      t.registerProperty("LetterSpacing", e.getStyle().setLetterSpacing),
+      t.registerProperty("OutlineColor", e.getStyle().setOutlineColor),
+      t.registerProperty("FontWeight", e.getStyle().setFontWeight),
+      t.registerProperty("FillColor", e.getStyle().setFillColor),
+      t.registerProperty("FontStyle", e.getStyle().setFontStyle),
+      t.registerProperty("Transform", e.getStyle().setTransform),
+      t.registerProperty("WhiteSpace", e.getStyle().setWhiteSpace);
+  },
+}),
+  (EJSS_INTERFACE.element = function (e) {
+    var t = {},
+      n,
+      r,
+      i = EJSS_INTERFACE.style(e),
+      s = null;
+    return (
+      (t.getDOMElement = function () {
+        return n;
+      }),
+      (t.setDOMElement = function (e) {
+        n = e;
+      }),
+      (t.setParent = function (e) {
+        r = e;
+        if (typeof e == "string") {
+          var n = document.getElementById(e);
+          n.appendChild(t.getDOMElement());
+        } else
+          e.getDOMElement ? e.appendChild(t) : e.appendChild(t.getDOMElement());
+      }),
+      (t.getParent = function () {
+        return r;
+      }),
+      (t.getName = function () {
+        return e;
+      }),
+      (t.getResourcePath = function (e) {
+        return e;
+      }),
+      (t.setClassName = function (e) {
+        t.getDOMElement().className = e;
+      }),
+      (t._23Name = function () {
+        return t.getDOMElement().className;
+      }),
+      (t.setDisabled = function (e) {
+        t.getDOMElement().disabled = e;
+      }),
+      (t.getDisabled = function () {
+        return t.getDOMElement().disabled;
+      }),
+      (t.setTitle = function (e) {
+        t.getDOMElement().title = e;
+      }),
+      (t.getTitle = function () {
+        return t.getDOMElement().title;
+      }),
+      (t.getStyle = function () {
+        return i;
+      }),
+      (t.getController = function () {
+        return s;
+      }),
+      (t.setController = function (e) {
+        s = e;
+      }),
+      (t.registerProperties = function (e) {
+        EJSS_INTERFACE.Element.registerProperties(t, e);
+      }),
+      t
+    );
+  });
+var EJSS_INTERFACE = EJSS_INTERFACE || {};
+(EJSS_INTERFACE.FunctionField = {}),
+  (EJSS_INTERFACE.functionField = function (e) {});
+var EJSS_INTERFACE = EJSS_INTERFACE || {};
+(EJSS_INTERFACE.Html = {}), (EJSS_INTERFACE.html = function (e) {});
+var EJSS_INTERFACE = EJSS_INTERFACE || {};
+(EJSS_INTERFACE.Image = {}), (EJSS_INTERFACE.image = function (e) {});
+var EJSS_INTERFACE = EJSS_INTERFACE || {};
+(EJSS_INTERFACE.ImageAndTextButton = {
+  registerProperties: function (e, t) {
+    EJSS_INTERFACE.Element.registerProperties(e, t),
+      t.registerProperty("Text", e.setText),
+      t.registerProperty("ImageUrl", e.setImageUrl),
+      t.registerAction("OnClick");
+  },
+}),
+  (EJSS_INTERFACE.imageAndTextButton = function (e) {
+    var t = EJSS_INTERFACE.element(e),
+      n = "",
+      r = "";
+    (t.setText = function (e) {
+      (n = e.toString()), (t.getDOMElement().innerHTML = r + n);
+    }),
+      (t.getText = function () {
+        return n;
+      }),
+      (t.setImageUrl = function (e) {
+        (r = '<img src="' + t.getResourcePath(e) + '"/>'),
+          (t.getDOMElement().innerHTML = r + n);
+      }),
+      (t.getImageUrl = function () {
+        return r;
+      }),
+      (t.registerProperties = function (e) {
+        EJSS_INTERFACE.ImageAndTextButton.registerProperties(t, e);
+      });
+    var i = document.createElement("button");
+    return (
+      (i.id = e),
+      (i.style.borderStyle = "none"),
+      (i.style.background = "inherit"),
+      (i.style.cursor = "inherit"),
+      (i.style.webkitBoxShadow =
+        "inset 0 0px 0 rgba(255,255,255,0),0 0px 0px rgba(0,0,0,0)"),
+      document.body.appendChild(i),
+      t.setDOMElement(i),
+      (t.getDOMElement().onclick = function () {
+        var e = t.getController();
+        return e && e.invokeAction("OnClick").reportInteractions(), !1;
+      }),
+      t
+    );
+  });
+var EJSS_INTERFACE = EJSS_INTERFACE || {};
+(EJSS_INTERFACE.Label = {}), (EJSS_INTERFACE.label = function (e) {});
+var EJSS_INTERFACE = EJSS_INTERFACE || {};
+(EJSS_INTERFACE.MathML = {}), (EJSS_INTERFACE.mathML = function (e) {});
+var EJSS_INTERFACE = EJSS_INTERFACE || {};
+(EJSS_INTERFACE.Media = {}), (EJSS_INTERFACE.media = function (e) {});
+var EJSS_INTERFACE = EJSS_INTERFACE || {};
+(EJSS_INTERFACE.MotionJPEG = {}), (EJSS_INTERFACE.motionJPEG = function (e) {});
+var EJSS_INTERFACE = EJSS_INTERFACE || {};
+(EJSS_INTERFACE.NumberField = {
+  registerProperties: function (e, t) {
+    EJSS_INTERFACE.Element.registerProperties(e, t),
+      t.registerProperty("Value", e.setValue, e.getValue),
+      t.registerProperty("Editable", e.setEditable),
+      t.registerProperty("Format", e.setFormat),
+      t.registerProperty("Size", e.setSize),
+      t.registerAction("OnChange");
+  },
+}),
+  (EJSS_INTERFACE.numberField = function (e) {
+    function t() {
+      var e = n.getDOMElement().value;
+      if (!isNaN(parseFloat(e)) && isFinite(e)) {
+        n.getStyle().setBackgroundColor("white");
+        if (o != e) {
+          var t = n.getController();
+          t &&
+            (t.propertiesChanged("Value"),
+            t.invokeAction("OnChange"),
+            t.reportInteractions());
+        }
+      } else {
+        if (e !== "âˆž" && e !== "-âˆž" && e !== "âˆ…")
+          return n.getStyle().setBackgroundColor("red"), !1;
+        n.getStyle().setBackgroundColor("white");
+      }
+      return !0;
+    }
+    var n = EJSS_INTERFACE.element(e),
+      r = 3,
+      i = !1,
+      s = !1,
+      o = "";
+    (n.registerProperties = function (e) {
+      EJSS_INTERFACE.NumberField.registerProperties(n, e);
+    }),
+      (n.enableEPub = function () {
+        n.getDOMElement().disabled && (n.getDOMElement().disabled = !1);
+      }),
+      typeof _isEPub != "undefined" &&
+        _isEPub &&
+        (n.render = function () {
+          n.enableEPub();
+        }),
+      (n.setValue = function (e) {
+        s ||
+          (typeof e == "undefined"
+            ? (n.getDOMElement().value = "value undefined")
+            : !isNaN(parseFloat(e)) && isFinite(e)
+            ? i
+              ? (n.getDOMElement().value = parseFloat(e).toExponential(r))
+              : (n.getDOMElement().value = parseFloat(e).toFixed(r))
+            : e === Number.POSITIVE_INFINITY
+            ? (n.getDOMElement().value = "âˆž")
+            : e === Number.NEGATIVE_INFINITY
+            ? (n.getDOMElement().value = "-âˆž")
+            : isNaN(e) && (n.getDOMElement().value = "âˆ…"));
+      }),
+      (n.getValue = function () {
+        var e = n.getDOMElement().value;
+        return (
+          !isNaN(parseFloat(e)) && isFinite(e)
+            ? (e = parseFloat(e))
+            : e === "âˆž"
+            ? (e = Number.POSITIVE_INFINITY)
+            : e === "-âˆž"
+            ? (e = Number.NEGATIVE_INFINITY)
+            : e === "âˆ…" && (e = Number.NaN),
+          e
+        );
+      }),
+      (n.setEditable = function (e) {
+        n.getDOMElement().readOnly = !e;
+      }),
+      (n.getEditable = function () {
+        return !n.getDOMElement().readOnly;
+      }),
+      (n.setSize = function (e) {
+        n.getDOMElement().size = e;
+      }),
+      (n.getSize = function () {
+        return n.getDOMElement().size;
+      }),
+      (n.setFormat = function (e) {
+        var t = e.indexOf("."),
+          s = e.toUpperCase().indexOf("E");
+        if (s == -1) {
+          var o = 0;
+          t >= 0 && (o = Number(e.length - t - 1));
+          if (i || r != o) (r = o), (i = !1), n.setValue(n.getValue());
+        } else {
+          var o = 0;
+          t >= 0 && (o = Number(s - t - 1));
+          if (!i || r != o) (r = o), (i = !0), n.setValue(n.getValue());
+        }
+      });
+    var u = document.createElement("input");
+    return (
+      (u.type = "tel"),
+      (u.id = e),
+      (u.value = 0),
+      document.body.appendChild(u),
+      n.setDOMElement(u),
+      (n.getDOMElement().onkeydown = function (e) {
+        var r = n.getDOMElement();
+        if (!r.readOnly) {
+          var i = e || window.event,
+            u = i.which ? i.which : i.keyCode;
+          u == 13
+            ? ((s = !1), t() && (o = n.getDOMElement().value))
+            : u == 27
+            ? (n.getDOMElement().value = o)
+            : (n.getStyle().setBackgroundColor("yellow"), (s = !0));
+        }
+      }),
+      (n.getDOMElement().onfocus = function (e) {
+        o = n.getDOMElement().value;
+      }),
+      (n.getDOMElement().onblur = function (e) {
+        !e.readOnly && s && ((s = !1), t());
+      }),
+      (n.getDOMElement().ontouchstart = function (e) {
+        n.getDOMElement().disabled && (n.getDOMElement().disabled = !1),
+          n.getDOMElement().focus(),
+          e.stop();
+      }),
+      n
+    );
+  });
+var EJSS_INTERFACE = EJSS_INTERFACE || {};
+(EJSS_INTERFACE.Panel = {
+  registerProperties: function (e, t) {
+    EJSS_INTERFACE.Element.registerProperties(e, t),
+      t.registerProperty("Html", e.setHtml, e.getHtml);
+  },
+}),
+  (EJSS_INTERFACE.panel = function (e) {
+    var t = EJSS_INTERFACE.element(e),
+      n = EJSS_INTERFACE.panel;
+    (t.appendChild = function (e) {
+      var n = e.getDOMElement();
+      t.getDOMElement().appendChild(n);
+    }),
+      (t.removeChild = function (e) {
+        var n = e.getDOMElement();
+        t.getDOMElement().removeChild(n);
+      }),
+      (t.insertBefore = function (e, n) {
+        var r = e.getDOMElement(),
+          i = n.getDOMElement();
+        t.getDOMElement().insertBefore(r, i);
+      }),
+      (t.setHtml = function (e) {
+        t.getDOMElement().innerHTML = e;
+      }),
+      (t.getHtml = function () {
+        return t.getDOMElement().innerHTML;
+      }),
+      (t.registerProperties = function (e) {
+        EJSS_INTERFACE.Panel.registerProperties(t, e);
+      });
+    var r = document.createElement("div");
+    return (
+      (r.id = e),
+      (r.contenteditable = !0),
+      document.body.appendChild(r),
+      t.setDOMElement(r),
+      t.getStyle().setPadding("0px"),
+      t.getStyle().setMargin("0px"),
+      t.getStyle().setTextAlign("TEXTA_CENTER"),
+      t.getStyle().setCSS({
+        display: "block",
+        "margin-left": "auto",
+        "margin-right": "auto",
+      }),
+      (t.getDOMElement().ontouchstart = function (e) {
+        var t = document.getElementsByTagName("input");
+        for (var n = 0; t.length > n; n++) t[n].disabled = !1;
+      }),
+      t
+    );
+  });
+var EJSS_INTERFACE = EJSS_INTERFACE || {};
+(EJSS_INTERFACE.PasswordField = {}),
+  (EJSS_INTERFACE.passwordField = function (e) {});
+var EJSS_INTERFACE = EJSS_INTERFACE || {};
+(EJSS_INTERFACE.RadioButton = {
+  registerProperties: function (e, t) {
+    EJSS_INTERFACE.Element.registerProperties(e, t),
+      t.registerProperty("Text", e.setText),
+      t.registerProperty("ImageUrl", e.setImageUrl),
+      t.registerProperty("TextOn", e.setTextOn),
+      t.registerProperty("ImageOnUrl", e.setImageOnUrl),
+      t.registerProperty("TextOff", e.setTextOff),
+      t.registerProperty("ImageOffUrl", e.setImageOffUrl),
+      t.registerProperty("Checked", e.setChecked, e.getChecked),
+      t.registerProperty("Value", e.setValue, e.getValue),
+      t.registerProperty("Parent", function (t) {
+        e.setParent(t), e.setKey(e.getDOMElement().parentNode.id);
+      }),
+      t.registerAction("OnChange", e.getChecked),
+      t.registerAction("OnCheckOn"),
+      t.registerAction("OnCheckOff");
+  },
+}),
+  (EJSS_INTERFACE.radioButton = function (e) {
+    function t() {
+      (c.innerHTML = ""),
+        l.checked
+          ? i.src.length > 0
+            ? c.appendChild(i)
+            : u.length > 0
+            ? (c.innerHTML = u.toString())
+            : r.src.length > 0
+            ? c.appendChild(r)
+            : o.length > 0 && (c.innerHTML = o.toString())
+          : s.src.length > 0
+          ? c.appendChild(s)
+          : a.length > 0
+          ? (c.innerHTML = a.toString())
+          : r.src.length > 0
+          ? c.appendChild(r)
+          : o.length > 0 && (c.innerHTML = o.toString());
+    }
+    var n = EJSS_INTERFACE.element(e),
+      r = new Image(),
+      i = new Image(),
+      s = new Image(),
+      o = "",
+      u = "",
+      a = "";
+    (n.setKey = function (e) {
+      l.name = e;
+    }),
+      (n.getKey = function () {
+        return l.name;
+      }),
+      (n.setText = function (e) {
+        (o = e), t();
+      }),
+      (n.setImageUrl = function (e) {
+        (r.src = n.getResourcePath(e)), t();
+      }),
+      (n.setTextOff = function (e) {
+        (a = e), t();
+      }),
+      (n.getTextOff = function () {
+        return a;
+      }),
+      (n.setImageOffUrl = function (e) {
+        (s.src = n.getResourcePath(e)), t();
+      }),
+      (n.getImageUrlOff = function () {
+        return s.src;
+      }),
+      (n.setTextOn = function (e) {
+        (u = e), t();
+      }),
+      (n.getTextOn = function () {
+        return u;
+      }),
+      (n.setImageOnUrl = function (e) {
+        (i.src = n.getResourcePath(e)), t();
+      }),
+      (n.getImageUrlOn = function () {
+        return i.src;
+      }),
+      (n.setChecked = function (e) {
+        l.checked != e && ((l.checked = e), t());
+      }),
+      (n.getChecked = function () {
+        return l.checked;
+      }),
+      (n.setValue = function (e) {
+        l.value = e;
+      }),
+      (n.getValue = function () {
+        return l.value;
+      }),
+      (n.registerProperties = function (e) {
+        EJSS_INTERFACE.RadioButton.registerProperties(n, e);
+      });
+    var f = document.createElement("fieldset");
+    (f.id = e),
+      (f.style.border = 0),
+      (f.style.display = "inline-block"),
+      document.body.appendChild(f),
+      n.setDOMElement(f);
+    var l = document.createElement("input");
+    (l.id = e + ".radio"),
+      (l.type = "radio"),
+      f.appendChild(l),
+      (l.onchange = function () {
+        l.remoteonchange();
+        var e = document.getElementsByTagName("fieldset");
+        for (var t = 0; t < e.length; t++)
+          if (e[t].childNodes && e[t].childNodes[0]) {
+            var n = e[t].childNodes[0];
+            n.type == "radio" &&
+              n.remoteonchange &&
+              n.name == l.name &&
+              n.id != l.id &&
+              n.remoteonchange();
+          }
+      }),
+      (l.remoteonchange = function (e) {
+        t();
+        var r = n.getController();
+        r &&
+          (r.propertiesChanged("Checked"),
+          r.invokeAction("OnChange"),
+          l.checked
+            ? r.invokeAction("OnCheckOn")
+            : r.invokeAction("OnCheckOff"),
+          r.reportInteractions());
+      });
+    var c = document.createElement("label");
+    return (
+      (c.id = e + ".label"),
+      (c.style.display = "inline-block"),
+      f.appendChild(c),
+      n
+    );
+  });
+var EJSS_INTERFACE = EJSS_INTERFACE || {};
+(EJSS_INTERFACE.Separator = {}), (EJSS_INTERFACE.separator = function (e) {});
+var EJSS_INTERFACE = EJSS_INTERFACE || {};
+(EJSS_INTERFACE.Slider = {}), (EJSS_INTERFACE.slider = function (e) {});
+var EJSS_INTERFACE = EJSS_INTERFACE || {};
+(EJSS_INTERFACE.Style = {
+  BORDER_SOLID: "solid",
+  BORDER_DOTTED: "dotted",
+  BORDER_DASHED: "dashed",
+  TEXTA_LEFT: "left",
+  TEXTA_RIGHT: "right",
+  TEXTA_CENTER: "center",
+  TEXTA_JUSTIFY: "justify",
+  VISIB_VISIBLE: "visible",
+  VISIB_HIDDEN: "hidden",
+  FLOAT_LEFT: "left",
+  FLOAT_RIGHT: "right",
+  FLOAT_NONE: "none",
+  FLOAT_CENTER: "none",
+  POSITION_STATIC: "static",
+  POSITION_ABSOLUTE: "absolute",
+  POSITION_FIXED: "fixed",
+  POSITION_RELATIVE: "relative",
+  POSITION_INHERIT: "inherit",
+  OVERFLOW_VISIBLE: "visible",
+  OVERFLOW_HIDDEN: "hidden",
+  OVERFLOW_SCROLL: "scroll",
+  OVERFLOW_AUTO: "auto",
+  setCSS: function (e, t) {
+    var n = /-([\da-z])/gi,
+      r = function (e, t) {
+        return (t + "").toUpperCase();
+      },
+      i = e.style;
+    if (typeof t != "object") {
+      var s = t.trim().split("{");
+      if (s[0] && s[0].length > 0) {
+        var o = s[0].trim(),
+          u,
+          a = document.styleSheets[0].rules || document.styleSheets[0].cssRules;
+        for (u = 0; u < a.length; u++) if (a[u].selectorText == o) break;
+        var f = a[u].cssText ? a[u].cssText : a[u].style.cssText;
+        f = f.match(/{.*}/g)[0];
+        var l = f.slice(1, f.length - 2).split(";");
+        for (elem in l) {
+          var c = l[elem].split(":");
+          if (c.length == 2) {
+            var h = c[0].trim(),
+              p = c[1].trim(),
+              d = h.replace(n, r);
+            i[d] = p;
+          }
+        }
+      }
+      if (s[1]) {
+        var v = s[1].trim(),
+          l = v.slice(0, v.length - 2).split(";");
+        for (elem in l) {
+          var c = l[elem].split(":");
+          if (c.length == 2) {
+            var h = c[0].trim(),
+              p = c[1].trim(),
+              d = h.replace(n, r);
+            i[d] = p;
+          }
+        }
+      }
+    } else
+      for (var m in t) {
+        var d = m.replace(n, r);
+        i[d] = t[m];
+      }
+  },
+}),
+  (EJSS_INTERFACE.style = function (e) {
+    var t = EJSS_INTERFACE.Style,
+      n = {},
+      r = "white",
+      i = 0,
+      s = t.BORDER_SOLID;
+    return (
+      (n.setCSS = function (n) {
+        t.setCSS(document.getElementById(e), n);
+      }),
+      (n.setVisibility = function (t) {
+        document.getElementById(e).style.visibility = t ? "visible" : "hidden";
+      }),
+      (n.getVisibility = function () {
+        return document.getElementById(e).style.visibility == "visible";
+      }),
+      (n.setVerticalAlign = function (t) {
+        document.getElementById(e).style.verticalAlign = t;
+      }),
+      (n.getVerticalAlign = function () {
+        return document.getElementById(e).style.verticalAlign;
+      }),
+      (n.setTextAlign = function (n) {
+        n.substring(0, 6) == "TEXTA_" && (n = t[n.toUpperCase()]),
+          (document.getElementById(e).style.textAlign = n);
+      }),
+      (n.getTextAlign = function () {
+        return document.getElementById(e).style.textAlign;
+      }),
+      (n.setLineHeight = function (t) {
+        typeof t != "string" && (t += "px"),
+          (document.getElementById(e).style.lineHeight = t);
+      }),
+      (n.getLineHeight = function () {
+        return document.getElementById(e).style.lineHeight;
+      }),
+      (n.setHeight = function (t) {
+        typeof t != "string" && (t += "px"),
+          (document.getElementById(e).style.height = t);
+      }),
+      (n.getHeight = function () {
+        return document.getElementById(e).style.height;
+      }),
+      (n.setWidth = function (t) {
+        typeof t != "string" && (t += "px"),
+          (document.getElementById(e).style.width = t);
+      }),
+      (n.getWidth = function () {
+        return document.getElementById(e).style.width;
+      }),
+      (n.setOverflow = function (n) {
+        n.substring(0, 6) == "OVERFL" && (n = t[n.toUpperCase()]),
+          (document.getElementById(e).style.overflow = n);
+      }),
+      (n.getOverflow = function () {
+        return document.getElementById(e).style.overflow;
+      }),
+      (n.setPosition = function (n) {
+        n.substring(0, 6) == "POSITI" && (n = t[n.toUpperCase()]),
+          (document.getElementById(e).style.position = n);
+      }),
+      (n.getPosition = function () {
+        return document.getElementById(e).style.position;
+      }),
+      (n.setFloat = function (n) {
+        n.substring(0, 6) == "FLOAT_" && (n = t[n.toUpperCase()]),
+          (document.getElementById(e).style.float = n);
+      }),
+      (n.getFloat = function () {
+        return document.getElementById(e).style.float;
+      }),
+      (n.setDisplay = function (t) {
+        document.getElementById(e).style.display = t;
+      }),
+      (n.getDisplay = function () {
+        return document.getElementById(e).style.display;
+      }),
+      (n.setTop = function (t) {
+        document.getElementById(e).style.top = t;
+      }),
+      (n.getTop = function () {
+        return document.getElementById(e).style.top;
+      }),
+      (n.setBottom = function (t) {
+        document.getElementById(e).style.bottom = t;
+      }),
+      (n.getBottom = function () {
+        return document.getElementById(e).style.bottom;
+      }),
+      (n.setLeft = function (t) {
+        document.getElementById(e).style.left = t;
+      }),
+      (n.getLeft = function () {
+        return document.getElementById(e).style.left;
+      }),
+      (n.setBorderStyle = function (n) {
+        n.substring(0, 6) == "BORDER" && (n = t[n.toUpperCase()]),
+          (s = n),
+          (document.getElementById(e).style.border = i + "px " + s + " " + r);
+      }),
+      (n.getBorderStyle = function () {
+        return s;
+      }),
+      (n.setBorderWidth = function (t) {
+        (i = t),
+          (document.getElementById(e).style.border = i + "px " + s + " " + r);
+      }),
+      (n.getBorderWidth = function () {
+        return i;
+      }),
+      (n.setBorderColor = function (t) {
+        typeof t != "string" && (t = EJSS_TOOLS.DisplayColors.getLineColor(t)),
+          (r = t),
+          (document.getElementById(e).style.border = i + "px " + s + " " + r);
+      }),
+      (n.getBorderColor = function () {
+        return r;
+      }),
+      (n.setPadding = function (t) {
+        document.getElementById(e).style.padding = t;
+      }),
+      (n.getPadding = function () {
+        return document.getElementById(e).style.padding;
+      }),
+      (n.setShadow = function (t) {
+        t
+          ? (document.getElementById(e).style.boxShadow = t)
+          : (document.getElementById(e).style.boxShadow = "");
+      }),
+      (n.getShadow = function () {
+        return document.getElementById(e).style.boxShadow != "";
+      }),
+      (n.setMargin = function (t) {
+        document.getElementById(e).style.margin = t;
+      }),
+      (n.getMargin = function () {
+        return document.getElementById(e).style.margin;
+      }),
+      (n.setBackgroundImage = function (t) {
+        (document.getElementById(e).style.backgroundImage = "url(" + t + ")"),
+          (document.getElementById(e).style.backgroundSize = "100% 100%");
+      }),
+      (n.getBackgroundImage = function () {
+        return document.getElementById(e).style.backgroundImage;
+      }),
+      (n.setBackgroundColor = function (t) {
+        typeof t != "string" && (t = EJSS_TOOLS.DisplayColors.getLineColor(t)),
+          (document.getElementById(e).style.backgroundColor = t);
+      }),
+      (n.getBackgroundColor = function () {
+        return document.getElementById(e).style.backgroundColor;
+      }),
+      (n.setColor = function (t) {
+        typeof t != "string" && (t = EJSS_TOOLS.DisplayColors.getLineColor(t)),
+          (document.getElementById(e).style.color = t);
+      }),
+      (n.getColor = function () {
+        return document.getElementById(e).style.color;
+      }),
+      (n.getFont = function () {
+        return document.getElementById(e).style.font;
+      }),
+      (n.setFont = function (t) {
+        var n = document.getElementById(e).style,
+          r = t.split(" ");
+        (n.fontStyle = r[0]), (n.fontWeight = r[1]);
+        var i = r[2].split("/");
+        (n.fontSize = i[0]),
+          i[1] && (n.lineHeight = i[1]),
+          r[3] && (n.fontFamily = t.substring(t.indexOf(r[3])));
+      }),
+      (n.setFontStyle = function (t) {
+        document.getElementById(e).style.fontStyle = t;
+      }),
+      (n.getFontStyle = function () {
+        return document.getElementById(e).style.fontStyle;
+      }),
+      (n.setFontFamily = function (t) {
+        document.getElementById(e).style.fontFamily = t;
+      }),
+      (n.getFontFamily = function () {
+        return document.getElementById(e).style.fontFamily;
+      }),
+      (n.setFontSize = function (t) {
+        document.getElementById(e).style.fontSize = t;
+      }),
+      (n.getFontSize = function () {
+        return document.getElementById(e).style.fontSize;
+      }),
+      (n.setLetterSpacing = function (t) {
+        document.getElementById(e).style.letterSpacing = t;
+      }),
+      (n.getLetterSpacing = function () {
+        return document.getElementById(e).style.letterSpacing;
+      }),
+      (n.setOutlineColor = function (t) {
+        document.getElementById(e).style.stroke = t;
+      }),
+      (n.getOutlineColor = function () {
+        return document.getElementById(e).style.stroke;
+      }),
+      (n.setFontWeight = function (t) {
+        document.getElementById(e).style.fontWeight = t;
+      }),
+      (n.getFontWeight = function () {
+        return document.getElementById(e).style.fontWeight;
+      }),
+      (n.setFillColor = function (t) {
+        document.getElementById(e).style.fill = t;
+      }),
+      (n.getFillColor = function () {
+        return document.getElementById(e).style.fill;
+      }),
+      (n.setTransform = function (t) {
+        (document.getElementById(e).style.transform = t),
+          (document.getElementById(e).style["-ms-transform"] = t),
+          (document.getElementById(e).style["-webkit-transform"] = t);
+      }),
+      (n.getTransform = function () {
+        return document.getElementById(e).style.transform;
+      }),
+      (n.setWhiteSpace = function (t) {
+        document.getElementById(e).style.whiteSpace = t;
+      }),
+      (n.getWhiteSpace = function () {
+        return document.getElementById(e).style.whiteSpace;
+      }),
+      n
+    );
+  });
+var EJSS_INTERFACE = EJSS_INTERFACE || {};
+(EJSS_INTERFACE.SvgGraphics = {
+  registerProperties: function (e, t) {
+    EJSS_INTERFACE.Element.registerProperties(e, t),
+      t.registerProperty("Height", e.setHeight),
+      t.registerProperty("Width", e.setWidth);
+  },
+}),
+  (EJSS_INTERFACE.svgGraphics = function (e) {
+    var t = EJSS_INTERFACE.element(e),
+      n = EJSS_INTERFACE.SvgGraphics,
+      r = 0,
+      i = 0;
+    (t.setWidth = function (e) {
+      if (i != e) {
+        i = e;
+        var n =
+          typeof i == "string" && i.indexOf("%") != -1 ? i : parseFloat(i);
+        return t.getDOMElement().setAttribute("width", n), !0;
+      }
+      return !1;
+    }),
+      (t.getWidth = function () {
+        return i;
+      }),
+      (t.setHeight = function (e) {
+        if (r != e) {
+          r = e;
+          var n =
+            typeof r == "string" && r.indexOf("%") != -1 ? r : parseFloat(r);
+          return t.getDOMElement().setAttribute("height", n), !0;
+        }
+        return !1;
+      }),
+      (t.getHeight = function () {
+        return r;
+      }),
+      (t.registerProperties = function (e) {
+        EJSS_INTERFACE.SvgGraphics.registerProperties(t, e);
+      });
+    var s = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    return (
+      s.setAttribute("id", e),
+      s.setAttribute("width", 500),
+      s.setAttribute("height", 500),
+      (s.style.overflow = "hidden"),
+      s.setAttributeNS(
+        "http://www.w3.org/2000/xmlns/",
+        "xmlns:xlink",
+        "http://www.w3.org/1999/xlink"
+      ),
+      document.body.appendChild(s),
+      t.setDOMElement(s),
+      t
+    );
+  });
+var EJSS_INTERFACE = EJSS_INTERFACE || {};
+(EJSS_INTERFACE.TextArea = {}), (EJSS_INTERFACE.textArea = function (e) {});
+var EJSS_INTERFACE = EJSS_INTERFACE || {};
+(EJSS_INTERFACE.TextField = {}), (EJSS_INTERFACE.textField = function (e) {});
+var EJSS_INTERFACE = EJSS_INTERFACE || {};
+(EJSS_INTERFACE.TwoStateButton = {
+  OFF: !1,
+  ON: !0,
+  registerProperties: function (e, t) {
+    EJSS_INTERFACE.Element.registerProperties(e, t),
+      t.registerProperty("TextOn", e.setTextOn),
+      t.registerProperty("ImageOnUrl", e.setImageUrlOn),
+      t.registerProperty("TextOff", e.setTextOff),
+      t.registerProperty("ImageOffUrl", e.setImageUrlOff),
+      t.registerProperty("State", e.setState, e.getState),
+      t.registerAction("OnClick"),
+      t.registerAction("OffClick");
+  },
+}),
+  (EJSS_INTERFACE.twoStateButton = function (e) {
+    function t() {
+      (r.getDOMElement().innerHTML = ""),
+        a
+          ? (i.length > 0 &&
+              (r.getDOMElement().innerHTML =
+                '<img style="vertical-align:inherit;" src="' + i + '"/>'),
+            o.length > 0 &&
+              (r.getDOMElement().innerHTML +=
+                '<span style="white-space:pre;vertical-align:inherit;">' +
+                o.toString() +
+                "</span>"))
+          : (s.length > 0 &&
+              (r.getDOMElement().innerHTML =
+                '<img style="vertical-align:inherit;" src="' + s + '"/>'),
+            u.length > 0 &&
+              (r.getDOMElement().innerHTML +=
+                '<span style="white-space:pre;vertical-align:inherit;">' +
+                u.toString() +
+                "</span>"));
+    }
+    var n = EJSS_INTERFACE.TwoStateButton,
+      r = EJSS_INTERFACE.element(e),
+      i = "",
+      s = "",
+      o = "",
+      u = "",
+      a = -1;
+    (r.setTextOff = function (e) {
+      (u = e), t();
+    }),
+      (r.getTextOff = function () {
+        return u;
+      }),
+      (r.setImageUrlOff = function (e) {
+        (s = r.getResourcePath(e)), t();
+      }),
+      (r.getImageUrlOff = function () {
+        return s;
+      }),
+      (r.setTextOn = function (e) {
+        (o = e), t();
+      }),
+      (r.getTextOn = function () {
+        return o;
+      }),
+      (r.setImageUrlOn = function (e) {
+        (i = r.getResourcePath(e)), t();
+      }),
+      (r.getImageUrlOn = function () {
+        return i;
+      }),
+      (r.setState = function (e) {
+        typeof e == "string" && (e = n[e.toUpperCase()]),
+          e != a && ((a = e), t());
+      }),
+      (r.getState = function () {
+        return a;
+      }),
+      (r.registerProperties = function (e) {
+        EJSS_INTERFACE.TwoStateButton.registerProperties(r, e);
+      });
+    var f = document.createElement("button");
+    return (
+      (f.id = e),
+      (f.style.verticalAlign = "middle"),
+      document.body.appendChild(f),
+      r.setDOMElement(f),
+      (r.getDOMElement().onclick = function () {
+        var e = r.getState();
+        r.setState(!e);
+        var t = r.getController();
+        return (
+          t &&
+            (t.propertiesChanged("State"),
+            e ? t.invokeAction("OnClick") : t.invokeAction("OffClick"),
+            t.reportInteractions()),
+          !1
+        );
+      }),
+      r
+    );
+  });
+var EJSS_INTERFACE = EJSS_INTERFACE || {};
+(EJSS_INTERFACE.Video = {}), (EJSS_INTERFACE.video = function (e) {});
+var EJSS_INTERFACE = EJSS_INTERFACE || {};
+(EJSS_INTERFACE.WebGLCanvas = {}),
+  (EJSS_INTERFACE.webGLCanvas = function (e) {});
+var EJSS_INTERFACE = EJSS_INTERFACE || {};
+(EJSS_INTERFACE.WrappedPanel = {
+  registerProperties: function (e, t) {
+    EJSS_INTERFACE.Element.registerProperties(e, t),
+      t.registerProperty("Parent", e.setDoubleParent);
+  },
+}),
+  (EJSS_INTERFACE.wrappedPanel = function (e) {
+    var t = EJSS_INTERFACE.element(e);
+    (t.registerProperties = function (e) {
+      EJSS_INTERFACE.WrappedPanel.registerProperties(t, e);
+    }),
+      (t.adjustPosition = function () {
+        (n.style.height = r.getBoundingClientRect().height + "px"),
+          (n.style.width = r.getBoundingClientRect().width + "px");
+        var e = n.getBoundingClientRect().top,
+          t = n.getBoundingClientRect().left,
+          i = document.body,
+          s = document.documentElement,
+          o = window.pageYOffset || s.scrollTop || i.scrollTop,
+          u = window.pageXOffset || s.scrollLeft || i.scrollLeft;
+        (r.style.top = e + o + "px"), (r.style.left = t + u + "px");
+      }),
+      (t.setDoubleParent = function (e) {
+        if (typeof e == "string") {
+          var r = document.getElementById(e);
+          r.appendChild(n);
+        } else
+          e.getDOMElement ? e.getDOMElement().appendChild(n) : e.appendChild(n);
+        t.setParent(e);
+      }),
+      (t.appendChild = function (e) {
+        var n = e.getDOMElement();
+        t.getDOMElement().appendChild(n);
+      }),
+      (t.removeChild = function (e) {
+        var n = e.getDOMElement();
+        t.getDOMElement().removeChild(n);
+      }),
+      (t.insertBefore = function (e, n) {
+        var r = e.getDOMElement(),
+          i = n.getDOMElement();
+        t.getDOMElement().insertBefore(r, i);
+      });
+    var n = document.createElement("div");
+    EJSS_INTERFACE.Style.setCSS(n, {
+      display: "block",
+      "margin-left": "auto",
+      "margin-right": "auto",
+      "page-break-inside": "avoid",
+    }),
+      document.body.appendChild(n);
+    var r = document.createElement("div");
+    return (
+      (r.id = e),
+      (r.contenteditable = !0),
+      document.body.appendChild(r),
+      t.setDOMElement(r),
+      t.getStyle().setPadding("0px"),
+      t.getStyle().setMargin("0px"),
+      t.getStyle().setTextAlign("TEXTA_CENTER"),
+      t.getStyle().setCSS({
+        "page-break-inside": "avoid",
+        display: "inline-block",
+        "margin-left": "auto",
+        "margin-right": "auto",
+        position: "absolute",
+      }),
+      (t.getDOMElement().ontouchstart = function (e) {
+        var t = document.getElementsByTagName("input");
+        for (var n = 0; t.length > n; n++) t[n].disabled = !1;
+      }),
+      t
+    );
+  });
+var EJSS_CORE = EJSS_CORE || {};
+(EJSS_CORE.Model = {
+  MODE_JAVA_STYLE: 1,
+  MODE_RESPECT_TIME: 2,
+  MODE_RESPECT_DELAY: 3,
+}),
+  (EJSS_CORE.createAnimation = function () {
+    function e(e) {
+      for (var t = 0, n = e.length; t < n; t++) {
+        (l = !1), e[t]();
+        if (l) return;
+      }
+    }
+    var t = {},
+      n = 1,
+      r = "Choose a name for the file",
+      i = "Select a file to read",
+      s = n,
+      o = 1,
+      u = !1,
+      a = !0,
+      f = !1,
+      l = !1,
+      c = +new Date(),
+      h = !1,
+      p = null,
+      d = NaN,
+      v = s,
+      m = 0,
+      g = 10,
+      y,
+      b = !0,
+      w = !1,
+      E = EJSS_CORE.Model.MODE_JAVA_STYLE;
+    (t.setView = function (e) {
+      (p = e),
+        p._12(function () {
+          h || (p._16() && (t.automaticResetSolvers(), t.update()));
+        });
+    }),
+      (t.serialize = function () {
+        var e = {};
+        t._userSerialize && (e = t._userSerialize());
+        var n = p.serialize(),
+          r = { model: e, view: n };
+        return JSON.stringify(r, function (e, t) {
+          return (
+            typeof t == "number" &&
+              (isNaN(t) ? (t = "__NaN") : isFinite(t) || (t = "__Infinity")),
+            t
+          );
+        });
+      }),
+      (t.unserialize = function (e) {
+        var n = JSON.parse(e, function (e, t) {
+          return (
+            t == "__NaN" ? (t = NaN) : t == "__Infinity" && (t = Infinity), t
+          );
+        });
+        if (n.model) {
+          var r = n.model;
+          t._userUnserialize && t._userUnserialize(r);
+        }
+        if (n.view) {
+          var i = n.view;
+          p.unserialize(i);
+        }
+      });
+    var S, x, T, N, C;
+    (t.sendCallback = function () {}),
+      (t.setStatusParams = function (e, n, r, i, s, o) {
+        (S = e), (x = n), (T = r), (N = i), (C = s), o && (t.sendCallback = o);
+      }),
+      (t.sendSnapshot = function (e, t, n, r) {
+        if (!N) return;
+        var i = t.split(".").pop();
+        i == t.split(".")[0] && (i = "");
+        var s =
+          t.split(".")[0] +
+          "_context_id_" +
+          S +
+          "_user_id_" +
+          x +
+          "_ejsapp_id_" +
+          T +
+          i;
+        e.importGraphics(function (e) {
+          var t = new XMLHttpRequest(),
+            i =
+              "user_file=" + s + "&file=" + encodeURIComponent(e) + "&type=png";
+          t.open("POST", N, !0),
+            t.setRequestHeader(
+              "Content-type",
+              "application/x-www-form-urlencoded"
+            ),
+            (t.onreadystatechange = function () {
+              t.readyState == 4 && t.status == 200 ? n && n() : r && r();
+            }),
+            t.send(i);
+        });
+      }),
+      (t.sendState = function (e, n, r) {
+        if (!N) return;
+        var i = e.split(".").pop();
+        i == e.split(".")[0] && (i = "");
+        var s =
+            e.split(".")[0] +
+            "_context_id_" +
+            S +
+            "_user_id_" +
+            x +
+            "_ejsapp_id_" +
+            T +
+            i,
+          o = t.serialize(),
+          u = new XMLHttpRequest(),
+          a =
+            "user_file=" + s + "&file=" + encodeURIComponent(o) + "&type=json";
+        u.open("POST", N, !0),
+          u.setRequestHeader(
+            "Content-type",
+            "application/x-www-form-urlencoded"
+          ),
+          (u.onreadystatechange = function () {
+            u.readyState == 4 && u.status == 200 ? n && n() : r && r();
+          }),
+          u.send(a);
+      }),
+      (t.sendText = function (e, t, n, r, i) {
+        if (!N) return;
+        if (!n) {
+          n = "txt";
+          var s = "." + e.split(".").pop();
+          s == "." + e.split(".")[0] && (s = "");
+        } else s = "." + n;
+        var o =
+            e.split(".")[0] +
+            "_context_id_" +
+            S +
+            "_user_id_" +
+            x +
+            "_ejsapp_id_" +
+            T +
+            s,
+          u = new XMLHttpRequest(),
+          a =
+            "user_file=" + o + "&file=" + encodeURIComponent(t) + "&type=" + n;
+        u.open("POST", N, !0),
+          u.setRequestHeader(
+            "Content-type",
+            "application/x-www-form-urlencoded"
+          ),
+          (u.onreadystatechange = function () {
+            u.readyState == 4 && u.status == 200 ? r && r() : i && i();
+          }),
+          u.send(a);
+      }),
+      (t.getState = function (e, n, r) {
+        var i = new XMLHttpRequest();
+        i.open("GET", e, !0),
+          i.setRequestHeader("Cache-Control", "no-cache"),
+          (i.onreadystatechange = function () {
+            i.readyState == 4 && i.status == 200
+              ? (t.unserialize(i.responseText), n && n())
+              : r && r();
+          }),
+          i.send();
+      }),
+      (t.getText = function (e, t, n) {
+        var r = new XMLHttpRequest();
+        r.open("GET", e, !0),
+          r.setRequestHeader("Cache-Control", "no-cache"),
+          (r.onreadystatechange = function () {
+            r.readyState == 4 && r.status == 200
+              ? t && t(r.responseText)
+              : n && n();
+          }),
+          r.send();
+      }),
+      (t.getStateFiles = function (e, n, r) {
+        if (!T) return;
+        var i = t.serialize(),
+          s = new XMLHttpRequest(),
+          o = C + "?ejsapp_id=" + T + "&type=" + e;
+        s.open("GET", o, !0),
+          (s.onreadystatechange = function () {
+            if (s.readyState == 4 && s.status == 200) {
+              var e = s.responseText.split(";"),
+                t = {};
+              (t.name = []), (t.url = []);
+              for (var i = 0; i + 1 < e.length; i++)
+                t.name.push(e[i]), t.url.push(e[++i]);
+              n && n(t);
+            } else r && r();
+          }),
+          s.send();
+      }),
+      (t.saveText = function (e, n, i) {
+        if (!i) {
+          var i = n;
+          n = null;
+        }
+        S
+          ? EJSS_INTERFACE.BoxPanel.showInputDialog(r, function (e) {
+              t.sendText(e, i, n, function () {
+                t.sendCallback();
+              });
+            })
+          : t.sendText(e, i, n, function () {
+              t.sendCallback();
+            });
+      }),
+      (t.saveState = function (e) {
+        S
+          ? EJSS_INTERFACE.BoxPanel.showInputDialog(r, function (e) {
+              t.sendState(e, function () {
+                t.sendCallback();
+              });
+            })
+          : t.sendState(e, function () {
+              t.sendCallback();
+            });
+      }),
+      (t.saveImage = function (e, n) {
+        S
+          ? EJSS_INTERFACE.BoxPanel.showInputDialog(r, function (e) {
+              t.sendSnapshot(p[n], e, function () {
+                t.sendCallback();
+              });
+            })
+          : t.sendSnapshot(p[n], e, function () {
+              t.sendCallback();
+            });
+      }),
+      (t.readState = function (e, n) {
+        if (!e) {
+          var r = n ? n : ".json";
+          t.getStateFiles(r, function (e) {
+            var n = { text: e.name, value: e.url };
+            EJSS_INTERFACE.BoxPanel.showSelectDialog(i, n, function (e) {
+              t.getState(e);
+            });
+          });
+        } else t.getState(e);
+      }),
+      (t.readText = function (e, n, r) {
+        e
+          ? t.getText(e, function (e) {
+              var n = {};
+              (n[r] = e), t._userUnserialize(n);
+            })
+          : t.getStateFiles(n, function (e) {
+              var n = { text: e.name, value: e.url };
+              EJSS_INTERFACE.BoxPanel.showSelectDialog(i, n, function (e) {
+                t.getText(e, function (e) {
+                  var n = {};
+                  (n[r] = e), t._userUnserialize(n);
+                });
+              });
+            });
+      }),
+      (t.setMode = function (e) {
+        setRunningMode(e);
+      }),
+      (t.setRunningMode = function (e) {
+        typeof e == "string" ? (E = EJSS_CORE.Model[e.toUpperCase()]) : (E = e);
+      }),
+      (t.getMode = function () {
+        return E;
+      }),
+      (t.setRunAlways = function (e) {
+        w = e;
+      }),
+      (t.setFPS = function (e) {
+        s = Math.max(1e3 / e, n);
+      }),
+      (t.getFPS = function () {
+        return Math.int(1e3 / s);
+      }),
+      (t.setDelay = function (e) {
+        s = Math.max(e, 0);
+      }),
+      (t.setMinimumDelay = function (e) {
+        g = Math.max(e, 0);
+      }),
+      (t.setStepsPerDisplay = function (e) {
+        e >= 1 && (o = e);
+      }),
+      (t.setUpdateView = function (e) {
+        a = e;
+      }),
+      (t.setAutoplay = function (e) {
+        f = e;
+      }),
+      (t.isPlaying = function () {
+        return h;
+      }),
+      (t.isPaused = function () {
+        return !h;
+      }),
+      (t.resetRealTime = function () {
+        var e = +Date();
+        d = 1e3 * t.getRealTime() - e;
+      }),
+      (t.play = function () {
+        if (h) return;
+        (c = +new Date()), (v = s), (h = !0), (y = window.setTimeout(t.run, g));
+      }),
+      (t.pause = function () {
+        (h = !1), (u = !0), y != 0 && (window.clearTimeout(y), (y = 0));
+      }),
+      (t.run = function () {
+        var e = 1,
+          n,
+          r;
+        if (!h) return;
+        if (b || w) {
+          switch (E) {
+            default:
+            case EJSS_CORE.Model.MODE_JAVA_STYLE:
+              (c = +new Date()),
+                t.step(),
+                (n = +new Date()),
+                (r = n - c),
+                (e = Math.max(g, s - r));
+              break;
+            case EJSS_CORE.Model.MODE_RESPECT_DELAY:
+              t.step(), (e = s), (c = +new Date());
+              break;
+            case EJSS_CORE.Model.MODE_RESPECT_TIME:
+              (n = +new Date()), (r = n - c);
+              if (r >= v - m) {
+                var i = 0;
+                v && ((i = Math.floor((r + m) / v)), (m = r + m - i * v));
+                var o = t.step(i);
+                v &&
+                  o > r &&
+                  i > 100 &&
+                  (alert("Imposible running with delay " + v + " ms."),
+                  (h = !1),
+                  (m = 0)),
+                  (v = s),
+                  (c = n);
+              }
+          }
+          var u = y;
+          p._16() && (t.automaticResetSolvers(), t.update());
+          if (u != y) return;
+        } else c = +new Date();
+        y = window.setTimeout(t.run, e);
+      }),
+      (t.onExit = function () {
+        t.pause(), p._16(), t.freeMemory();
+      }),
+      (t.reset = function (e) {
+        e || (t.pause(), t.resetModel()),
+          p._14(!1),
+          p._reset(),
+          e || (p._15(), p._initialize(), t.initializeModel()),
+          t.updateModel(),
+          a ? (p._update(), p._render()) : p._collectData(),
+          p._14(!0),
+          f && t.play(),
+          p._resized(window.innerWidth, window.innerHeight);
+      }),
+      (t.initialize = function () {
+        p._initialize(),
+          t.initializeModel(),
+          t.updateModel(),
+          a ? (p._update(), p._render()) : p._collectData();
+      }),
+      (t.update = function () {
+        if (!b && !w) return;
+        t.updateModel(), a ? (p._update(), p._render()) : p._collectData();
+      }),
+      (t.step = function (e) {
+        var n = +new Date();
+        e || (e = 1);
+        var r = Math.max(e, o);
+        if (r > 1) {
+          u = !1;
+          for (var i = 1; i < r; i++) {
+            if (u) {
+              t.update();
+              return;
+            }
+            t.stepModel(), t.updateModel(), p._collectData();
+          }
+        }
+        t.stepModel();
+        var s = +new Date() - n;
+        return t.update(), s;
+      }),
+      (t.setShouldBreak = function (e) {
+        l = e;
+      }),
+      (t.getShouldBreak = function () {
+        return l;
+      }),
+      (t._autoSelectView = function (e) {
+        var t = screen.height,
+          n = screen.width,
+          r = [],
+          i = Number.MAX_VALUE;
+        for (var s = 0; s < e.length; s++) {
+          var o = n - e[s].width;
+          o >= 0 && (o < i ? ((i = o), (r = [s])) : o == i && r.push(s));
+        }
+        var u = -1;
+        i = Number.MAX_VALUE;
+        for (var s = 0; s < r.length; s++) {
+          var o = Math.abs(t - e[r[s]].height);
+          o < i && ((i = o), (u = r[s]));
+        }
+        return u;
+      });
+    var k = [],
+      L = [],
+      A = [],
+      O = [];
+    return (
+      (t.getRealTime = function () {
+        return NaN;
+      }),
+      (t.automaticResetSolvers = function () {}),
+      (t.freeMemory = function () {}),
+      (t.addToReset = function (e) {
+        k.push(e);
+      }),
+      (t.addToInitialization = function (e) {
+        L.push(e);
+      }),
+      (t.addToEvolution = function (e) {
+        A.push(e);
+      }),
+      (t.addToFixedRelations = function (e) {
+        O.push(e);
+      }),
+      (t.resetModel = function () {
+        e(k);
+      }),
+      (t.initializeModel = function () {
+        e(L);
+      }),
+      (t.stepModel = function () {
+        e(A);
+      }),
+      (t.updateModel = function () {
+        e(O);
+      }),
+      (window.onblur = function () {
+        b = !1;
+      }),
+      (window.onfocus = function () {
+        b = !0;
+      }),
+      t
+    );
+  });
+var EJSS_ODE_INTERPOLATION = EJSS_ODE_INTERPOLATION || {};
+(EJSS_ODE_INTERPOLATION.Bootstrap2IntervalData = {}),
+  (EJSS_ODE_INTERPOLATION.bootstrap2IntervalData = function (e, t, n, r, i) {
+    var s = EJSS_ODE_INTERPOLATION.bootstrapIntervalData(e, t, n, r, i),
+      o,
+      u,
+      a,
+      f;
+    (s.interpolate = function (e, t) {
+      var n = s.getDeltaTime(),
+        r = s.getLeftState(),
+        i = s.getLeftRate(),
+        l = (e - s.getLeft()) / n;
+      return (
+        r[t] + l * (n * i[t] + l * (o[t] + l * (u[t] + l * (a[t] + l * f[t]))))
+      );
+    }),
+      (s.interpolateState = function (e, t, n, r) {
+        return s.bootstrap2((e - s.getLeft()) / s.getDeltaTime(), t, n, r), t;
+      }),
+      (s.bootstrap2 = function (e, t, n, r) {
+        var i = s.getDeltaTime(),
+          l = s.getLeftState(),
+          c = s.getLeftRate(),
+          h = n;
+        for (var p = 0; p < r; p++)
+          (t[p] =
+            l[h] +
+            e * (i * c[h] + e * (o[h] + e * (u[h] + e * (a[h] + e * f[h]))))),
+            h++;
+      });
+    var l = 0.7,
+      c = 0.85,
+      h =
+        2 *
+        l *
+        (l - 1) *
+        c *
+        (c - 1) *
+        (c - l) *
+        (10 * l * c - 5 * c - 5 * l + 3),
+      p = l * (-3 * l + 2),
+      d = l * (-3 * l + 4) - 1,
+      v = 6 * l * (l - 1),
+      m = c * (-3 * c + 2),
+      g = c * (-3 * c + 4) - 1,
+      y = 6 * c * (c - 1),
+      b = l * (2 + l * (-6 + 4 * l)),
+      w = c * (2 + c * (-6 + 4 * c)),
+      E = l * (4 + l * (-9 + 5 * l * l)),
+      S = c * (4 + c * (-9 + 5 * c * c)),
+      x = e.length,
+      T = x - 1,
+      N = s.getDeltaTime(),
+      C = new Array(x),
+      k = new Array(x),
+      L = new Array(x);
+    (o = new Array(x)),
+      (u = new Array(x)),
+      (a = new Array(x)),
+      (f = new Array(x)),
+      s.bootstrap1(l, C, 0, T),
+      (C[T] = s.getLeft() + l * N),
+      i.getRate(C, k),
+      s.bootstrap1(c, C, 0, T),
+      (C[T] = s.getLeft() + c * N),
+      i.getRate(C, L);
+    for (var A = 0; A < x; A++) {
+      var O = n[A] - e[A],
+        M = N * t[A],
+        _ = N * r[A],
+        D = N * k[A] + p * _ + d * M + v * O,
+        P = N * L[A] + m * _ + g * M + y * O,
+        H = (S * D - E * P) / h,
+        B = (b * P - w * D) / h,
+        j = _ + M - 2 * O - 2 * H - 3 * B;
+      (f[A] = B), (a[A] = H), (u[A] = j), (o[A] = O - M - j - H - B);
+    }
+    return s;
+  });
+var EJSS_ODE_INTERPOLATION = EJSS_ODE_INTERPOLATION || {};
+(EJSS_ODE_INTERPOLATION.BootstrapIntervalData = {}),
+  (EJSS_ODE_INTERPOLATION.bootstrapIntervalData = function (e, t, n, r, i) {
+    var s = EJSS_ODE_INTERPOLATION.hermiteIntervalData(e, t, n, r),
+      o,
+      u,
+      a;
+    (s.interpolate = function (e, t) {
+      var n = s.getDeltaTime(),
+        r = s.getLeftState(),
+        i = s.getLeftRate(),
+        f = (e - s.getLeft()) / n;
+      return r[t] + f * (n * i[t] + f * (o[t] + f * (u[t] + f * a[t])));
+    }),
+      (s.interpolateState = function (e, t, n, r) {
+        return s.bootstrap1((e - s.getLeft()) / s.getDeltaTime(), t, n, r), t;
+      }),
+      (s.bootstrap1 = function (e, t, n, r) {
+        var i = s.getDeltaTime(),
+          f = s.getLeftState(),
+          l = s.getLeftRate(),
+          c = n;
+        for (var h = 0; h < r; h++)
+          (t[h] = f[c] + e * (i * l[c] + e * (o[c] + e * (u[c] + e * a[c])))),
+            c++;
+      });
+    var f = 0.25,
+      l = f * (f - 1) * (4 * f - 2),
+      c = f * (-3 * f + 2),
+      h = f * (-3 * f + 4) - 1,
+      p = 6 * f * (f - 1),
+      d = e.length,
+      v = s.getDeltaTime(),
+      m = new Array(d),
+      g = new Array(d);
+    (o = new Array(d)),
+      (u = new Array(d)),
+      (a = new Array(d)),
+      s.hermite(f, m, 0, d - 1),
+      (m[d - 1] = s.getLeft() + f * v),
+      i.getRate(m, g);
+    for (var y = 0; y < d; y++) {
+      var b = n[y] - e[y],
+        w = v * t[y],
+        E = v * r[y],
+        S = (v * g[y] + c * E + h * w + p * b) / l,
+        x = E + w - 2 * b - 2 * S;
+      (a[y] = S), (u[y] = x), (o[y] = b - w - x - S);
+    }
+    return s;
+  });
+var EJSS_ODE_INTERPOLATION = EJSS_ODE_INTERPOLATION || {};
+(EJSS_ODE_INTERPOLATION.ConstantConditionData = {}),
+  (EJSS_ODE_INTERPOLATION.constantConditionData = function (e) {
+    var t = EJSS_ODE_INTERPOLATION.intervalData(Number.NaN, Number.NaN),
+      n;
+    (t.interpolate = function (e, t) {
+      return n[t];
+    }),
+      (t.interpolateState = function (e, t, r, i) {
+        var s = r;
+        for (var o = 0; o < i; o++) (t[o] = n[s]), s++;
+        return t;
+      });
+    var r = e.length;
+    n = new Array(r);
+    for (var i = 0; i < r; i++) n[i] = e[i];
+    return t;
+  });
+var EJSS_ODE_INTERPOLATION = EJSS_ODE_INTERPOLATION || {};
+(EJSS_ODE_INTERPOLATION.Dopri5IntervalData = {}),
+  (EJSS_ODE_INTERPOLATION.dopri5IntervalData = function (e, t, n) {
+    var r = EJSS_ODE_INTERPOLATION.extraStepsIntervalData(e, bState, n);
+    return (
+      (r.interpolate = function (e, t) {
+        var n = (e - r.getLeft()) / r.getDeltaTime(),
+          i = 1 - n,
+          s = r.getCoeffs();
+        return (
+          s[0][t] + n * (s[1][t] + i * (s[2][t] + n * (s[3][t] + i * s[4][t])))
+        );
+      }),
+      (r.interpolateState = function (e, t, n, i) {
+        var s = (e - r.getLeft()) / r.getDeltaTime(),
+          o = 1 - s,
+          u = r.getCoeffs(),
+          a = n;
+        for (var f = 0; f < i; f++)
+          (t[f] =
+            u[0][a] +
+            s * (u[1][a] + o * (u[2][a] + s * (u[3][a] + o * u[4][a])))),
+            a++;
+        return t;
+      }),
+      r
+    );
+  });
+var EJSS_ODE_INTERPOLATION = EJSS_ODE_INTERPOLATION || {};
+(EJSS_ODE_INTERPOLATION.Dopri853IntervalData = {}),
+  (EJSS_ODE_INTERPOLATION.dopri853IntervalData = function (e, t, n) {
+    var r = EJSS_ODE_INTERPOLATION.extraStepsIntervalData(e, bState, n);
+    return (
+      (r.interpolate = function (e, t) {
+        var n = (e - r.getLeft()) / r.getDeltaTime(),
+          i = 1 - n,
+          s = r.getCoeffs();
+        return (
+          s[0][t] +
+          n *
+            (s[1][t] +
+              i *
+                (s[2][t] +
+                  n *
+                    (s[3][t] +
+                      i *
+                        (s[4][t] +
+                          n * (s[5][t] + i * (s[6][t] + n * s[7][t]))))))
+        );
+      }),
+      (r.interpolateState = function (e, t, n, i) {
+        var s = (e - r.getLeft()) / r.getDeltaTime(),
+          o = 1 - s,
+          u = r.getCoeffs(),
+          a = n;
+        for (var f = 0; f < i; f++)
+          (t[f] =
+            u[0][a] +
+            s *
+              (u[1][a] +
+                o *
+                  (u[2][a] +
+                    s *
+                      (u[3][a] +
+                        o *
+                          (u[4][a] +
+                            s * (u[5][a] + o * (u[6][a] + s * u[7][a]))))))),
+            a++;
+        return t;
+      }),
+      r
+    );
+  });
+var EJSS_ODE_INTERPOLATION = EJSS_ODE_INTERPOLATION || {};
+(EJSS_ODE_INTERPOLATION.EulerIntervalData = {}),
+  (EJSS_ODE_INTERPOLATION.eulerIntervalData = function (e, t, n) {
+    var r = EJSS_ODE_INTERPOLATION.intervalData(e[e.length - 1], n),
+      i,
+      s;
+    (r.interpolate = function (e, t) {
+      var n = e - r.getLeft();
+      return i[t] + n * s[t];
+    }),
+      (r.interpolateState = function (e, t, n, o) {
+        var u = e - r.getLeft(),
+          a = n;
+        for (var f = 0; f < o; f++) (t[f] = i[a] + u * s[a]), a++;
+        return t;
+      });
+    var o = e.length;
+    (i = new Array(o)), (s = new Array(o));
+    for (var u = 0; u < o; u++) (i[u] = e[u]), (s[u] = t[u]);
+    return r;
+  });
+var EJSS_ODE_INTERPOLATION = EJSS_ODE_INTERPOLATION || {};
+(EJSS_ODE_INTERPOLATION.EulerRichardsonIntervalData = {}),
+  (EJSS_ODE_INTERPOLATION.eulerRichardsonIntervalData = function (e, t, n, r) {
+    var i = EJSS_ODE_INTERPOLATION.intervalData(e[e.length - 1], n),
+      s,
+      o,
+      u,
+      a,
+      f;
+    (i.interpolate = function (e, t) {
+      var n = (e - i.getLeft()) / o,
+        r = n * n * o,
+        s = o * n - r;
+      return u[t] + s * a[t] + r * f[t];
+    }),
+      (i.interpolateState = function (e, t, n, r) {
+        var s = (e - i.getLeft()) / o,
+          l = s * s * o,
+          c = o * s - l,
+          h = n;
+        for (var p = 0; p < r; p++) (t[p] = u[h] + c * a[h] + l * f[h]), h++;
+        return t;
+      });
+    var l = e.length;
+    (u = new Array(l)), (a = new Array(l)), (f = new Array(l));
+    for (var c = 0; c < l; c++) (u[c] = e[c]), (a[c] = t[c]), (f[c] = r[c]);
+    return (s = l - 1), (o = n - e[s]), i;
+  });
+var EJSS_ODE_INTERPOLATION = EJSS_ODE_INTERPOLATION || {};
+(EJSS_ODE_INTERPOLATION.ExtraStepsIntervalData = {}),
+  (EJSS_ODE_INTERPOLATION.extraStepsIntervalData = function (e, t, n) {
+    var r = EJSS_ODE_INTERPOLATION.intervalData(
+        e[e.length - 1],
+        t[t.length - 1]
+      ),
+      i,
+      s,
+      o;
+    (r.getTimeIndex = function () {
+      return i;
+    }),
+      (r.getDeltaTime = function () {
+        return s;
+      }),
+      (r.getCoeffs = function () {
+        return o;
+      });
+    var u = e.length;
+    (i = u - 1), (s = t[i] - e[i]);
+    var a = n.length;
+    o = new Array(a);
+    for (var f = 0; f < a; f++) {
+      o[f] = new Array(u);
+      for (var l = 0; l < u; l++) o[f][l] = n[f][l];
+    }
+    return r;
+  });
+var EJSS_ODE_INTERPOLATION = EJSS_ODE_INTERPOLATION || {};
+(EJSS_ODE_INTERPOLATION.HermiteIntervalData = {}),
+  (EJSS_ODE_INTERPOLATION.hermiteIntervalData = function (e, t, n, r) {
+    var i = EJSS_ODE_INTERPOLATION.intervalData(
+        e[e.length - 1],
+        n[n.length - 1]
+      ),
+      s,
+      o,
+      u,
+      a,
+      f,
+      l;
+    (i.getTimeIndex = function () {
+      return s;
+    }),
+      (i.getDeltaTime = function () {
+        return o;
+      }),
+      (i.getLeftState = function () {
+        return u;
+      }),
+      (i.getLeftRate = function () {
+        return a;
+      }),
+      (i.interpolate = function (e, t) {
+        var n = (e - i.getLeft()) / o,
+          r = n - 1,
+          s = n * r,
+          c = s * (1 - 2 * n),
+          h = -r - c,
+          p = n + c,
+          d = s * r * o,
+          v = s * n * o;
+        return h * u[t] + p * f[t] + d * a[t] + v * l[t];
+      }),
+      (i.interpolateState = function (e, t, n, r) {
+        return i.hermite((e - i.getLeft()) / o, t, n, r), t;
+      }),
+      (i.hermite = function (e, t, n, r) {
+        var i = e - 1,
+          s = e * i,
+          c = s * (1 - 2 * e),
+          h = -i - c,
+          p = e + c,
+          d = s * i * o,
+          v = s * e * o,
+          m = n;
+        for (var g = 0; g < r; g++)
+          (t[g] = h * u[m] + p * f[m] + d * a[m] + v * l[m]), m++;
+      });
+    var c = e.length;
+    (u = new Array(c)),
+      (a = new Array(c)),
+      (f = new Array(c)),
+      (l = new Array(c));
+    for (var h = 0; h < c; h++)
+      (u[h] = e[h]), (a[h] = t[h]), (f[h] = n[h]), (l[h] = r[h]);
+    return (s = c - 1), (o = n[s] - e[s]), i;
+  });
+var EJSS_ODE_INTERPOLATION = EJSS_ODE_INTERPOLATION || {};
+(EJSS_ODE_INTERPOLATION.InitialConditionData = {}),
+  (EJSS_ODE_INTERPOLATION.initialConditionData = function (e) {
+    var t = EJSS_ODE_INTERPOLATION.intervalData(Number.NaN, Number.NaN),
+      n;
+    (t.interpolate = function (t, r) {
+      return e.getInitialCondition(t, n), n[r];
+    }),
+      (t.interpolateState = function (t, r, i, s) {
+        e.getInitialCondition(t, n);
+        var o = i;
+        for (var u = 0; u < s; u++) (r[u] = n[o]), o++;
+        return r;
+      });
+    var r = e.getState(),
+      i = r.length;
+    return (n = new Array(i)), t;
+  });
+var EJSS_ODE_INTERPOLATION = EJSS_ODE_INTERPOLATION || {};
+(EJSS_ODE_INTERPOLATION.IntervalData = {}),
+  (EJSS_ODE_INTERPOLATION.intervalData = function (e, t) {
+    var n = {};
+    return (
+      (n.getLeft = function () {
+        return e;
+      }),
+      (n.getRight = function () {
+        return t;
+      }),
+      (n.setRight = function (e) {
+        t = e;
+      }),
+      (n.interpolate = function (e, t) {
+        return Number.NaN;
+      }),
+      (n.interpolateState = function (e, t, n, r) {
+        return t;
+      }),
+      n
+    );
+  });
+var EJSS_ODE_INTERPOLATION = EJSS_ODE_INTERPOLATION || {};
+(EJSS_ODE_INTERPOLATION.Radau5IntervalData = {}),
+  (EJSS_ODE_INTERPOLATION.radau5IntervalData = function (e, t, n) {
+    var r = EJSS_ODE_INTERPOLATION.extraStepsIntervalData(e, bState, n),
+      i = bState[bState.length - 1];
+    return (
+      (r.interpolate = function (e, t) {
+        var n = (e - i) / r.getDeltaTime(),
+          s = r.getCoeffs(),
+          o = EJSS_ODE_SOLVERS.Radau5.c1m1,
+          u = EJSS_ODE_SOLVERS.Radau5.c2m1;
+        return (
+          s[0][t] + n * (s[1][t] + (n - u) * (s[2][t] + (n - o) * s[3][t]))
+        );
+      }),
+      (r.interpolateState = function (e, t, n, s) {
+        var o = (e - i) / mDeltaTime,
+          u = r.getCoeffs(),
+          a = EJSS_ODE_SOLVERS.Radau5.c1m1,
+          f = EJSS_ODE_SOLVERS.Radau5.c2m1,
+          l = n;
+        for (var c = 0; c < s; c++)
+          (t[c] =
+            u[0][l] + o * (u[1][l] + (o - f) * (u[2][l] + (o - a) * u[3][l]))),
+            l++;
+        return t;
+      }),
+      r
+    );
+  });
+var EJSS_ODE_INTERPOLATION = EJSS_ODE_INTERPOLATION || {};
+(EJSS_ODE_INTERPOLATION.StateHistory = {}),
+  (EJSS_ODE_INTERPOLATION.stateHistory = function (e) {
+    var t = {},
+      n = [],
+      r = !0,
+      i,
+      s = 0,
+      o = 0,
+      u = 0;
+    return (
+      (t.setLength = function (e) {
+        (o = Math.abs(e)), (u = Math.max(s, o));
+      }),
+      (t.setMinimumLength = function (e) {
+        (s = Math.abs(e)), (u = Math.max(s, o));
+      }),
+      (t.addIntervalData = function (e) {
+        r = e.getLeft() <= e.getRight();
+        var t = n.length;
+        if (n.length > 0) {
+          var i = n.length - 1,
+            s = n[i],
+            o = 0;
+          if (r) {
+            while (s != null && s.getLeft() >= e.getLeft())
+              o++, i--, i < 0 ? (s = null) : (s = n[i]);
+            s != null && e.getLeft() < s.getRight() && s.setRight(e.getLeft());
+          } else {
+            while (s != null && s.getLeft() <= e.getLeft())
+              o++, i--, i < 0 ? (s = null) : (s = n[i]);
+            s != null && e.getLeft() > s.getRight() && s.setRight(e.getLeft());
+          }
+          o > 0 && n.splice(i, o);
+        }
+        n.push(e);
+      }),
+      (t.toString = function () {
+        var e = "History has now " + n.length + " intervals: ";
+        for (var t = 0, r = n.length; t < r; t++) {
+          var i = n[t];
+          t > 0 && (e += ", "),
+            (e += " [" + i.getLeft() + "," + i.getRight() + ")");
+        }
+        return e;
+      }),
+      (t.clearAll = function () {
+        n = [];
+      }),
+      (t.clean = function (e) {
+        if (!isFinite(u)) return;
+        if (u == 0) {
+          clearAll();
+          return;
+        }
+        var t = 0,
+          i = n.length;
+        if (r) {
+          e -= u;
+          for (var s = 0; s < i; s++) {
+            var o = n[s];
+            if (o.getRight() > e) break;
+            t++;
+          }
+        } else {
+          e += u;
+          for (var s = 0; s < i; s++) {
+            var o = n[s];
+            if (o.getRight() < e) break;
+            t++;
+          }
+        }
+        t > 0 && n.splice(0, t);
+      }),
+      (t.findInterval = function (e) {
+        var t = n.length;
+        if (r)
+          for (var s = t - 1; s >= 0; s--) {
+            var o = n[s];
+            if (o.getLeft() <= e) return o;
+          }
+        else
+          for (var s = t - 1; s >= 0; s--) {
+            var o = n[s];
+            if (o.getLeft() >= e) return o;
+          }
+        return i;
+      }),
+      (t.interpolate = function (e, n) {
+        var r = t.findInterval(e);
+        return r.interpolate(e, n);
+      }),
+      (t.interpolateState = function (e, n, r, i) {
+        var s = t.findInterval(e);
+        return (
+          i || (i = n.length), r || (r = 0), s.interpolateState(e, n, r, i)
+        );
+      }),
+      e.getInitialCondition
+        ? ((i = EJSS_ODE_INTERPOLATION.initialConditionData(e)),
+          e.setStateHistory(t))
+        : (i = EJSS_ODE_INTERPOLATION.constantConditionData(e.getState())),
+      t
+    );
+  });
+var EJSS_ODE_SOLVERS = EJSS_ODE_SOLVERS || {};
+(EJSS_ODE_SOLVERS.EVENT_TYPE = {
+  STATE_EVENT: 0,
+  POSITIVE_EVENT: 1,
+  CROSSING_EVENT: 2,
+}),
+  (EJSS_ODE_SOLVERS.EVENT_METHOD = { BISECTION: 0, SECANT: 1 }),
+  (EJSS_ODE_SOLVERS.ERROR = {
+    NO_ERROR: 0,
+    INTERNAL_SOLVER_ERROR: 1,
+    EVENT_NOT_FOUND: 2,
+    ILLEGAL_EVENT_STATE: 3,
+    ZENO_EFFECT: 4,
+    TOO_MANY_STEPS_ERROR: 5,
+    DISCONTINUITY_PRODUCED_ERROR: 6,
+    DID_NOT_CONVERGE: 7,
+  }),
+  (EJSS_ODE_SOLVERS.DISCONTINUITY_CODE = {
+    DISCONTINUITY_PRODUCED_ERROR: 0,
+    NO_DISCONTINUITY_ALONG_STEP: 1,
+    DISCONTINUITY_ALONG_STEP: 2,
+    DISCONTINUITY_JUST_PASSED: 3,
+    DISCONTINUITY_EXACTLY_ON_STEP: 4,
+  }),
+  (EJSS_ODE_SOLVERS.InterpolatorEventSolver = {}),
+  (EJSS_ODE_SOLVERS.interpolatorEventSolver = function (e, t) {
+    function n(t, n) {
+      p ? e.bestInterpolate(t, n) : e.interpolate(t, n);
+    }
+    function r() {
+      var r = t.getState(),
+        i = e.getCurrentRate(),
+        s = r[T];
+      if (s + i[T] == s) return 0;
+      var o = e.getMaximumTime(!1);
+      if (isNaN(o))
+        return c.error(
+          EJSS_ODE_SOLVERS.ERROR.INTERNAL_SOLVER_ERROR,
+          "Error when stepping the solver at " + r[T]
+        );
+      if (s == o) {
+        o = e.internalStep(!1);
+        if (isNaN(o))
+          return c.error(
+            EJSS_ODE_SOLVERS.ERROR.INTERNAL_SOLVER_ERROR,
+            "Error when stepping the solver at max step at " + r[T]
+          );
+      }
+      return n(o, r), o - s;
+    }
+    function i() {
+      var r = t.getState(),
+        i = e.getCurrentRate(),
+        s = r[T];
+      if (s + i[T] == s) return 0;
+      var o = r[T] + d,
+        u = e.getMaximumTime(!1);
+      if (isNaN(u))
+        return c.error(
+          EJSS_ODE_SOLVERS.ERROR.INTERNAL_SOLVER_ERROR,
+          "Error when stepping the solver at " + r[T]
+        );
+      var a = 0;
+      if (S)
+        while (u < o) {
+          u = e.internalStep(!1);
+          if (isNaN(u))
+            return c.error(
+              EJSS_ODE_SOLVERS.ERROR.INTERNAL_SOLVER_ERROR,
+              "Error when stepping the solver forwards at " + r[T]
+            );
+          if (++a > E) {
+            var f = r[T],
+              l = e.bestInterpolate(o, new Array(x))[T];
+            return c.error(
+              EJSS_ODE_SOLVERS.ERROR.TOO_MANY_STEPS_ERROR,
+              "The solver exceeded the maximum of " +
+                E +
+                " internal steps\nat " +
+                l +
+                ", starting from " +
+                f +
+                " for an step of " +
+                d
+            );
+          }
+        }
+      else
+        while (u > o) {
+          u = e.internalStep(!1);
+          if (isNaN(u))
+            return c.error(
+              EJSS_ODE_SOLVERS.ERROR.INTERNAL_SOLVER_ERROR,
+              "Error when stepping the solver backwards at " + r[T]
+            );
+          if (++a > E)
+            return c.error(
+              EJSS_ODE_SOLVERS.ERROR.TOO_MANY_STEPS_ERROR,
+              "The solver exceeded the number of internal steps at " + r[T]
+            );
+        }
+      return n(o, r), d;
+    }
+    function s() {
+      var r = t.getState();
+      if (y > 0 && H > y && a(r)) return 0;
+      var i = r[T],
+        s = e.getCurrentRate();
+      if (i + s[T] == i) return 0;
+      var o = e.getMaximumTime(I);
+      if (isNaN(o))
+        return c.error(
+          EJSS_ODE_SOLVERS.ERROR.INTERNAL_SOLVER_ERROR,
+          "Error when stepping the solver at " + r[T]
+        );
+      if (i == o) {
+        o = e.internalStep(I);
+        if (isNaN(o))
+          return c.error(
+            EJSS_ODE_SOLVERS.ERROR.INTERNAL_SOLVER_ERROR,
+            "Error when stepping the solver forwards at " + r[T]
+          );
+      }
+      P != null &&
+        (isNaN(P.getMaxAdvance()) ||
+          (o = S
+            ? Math.min(o, P.getMaxAdvance())
+            : Math.max(o, P.getMaxAdvance())));
+      var f = S ? Math.min(i + g, o) : Math.max(i - g, o);
+      for (;;) {
+        var l = null;
+        (j = null),
+          n(f, L),
+          (l = c.findFirstEvent(r, f, L)),
+          l == null && q != null && q.getTime() <= f && (l = q);
+        if (l == null) {
+          if (f == o) {
+            for (var h = 0; h < x; h++) r[h] = L[h];
+            return u(r[T]), o - i;
+          }
+          f = S ? Math.min(f + g, o) : Math.max(f - g, o);
+          continue;
+        }
+        j = l;
+        if (p) e.bestInterpolate(l.getTime(), r);
+        else for (var h = 0; h < x; h++) r[h] = L[h];
+        var d = r[T];
+        return (
+          l.action(),
+          c.reinitialize(),
+          (r = t.getState()),
+          d != r[T]
+            ? ((H = 0), (P = null), (j = null), l.reset(r), l.getTime() - i)
+            : (P != null && (Math.abs(D - l.getTime()) < b ? H++ : (H = 0)),
+              (P = l),
+              (D = l.getTime()),
+              l.getTime() - i)
+        );
+      }
+    }
+    function o() {
+      var r = t.getState();
+      if (y > 0 && H > y && a(r)) return 0;
+      var i = r[T],
+        s = e.getCurrentRate();
+      if (i + s[T] == i) return 0;
+      var o = i + d,
+        f = e.getMaximumTime(I);
+      if (isNaN(f))
+        return c.error(
+          EJSS_ODE_SOLVERS.ERROR.INTERNAL_SOLVER_ERROR,
+          "Error when stepping the solver at " + r[T]
+        );
+      var l = S ? Math.min(i + g, o) : Math.max(i - g, o),
+        h = 0;
+      for (;;) {
+        var v = null;
+        j = null;
+        var m = S ? f < l : f > l;
+        if (m) {
+          e.bestInterpolate(f, L),
+            (v = c.findFirstEvent(r, f, L)),
+            v == null && (v = q);
+          if (v == null) {
+            for (var N = 0; N < x; N++) r[N] = L[N];
+            u(r[T]), (f = e.internalStep(I));
+            if (isNaN(f))
+              return c.error(
+                EJSS_ODE_SOLVERS.ERROR.INTERNAL_SOLVER_ERROR,
+                "Error when stepping the solver looking for an event at " + r[T]
+              );
+            if (++h > E)
+              return c.error(
+                EJSS_ODE_SOLVERS.ERROR.TOO_MANY_STEPS_ERROR,
+                "The solver exceeded the number of internal steps at " + r[T]
+              );
+            continue;
+          }
+        } else {
+          n(l, L),
+            (v = c.findFirstEvent(r, l, L)),
+            v == null && q != null && q.time <= l && (v = q);
+          if (v == null) {
+            if (l == o) {
+              for (var N = 0; N < x; N++) r[N] = L[N];
+              return u(r[T]), o - i;
+            }
+            l = S ? Math.min(l + g, o) : Math.max(l - g, o);
+            continue;
+          }
+        }
+        j = v;
+        if (p) e.bestInterpolate(v.getTime(), r);
+        else for (var N = 0; N < x; N++) r[N] = L[N];
+        var C = r[T],
+          k = v.action();
+        c.reinitialize(), (h = 0), (r = t.getState());
+        if (C != r[T])
+          return (H = 0), (P = null), (j = null), v.reset(r), v.getTime() - i;
+        P != null &&
+          (Math.abs(D - v.getTime()) < b ? (H++, w && (k = !1)) : (H = 0)),
+          (P = v),
+          (D = v.getTime());
+        if (k) return v.getTime() - i;
+        if (y > 0 && H > y && a(r)) return v.getTime() - i;
+        (q = null),
+          (f = e.getMaximumTime(I)),
+          isNaN(v.getMaxAdvance()) ||
+            (f = S
+              ? Math.min(f, v.getMaxAdvance())
+              : Math.max(f, v.getMaxAdvance()));
+        if (isNaN(f))
+          return c.error(
+            EJSS_ODE_SOLVERS.ERROR.INTERNAL_SOLVER_ERROR,
+            "Error when stepping the solver after an event at " + r[T]
+          );
+      }
+    }
+    function u(e) {
+      var t, n;
+      n = O.length;
+      for (t = 0; t < n; t++) {
+        var r = O[t];
+        r.findPosition(e, r.getH());
+      }
+      n = R.length;
+      for (t = 0; t < n; t++) {
+        var r = R[t];
+        r.findPosition(e, r.getH());
+      }
+    }
+    function a(e) {
+      if (B.length <= 0)
+        return (
+          c.error(
+            EJSS_ODE_SOLVERS.ERROR.ZENO_EFFECT,
+            "A Zeno-like effect has been detected.\nLast event was " +
+              P.getProblem() +
+              " which took place at " +
+              D
+          ),
+          !0
+        );
+      var t = !1,
+        n,
+        r = B.length;
+      for (n = 0; n < r; n++) {
+        var i = B[n];
+        i.zenoEffectAction(P.getProblem(), e) && (t = !0);
+      }
+      return (H = 0), t;
+    }
+    function f(e, t, n, r) {
+      n.splice(0, n.length);
+      var i = O.length;
+      for (var s = 0; s < i; s++) {
+        var o = O[s];
+        o.setH(o.getEvent().evaluate(t));
+        switch (o.getCurrentPosition()) {
+          default:
+          case EJSS_ODE_SOLVERS.ProblemData.POSITIVE:
+            o.getH() <= 0 && n.push(o);
+            break;
+          case EJSS_ODE_SOLVERS.ProblemData.SMALL_POSITIVE:
+            if (
+              o.getH() <= 0 &&
+              (o.hasPositiveFlag() ||
+                o.getEventType() == EJSS_ODE_SOLVERS.EVENT_TYPE.STATE_EVENT)
+            )
+              return o;
+            break;
+          case EJSS_ODE_SOLVERS.ProblemData.ZERO:
+            if (o.getH() < 0) {
+              if (
+                o.hasPositiveFlag() ||
+                o.getEventType() == EJSS_ODE_SOLVERS.EVENT_TYPE.STATE_EVENT
+              )
+                return o;
+            } else if (
+              o.getH() > 0 &&
+              o.hasNegativeFlag() &&
+              o.getEventType() == EJSS_ODE_SOLVERS.EVENT_TYPE.CROSSING_EVENT
+            )
+              return o;
+            break;
+          case EJSS_ODE_SOLVERS.ProblemData.SMALL_NEGATIVE:
+            if (o.getEventType() == EJSS_ODE_SOLVERS.EVENT_TYPE.STATE_EVENT) {
+              if (o.getH() <= -o.getEvent().getTolerance()) return o;
+            } else if (
+              o.getEventType() == EJSS_ODE_SOLVERS.EVENT_TYPE.CROSSING_EVENT &&
+              o.hasNegativeFlag() &&
+              o.getH() >= 0
+            )
+              return o;
+            break;
+          case EJSS_ODE_SOLVERS.ProblemData.NEGATIVE:
+            if (o.getEventType() == EJSS_ODE_SOLVERS.EVENT_TYPE.CROSSING_EVENT)
+              o.getH() >= 0 && n.push(o);
+            else if (
+              o.getEventType() == EJSS_ODE_SOLVERS.EVENT_TYPE.STATE_EVENT
+            )
+              return (
+                c.error(
+                  EJSS_ODE_SOLVERS.ERROR.ILLEGAL_EVENT_STATE,
+                  "The system started from an illegal state at " +
+                    e +
+                    " for the state event " +
+                    o.getEvent()
+                ),
+                o
+              );
+        }
+      }
+      return null;
+    }
+    function l(e, t, n) {
+      var r,
+        i = e.length,
+        s,
+        o = n,
+        u = n - t,
+        a = (t + n) / 2;
+      if (S)
+        for (r = 0; r < i; r++) {
+          var f = e[r];
+          switch (f.getEvent().getRootFindingMethod()) {
+            default:
+            case EJSS_ODE_SOLVERS.EVENT_METHOD.BISECTION:
+              o = Math.min(o, a);
+              break;
+            case EJSS_ODE_SOLVERS.EVENT_METHOD.SECANT:
+              (s = f.getHBefore()),
+                (o = Math.min(o, t - (s * u) / (f.getHAfter() - s)));
+          }
+        }
+      else
+        for (r = 0; r < i; r++) {
+          var f = e[r];
+          switch (f.getEvent().getRootFindingMethod()) {
+            default:
+            case EJSS_ODE_SOLVERS.EVENT_METHOD.BISECTION:
+              o = Math.max(o, a);
+              break;
+            case EJSS_ODE_SOLVERS.EVENT_METHOD.SECANT:
+              (s = f.getHBefore()),
+                (o = Math.max(o, t - (s * u) / (f.getHAfter() - s)));
+          }
+        }
+      return o;
+    }
+    var c = {},
+      h = !0,
+      p = !1,
+      d = 0.1,
+      v = Number.NaN,
+      m = Number.NaN,
+      g = Number.POSITIVE_INFINITY,
+      y = 500,
+      b = 2 * Number.MIN_VALUE,
+      w = !0,
+      E = 1e4,
+      S = d > 0,
+      x,
+      T,
+      N = EJSS_ODE_SOLVERS.ERROR.NO_ERROR,
+      C = "No error",
+      k = 0,
+      L,
+      A,
+      O = [],
+      M = [],
+      _ = [],
+      D = Number.NaN,
+      P = null,
+      H = 0,
+      B = [],
+      j = null,
+      F = !1,
+      I = !1,
+      q = null,
+      R = [],
+      U = null,
+      z = 100,
+      W = 1e-8,
+      X = Number.NaN;
+    return (
+      (c.getEPSILON = function () {
+        if (isNaN(X)) {
+          X = 1;
+          while (X + 1 != 1) X /= 2;
+          X *= 2;
+        }
+        return X;
+      }),
+      (c.setEnableExceptions = function (e) {
+        h = e;
+      }),
+      (c.setBestInterpolation = function (e) {
+        p = e;
+      }),
+      (c.setHistoryLength = function (t) {
+        e.getStateHistory().setLength(t);
+      }),
+      (c.setStepSize = function (t) {
+        if (d == t) return;
+        (d = t), (S = d > 0), c.setInternalStepSize(e.getStepSize());
+      }),
+      (c.getStepSize = function () {
+        return d;
+      }),
+      (c.setEstimateFirstStep = function (t) {
+        e.setEstimateFirstStep(t);
+      }),
+      (c.setInternalStepSize = function (t) {
+        e.setStepSize(S ? Math.abs(t) : -Math.abs(t));
+      }),
+      (c.setMaximumInternalStepSize = function (t) {
+        e.setMaximumStepSize(t);
+      }),
+      (c.setMaximumInternalSteps = function (e) {
+        E = e;
+      }),
+      (c.setTolerances = function (t, n) {
+        e.setTolerances((v = Math.abs(t)), (m = Math.abs(n)));
+      }),
+      (c.setTolerance = function (e) {
+        setTolerances(e, 0);
+      }),
+      (c.getTolerance = function () {
+        return Math.max(v, m);
+      }),
+      (c.setDDETolerance = function (e) {
+        W = e;
+      }),
+      (c.getDDETolerance = function () {
+        return W;
+      }),
+      (c.setDDEIterations = function (e) {
+        z = e;
+      }),
+      (c.getDDEIterations = function () {
+        return z;
+      }),
+      (c.addEvent = function (e) {
+        O.push(EJSS_ODE_SOLVERS.eventData(c, e, t.getState())), (F = !0);
+      }),
+      (c.removeEvent = function (e) {
+        var t = -1,
+          n = O.length;
+        for (var r = 0; r < n; r++) {
+          var i = O[r];
+          if (i.getEvent() == e) {
+            t = r;
+            break;
+          }
+        }
+        if (t >= 0) {
+          var s = O[t];
+          P == s && ((P = null), (H = 0)), j == s && (j = null), O.splice(t, 1);
+        }
+        F = I || O.length > 0;
+      }),
+      (c.addDiscontinuity = function (e) {
+        R.push(EJSS_ODE_SOLVERS.discontinuityData(c, e, t.getState())),
+          (I = !0),
+          (F = !0);
+      }),
+      (c.removeDiscontinuity = function (e) {
+        var t = -1,
+          n = R.length;
+        for (var r = 0; r < n; r++) {
+          var i = R[r];
+          if (i.getDiscontinuity() == e) {
+            t = r;
+            break;
+          }
+        }
+        t >= 0 && R.splice(t, 1), (I = R.length > 0), (F = I || O.length > 0);
+      }),
+      (c.removeAllEvents = function () {
+        (O = []),
+          (R = []),
+          (I = !1),
+          (F = !1),
+          U != null && c.addDiscontinuity(U);
+      }),
+      (c.setMaximumEventStep = function (e) {
+        g = Math.abs(e);
+      }),
+      (c.getMaximumEventStep = function () {
+        return g;
+      }),
+      (c.setCoalesceCloseEvents = function (e) {
+        w = e;
+      }),
+      (c.isCoalesceCloseEvents = function () {
+        return w;
+      }),
+      (c.setEventProximityThreshold = function (e) {
+        b = e;
+      }),
+      (c.getEventProximityThreshold = function () {
+        return b;
+      }),
+      (c.setZenoEffectDetection = function (e) {
+        y = e;
+      }),
+      (c.getZenoEffectDetection = function () {
+        return y;
+      }),
+      (c.addZenoEffectListener = function (e) {
+        B.push(e);
+      }),
+      (c.removeZenoEffectListener = function (e) {
+        var t = B.length;
+        for (var n = 0; n < t; n++)
+          if (B[n] == e) {
+            B.splice(n, 1);
+            return;
+          }
+      }),
+      (c.setZeroZenoCounter = function () {
+        H = 0;
+      }),
+      (c.getSolverEngine = function () {
+        return e;
+      }),
+      (c.getODE = function () {
+        return t;
+      }),
+      (c.getStateHistory = function () {
+        return e.getStateHistory();
+      }),
+      (c.getErrorCode = function () {
+        return N;
+      }),
+      (c.getErrorMessage = function () {
+        return C;
+      }),
+      (c.getCounter = function () {
+        return e.getCounter();
+      }),
+      (c.getNumberOfAttempts = function () {
+        return k;
+      }),
+      (c.getInternalStepSize = function () {
+        return e.getInternalStepSize();
+      }),
+      (c.getIndependentVariableValue = function () {
+        return t.getState()[T];
+      }),
+      (c.getCurrentTime = function () {
+        return t.getState()[T];
+      }),
+      (c.getRunsForwards = function () {
+        return S;
+      }),
+      (c.getCurrentEventData = function () {
+        return j;
+      }),
+      (c.getLastEventData = function () {
+        return P;
+      }),
+      (c.getLastEventDataTime = function () {
+        return D;
+      }),
+      (c.initialize = function (n) {
+        var r, i, s;
+        (d = n),
+          (S = d > 0),
+          e.initialize(d),
+          (s = t.getState()),
+          (x = s.length),
+          (T = x - 1),
+          (L = new Array(x)),
+          (A = new Array(x)),
+          (N = EJSS_ODE_SOLVERS.ERROR.NO_ERROR),
+          (C = "No error"),
+          (H = 0),
+          (P = null),
+          (j = null),
+          U !== null &&
+            (U.initialize(s), c.removeDiscontinuity(U), c.addDiscontinuity(U)),
+          (i = O.length);
+        for (r = 0; r < i; r++) O[r].reset(s);
+        i = R.length;
+        for (r = 0; r < i; r++) R[r].reset(s);
+      }),
+      (c.step = function () {
+        return F ? o() : i();
+      }),
+      (c.maxStep = function () {
+        return F ? s() : r();
+      }),
+      (c.userReinitialize = function () {
+        (j = null), c.reinitialize();
+      }),
+      (c.reinitialize = function () {
+        var n,
+          r,
+          i = t.getState();
+        e.reinitialize(i),
+          (N = EJSS_ODE_SOLVERS.ERROR.NO_ERROR),
+          (C = "No error"),
+          U != null && U.reset(i),
+          (r = O.length);
+        for (n = 0; n < r; n++) O[n].reset(i);
+        r = R.length;
+        for (n = 0; n < r; n++) R[n].reset(i);
+        q = null;
+      }),
+      (c.resetDiscontinuities = function (e) {
+        if (U !== null) {
+          U.reset(e);
+          var t = R.length;
+          for (var n = 0; n < t; n++) R[n].reset(e);
+        }
+      }),
+      (c.checkDiscontinuity = function (e, t) {
+        var n = R.length,
+          r = null;
+        for (var i = 0; i < n; i++) {
+          var s = R[i],
+            o = s.getDiscontinuity().evaluate(e);
+          s.setH(o);
+          switch (s.getCurrentPosition()) {
+            default:
+            case EJSS_ODE_SOLVERS.ProblemData.POSITIVE:
+              if (o <= 0)
+                return EJSS_ODE_SOLVERS.DISCONTINUITY_CODE
+                  .DISCONTINUITY_ALONG_STEP;
+              o < s.getDiscontinuity().getTolerance() && (r = s);
+              break;
+            case EJSS_ODE_SOLVERS.ProblemData.SMALL_POSITIVE:
+              if (o <= 0 && s.hasPositiveFlag())
+                return (
+                  c.error(
+                    EJSS_ODE_SOLVERS.ERROR.ILLEGAL_EVENT_STATE,
+                    "The system started from an illegal state at " +
+                      e[T] +
+                      " for the discontinuity " +
+                      s.getDiscontinuity()
+                  ),
+                  EJSS_ODE_SOLVERS.DISCONTINUITY_CODE
+                    .DISCONTINUITY_PRODUCED_ERROR
+                );
+              break;
+            case EJSS_ODE_SOLVERS.ProblemData.ZERO:
+              if (o < 0 && s.hasPositiveFlag())
+                return (
+                  c.error(
+                    EJSS_ODE_SOLVERS.ERROR.ILLEGAL_EVENT_STATE,
+                    "The system started from an illegal state at " +
+                      e[T] +
+                      " for the discontinuity " +
+                      s.getDiscontinuity()
+                  ),
+                  EJSS_ODE_SOLVERS.DISCONTINUITY_CODE
+                    .DISCONTINUITY_PRODUCED_ERROR
+                );
+              if (o > 0 && s.hasNegativeFlag())
+                return (
+                  c.error(
+                    EJSS_ODE_SOLVERS.ERROR.ILLEGAL_EVENT_STATE,
+                    "The system started from an illegal state at " +
+                      e[T] +
+                      " for the discontinuity " +
+                      s.getDiscontinuity()
+                  ),
+                  EJSS_ODE_SOLVERS.DISCONTINUITY_CODE
+                    .DISCONTINUITY_PRODUCED_ERROR
+                );
+              break;
+            case EJSS_ODE_SOLVERS.ProblemData.SMALL_NEGATIVE:
+              if (s.hasNegativeFlag() && o >= 0)
+                return (
+                  c.error(
+                    EJSS_ODE_SOLVERS.ERROR.ILLEGAL_EVENT_STATE,
+                    "The system started from an illegal state at " +
+                      e[T] +
+                      " for the discontinuity " +
+                      s.getDiscontinuity()
+                  ),
+                  EJSS_ODE_SOLVERS.DISCONTINUITY_CODE
+                    .DISCONTINUITY_PRODUCED_ERROR
+                );
+              break;
+            case EJSS_ODE_SOLVERS.ProblemData.NEGATIVE:
+              if (o > 0)
+                return EJSS_ODE_SOLVERS.DISCONTINUITY_CODE
+                  .DISCONTINUITY_ALONG_STEP;
+              o > -s.getDiscontinuity().getTolerance() && (r = s);
+          }
+        }
+        return r != null
+          ? (t && ((q = r), q.setTime(e[T])),
+            EJSS_ODE_SOLVERS.DISCONTINUITY_CODE.DISCONTINUITY_EXACTLY_ON_STEP)
+          : EJSS_ODE_SOLVERS.DISCONTINUITY_CODE.NO_DISCONTINUITY_ALONG_STEP;
+      }),
+      (c.error = function (t, n) {
+        (N = t), (C = n);
+        if (h) throw { name: "ODE Solver exception", solver: e, message: n };
+        return Number.NaN;
+      }),
+      (c.findFirstEvent = function (t, r, i) {
+        var s, o;
+        k = 0;
+        var u = f(t[T], i, M, "at t1");
+        if (u != null) {
+          (u.time = t[T]), (u.maxAdvance = r);
+          for (s = 0; s < x; s++) i[s] = t[s];
+          return u;
+        }
+        if (M.length <= 0) return null;
+        var a = !0;
+        o = O.length;
+        for (s = 0; s < o; s++) {
+          var h = O[s];
+          h.setHAfter(h.getH());
+        }
+        while (a) {
+          k++;
+          var p = l(M, t[T], r);
+          n(p, A);
+          var d = f(t[T], A, _, "short");
+          if (d != null) {
+            (d.time = t[T]), (d.maxAdvance = p);
+            for (s = 0; s < x; s++) i[s] = t[s];
+            return d;
+          }
+          if (_.length <= 0) {
+            var v = null;
+            o = M.length;
+            for (s = 0; s < o; s++) {
+              var h = M[s];
+              if (
+                h.getCurrentPosition() == EJSS_ODE_SOLVERS.ProblemData.POSITIVE
+              ) {
+                if (h.getH() < h.getEvent().getTolerance()) {
+                  v = h;
+                  break;
+                }
+              } else if (h.getH() > -h.getEvent().getTolerance()) {
+                v = h;
+                break;
+              }
+            }
+            if (v != null) {
+              (v.time = p), (v.maxAdvance = r);
+              for (s = 0; s < x; s++) i[s] = A[s];
+              return v;
+            }
+            for (s = 0; s < x; s++) t[s] = A[s];
+            o = O.length;
+            for (s = 0; s < o; s++) {
+              var h = O[s];
+              h.findPosition(t[T], h.getH());
+            }
+            var m = f(t[T], i, M, "at tTest");
+            if (m != null) {
+              (m.time = t[T]), (m.maxAdvance = r);
+              for (s = 0; s < x; s++) i[s] = t[s];
+              return m;
+            }
+          } else {
+            var g = !0,
+              v = null;
+            o = _.length;
+            for (s = 0; s < o; s++) {
+              var y = _[s];
+              if (
+                y.getCurrentPosition() == EJSS_ODE_SOLVERS.ProblemData.POSITIVE
+              ) {
+                if (y.getH() <= -y.getEvent().getTolerance()) {
+                  g = !1;
+                  break;
+                }
+                v = y;
+              } else {
+                if (y.getH() >= y.getEvent().getTolerance()) {
+                  g = !1;
+                  break;
+                }
+                v = y;
+              }
+            }
+            if (g && v != null) {
+              (v.time = p), (v.maxAdvance = r);
+              for (s = 0; s < x; s++) i[s] = A[s];
+              return v;
+            }
+            r = p;
+            for (s = 0; s < x; s++) i[s] = A[s];
+            o = O.length;
+            for (s = 0; s < o; s++) {
+              var h = O[s];
+              h.setHAfter(h.getH());
+            }
+            (M = []), (o = _.length);
+            for (s = 0; s < o; s++) M.push(_[s]);
+          }
+          o = M.length;
+          for (s = 0; s < o; s++) {
+            var y = M[s];
+            if (k > y.getEvent().getMaxIterations()) {
+              a = !1;
+              break;
+            }
+          }
+        }
+        var b = M[0];
+        return (
+          c.error(
+            EJSS_ODE_SOLVERS.ERROR.EVENT_NOT_FOUND,
+            "Warning : Event not found after " +
+              k +
+              " attempts at t=" +
+              t[T] +
+              " h=" +
+              b.getH() +
+              ".\nPlease check the code of your event, decrease the initial step size, the tolerance of the solver," +
+              "\nor the event maximum step, or increase the maximum number of attempts." +
+              "\nFirst event remaining in the queue: " +
+              b.getEvent()
+          ),
+          b.setTime((t[T] + r) / 2),
+          b.setMaxAdvance(Number.NaN),
+          e.bestInterpolate(b.time, i),
+          b
+        );
+      }),
+      t.getDelays && (U = EJSS_ODE_SOLVERS.ddeDiscontinuity(c, t)),
+      e.setODE(c, t),
+      c
+    );
+  });
+var EJSS_ODE_SOLVERS = EJSS_ODE_SOLVERS || {};
+(EJSS_ODE_SOLVERS.BogackiShampine23 = {
+  B3_1: 2 / 9,
+  B3_2: 1 / 3,
+  B3_3: 4 / 9,
+  B2_1: 7 / 24,
+  B2_2: 0.25,
+  B2_3: 1 / 3,
+  B2_4: 1 / 8,
+}),
+  (EJSS_ODE_SOLVERS.bogackiShampine23 = function () {
+    var e = EJSS_ODE_SOLVERS.solverEngineDiscreteTimeAdaptive(3),
+      t,
+      n,
+      r,
+      i = e.allocateOtherArrays;
+    return (
+      (e.getNumberOfEvaluations = function () {
+        return 3;
+      }),
+      (e.allocateOtherArrays = function () {
+        i(),
+          (t = new Array(e.getDimension())),
+          (n = new Array(e.getDimension())),
+          (r = new Array(e.getDimension()));
+      }),
+      (e.computeIntermediateStep = function (r, i) {
+        var s = r / 2,
+          o = e.getODE(),
+          u = e.getInitialState(),
+          a = e.getInitialRate(),
+          f = e.getDimension(),
+          l = f - 1,
+          c = a[l],
+          h = EJSS_ODE_SOLVERS.BogackiShampine23,
+          p;
+        for (p = 0; p < f; p++) i[p] = u[p] + s * a[p];
+        o.getRate(i, t);
+        var d = 0.75 * r;
+        for (p = 0; p < f; p++) i[p] = u[p] + d * t[p];
+        o.getRate(i, n);
+        for (p = 0; p < l; p++)
+          i[p] = u[p] + r * (h.B3_1 * a[p] + h.B3_2 * t[p] + h.B3_3 * n[p]);
+        i[l] = e.getInitialTime() + r * a[l];
+      }),
+      (e.computeCarefulIntermediateStep = function (r, i, s) {
+        var o = i / 2,
+          u = e.getODE(),
+          a = e.getInitialState(),
+          f = e.getInitialRate(),
+          l = e.getDimension(),
+          c = l - 1,
+          h = f[c],
+          p = EJSS_ODE_SOLVERS.BogackiShampine23,
+          d = EJSS_ODE_SOLVERS.DISCONTINUITY_CODE,
+          v;
+        for (v = 0; v < l; v++) s[v] = a[v] + o * f[v];
+        switch (r.checkDiscontinuity(s, !1)) {
+          case d.DISCONTINUITY_PRODUCED_ERROR:
+            return d.DISCONTINUITY_PRODUCED_ERROR;
+          case d.DISCONTINUITY_JUST_PASSED:
+            return d.DISCONTINUITY_JUST_PASSED;
+          case d.DISCONTINUITY_ALONG_STEP:
+            return d.DISCONTINUITY_ALONG_STEP;
+          case d.DISCONTINUITY_EXACTLY_ON_STEP:
+            break;
+          case d.NO_DISCONTINUITY_ALONG_STEP:
+        }
+        u.getRate(s, t);
+        var m = 0.75 * i;
+        for (v = 0; v < l; v++) s[v] = a[v] + m * t[v];
+        switch (r.checkDiscontinuity(s, !1)) {
+          case d.DISCONTINUITY_PRODUCED_ERROR:
+            return d.DISCONTINUITY_PRODUCED_ERROR;
+          case d.DISCONTINUITY_JUST_PASSED:
+            return d.DISCONTINUITY_CODE.DISCONTINUITY_JUST_PASSED;
+          case d.DISCONTINUITY_ALONG_STEP:
+            return d.DISCONTINUITY_ALONG_STEP;
+          case d.DISCONTINUITY_EXACTLY_ON_STEP:
+            break;
+          case d.NO_DISCONTINUITY_ALONG_STEP:
+        }
+        u.getRate(s, n);
+        for (v = 0; v < c; v++)
+          s[v] = a[v] + i * (p.B3_1 * f[v] + p.B3_2 * t[v] + p.B3_3 * n[v]);
+        return (
+          (s[c] = e.getInitialTime() + i * f[c]), r.checkDiscontinuity(s, !0)
+        );
+      }),
+      (e.computeFinalRateAndCreateIntervalData = function () {
+        var t = e.getODE(),
+          n = e.getInitialState(),
+          r = e.getInitialRate(),
+          i = e.getFinalState(),
+          s = e.getFinalRate();
+        return EJSS_ODE_INTERPOLATION.hermiteIntervalData(n, r, i, s);
+      }),
+      (e.computeApproximation = function (i) {
+        var s = e.getODE(),
+          o = e.getTimeIndex(),
+          u = e.getInitialState(),
+          a = e.getInitialRate(),
+          f = e.getFinalState(),
+          l = e.getFinalRate();
+        s.getRate(f, l);
+        var c = EJSS_ODE_SOLVERS.BogackiShampine23;
+        for (var h = 0; h < o; h++)
+          r[h] =
+            u[h] +
+            i * (c.B2_1 * a[h] + c.B2_2 * t[h] + c.B2_3 * n[h] + c.B2_4 * l[h]);
+        return (r[o] = e.getInitialTime() + i * a[o]), e.computeError(r);
+      }),
+      e
+    );
+  });
+var EJSS_ODE_SOLVERS = EJSS_ODE_SOLVERS || {};
+(EJSS_ODE_SOLVERS.CashKarp45 = {
+  A_11: 0.2,
+  A_21: 0.075,
+  A_22: 0.225,
+  A_31: 0.3,
+  A_32: -0.9,
+  A_33: 1.2,
+  A_41: -11 / 54,
+  A_42: 2.5,
+  A_43: -70 / 27,
+  A_44: 35 / 27,
+  A_51: 1631 / 55296,
+  A_52: 175 / 512,
+  A_53: 575 / 13824,
+  A_54: 44275 / 110592,
+  A_55: 253 / 4096,
+  B4_1: 2825 / 27648,
+  B4_2: 0,
+  B4_3: 18575 / 48384,
+  B4_4: 13525 / 55296,
+  B4_5: 277 / 14336,
+  B4_6: 0.25,
+  B5_1: 37 / 378,
+  B5_2: 0,
+  B5_3: 250 / 621,
+  B5_4: 125 / 594,
+  B5_5: 0,
+  B5_6: 512 / 1771,
+}),
+  (EJSS_ODE_SOLVERS.cashKarp45 = function () {
+    var e = EJSS_ODE_SOLVERS.solverEngineDiscreteTimeAdaptive(5),
+      t,
+      n,
+      r,
+      i,
+      s,
+      o,
+      u = e.allocateOtherArrays;
+    return (
+      (e.getNumberOfEvaluations = function () {
+        return 6;
+      }),
+      (e.allocateOtherArrays = function () {
+        u(),
+          (t = new Array(e.getDimension())),
+          (n = new Array(e.getDimension())),
+          (r = new Array(e.getDimension())),
+          (i = new Array(e.getDimension())),
+          (s = new Array(e.getDimension())),
+          (o = new Array(e.getDimension()));
+      }),
+      (e.computeIntermediateStep = function (o, u) {
+        var a = o / 2,
+          f = e.getODE(),
+          l = e.getInitialState(),
+          c = e.getInitialRate(),
+          h = e.getDimension(),
+          p = h - 1,
+          d = c[p],
+          v = EJSS_ODE_SOLVERS.CashKarp45,
+          m;
+        for (m = 0; m < h; m++) u[m] = l[m] + o * v.A_11 * c[m];
+        f.getRate(u, t);
+        for (m = 0; m < h; m++)
+          u[m] = l[m] + o * (v.A_21 * c[m] + v.A_22 * t[m]);
+        f.getRate(u, n);
+        for (m = 0; m < h; m++)
+          u[m] = l[m] + o * (v.A_31 * c[m] + v.A_32 * t[m] + v.A_33 * n[m]);
+        f.getRate(u, r);
+        for (m = 0; m < h; m++)
+          u[m] =
+            l[m] +
+            o * (v.A_41 * c[m] + v.A_42 * t[m] + v.A_43 * n[m] + v.A_44 * r[m]);
+        f.getRate(u, i);
+        for (m = 0; m < h; m++)
+          u[m] =
+            l[m] +
+            o *
+              (v.A_51 * c[m] +
+                v.A_52 * t[m] +
+                v.A_53 * n[m] +
+                v.A_54 * r[m] +
+                v.A_55 * i[m]);
+        f.getRate(u, s);
+        for (m = 0; m < p; m++)
+          u[m] =
+            l[m] +
+            o *
+              (v.B5_1 * c[m] +
+                v.B5_2 * t[m] +
+                v.B5_3 * n[m] +
+                v.B5_4 * r[m] +
+                v.B5_5 * i[m] +
+                v.B5_6 * s[m]);
+        u[p] = e.getInitialTime() + o * c[p];
+      }),
+      (e.computeCarefulIntermediateStep = function (o, u, a) {
+        var f = u / 2,
+          l = e.getODE(),
+          c = e.getInitialState(),
+          h = e.getInitialRate(),
+          p = e.getDimension(),
+          d = p - 1,
+          v = h[d],
+          m = EJSS_ODE_SOLVERS.CashKarp45,
+          g = EJSS_ODE_SOLVERS.DISCONTINUITY_CODE,
+          y;
+        for (y = 0; y < p; y++) a[y] = c[y] + u * m.A_11 * h[y];
+        switch (o.checkDiscontinuity(a, !1)) {
+          case g.DISCONTINUITY_PRODUCED_ERROR:
+            return g.DISCONTINUITY_PRODUCED_ERROR;
+          case g.DISCONTINUITY_JUST_PASSED:
+            return g.DISCONTINUITY_JUST_PASSED;
+          case g.DISCONTINUITY_ALONG_STEP:
+            return g.DISCONTINUITY_ALONG_STEP;
+          case g.DISCONTINUITY_EXACTLY_ON_STEP:
+            break;
+          case g.NO_DISCONTINUITY_ALONG_STEP:
+        }
+        l.getRate(a, t);
+        for (y = 0; y < p; y++)
+          a[y] = c[y] + u * (m.A_21 * h[y] + m.A_22 * t[y]);
+        switch (o.checkDiscontinuity(a, !1)) {
+          case g.DISCONTINUITY_PRODUCED_ERROR:
+            return g.DISCONTINUITY_PRODUCED_ERROR;
+          case g.DISCONTINUITY_JUST_PASSED:
+            return g.DISCONTINUITY_CODE.DISCONTINUITY_JUST_PASSED;
+          case g.DISCONTINUITY_ALONG_STEP:
+            return g.DISCONTINUITY_ALONG_STEP;
+          case g.DISCONTINUITY_EXACTLY_ON_STEP:
+            break;
+          case g.NO_DISCONTINUITY_ALONG_STEP:
+        }
+        l.getRate(a, n);
+        for (y = 0; y < p; y++)
+          a[y] = c[y] + u * (m.A_31 * h[y] + m.A_32 * t[y] + m.A_33 * n[y]);
+        switch (o.checkDiscontinuity(a, !1)) {
+          case g.DISCONTINUITY_PRODUCED_ERROR:
+            return g.DISCONTINUITY_PRODUCED_ERROR;
+          case g.DISCONTINUITY_JUST_PASSED:
+            return g.DISCONTINUITY_JUST_PASSED;
+          case g.DISCONTINUITY_ALONG_STEP:
+            return g.DISCONTINUITY_ALONG_STEP;
+          case g.DISCONTINUITY_EXACTLY_ON_STEP:
+            break;
+          case g.NO_DISCONTINUITY_ALONG_STEP:
+        }
+        l.getRate(a, r);
+        for (y = 0; y < p; y++)
+          a[y] =
+            c[y] +
+            u * (m.A_41 * h[y] + m.A_42 * t[y] + m.A_43 * n[y] + m.A_44 * r[y]);
+        switch (o.checkDiscontinuity(a, !1)) {
+          case g.DISCONTINUITY_PRODUCED_ERROR:
+            return g.DISCONTINUITY_PRODUCED_ERROR;
+          case g.DISCONTINUITY_JUST_PASSED:
+            return g.DISCONTINUITY_JUST_PASSED;
+          case g.DISCONTINUITY_ALONG_STEP:
+            return g.DISCONTINUITY_ALONG_STEP;
+          case g.DISCONTINUITY_EXACTLY_ON_STEP:
+            break;
+          case g.NO_DISCONTINUITY_ALONG_STEP:
+        }
+        l.getRate(a, i);
+        for (y = 0; y < p; y++)
+          a[y] =
+            c[y] +
+            u *
+              (m.A_51 * h[y] +
+                m.A_52 * t[y] +
+                m.A_53 * n[y] +
+                m.A_54 * r[y] +
+                m.A_55 * i[y]);
+        switch (o.checkDiscontinuity(a, !1)) {
+          case g.DISCONTINUITY_PRODUCED_ERROR:
+            return g.DISCONTINUITY_PRODUCED_ERROR;
+          case g.DISCONTINUITY_JUST_PASSED:
+            return g.DISCONTINUITY_JUST_PASSED;
+          case g.DISCONTINUITY_ALONG_STEP:
+            return g.DISCONTINUITY_ALONG_STEP;
+          case g.DISCONTINUITY_EXACTLY_ON_STEP:
+            break;
+          case g.NO_DISCONTINUITY_ALONG_STEP:
+        }
+        l.getRate(a, s);
+        for (y = 0; y < d; y++)
+          a[y] =
+            c[y] +
+            u *
+              (m.B5_1 * h[y] +
+                m.B5_2 * t[y] +
+                m.B5_3 * n[y] +
+                m.B5_4 * r[y] +
+                m.B5_5 * i[y] +
+                m.B5_6 * s[y]);
+        return (
+          (a[d] = e.getInitialTime() + u * h[d]), o.checkDiscontinuity(a, !0)
+        );
+      }),
+      (e.computeFinalRateAndCreateIntervalData = function () {
+        var t = e.getODE(),
+          n = e.getInitialState(),
+          r = e.getInitialRate(),
+          i = e.getFinalState(),
+          s = e.getFinalRate();
+        return (
+          t.getRate(i, s),
+          EJSS_ODE_INTERPOLATION.bootstrap2IntervalData(n, r, i, s, t)
+        );
+      }),
+      (e.computeApproximation = function (u) {
+        var a = e.getTimeIndex(),
+          f = e.getInitialState(),
+          l = e.getInitialRate(),
+          c = EJSS_ODE_SOLVERS.CashKarp45;
+        for (var h = 0; h < a; h++)
+          o[h] =
+            f[h] +
+            u *
+              (c.B4_1 * l[h] +
+                c.B4_2 * t[h] +
+                c.B4_3 * n[h] +
+                c.B4_4 * r[h] +
+                c.B4_5 * i[h] +
+                c.B4_6 * s[h]);
+        return (o[a] = e.getInitialTime() + u * l[a]), e.computeError(o);
+      }),
+      e
+    );
+  });
+var EJSS_ODE_SOLVERS = EJSS_ODE_SOLVERS || {};
+(EJSS_ODE_SOLVERS.Euler = {}),
+  (EJSS_ODE_SOLVERS.euler = function () {
+    var e = EJSS_ODE_SOLVERS.solverEngineDiscreteTime();
+    return (
+      (e.getNumberOfEvaluations = function () {
+        return 1;
+      }),
+      (e.computeIntermediateStep = function (t, n) {
+        var r = e.getDimension(),
+          i = e.getInitialState(),
+          s = e.getInitialRate();
+        for (var o = 0; o < r; o++) n[o] = i[o] + t * s[o];
+      }),
+      (e.computeCarefulIntermediateStep = function (t, n, r) {
+        return e.computeIntermediateStep(n, r), t.checkDiscontinuity(r, !0);
+      }),
+      (e.computeFinalRateAndCreateIntervalData = function () {
+        var t = e.getODE(),
+          n = e.getInitialState(),
+          r = e.getInitialRate(),
+          i = e.getFinalState(),
+          s = e.getFinalRate();
+        return (
+          t.getRate(i, s),
+          EJSS_ODE_INTERPOLATION.eulerIntervalData(n, r, i[e.getTimeIndex()])
+        );
+      }),
+      e
+    );
+  });
+var EJSS_ODE_SOLVERS = EJSS_ODE_SOLVERS || {};
+EJSS_ODE_SOLVERS.Radau5 = {
+  c1: (4 - Math.sqrt(6)) / 10,
+  c2: (4 + Math.sqrt(6)) / 10,
+  c1m1: (4 - Math.sqrt(6)) / 10 - 1,
+  c2m1: (4 + Math.sqrt(6)) / 10 - 1,
+  c1mc2: (4 - Math.sqrt(6)) / 10 - (4 + Math.sqrt(6)) / 10,
+};
+var EJSS_ODE_SOLVERS = EJSS_ODE_SOLVERS || {};
+(EJSS_ODE_SOLVERS.RungeKutta4 = {}),
+  (EJSS_ODE_SOLVERS.rungeKutta4 = function () {
+    var e = EJSS_ODE_SOLVERS.solverEngineDiscreteTime(),
+      t,
+      n,
+      r;
+    return (
+      (e.getNumberOfEvaluations = function () {
+        return 4;
+      }),
+      (e.allocateOtherArrays = function () {
+        (t = new Array(e.getDimension())),
+          (n = new Array(e.getDimension())),
+          (r = new Array(e.getDimension()));
+      }),
+      (e.computeIntermediateStep = function (i, s) {
+        var o = i / 2,
+          u = e.getODE(),
+          a = e.getInitialState(),
+          f = e.getInitialRate(),
+          l = e.getDimension(),
+          c = l - 1,
+          h = f[c],
+          p;
+        for (p = 0; p < l; p++) s[p] = a[p] + o * f[p];
+        u.getRate(s, t);
+        for (p = 0; p < l; p++) s[p] = a[p] + o * t[p];
+        u.getRate(s, n);
+        for (p = 0; p < l; p++) s[p] = a[p] + i * n[p];
+        u.getRate(s, r);
+        for (p = 0; p < c; p++)
+          s[p] = a[p] + (i * (f[p] + 2 * t[p] + 2 * n[p] + r[p])) / 6;
+        s[c] = e.getInitialTime() + i * h;
+      }),
+      (e.computeCarefulIntermediateStep = function (i, s, o) {
+        var u = s / 2,
+          a = e.getODE(),
+          f = e.getInitialState(),
+          l = e.getInitialRate(),
+          c = e.getDimension(),
+          h = c - 1,
+          p = l[h],
+          d = EJSS_ODE_SOLVERS.DISCONTINUITY_CODE,
+          v;
+        for (v = 0; v < c; v++) o[v] = f[v] + u * l[v];
+        switch (i.checkDiscontinuity(o, !1)) {
+          case d.DISCONTINUITY_PRODUCED_ERROR:
+            return d.DISCONTINUITY_PRODUCED_ERROR;
+          case d.DISCONTINUITY_JUST_PASSED:
+            return d.DISCONTINUITY_JUST_PASSED;
+          case d.DISCONTINUITY_ALONG_STEP:
+            return d.DISCONTINUITY_ALONG_STEP;
+          case d.DISCONTINUITY_EXACTLY_ON_STEP:
+            break;
+          case d.NO_DISCONTINUITY_ALONG_STEP:
+        }
+        a.getRate(o, t);
+        for (v = 0; v < c; v++) o[v] = f[v] + u * t[v];
+        switch (i.checkDiscontinuity(o, !1)) {
+          case d.DISCONTINUITY_PRODUCED_ERROR:
+            return d.DISCONTINUITY_PRODUCED_ERROR;
+          case d.DISCONTINUITY_JUST_PASSED:
+            return d.DISCONTINUITY_JUST_PASSED;
+          case d.DISCONTINUITY_ALONG_STEP:
+            return d.DISCONTINUITY_ALONG_STEP;
+          case d.DISCONTINUITY_EXACTLY_ON_STEP:
+            break;
+          case d.NO_DISCONTINUITY_ALONG_STEP:
+        }
+        a.getRate(o, n);
+        for (v = 0; v < c; v++) o[v] = f[v] + s * n[v];
+        switch (i.checkDiscontinuity(o, !1)) {
+          case d.DISCONTINUITY_PRODUCED_ERROR:
+            return d.DISCONTINUITY_PRODUCED_ERROR;
+          case d.DISCONTINUITY_JUST_PASSED:
+            return d.DISCONTINUITY_JUST_PASSED;
+          case d.DISCONTINUITY_ALONG_STEP:
+            return d.DISCONTINUITY_ALONG_STEP;
+          case d.DISCONTINUITY_EXACTLY_ON_STEP:
+            break;
+          case d.NO_DISCONTINUITY_ALONG_STEP:
+        }
+        a.getRate(o, r);
+        for (v = 0; v < h; v++)
+          o[v] = f[v] + (s * (l[v] + 2 * t[v] + 2 * n[v] + r[v])) / 6;
+        return (o[h] = e.getInitialTime() + s * p), i.checkDiscontinuity(o, !0);
+      }),
+      (e.computeFinalRateAndCreateIntervalData = function () {
+        var t = e.getODE(),
+          n = e.getInitialState(),
+          r = e.getInitialRate(),
+          i = e.getFinalState(),
+          s = e.getFinalRate();
+        return (
+          t.getRate(i, s),
+          EJSS_ODE_INTERPOLATION.bootstrapIntervalData(n, r, i, s, t)
+        );
+      }),
+      e
+    );
+  });
+var EJSS_ODE_SOLVERS = EJSS_ODE_SOLVERS || {};
+(EJSS_ODE_SOLVERS.SolverEngineDiscreteTime = {}),
+  (EJSS_ODE_SOLVERS.solverEngineDiscreteTime = function () {
+    var e = {},
+      t = EJSS_ODE_SOLVERS.ERROR.NO_ERROR,
+      n,
+      r,
+      i = 0,
+      s = 0.1,
+      o = Number.POSITIVE_INFINITY,
+      u = 0,
+      a = 0,
+      f,
+      l,
+      c,
+      h,
+      p,
+      d,
+      v;
+    return (
+      (e.getNumberOfEvaluations = function () {
+        return 0;
+      }),
+      (e.allocateOtherArrays = function () {}),
+      (e.computeIntermediateStep = function (e, t) {
+        return null;
+      }),
+      (e.computeCarefulIntermediateStep = function (e, t, n) {
+        return EJSS_ODE_SOLVERS.DISCONTINUITY_CODE.NO_DISCONTINUITY_ALONG_STEP;
+      }),
+      (e.computeFinalRateAndCreateIntervalData = function () {
+        return null;
+      }),
+      (e.getODE = function () {
+        return p;
+      }),
+      (e.getEventSolver = function () {
+        return d;
+      }),
+      (e.getDimension = function () {
+        return n;
+      }),
+      (e.getTimeIndex = function () {
+        return r;
+      }),
+      (e.getInitialTime = function () {
+        return u;
+      }),
+      (e.getInitialState = function () {
+        return f;
+      }),
+      (e.getInitialRate = function () {
+        return l;
+      }),
+      (e.getFinalState = function () {
+        return c;
+      }),
+      (e.getFinalRate = function () {
+        return h;
+      }),
+      (e.setFinalTime = function (e) {
+        a = e;
+      }),
+      (e.getFinalTime = function () {
+        return a;
+      }),
+      (e.setErrorCode = function (e) {
+        t = e;
+      }),
+      (e.addToEvaluations = function (e) {
+        i += e;
+      }),
+      (e.setODE = function (e, t) {
+        (d = e), (p = t);
+        var i = p.getState();
+        (n = i.length),
+          (r = n - 1),
+          (v = EJSS_ODE_INTERPOLATION.stateHistory(t)),
+          p.getMaximumDelay && v.setMinimumLength(p.getMaximumDelay());
+      }),
+      (e.initialize = function (t) {
+        s = t;
+        var o = p.getState();
+        if (f == null || f.length != o.length)
+          (n = o.length),
+            (r = n - 1),
+            (f = new Array(n)),
+            (l = new Array(n)),
+            (c = new Array(n)),
+            (h = new Array(n)),
+            e.allocateOtherArrays();
+        (i = 0),
+          v.clearAll(),
+          p.getMaximumDelay
+            ? v.setMinimumLength(
+                Math.max(Math.abs(p.getMaximumDelay()), Math.abs(t))
+              )
+            : v.setMinimumLength(t),
+          e.reinitialize(o);
+      }),
+      (e.reinitialize = function (e) {
+        u = e[r];
+        for (var i = 0; i < n; i++) f[i] = e[i];
+        p.getRate(f, l),
+          (a = Number.NaN),
+          (t = EJSS_ODE_SOLVERS.ERROR.NO_ERROR);
+      }),
+      (e.getCurrentRate = function () {
+        return l;
+      }),
+      (e.setStepSize = function (e) {
+        (s = e),
+          p.getMaximumDelay
+            ? v.setMinimumLength(
+                Math.max(Math.abs(p.getMaximumDelay()), Math.abs(e))
+              )
+            : v.setMinimumLength(e);
+      }),
+      (e.setMaximumStepSize = function (e) {
+        o = Math.abs(e);
+      }),
+      (e.getMaximumStepSize = function () {
+        return o;
+      }),
+      (e.getStepSize = function () {
+        return s;
+      }),
+      (e.getInternalStepSize = function () {
+        return a - u;
+      }),
+      (e.setEstimateFirstStep = function (e) {}),
+      (e.setTolerances = function (e, t) {}),
+      (e.getMaximumTime = function (n) {
+        return t != EJSS_ODE_SOLVERS.ERROR.NO_ERROR
+          ? Number.NaN
+          : (isNaN(a) && e.computeOneStep(n), a);
+      }),
+      (e.internalStep = function (r) {
+        var i;
+        (u = a), (t = EJSS_ODE_SOLVERS.ERROR.NO_ERROR);
+        for (i = 0; i < n; i++) f[i] = c[i];
+        for (i = 0; i < n; i++) l[i] = h[i];
+        return e.computeOneStep(r), a;
+      }),
+      (e.getCounter = function () {
+        return i;
+      }),
+      (e.getStateHistory = function () {
+        return v;
+      }),
+      (e.interpolate = function (e, t) {
+        return v.interpolateState(e, t);
+      }),
+      (e.bestInterpolate = function (t, r) {
+        var i;
+        if (isNaN(a)) return null;
+        if (t == a) {
+          for (i = 0; i < n; i++) r[i] = c[i];
+          return r;
+        }
+        if (t == u) {
+          for (i = 0; i < n; i++) r[i] = f[i];
+          return r;
+        }
+        return e.computeIntermediateStep(t - u, r), r;
+      }),
+      (e.getActualStepSize = function () {
+        return s;
+      }),
+      (e.findTheDiscontinuity = function (t) {
+        var n = 0,
+          i = 0,
+          s = t,
+          o = 0,
+          u = d.getDDEIterations(),
+          a = d.getEPSILON();
+        while (n < u) {
+          if (Math.abs(i - s) < a) break;
+          var f = (i + s) / 2;
+          switch (e.computeCarefulIntermediateStep(d, f, c)) {
+            default:
+            case EJSS_ODE_SOLVERS.DISCONTINUITY_CODE
+              .DISCONTINUITY_PRODUCED_ERROR:
+              return Number.NaN;
+            case EJSS_ODE_SOLVERS.DISCONTINUITY_CODE
+              .NO_DISCONTINUITY_ALONG_STEP:
+              (o = c[r]), (i = f);
+              break;
+            case EJSS_ODE_SOLVERS.DISCONTINUITY_CODE
+              .DISCONTINUITY_EXACTLY_ON_STEP:
+              return c[r];
+            case EJSS_ODE_SOLVERS.DISCONTINUITY_CODE.DISCONTINUITY_JUST_PASSED:
+              s -= (s - i) / 4;
+              break;
+            case EJSS_ODE_SOLVERS.DISCONTINUITY_CODE.DISCONTINUITY_ALONG_STEP:
+              s = f;
+          }
+          n++;
+        }
+        return e.computeCarefulIntermediateStep(d, o, c), o;
+      }),
+      (e.computeOneStep = function (n) {
+        var o = s;
+        if (n) {
+          switch (e.computeCarefulIntermediateStep(d, o, c)) {
+            case EJSS_ODE_SOLVERS.DISCONTINUITY_CODE
+              .DISCONTINUITY_PRODUCED_ERROR:
+              a = Number.NaN;
+              return;
+            case EJSS_ODE_SOLVERS.DISCONTINUITY_CODE
+              .NO_DISCONTINUITY_ALONG_STEP:
+            case EJSS_ODE_SOLVERS.DISCONTINUITY_CODE
+              .DISCONTINUITY_EXACTLY_ON_STEP:
+              a = c[r];
+              break;
+            case EJSS_ODE_SOLVERS.DISCONTINUITY_CODE.DISCONTINUITY_JUST_PASSED:
+            case EJSS_ODE_SOLVERS.DISCONTINUITY_CODE.DISCONTINUITY_ALONG_STEP:
+              a = e.findTheDiscontinuity(o);
+          }
+          if (isNaN(a)) {
+            t = EJSS_ODE_SOLVERS.ERROR.DISCONTINUITY_PRODUCED_ERROR;
+            return;
+          }
+        } else e.computeIntermediateStep(o, c), (a = c[r]);
+        (i += e.getNumberOfEvaluations()),
+          v.clean(u),
+          v.addIntervalData(e.computeFinalRateAndCreateIntervalData());
+      }),
+      e
+    );
+  });
+var EJSS_ODE_SOLVERS = EJSS_ODE_SOLVERS || {};
+(EJSS_ODE_SOLVERS.SolverEngineDiscreteTimeAdaptive = {
+  FAC1: 0.33,
+  FAC2: 6,
+  BETA: 0,
+  SAFE: 0.9,
+}),
+  (EJSS_ODE_SOLVERS.solverEngineDiscreteTimeAdaptive = function (e) {
+    function t(e) {
+      var t = 0;
+      return (
+        e != 0
+          ? ((t = Math.pow(e, s)),
+            (u =
+              t /
+              Math.exp(
+                EJSS_ODE_SOLVERS.SolverEngineDiscreteTimeAdaptive.BETA *
+                  Math.log(o)
+              )),
+            (u = Math.max(
+              1 / EJSS_ODE_SOLVERS.SolverEngineDiscreteTimeAdaptive.FAC2,
+              Math.min(
+                1 / EJSS_ODE_SOLVERS.SolverEngineDiscreteTimeAdaptive.FAC1,
+                u / EJSS_ODE_SOLVERS.SolverEngineDiscreteTimeAdaptive.SAFE
+              )
+            )))
+          : ((t = 1 / EJSS_ODE_SOLVERS.SolverEngineDiscreteTimeAdaptive.FAC1),
+            (u = 1 / EJSS_ODE_SOLVERS.SolverEngineDiscreteTimeAdaptive.FAC2)),
+        e <= 1
+          ? ((o = Math.max(e, 1e-4)), f / u)
+          : f /
+            Math.min(
+              1 / EJSS_ODE_SOLVERS.SolverEngineDiscreteTimeAdaptive.FAC1,
+              t / EJSS_ODE_SOLVERS.SolverEngineDiscreteTimeAdaptive.SAFE
+            )
+      );
+    }
+    function n(e) {
+      var t = i.getODE(),
+        n,
+        r,
+        s;
+      if (e >= 0) {
+        if (t.getDelays) {
+          (n = t.getDelays(i.getInitialState())), (s = n.length);
+          for (r = 0; r < s; r++) e = Math.min(e, n[r] / 2);
+        }
+        return Math.min(e, i.getMaximumStepSize());
+      }
+      if (t.getDelays) {
+        (n = t.getDelays(i.getInitialState())), (s = n.length);
+        for (r = 0; r < s; r++) e = Math.max(e, n[r] / 2);
+      }
+      return Math.max(e, -i.getMaximumStepSize());
+    }
+    function r(t) {
+      var n,
+        r = i.getDimension(),
+        s = i.getInitialState(),
+        o = i.getInitialRate(),
+        u = i.getODE(),
+        a = t < 0 ? -1 : 1;
+      t = Math.abs(t);
+      var f = 0,
+        l = 0;
+      for (n = 0; n < r; n++) {
+        var c = h[n] + p[n] * Math.abs(s[n]),
+          d = o[n] / c;
+        (f += d * d), (d = s[n] / c), (l += d * d);
+      }
+      var v;
+      f <= 1e-10 || l <= 1e-10 ? (v = 1e-6) : (v = Math.sqrt(l / f) * 0.01),
+        (v = a * Math.min(v, t));
+      if (u.getDelays) {
+        var m = i.getEventSolver();
+        m.resetDiscontinuities(s);
+        var g = 0,
+          y = !1;
+        while (!y) {
+          for (n = 0; n < r; n++) finalState[n] = s[n] + v * o[n];
+          switch (m.checkDiscontinuity(finalState, !1)) {
+            case EJSS_ODE_SOLVERS.DISCONTINUITY_CODE
+              .DISCONTINUITY_PRODUCED_ERROR:
+              return Number.NaN;
+            case EJSS_ODE_SOLVERS.DISCONTINUITY_CODE.DISCONTINUITY_JUST_PASSED:
+            case EJSS_ODE_SOLVERS.DISCONTINUITY_CODE.DISCONTINUITY_ALONG_STEP:
+              v /= 2;
+              break;
+            case EJSS_ODE_SOLVERS.DISCONTINUITY_CODE
+              .DISCONTINUITY_EXACTLY_ON_STEP:
+              y = !0;
+              break;
+            case EJSS_ODE_SOLVERS.DISCONTINUITY_CODE
+              .NO_DISCONTINUITY_ALONG_STEP:
+              y = !0;
+          }
+          if (++g > 100) return Number.NaN;
+        }
+      } else for (n = 0; n < r; n++) finalState[n] = s[n] + v * o[n];
+      u.getRate(finalState, finalRate);
+      var b = 0;
+      for (n = 0; n < r; n++) {
+        var c = h[n] + p[n] * Math.abs(s[n]),
+          d = (finalRate[n] - o[n]) / c;
+        b += d * d;
+      }
+      b = Math.sqrt(b) / v;
+      var w = Math.max(Math.abs(b), Math.sqrt(f)),
+        E;
+      return (
+        w <= 1e-15
+          ? (E = Math.max(1e-6, Math.abs(v) * 0.001))
+          : (E = Math.exp((1 / e) * Math.log(0.01 / w))),
+        (v = a * Math.min(100 * v, E)),
+        t != 0 && (v = a * Math.min(Math.abs(v), t)),
+        v
+      );
+    }
+    var i = EJSS_ODE_SOLVERS.solverEngineDiscreteTime(),
+      s = 1 / e - EJSS_ODE_SOLVERS.SolverEngineDiscreteTimeAdaptive.BETA * 0.75,
+      o = 1e-4,
+      u = 0,
+      a = !1,
+      f,
+      l = Number.NaN,
+      c = Number.NaN,
+      h,
+      p,
+      d = i.reinitialize,
+      v = i.setMaximumStepSize;
+    return (
+      (i.computeApproximation = function (e) {}),
+      (i.getAbsTol = function () {
+        return h;
+      }),
+      (i.getRelTol = function () {
+        return p;
+      }),
+      (i.allocateOtherArrays = function () {
+        var e = i.getDimension();
+        (h = new Array(e)), (p = new Array(e)), i.setTolerances(1e-6, 1e-6);
+      }),
+      (i.reinitialize = function (e) {
+        d(e), a ? (f = n(r(i.getStepSize()))) : (f = n(i.getStepSize()));
+      }),
+      (i.setEstimateFirstStep = function (e) {
+        a = e;
+      }),
+      (i.setMaximumStepSize = function (e) {
+        v(e), (f = n(f));
+      }),
+      (i.setTolerances = function (e, t) {
+        var s,
+          o = i.getDimension();
+        if (e instanceof Array) {
+          l = c = Number.NaN;
+          for (s = 0; s < o; s++) (h[s] = e[s]), (p[s] = t[s]);
+        } else {
+          if (l == e && c == t) return;
+          (l = e), (c = t);
+          for (s = 0; s < o; s++) (h[s] = e), (p[s] = t);
+        }
+        (mFinalTime = Number.NaN),
+          (mErrorCode = EJSS_ODE_SOLVERS.ERROR.NO_ERROR),
+          a ? (f = n(r(i.getStepSize()))) : (f = n(i.getStepSize()));
+      }),
+      (i.computeOneStep = function (e) {
+        var r = i.getEventSolver(),
+          s = i.getFinalState();
+        mErrorCode = EJSS_ODE_SOLVERS.ERROR.NO_ERROR;
+        for (var o = 0; o < 500; o++) {
+          if (e) {
+            switch (i.computeCarefulIntermediateStep(r, f, s)) {
+              case EJSS_ODE_SOLVERS.DISCONTINUITY_CODE
+                .DISCONTINUITY_PRODUCED_ERROR:
+                i.setFinalTime(Number.NaN);
+                return;
+              case EJSS_ODE_SOLVERS.DISCONTINUITY_CODE
+                .NO_DISCONTINUITY_ALONG_STEP:
+              case EJSS_ODE_SOLVERS.DISCONTINUITY_CODE
+                .DISCONTINUITY_EXACTLY_ON_STEP:
+                i.setFinalTime(s[i.getTimeIndex()]);
+                break;
+              case EJSS_ODE_SOLVERS.DISCONTINUITY_CODE
+                .DISCONTINUITY_JUST_PASSED:
+              case EJSS_ODE_SOLVERS.DISCONTINUITY_CODE.DISCONTINUITY_ALONG_STEP:
+                var u = i.findTheDiscontinuity(f);
+                i.setFinalTime(u), (f = u - i.getInitialTime());
+            }
+            if (isNaN(i.getFinalTime())) {
+              i.setErrorCode(
+                EJSS_ODE_SOLVERS.ERROR.DISCONTINUITY_PRODUCED_ERROR
+              );
+              return;
+            }
+          } else
+            i.computeIntermediateStep(f, s),
+              i.setFinalTime(s[i.getTimeIndex()]);
+          var a = i.computeApproximation(f);
+          i.addToEvaluations(i.getNumberOfEvaluations());
+          if (a <= 1) {
+            i.getStateHistory().clean(i.getInitialTime()),
+              i
+                .getStateHistory()
+                .addIntervalData(i.computeFinalRateAndCreateIntervalData()),
+              o > 0
+                ? (f = n(f > 0 ? Math.min(f, t(a)) : Math.max(f, t(a))))
+                : (f = n(t(a)));
+            return;
+          }
+          f = n(f > 0 ? Math.min(f, t(a)) : Math.max(f, t(a)));
+        }
+        i.setFinalTime(Number.NaN),
+          i.setErrorCode(EJSS_ODE_SOLVERS.ERROR.DID_NOT_CONVERGE);
+      }),
+      (i.getActualStepSize = function () {
+        return f;
+      }),
+      (i.computeError = function (e) {
+        var t = 0,
+          n = i.getDimension(),
+          r = i.getInitialState(),
+          s = i.getFinalState();
+        for (var o = 0; o < n; o++) {
+          var u = h[o] + p[o] * Math.max(Math.abs(s[o]), Math.abs(r[o])),
+            a = (s[o] - e[o]) / u;
+          t += a * a;
+        }
+        return Math.sqrt(t / n);
+      }),
+      i
+    );
+  });
+var EJSS_ODE_SOLVERS = EJSS_ODE_SOLVERS || {};
+(EJSS_ODE_SOLVERS.DDEDiscontinuity = {}),
+  (EJSS_ODE_SOLVERS.ddeDiscontinuity = function (e, t) {
+    function n(n) {
+      var r,
+        u = t.getDelays(n),
+        a = u.length,
+        f = s.length,
+        l = n.length - 1;
+      if (e.getRunsForwards())
+        for (r = 0; r < a; r++) {
+          var c = n[l] - u[r] + i.getTolerance();
+          for (var h = o[r]; h < f; h++) {
+            var p = s[h];
+            if (p > c) {
+              o[r] = h;
+              break;
+            }
+          }
+        }
+      else
+        for (r = 0; r < a; r++) {
+          var c = n[l] - u[r] - i.getTolerance();
+          for (var h = o[r]; h < f; h++) {
+            var p = s[h];
+            if (p < c) {
+              o[r] = h;
+              break;
+            }
+          }
+        }
+    }
+    function r(n) {
+      var r,
+        s = n.length,
+        o = s - 1,
+        a = i.getTolerance() / 20,
+        f = e.getDDEIterations(),
+        l = e.getStateHistory(),
+        c = 0;
+      if (e.getRunsForwards())
+        while (++c < f) {
+          t.getRate(n, u),
+            l.addIntervalData(
+              EJSS_ODE_INTERPOLATION.eulerIntervalData(n, u, n[o] + a)
+            );
+          for (r = 0; r < s; r++) n[r] += a * u[r];
+          var h = i.evaluate(n);
+          if (h < 0) return n[o];
+        }
+      else
+        while (++c < f) {
+          t.getRate(n, u),
+            l.addIntervalData(
+              EJSS_ODE_INTERPOLATION.eulerIntervalData(n, u, n[o] - a)
+            );
+          for (r = 0; r < s; r++) n[r] -= a * u[r];
+          var h = evaluate(n);
+          if (h > 0) return n[o];
+        }
+      return Number.NaN;
+    }
+    var i = {},
+      s = [],
+      o = [],
+      u = [];
+    return (
+      (i.initialize = function (n) {
+        e.getRunsForwards()
+          ? s.push(Number.NEGATIVE_INFINITY)
+          : s.push(Number.POSITIVE_INFINITY);
+        var r = t.getInitialConditionDiscontinuities();
+        if (r != null) {
+          var a = r.length;
+          for (var f = 0; f < a; f++) s.push(r[f]);
+        }
+        s.push(n[n.length - 1]);
+        var l = t.getDelays(n);
+        (o = new Array(l.length)), i.reset(n), (u = new Array(n.length));
+      }),
+      (i.reset = function (e) {
+        var t = o.length;
+        for (var r = 0; r < t; r++) o[r] = 0;
+        n(e);
+      }),
+      (i.evaluate = function (n) {
+        var r,
+          i = n[n.length - 1],
+          u = t.getDelays(n),
+          a = u.length;
+        if (e.getRunsForwards()) {
+          var f = Number.POSITIVE_INFINITY;
+          for (r = 0; r < a; r++) {
+            var l = s[o[r]];
+            f = Math.min(f, u[r] + l - i);
+          }
+          return f;
+        }
+        var c = Number.NEGATIVE_INFINITY;
+        for (r = 0; r < a; r++) {
+          var l = s[o[r]];
+          c = Math.max(c, u[r] + l - i);
+        }
+        return c;
+      }),
+      (i.action = function () {
+        var n = t.getState(),
+          i = r(n);
+        s.push(i);
+        var o = e.findFirstEvent(n, i, n);
+        return o != null && ((mCurrentEventData = o), o.action()), !0;
+      }),
+      (i.getTolerance = function () {
+        return e.getDDETolerance();
+      }),
+      i
+    );
+  });
+var EJSS_ODE_SOLVERS = EJSS_ODE_SOLVERS || {};
+(EJSS_ODE_SOLVERS.ProblemData = {
+  POSITIVE: 2,
+  SMALL_POSITIVE: 1,
+  ZERO: 0,
+  SMALL_NEGATIVE: -1,
+  NEGATIVE: -2,
+}),
+  (EJSS_ODE_SOLVERS.eventData = function (e, t, n) {
+    var r = {},
+      i = t.getTypeOfEvent(),
+      s = n.length - 1,
+      o,
+      u,
+      a,
+      f,
+      l,
+      c,
+      h,
+      p;
+    return (
+      (r.getEvent = function () {
+        return t;
+      }),
+      (r.getEventType = function () {
+        return i;
+      }),
+      (r.setH = function (e) {
+        c = e;
+      }),
+      (r.getH = function () {
+        return c;
+      }),
+      (r.getTime = function () {
+        return h;
+      }),
+      (r.setTime = function (e) {
+        h = e;
+      }),
+      (r.hasPositiveFlag = function () {
+        return o;
+      }),
+      (r.hasNegativeFlag = function () {
+        return u;
+      }),
+      (r.getHBefore = function () {
+        return f;
+      }),
+      (r.setHAfter = function (e) {
+        l = e;
+      }),
+      (r.getHAfter = function () {
+        return l;
+      }),
+      (r.getCurrentPosition = function () {
+        return a;
+      }),
+      (r.getMaxAdvance = function () {
+        return p;
+      }),
+      (r.setMaxAdvance = function (e) {
+        p = e;
+      }),
+      (r.action = function () {
+        return t.action();
+      }),
+      (r.getProblem = function () {
+        return t;
+      }),
+      (r.reset = function (n) {
+        (o = !1), (u = !1);
+        var a = t.evaluate(n);
+        r.findPosition(n[s], a),
+          e.getCurrentEventData() != r &&
+            (i == EJSS_ODE_SOLVERS.EVENT_TYPE.CROSSING_EVENT
+              ? a > 0
+                ? (o = !0)
+                : a < 0 && (u = !0)
+              : i == EJSS_ODE_SOLVERS.EVENT_TYPE.POSITIVE_EVENT &&
+                a > 0 &&
+                (o = !0));
+      }),
+      (r.findPosition = function (n, r) {
+        (f = r),
+          f >= t.getTolerance()
+            ? ((a = EJSS_ODE_SOLVERS.ProblemData.POSITIVE), (o = !0))
+            : f > 0
+            ? (a = EJSS_ODE_SOLVERS.ProblemData.SMALL_POSITIVE)
+            : f == 0
+            ? (a = EJSS_ODE_SOLVERS.ProblemData.ZERO)
+            : f > -t.getTolerance()
+            ? (a = EJSS_ODE_SOLVERS.ProblemData.SMALL_NEGATIVE)
+            : ((a = EJSS_ODE_SOLVERS.ProblemData.NEGATIVE), (u = !0));
+        if (
+          i == EJSS_ODE_SOLVERS.EVENT_TYPE.STATE_EVENT &&
+          a == EJSS_ODE_SOLVERS.ProblemData.NEGATIVE
+        ) {
+          var s =
+            "The state event " +
+            t +
+            " is in an illegal state: " +
+            f +
+            " at " +
+            n;
+          e.getLastEventData() == null
+            ? (s += "\nThere was no previous event")
+            : (s +=
+                "\nLast previous event was " +
+                e.getLastEventData().getProblem() +
+                ", which took place at " +
+                e.getLastEventDataTime()),
+            e.error(EJSS_ODE_SOLVERS.ERROR.ILLEGAL_EVENT_STATE, s);
+        }
+      }),
+      r.reset(n),
+      r
+    );
+  }),
+  (EJSS_ODE_SOLVERS.discontinuityData = function (e, t, n) {
+    var r = {},
+      i = n.length - 1,
+      s,
+      o,
+      u,
+      a,
+      f,
+      l;
+    return (
+      (r.getDiscontinuity = function () {
+        return t;
+      }),
+      (r.setH = function (e) {
+        f = e;
+      }),
+      (r.getH = function () {
+        return f;
+      }),
+      (r.setTime = function (e) {
+        l = e;
+      }),
+      (r.getTime = function () {
+        return l;
+      }),
+      (r.hasPositiveFlag = function () {
+        return s;
+      }),
+      (r.hasNegativeFlag = function () {
+        return o;
+      }),
+      (r.getHBefore = function () {
+        return a;
+      }),
+      (r.setHAfter = function (e) {
+        mHAfter = e;
+      }),
+      (r.getHAfter = function () {
+        return mHAfter;
+      }),
+      (r.getCurrentPosition = function () {
+        return u;
+      }),
+      (r.getMaxAdvance = function () {
+        return Number.NaN;
+      }),
+      (r.action = function () {
+        return t.action();
+      }),
+      (r.getProblem = function () {
+        return t;
+      }),
+      (r.reset = function (n) {
+        (s = !1), (o = !1);
+        var u = t.evaluate(n);
+        r.findPosition(n[i], u),
+          e.getCurrentEventData() != r &&
+            (u > 0 ? (s = !0) : u < 0 && (o = !0));
+      }),
+      (r.findPosition = function (e, n) {
+        (a = n),
+          a >= t.getTolerance()
+            ? ((u = EJSS_ODE_SOLVERS.ProblemData.POSITIVE), (s = !0))
+            : a > 0
+            ? (u = EJSS_ODE_SOLVERS.ProblemData.SMALL_POSITIVE)
+            : a == 0
+            ? (u = EJSS_ODE_SOLVERS.ProblemData.ZERO)
+            : a > -t.getTolerance()
+            ? (u = EJSS_ODE_SOLVERS.ProblemData.SMALL_NEGATIVE)
+            : ((u = EJSS_ODE_SOLVERS.ProblemData.NEGATIVE), (o = !0));
+      }),
+      r.reset(n),
+      r
+    );
+  });
+var EJSS_ODE_SOLVERS = EJSS_ODE_SOLVERS || {};
+(EJSS_ODE_SOLVERS.ODEMultistepSolver = { NO_ERROR: 0, DID_NOT_CONVERGE: 1 }),
+  (EJSS_ODE_SOLVERS.createODEMultistepSolver = function (e) {
+    function t() {
+      var e = c.getTolerance(),
+        t = f;
+      (c.getStepSize() <= 0 ||
+        c.getStepSize() > f ||
+        f - c.getStepSize() == f) &&
+        c.setStepSize(f);
+      var n = 0;
+      while (t > e * f) {
+        n++;
+        var r = t;
+        if (t < c.getStepSize()) {
+          var i = c.getStepSize();
+          c.setStepSize(t);
+          var l = c.step();
+          (t -= l), c.setStepSize(i);
+        } else t -= c.step();
+        if (
+          c.getErrorCode() != EJSS_ODE_SOLVERS.ODEMultistepSolver.NO_ERROR ||
+          Math.abs(r - t) <= Number.MIN_VALUE ||
+          (e * f) / 10 > c.getStepSize() ||
+          n > o
+        ) {
+          (a = "ODEMultiStep did not converge. Remainder=" + t),
+            (s = EJSS_ODE_SOLVERS.ODEMultistepSolver.DID_NOT_CONVERGE);
+          if (u) throw a;
+          mMaxMessages > 0 && (mMaxMessages--, console.log(a));
+          break;
+        }
+      }
+      return t;
+    }
+    function n() {
+      var e = c.getTolerance(),
+        t = f;
+      (c.getStepSize() >= 0 ||
+        c.getStepSize() < f ||
+        f - c.getStepSize() == f) &&
+        c.setStepSize(f);
+      var n = 0;
+      while (t < e * f) {
+        n++;
+        var r = t;
+        if (t > c.getStepSize()) {
+          var i = c.getStepSize();
+          c.setStepSize(t);
+          var u = c.step();
+          (t -= u), c.setStepSize(i);
+        } else t -= c.step();
+        if (
+          c.getErrorCode() != EJSS_ODE_SOLVERS.ODEMultistepSolver.NO_ERROR ||
+          Math.abs(r - t) <= Number.MIN_VALUE ||
+          (e * f) / 10 < c.getStepSize() ||
+          n > o
+        ) {
+          (a = "ODEMultiStep did not converge. Remainder=" + t),
+            (s = EJSS_ODE_SOLVERS.ODEMultistepSolver.DID_NOT_CONVERGE);
+          if (enableExceptions) throw a;
+          mMaxMessages > 0 && (mMaxMessages--, console.log(a));
+        }
+      }
+      return t;
+    }
+    var r = {},
+      i = 3,
+      s = EJSS_ODE_SOLVERS.ODEMultistepSolver.NO_ERROR,
+      o = 200,
+      u = !1,
+      a = "",
+      f = 0.1,
+      l = EJSS_ODE_SOLVERS.createODEMultistepSolverInternalODE(e),
+      c = EJSS_ODE_SOLVERS.createCashKarp45(l);
+    return (
+      (r.enableRuntimeExceptions = function (e) {
+        u = e;
+      }),
+      (r.setMaxIterations = function (e) {
+        o = Math.max(1, e);
+      }),
+      (r.setTolerance = function (e) {
+        (e = Math.abs(e)), c.setTolerance(e);
+      }),
+      (r.getTolerance = function () {
+        return c.getTolerance();
+      }),
+      (r.getErrorCode = function () {
+        return s;
+      }),
+      (r.initialize = function (e) {
+        (mMaxMessages = 4),
+          (a = ""),
+          (s = EJSS_ODE_SOLVERS.ODEMultistepSolver.NO_ERROR),
+          (f = e),
+          l.setInitialConditions(),
+          c.initialize(e);
+      }),
+      (r.setStepSize = function (e) {
+        (mMaxMessages = 4),
+          (f = e),
+          e < 0
+            ? c.setStepSize(Math.max(-Math.abs(c.getStepSize()), e))
+            : c.setStepSize(Math.min(c.getStepSize(), e));
+      }),
+      (r.setMaximumNumberOfErrorMessages = function (e) {
+        mMaxMessages = e;
+      }),
+      (r.getStepSize = function () {
+        return f;
+      }),
+      (r.step = function () {
+        (s = EJSS_ODE_SOLVERS.ODEMultistepSolver.NO_ERROR),
+          l.setInitialConditions();
+        var e = 0;
+        return f > 0 ? (e = t()) : (e = n()), l.update(), f - e;
+      }),
+      r
+    );
+  }),
+  (EJSS_ODE_SOLVERS.createODEMultistepSolverInternalODE = function (e) {
+    var t = {},
+      n = [];
+    return (
+      (t.getRate = function (t, n) {
+        e.getRate(t, n);
+      }),
+      (t.getState = function () {
+        return n;
+      }),
+      (t.setInitialConditions = function () {
+        var t = e.getState();
+        if (t == null) return;
+        if (n == null || n.length != t.length) n = new Array(t.length);
+        for (var r = 0, i = t.length; r < i; r++) n[r] = t[r];
+      }),
+      (t.update = function () {
+        var t = e.getState();
+        for (var r = 0, i = t.length; r < i; r++) t[r] = n[r];
+      }),
+      t.setInitialConditions(),
+      t
+    );
+  }),
+  (EJSS_ODE_SOLVERS.createCashKarp45 = function (e) {
+    var t = {},
+      n = [
+        [0.2],
+        [0.075, 0.225],
+        [0.3, -0.9, 1.2],
+        [-11 / 54, 2.5, -70 / 27, 35 / 27],
+        [1631 / 55296, 175 / 512, 575 / 13824, 44275 / 110592, 253 / 4096],
+      ],
+      r = [37 / 378, 0, 250 / 621, 125 / 594, 0, 512 / 1771],
+      i = [
+        277 / 64512,
+        0,
+        -6925 / 370944,
+        6925 / 202752,
+        277 / 14336,
+        -277 / 7084,
+      ],
+      s = 6,
+      o = EJSS_ODE_SOLVERS.ODEMultistepSolver.NO_ERROR,
+      u = 0.01,
+      a = 0,
+      f = [],
+      l = [],
+      c,
+      h = 1e-6,
+      p = !1;
+    return (
+      (t.enableRuntimeExpecptions = function (e) {
+        p = e;
+      }),
+      (t.setStepSize = function (e) {
+        u = e;
+      }),
+      (t.getStepSize = function () {
+        return u;
+      }),
+      (t.setTolerance = function (e) {
+        h = Math.abs(e);
+        if (h < 1e-12) {
+          var t =
+            "Error: Cash-Karp ODE solver tolerance cannot be smaller than 1.0e-12.";
+          if (p) throw t;
+          console.log(t), (h = 1e-12);
+        }
+      }),
+      (t.getTolerance = function () {
+        return h;
+      }),
+      (t.getErrorCode = function () {
+        return o;
+      }),
+      (t.initialize = function (t) {
+        u = t;
+        var n = e.getState();
+        if (n == null) return;
+        if (a != n.length) {
+          (a = n.length), (f = new Array(a)), (l = new Array(s));
+          for (var r = 0; r < s; r++) l[r] = new Array(a);
+        }
+      }),
+      (t.step = function () {
+        var t,
+          d,
+          v,
+          m = 10,
+          g = u,
+          y = 0,
+          b = e.getState();
+        (o = EJSS_ODE_SOLVERS.ODEMultistepSolver.NO_ERROR), e.getRate(b, l[0]);
+        do {
+          m--, (g = u);
+          for (v = 1; v < s; v++) {
+            for (t = 0; t < a; t++) {
+              f[t] = b[t];
+              for (d = 0; d < v; d++) f[t] = f[t] + u * n[v - 1][d] * l[d][t];
+            }
+            e.getRate(f, l[v]);
+          }
+          y = 0;
+          for (t = 0; t < a; t++) {
+            c = 0;
+            for (v = 0; v < s; v++) c += u * i[v] * l[v][t];
+            y = Math.max(y, Math.abs(c));
+          }
+          y <= Number.MIN_VALUE && (y = h / 1e5);
+          if (y > h) {
+            var w = 0.9 * Math.pow(y / h, -0.25);
+            u *= Math.max(w, 0.1);
+          } else if (y < h / 10) {
+            var w = 0.9 * Math.pow(y / h, -0.2);
+            w > 1 && (u *= Math.min(w, 10));
+          }
+        } while (y > h && m > 0);
+        for (t = 0; t < a; t++)
+          for (v = 0; v < s; v++) b[t] += g * r[v] * l[v][t];
+        if (m == 0) {
+          o = EJSS_ODE_SOLVERS.ODEMultistepSolver.DID_NOT_CONVERGE;
+          if (p) throw "DormanPrince45 ODE solver did not converge.";
+        }
+        return g;
+      }),
+      t.initialize(u),
+      t
+    );
+  });
+var EJSS_ODE_SOLVERS = EJSS_ODE_SOLVERS || {};
+EJSS_ODE_SOLVERS.createEulerODESolver = function (e) {
+  var t = EJSS_ODE_SOLVERS.createSolverInterpolatorDiscreteTime(e),
+    n,
+    r = t.initialize;
+  return (
+    (t.initialize = function (e) {
+      r(e), (n = new Array(t.getDimension()));
+    }),
+    (t.computeIntermediateStep = function (t, r) {
+      e.getRate(r, n);
+      for (var i = 0, s = r.length; i < s; i++) r[i] = r[i] + t * n[i];
+      return r;
+    }),
+    t
+  );
+};
+var EJSS_ODE_SOLVERS = EJSS_ODE_SOLVERS || {};
+EJSS_ODE_SOLVERS.createRungeKutta4ODESolver = function (e) {
+  var t = EJSS_ODE_SOLVERS.createSolverInterpolatorDiscreteTime(e),
+    n,
+    r,
+    i,
+    s,
+    o,
+    u = t.initialize;
+  return (
+    (t.initialize = function (e) {
+      u(e),
+        (n = new Array(t.getDimension())),
+        (r = new Array(t.getDimension())),
+        (i = new Array(t.getDimension())),
+        (s = new Array(t.getDimension())),
+        (o = new Array(t.getDimension()));
+    }),
+    (t.computeIntermediateStep = function (t, u) {
+      e.getRate(u, r);
+      for (var a = 0, f = u.length; a < f; a++)
+        (n[a] = u[a]), (u[a] = n[a] + (t * r[a]) / 2);
+      e.getRate(u, i);
+      for (var a = 0, f = u.length; a < f; a++) u[a] = n[a] + (t * i[a]) / 2;
+      e.getRate(u, s);
+      for (var a = 0, f = u.length; a < f; a++) u[a] = n[a] + t * s[a];
+      e.getRate(u, o);
+      for (var a = 0, f = u.length; a < f; a++)
+        u[a] = n[a] + (t * (r[a] + 2 * i[a] + 2 * s[a] + o[a])) / 6;
+      return u;
+    }),
+    t
+  );
+};
+var EJSS_ODE_SOLVERS = EJSS_ODE_SOLVERS || {};
+(EJSS_ODE_SOLVERS.SolverInterpolatorDiscreteTime = {}),
+  (EJSS_ODE_SOLVERS.createSolverInterpolatorDiscreteTime = function (e) {
+    var t = {},
+      n = 0,
+      r,
+      i,
+      s = 0,
+      o = 0.1,
+      u = Number.POSITIVE_INFINITY,
+      a = 0,
+      f = 0,
+      l,
+      c,
+      h,
+      p,
+      d = 0,
+      v = !1,
+      m = [],
+      g,
+      y;
+    return (
+      (t.getNumberOfEvaluations = function () {
+        return 0;
+      }),
+      (t.allocateOtherArrays = function () {}),
+      (t.computeIntermediateStep = function (e, t) {
+        return null;
+      }),
+      (t.computeCarefulIntermediateStep = function (e, t, n) {
+        return 0;
+      }),
+      (t.setTolerance = function (e) {
+        d = Math.abs(e);
+      }),
+      (t.getDimension = function () {
+        return r;
+      }),
+      (t.initialize = function (t) {
+        o = t;
+        var n = e.getState();
+        r = n.length;
+      }),
+      (t.step = function () {
+        var n = e.getState();
+        return t.computeIntermediateStep(o, n), 0;
+      }),
+      (t.setStepSize = function (e) {
+        o = e;
+      }),
+      (t.getStepSize = function () {
+        return o;
+      }),
+      t
+    );
+  });
+var EJSS_CORE = EJSS_CORE || {};
+EJSS_CORE.createRemoteView = function (e, t, n, r) {
+  function i(e, t) {
+    if (!h) return;
+    t !== undefined ? l.send(e + JSON.stringify(t)) : l.send(e);
+    var n = l.onmessage;
+    (l.onmessage = null), (l.onmessage = n);
+  }
+  function s(e) {
+    var t;
+    switch (e.charAt(0)) {
+      case "R":
+        u._reset();
+        break;
+      case "I":
+        u._initialize();
+        break;
+      case "U":
+        (d = JSON.parse(e.substring(1))), o(u._update);
+        break;
+      case "C":
+        (d = JSON.parse(e.substring(1))), o(u._collectData);
+        break;
+      case "M":
+        (t = JSON.parse(e.substring(1))),
+          u[t.method] &&
+            console.log(
+              "View function: <" +
+                t.method +
+                "> with data: <" +
+                t.data +
+                "> ignored. View function does not exist."
+            ),
+          u[t.method](t.data);
+        break;
+      case "P":
+        (t = JSON.parse(e.substring(1))),
+          u[t.element]
+            ? u[t.element].setProperty(t.property, t.value)
+            : console.log(
+                "setProperty<" +
+                  t.property +
+                  "> with value: <" +
+                  t.value +
+                  "> to element <" +
+                  t.element +
+                  "> ignored. Element does not exist!"
+              );
+        break;
+      case "E":
+        (t = JSON.parse(e.substring(1))),
+          u[t.element]
+            ? u[t.element][t.method](t.data)
+            : console.log(
+                "Message <" +
+                  t.method +
+                  "> to element <" +
+                  t.element +
+                  "> ignored. Element does not exist!"
+              );
+        break;
+      case "F":
+        (t = JSON.parse(e.substring(1))),
+          u[t.element]
+            ? u[t.element][t.method](t.data)
+            : console.log(
+                "Message with object <" +
+                  t.method +
+                  "> to element <" +
+                  t.element +
+                  "> ignored. Element does not exist!"
+              );
+        break;
+      default:
+        console.log("view process input error : Unrecognised command: " + e);
+    }
+  }
+  function o(e) {
+    e(), u._render(), i("O");
+  }
+  var u = EJSS_CORE.createView(e),
+    a = 10,
+    f = 500,
+    l,
+    c = {},
+    h = !1,
+    p = 0,
+    d = {},
+    v = [],
+    m = [],
+    g = [],
+    y = [],
+    b = !1,
+    w = !1,
+    E = "",
+    S = !0,
+    x = 0,
+    T = "";
+  (u._23 = function () {
+    return "ConnectionWS";
+  }),
+    (u._connectToServer = function () {
+      try {
+        (l = new WebSocket(T)),
+          console.log("Connecting... (readyState " + l.readyState + ")"),
+          (l.onopen = function (e) {
+            (h = !0),
+              (p = 0),
+              console.log("Openhd Event: " + e.type + " - Message: " + e.data),
+              i("A", { variables: v, actions: m });
+          }),
+          (l.onclose = function (e) {
+            p < a &&
+              (window.setTimeout(function () {
+                u._connectToServer();
+              }, f),
+              p++),
+              (h = !1),
+              console.log(
+                "Closehd Event: " +
+                  e.type +
+                  " - Message: " +
+                  e.data +
+                  " - Reopen: " +
+                  p
+              );
+          }),
+          (l.onerror = function (e) {
+            (h = !1),
+              console.log("Errorhd Event: " + e.type + " - Message: " + e.data);
+          }),
+          (l.onmessage = function (e) {
+            s(e.data);
+          });
+      } catch (e) {
+        console.log(e);
+      }
+      u._update(), u._render();
+    }),
+    (u._getValue = function (e) {
+      return h ? d[e] : u._10(e);
+    }),
+    (super_registerVariable = u._5),
+    (super_registerAction = u._7),
+    (super_startUp = u._11),
+    (u._11 = function () {
+      super_startUp(), u._connectToServer();
+    }),
+    (u._5 = function (e, t, n) {
+      super_registerVariable(e, t),
+        n
+          ? u._13(
+              e,
+              function () {
+                return u._getValue(e);
+              },
+              null,
+              t
+            )
+          : (v.push(e),
+            u._13(
+              e,
+              function () {
+                return u._getValue(e);
+              },
+              function (t) {
+                g.push({ name: e, value: t });
+              },
+              t
+            ));
+    }),
+    (u._7 = function (e) {
+      super_registerAction(e),
+        m.push(e),
+        u._setAction(e, function (t) {
+          y.push({ name: e, argument: t });
+        });
+    }),
+    (u._18 = function () {
+      u._16(), i("I", { properties: g, actions: y }), (g = []), (y = []);
+    }),
+    (u._17 = function () {
+      return y.length;
+    }),
+    (u.getLinkingURL = function () {
+      return E;
+    }),
+    (u.createLinkingButtons = function () {
+      u
+        ._9(EJSS_INTERFACE.button, "_linkingButton_")
+        .setAction("OnClick", function () {
+          var e = u.getLinkingURL();
+          window.alert(e.toString());
+        })
+        .setProperties({ Text: "@", FontSize: "8px" }),
+        u
+          ._9(EJSS_INTERFACE.button, "_qrButton_")
+          .setAction("OnClick", function () {
+            var e = encodeURIComponent(u.getLinkingURL()),
+              t =
+                "https://chart.googleapis.com/chart?cht=qr&chl=" +
+                e +
+                "&chs=400";
+            window.open(t, "_blank");
+          })
+          .setProperties({ Text: "QR", FontSize: "8px" });
+    }),
+    (u.hiddenLinkingButtons = function () {
+      _view._linkingButton_.setVisibility("hidden"),
+        _view._qrButton_.setVisibility("hidden");
+    }),
+    (u.showLinkingButtons = function () {
+      _view._linkingButton_.setVisibility("visible"),
+        _view._qrButton_.setVisibility("visible");
+    });
+  if (window.location.protocol.indexOf("file") != -1) {
+    if (typeof t == "undefined" || t === null || t == 0) t = 8800;
+    (T = "ws://localhost:" + t), (S = !1);
+  } else {
+    history.state && ((x = history.state.mServerModelPort), (S = !1));
+    if (typeof n == "undefined" || n === null || n == "") {
+      var N = window.location.host,
+        C = window.location.protocol;
+      n = C + "//" + N + "/ejsS_library/models";
+    }
+    if (typeof r == "undefined" || r === null || r == "") {
+      var k = window.location.href.lastIndexOf("/_view");
+      r = window.location.href.slice(n.length, k);
+    }
+    var L = new XMLHttpRequest();
+    x > 0
+      ? L.open("GET", n + "/broker.php?model=" + r + "&port=" + x, !0)
+      : L.open("GET", n + "/broker.php?model=" + r, !0),
+      (L.onreadystatechange = function () {
+        if (L.readyState == 4 && L.status == 200) {
+          var e = JSON.parse(L.responseText);
+          (T = e.webserver),
+            (E = n + "/linking.php?model=" + r + "&port=" + e.port),
+            S && u.createLinkingButtons(),
+            u._11();
+        } else console.log("WARNING: server no response!");
+      }),
+      L.send();
+  }
+  return u;
+};
+var EJSS_TOOLS = EJSS_TOOLS || {};
+(EJSS_TOOLS.addToArray = function (e, t, n) {
+  EJSS_TOOLS.removeFromArray(e, t), n >= 0 ? e.splice(n, 0, t) : e.push(t);
+}),
+  (EJSS_TOOLS.removeFromArray = function (e, t) {
+    var n = e.indexOf(t);
+    n >= 0 && e.splice(n, 1);
+  }),
+  (EJSS_TOOLS.compareArrays = function (e, t) {
+    if (!e || !t) return !1;
+    if (e.length != t.length) return !1;
+    for (var n = 0; n < e.length; n++)
+      if (e[n] instanceof Array && t[n] instanceof Array) {
+        if (!EJSS_TOOLS.compareArrays(e[n], t[n])) return !1;
+      } else if (e[n] != t[n]) return !1;
+    return !0;
+  });
+var EJSS_TOOLS = EJSS_TOOLS || {};
+(EJSS_TOOLS.ConnectionWS = {}),
+  (EJSS_TOOLS.connectionWS = function (e) {
+    function t() {
+      try {
+        (a = new WebSocket(e)),
+          console.log("Connecting... (readyState " + a.readyState + ")");
+      } catch (t) {
+        console.log(t);
+      }
+    }
+    function n(e, t) {
+      switch (e) {
+        case "onopen":
+          a.onopen = function (e) {
+            t(e);
+          };
+          break;
+        case "onmessage":
+          a.onmessage = function (e) {
+            t(e);
+          };
+          break;
+        case "onclose":
+          a.onclose = function (e) {
+            t(e);
+          };
+          break;
+        case "onerror":
+          a.onerror = function (e) {
+            t(e);
+          };
+          break;
+        default:
+      }
+    }
+    function r(e) {
+      var t = e.data.split(" ");
+      f[t[0]] = e.data.substring(t[0].length + 1);
+    }
+    function i(e) {
+      (l = !0),
+        console.log("Openhd Event: " + e.type + " - Message: " + e.data);
+    }
+    function s(e) {
+      (l = !1),
+        console.log("Closehd Event: " + e.type + " - Message: " + e.data);
+    }
+    function o(e) {
+      (l = !1),
+        console.log("Errorhd Event: " + e.type + " - Message: " + e.data);
+    }
+    var u = {},
+      a,
+      f = {},
+      l;
+    return (
+      (u._23 = function () {
+        return "ConnectionWS";
+      }),
+      (u.get = function (e) {
+        var t = f[e];
+        if (typeof t != "undefined" || t == null) return t;
+      }),
+      (u.set = function (e, t) {
+        console.log("set:" + e + ":" + t.toString()),
+          console.log("set:is open=" + l);
+        if (l) {
+          var n = e + " " + t.toString();
+          a.send(n), u.reset();
+        }
+      }),
+      (u.reset = function () {
+        var e = a.onmessage;
+        (a.onmessage = null), (a.onmessage = e);
+      }),
+      t(),
+      n("onopen", i),
+      n("onclose", s),
+      n("onerror", o),
+      n("onmessage", r),
+      u
+    );
+  });
+var EJSS_TOOLS = EJSS_TOOLS || {};
+EJSS_TOOLS.DisplayColors = {
+  phaseColors: {},
+  lineColors: [
+    "rgb(255,0,0)",
+    "rgb(0,240,0)",
+    "rgb(0,0,255)",
+    "rgb(240,240,0)",
+    "rgb(0,240,240)",
+    "rgb(255,0,255)",
+  ],
+  markerColors: [
+    "rgb(255,0,0)",
+    "rgb(0,240,0)",
+    "rgb(0,0,255)",
+    "rgb(240,240,0)",
+    "rgb(0,240,240)",
+    "rgb(255,0,255)",
+  ],
+  arrayColors: {
+    black: [0, 0, 0],
+    blue: [0, 0, 255],
+    brown: [165, 42, 42],
+    cyan: [0, 255, 255],
+    darkblue: [0, 0, 160],
+    darkcyan: [0, 240, 240],
+    darkgray: [64, 64, 64],
+    darkgreen: [0, 240, 0],
+    darkgrey: [64, 64, 64],
+    darkyellow: [240, 240, 0],
+    gray: [125, 125, 125],
+    green: [0, 255, 0],
+    grey: [125, 125, 125],
+    lightblue: [173, 216, 230],
+    lightgray: [192, 192, 192],
+    lightgrey: [192, 192, 192],
+    magenta: [255, 0, 255],
+    maroon: [128, 0, 0],
+    olive: [128, 128, 0],
+    orange: [255, 165, 0],
+    pink: [255, 175, 175],
+    purple: [128, 0, 128],
+    red: [255, 0, 0],
+    silver: [192, 192, 192],
+    white: [255, 255, 255],
+    yellow: [255, 255, 0],
+  },
+  getLineColor: function (e) {
+    var t = EJSS_TOOLS.DisplayColors.lineColors[e];
+    if (t === undefined) {
+      var n = ((e * 360) / 12) % 360;
+      (t = "hsl(" + n + ",100%,50%)"),
+        (EJSS_TOOLS.DisplayColors.lineColors[e] = t);
+    }
+    return t;
+  },
+  getMarkerColor: function (e) {
+    var t = EJSS_TOOLS.DisplayColors.markerColors[e];
+    if (t === undefined) {
+      var n = ((e * 360) / 12) % 360;
+      (t = "hsl(" + n + ",100%,100%)"),
+        (EJSS_TOOLS.DisplayColors.markerColors[e] = t);
+    }
+    return t;
+  },
+  getArrayColor: function (e) {
+    e = e.toLowerCase();
+    if (e.indexOf("rgb") == 0)
+      var t = e
+        .substring(4, e.length - 1)
+        .replace(/ /g, "")
+        .split(",");
+    else if (e.indexOf("#") == 0) {
+      (e = e.slice(1)), (e = e.toUpperCase());
+      var n = "0123456789ABCDEF",
+        t = new Array(3),
+        r = 0,
+        i,
+        s;
+      for (var o = 0; o < 6; o += 2)
+        (i = n.indexOf(e.charAt(o))),
+          (s = n.indexOf(e.charAt(o + 1))),
+          (t[r] = i * 16 + s),
+          r++;
+    } else {
+      var t = EJSS_TOOLS.DisplayColors.arrayColors[e];
+      t === undefined && (t = EJSS_TOOLS.DisplayColors.arrayColors.black);
+    }
+    return [t[0] / 255, t[1] / 255, t[2] / 255];
+  },
+};
+var EJSS_TOOLS = EJSS_TOOLS || {};
+EJSS_TOOLS.Worker = (function () {
+  function e(e, t) {
+    if (e) {
+      var n = new XMLHttpRequest();
+      n.open("GET", e),
+        (n.onreadystatechange = function () {
+          n.readyState == 4 && n.status == 200
+            ? t(n.responseText)
+            : console.log("Warning: impossible to read " + e);
+        }),
+        n.send();
+    } else t("");
+  }
+  var t = {};
+  if (typeof Worker == "undefined") return t;
+  if (!window.Worker) return t;
+  if (!window.URL) return t;
+  if (
+    window.navigator.userAgent.indexOf("MSIE ") > 0 ||
+    window.navigator.userAgent.indexOf("Trident") > 0
+  )
+    return t;
+  t.dummy = function (e) {
+    var e = e.data.params;
+    t.postMessage({ result: "dummy" });
+  };
+  var n = new Blob(
+      [
+        'onmessage=function (oEvent) { 		postMessage({ 			"id": oEvent.data.id, 			"evaluated": eval(oEvent.data.code) 		}); 	}   ',
+      ],
+      { type: "text/javascript" }
+    ),
+    r = window.URL.createObjectURL(n),
+    i = [],
+    s = new Worker(r);
+  (s.onmessage = function (e) {
+    i[e.data.id] && i[e.data.id](e.data.evaluated), delete i[e.data.id];
+  }),
+    (t.runCode = function (e, t) {
+      i.push(t || null), s.postMessage({ id: i.length - 1, code: e });
+    });
+  var o = {};
+  return (
+    (t.runFunction = function (t, n, r, i, s) {
+      if (typeof n == "function")
+        if (typeof o[t] == "undefined")
+          e(s, function (e) {
+            var s = e;
+            s += ";onmessage=" + n.toString();
+            var u = new Blob([s], { type: "text/javascript" }),
+              a = window.URL.createObjectURL(u);
+            o[t] = a;
+            var f = new Worker(a);
+            f.postMessage({ id: t, params: r }),
+              (f.onmessage = function (e) {
+                i && i(e.data);
+              });
+          });
+        else {
+          var u = o[t],
+            a = new Worker(u);
+          a.postMessage({ id: t, params: r });
+        }
+    }),
+    (t.runMultipleFunction = function (t, n, r, i, s, u) {
+      if (typeof r == "function" && i instanceof Array && i.length >= n)
+        if (typeof o[t] == "undefined")
+          e(u, function (e) {
+            var u = e;
+            u += ";onmessage=" + r.toString();
+            var a = new Blob([u], { type: "text/javascript" }),
+              f = window.URL.createObjectURL(a);
+            o[t] = f;
+            for (var l = 0; l < n; l++) {
+              var c = new Worker(f),
+                e = [];
+              (c.onmessage = function (t) {
+                e.push(t.data), e.length == n && s && s(e);
+              }),
+                c.postMessage({ id: t, params: i[l] });
+            }
+          });
+        else {
+          var a = o[t];
+          for (var f = 0; f < n; f++) {
+            var l = new Worker(a),
+              c = [];
+            (l.onmessage = function (e) {
+              c.push(e.data), c.length == n && s && s(c);
+            }),
+              l.postMessage({ id: t, params: i[f] });
+          }
+        }
+    }),
+    t
+  );
+})();
+var EJSS_TOOLS = EJSS_TOOLS || {};
+EJSS_TOOLS.enumeration = function (e) {
+  var t = function () {
+      throw "Can't Instantiate Enumerations";
+    },
+    n = (t.prototype = {
+      constructor: t,
+      toString: function () {
+        return this.name;
+      },
+      valueOf: function () {
+        return this.value;
+      },
+      toJSON: function () {
+        return this.name;
+      },
+    });
+  t.values = [];
+  for (var r in e) {
+    var i = inherit(n);
+    (i.name = r), (i.value = e[r]), (t[r] = i), t.values.push(i);
+  }
+  return (
+    (t.foreach = function (e, t) {
+      for (var n = 0; n < this.values.length; n++) e.call(t, this.values[n]);
+    }),
+    t
+  );
+};
+var EJSS_TOOLS = EJSS_TOOLS || {};
+EJSS_TOOLS.File = {
+  JSLoaded: "",
+  loadJSfile: function (e, t) {
+    if (EJSS_TOOLS.File.JSLoaded.indexOf("[" + e + "]") != -1) {
+      console.log("File already loaded " + e), t();
+      return;
+    }
+    EJSS_TOOLS.File.JSLoaded += "[" + e + "]";
+    var n = document.createElement("script");
+    n.setAttribute("type", "text/javascript"),
+      n.setAttribute("src", e),
+      typeof t != "undefined" && (n.onload = t),
+      document.getElementsByTagName("head")[0].appendChild(n);
+  },
+  plainName: function (e) {
+    var t = e.lastIndexOf("/");
+    return (
+      t >= 0 && (e = e.substring(t + 1)),
+      (t = e.indexOf(".")),
+      t > 0 && (e = e.substring(0, t)),
+      e
+    );
+  },
+  download: function (e, t) {
+    var n = document.createElement("a");
+    n.setAttribute(
+      "href",
+      "data:application/ejss;charset=utf-8," + encodeURIComponent(t)
+    ),
+      n.setAttribute("download", e),
+      n.click();
+  },
+  loadScript: function (e) {
+    var t = document.createElement("script");
+    (t.type = "text/javascript"),
+      (t.src = e),
+      document.getElementsByTagName("head")[0].appendChild(t);
+  },
+  loadJSONFile: function (e, t) {
+    var n = new XMLHttpRequest();
+    (n.onreadystatechange = function () {
+      if (n.readyState == 4 && n.status == 200) {
+        var e = JSON.parse(n.responseText);
+        t(e);
+      }
+    }),
+      n.open("GET", e, !0),
+      n.send();
+  },
+  requestShortUrl: function (e, t) {
+    var n = escape(
+      "http://urlecho.appspot.com/echo?status=200&Content-Type=text/plain&body=" +
+        e
+    );
+    (EJSS_TOOLS.File.CALLBACK = t),
+      (EJSS_TOOLS.File.callFunction = function (e) {
+        EJSS_TOOLS.File.CALLBACK(e.shortUrl);
+      });
+    if (document.getElementById("__rtShortUrl") == null) {
+      var r = document.createElement("script");
+      (r.type = "text/javascript"),
+        (r.id = "__rtShortUrl"),
+        (r.innerHTML =
+          "function rtShortUrl(data) { EJSS_TOOLS.File.callFunction(data); }"),
+        document.getElementsByTagName("head")[0].appendChild(r);
+    }
+    var i = document.getElementById("_requestShortUrl");
+    i != null && document.getElementsByTagName("head")[0].removeChild(i),
+      (i = document.createElement("script")),
+      (i.id = "_requestShortUrl"),
+      (i.type = "text/javascript"),
+      (i.src =
+        "http://b1t.co/Site/api/External/MakeUrlWithGet?callback=rtShortUrl&url=" +
+        n),
+      document.getElementsByTagName("head")[0].appendChild(i);
+  },
+};
+var EJSS_TOOLS = EJSS_TOOLS || {};
+EJSS_TOOLS.JsonrpcBuilder = {
+  template: {
+    METHOD: "${METHOD}",
+    PARAMS: "${PARAMS}",
+    ID: "${ID}",
+    REQUEST:
+      '{jsonrpc: "2.0", method: ${METHOD}, params: ${PARAMS}, id: ${ID}}',
+    RESPONSE_OK:
+      '{jsonrpc: "2.0", result: ${RESULT}, params: ${PARAMS}, id: ${ID}}',
+    RESPONSE_ERROR:
+      '{jsonrpc: "2.0", method: ${METHOD}, params: ${PARAMS}, id: ${ID}}',
+    ERROR: '{code: "2.0", message: ${MESSAGE}, data: ${DATA}}',
+  },
+  request: function (e, t, n) {
+    if (!t || t instanceof Array) {
+      var r = { jsonrpc: "2.0", method: e };
+      return t && (r.params = t), n && (r.id = n), r;
+    }
+    throw new InvalidParamsException();
+  },
+  response: function (e, t) {
+    return { jsonrpc: "2.0", result: e, id: t };
+  },
+  responseWithError: function (e, t) {
+    return { jsonrpc: "2.0", error: e, id: t };
+  },
+  error: function (e, t, n) {
+    return { code: e, message: t, data: n };
+  },
+  parseResponse: function (e) {
+    var t = null;
+    try {
+      t = JSON.parse(e);
+    } catch (n) {
+      console.log(n);
+    }
+    return t != null ? t.result : null;
+  },
+};
+var EJSS_TOOLS = EJSS_TOOLS || {};
+(EJSS_TOOLS.JsonrpcClient = {
+  methods: {
+    connect: "connect",
+    open: "open",
+    getMetadata: "getMetadata",
+    getValue: "getValue",
+    setValue: "setValue",
+    close: "close",
+    disconnect: "disconnect",
+  },
+}),
+  (EJSS_TOOLS.jsonrpcClient = function (e, t) {
+    function n(e) {
+      var t = "",
+        n = "abcdefghijklmnopqrstuvwxyz";
+      for (var r = 0; r < e; r++)
+        t += n.charAt(Math.floor(Math.random() * n.length));
+      return t;
+    }
+    function r(e, t, r, i) {
+      var s = i ? i : n(12);
+      r && (l[s] = r);
+      var o = u.request(e, t, s);
+      f.send(JSON.stringify(o));
+    }
+    function i() {
+      (f.onopen = function (e) {
+        c && c(e),
+          console.log("Openhd Event: " + e.type + " - Message: " + e.data);
+      }),
+        (f.onmessage = function (e) {
+          var t = JSON.parse(e.data);
+          d && d(l), t.id && l[t.id] && l[t.id](t.result);
+        }),
+        (f.onclose = function (e) {
+          h && h(message),
+            console.log(
+              "Closehd Event: " + message.type + " - Message: " + message.data
+            );
+        }),
+        (f.onerror = function (e) {
+          p && p(e),
+            console.log("Errorhd Event: " + e.type + " - Message: " + e.data);
+        });
+    }
+    var s = {},
+      o = EJSS_TOOLS.JsonrpcClient,
+      u = EJSS_TOOLS.JsonrpcBuilder,
+      a = [],
+      f,
+      l = {},
+      c,
+      h,
+      p,
+      d;
+    return (
+      (s.connect = function (e) {
+        return r(o.methods.connect, null, e);
+      }),
+      (s.open = function (e) {
+        return r(o.methods.open, null, e);
+      }),
+      (s.getValue = function (e, t) {
+        return r(o.methods.getValue, [e], t);
+      }),
+      (s.setValue = function (e, t) {
+        return r(o.methods.setValue, e, t);
+      }),
+      (s.getMetadata = function (e) {
+        return r(o.methods.getMetadata, null, e);
+      }),
+      (s.disconnect = function (e) {
+        return r(o.methods.disconnect, null, e);
+      }),
+      (s.close = function (e) {
+        return r(o.methods.close, null, e);
+      }),
+      (s.init = function (n, r, s, o) {
+        try {
+          (c = n), (p = s), (h = o), (d = r);
+          var u = "ws://" + e;
+          t && (u += ":" + t),
+            (f = new WebSocket(u)),
+            i(),
+            console.log("Connecting... (readyState " + f.readyState + ")");
+        } catch (a) {
+          console.log(a);
+        }
+      }),
+      (s.finish = function () {
+        try {
+          f.close();
+        } catch (e) {
+          console.log(e);
+        }
+      }),
+      s
+    );
+  });
+var EJSS_TOOLS = EJSS_TOOLS || {};
+(EJSS_TOOLS.Mathematics = {
+  TWO_PI: 6.2831852,
+  TO_RADIANS: Math.PI / 180,
+  LOG10SCALE: 1 / Math.log(10),
+  cosineAndSine: [],
+  cosineAndSineForDegrees: function (e) {
+    (e %= 360), e < 0 && (e += 360);
+    var t = this.cosineAndSine[e];
+    if (t === undefined) {
+      var n = e * this.TO_RADIANS;
+      t = [Math.cos(n), Math.sin(n)];
+    }
+    return t;
+  },
+  radians: function (e) {
+    return (e * Math.PI) / 180;
+  },
+  degrees: function (e) {
+    var t = (e * 180) / Math.PI,
+      n = t % 360;
+    return (t = n * 360 < 0 ? n + 360 : n), t;
+  },
+  norm: function (e) {
+    var t = 0;
+    for (var n = 0; n < e.length; n++) t += e[n] * e[n];
+    return Math.sqrt(t);
+  },
+  crossProduct: function (e, t) {
+    return [
+      e[1] * t[2] - e[2] * t[1],
+      e[2] * t[0] - e[0] * t[2],
+      e[0] * t[1] - e[1] * t[0],
+    ];
+  },
+  normalize: function (e) {
+    var t = EJSS_TOOLS.Mathematics.norm(e);
+    return t == 0 ? e : [e[0] / t, e[1] / t, e[2] / t];
+  },
+  normalTo: function (e) {
+    if (e[0] == 0) return [1, 0, 0];
+    if (e[1] == 0) return [0, 1, 0];
+    if (e[2] == 0) return [0, 0, 1];
+    var t = EJSS_TOOLS.Mathematics.norm(e);
+    return [-e[1] / t, e[0] / t, 0];
+  },
+}),
+  (sensors = {
+    iOS_accelerometer: { x: 0, y: 0, z: 0 },
+    iOS_gyroscope: { x: 0, y: 0, z: 0 },
+    setAccelerometer: function (accvalue) {
+      var value = JSON.parse(accvalue),
+        accelerometer = eval(value.result);
+      window.innerWidth > window.innerHeight
+        ? (sensors.iOS_accelerometer = {
+            x: accelerometer.y,
+            y: -accelerometer.x,
+            z: accelerometer.z,
+          })
+        : (sensors.iOS_accelerometer = accelerometer);
+    },
+    setGyroscope: function (gyrvalue) {
+      var value = JSON.parse(gyrvalue),
+        gyroscope = eval(value.result);
+      window.innerWidth > window.innerHeight
+        ? (sensors.iOS_gyroscope = {
+            x: gyroscope.y,
+            y: -gyroscope.x,
+            z: gyroscope.z,
+          })
+        : (sensors.iOS_gyroscope = gyroscope);
+    },
+    iOS_staccelerometer: { x: 0, y: 0, z: 0 },
+    iOS_stgyroscope: { x: 0, y: 0, z: 0 },
+    iOS_stmagnetometer: { x: 0, y: 0, z: 0 },
+    iOS_sthumidity: 0,
+    iOS_sttempamb: 0,
+    iOS_sttempir: 0,
+    iOS_stpressure: 0,
+    setSensorTag: function (stvalue) {
+      var value = JSON.parse(stvalue),
+        results = eval(value.result);
+      (sensors.iOS_staccelerometer = {
+        x: results.accx,
+        y: results.accy,
+        z: results.accz,
+      }),
+        (sensors.iOS_stgyroscope = {
+          x: results.gyrox,
+          y: results.gyroy,
+          z: results.gyroz,
+        }),
+        (sensors.iOS_stmagnetometer = {
+          x: results.magx,
+          y: results.magy,
+          z: results.magz,
+        }),
+        (sensors.iOS_sthumidity = results.hum),
+        (sensors.iOS_sttempamb = results.tamb),
+        (sensors.iOS_sttempir = results.tir),
+        (sensors.iOS_stpressure = results.press);
+    },
+    calliOSFunction: function (e, t, n, r) {
+      var i = "ejss://",
+        s = {};
+      (s.functionname = e),
+        n && (s.success = n),
+        r && (s.error = r),
+        t && (s.args = t),
+        (i += JSON.stringify(s)),
+        (window.location = i);
+    },
+    isSupportedSensorTag: function () {
+      var e = /(iPhone|iPod|iPad).*AppleWebKit(?!.*Safari)/i.test(
+        navigator.userAgent
+      );
+      return e;
+    },
+    runSensorTag: function (e, t) {
+      var n = /(iPhone|iPod|iPad).*AppleWebKit(?!.*Safari)/i.test(
+        navigator.userAgent
+      );
+      if (n) {
+        var r = [];
+        (r[0] = e),
+          (r[1] = t),
+          sensors.calliOSFunction("runSensorTag", r, "sensors.setSensorTag");
+      }
+    },
+    stopSensorTag: function () {
+      var e = /(iPhone|iPod|iPad).*AppleWebKit(?!.*Safari)/i.test(
+        navigator.userAgent
+      );
+      e && sensors.calliOSFunction("stopSensorTag");
+    },
+    getSensorTagAccelerometer: function () {
+      return sensors.iOS_staccelerometer;
+    },
+    getSensorTagGyroscope: function () {
+      return sensors.iOS_stgyroscope;
+    },
+    getSensorTagMagnetometer: function () {
+      return sensors.iOS_stmagnetometer;
+    },
+    getSensorTagTempAmb: function () {
+      return sensors.iOS_sttempamb;
+    },
+    getSensorTagTempIR: function () {
+      return sensors.iOS_sttempir;
+    },
+    getSensorTagPressure: function () {
+      return sensors.iOS_stpressure;
+    },
+    getSensorTagHumidity: function () {
+      return sensors.iOS_sthumidity;
+    },
+    isAccelerometer: function () {
+      var e = window.android && window.android.isAccelerometer(),
+        t = /(iPhone|iPod|iPad).*AppleWebKit(?!.*Safari)/i.test(
+          navigator.userAgent
+        );
+      return e || t;
+    },
+    runAccelerometer: function () {
+      var e = window.android && window.android.isAccelerometer(),
+        t = /(iPhone|iPod|iPad).*AppleWebKit(?!.*Safari)/i.test(
+          navigator.userAgent
+        );
+      e
+        ? window.android.runAccelerometer()
+        : t &&
+          sensors.calliOSFunction(
+            "runAccelerometer",
+            "",
+            "sensors.setAccelerometer"
+          );
+    },
+    stopAccelerometer: function () {
+      var e = window.android && window.android.isAccelerometer(),
+        t = /(iPhone|iPod|iPad).*AppleWebKit(?!.*Safari)/i.test(
+          navigator.userAgent
+        );
+      e
+        ? window.android.stopAccelerometer()
+        : t && sensors.calliOSFunction("stopAccelerometer");
+    },
+    getAccelerometer: function () {
+      var is_Androidwebview =
+          window.android && window.android.isAccelerometer(),
+        is_iOSwebview = /(iPhone|iPod|iPad).*AppleWebKit(?!.*Safari)/i.test(
+          navigator.userAgent
+        );
+      if (is_Androidwebview) {
+        var value = eval(window.android.getAccelerometer());
+        return window.innerWidth > window.innerHeight
+          ? value
+          : { x: value.y, y: -value.x, z: value.z };
+      }
+      return is_iOSwebview ? sensors.iOS_accelerometer : { x: 0, y: 0, z: 0 };
+    },
+    isGyroscope: function () {
+      var e = window.android && window.android.isGyroscope(),
+        t = /(iPhone|iPod|iPad).*AppleWebKit(?!.*Safari)/i.test(
+          navigator.userAgent
+        );
+      return e || t;
+    },
+    runGyroscope: function () {
+      var e = window.android && window.android.isGyroscope(),
+        t = /(iPhone|iPod|iPad).*AppleWebKit(?!.*Safari)/i.test(
+          navigator.userAgent
+        );
+      e
+        ? window.android.runGyroscope()
+        : t &&
+          sensors.calliOSFunction("runGyroscope", "", "sensors.setGyroscope");
+    },
+    stopGyroscope: function () {
+      var e = window.android && window.android.isGyroscope(),
+        t = /(iPhone|iPod|iPad).*AppleWebKit(?!.*Safari)/i.test(
+          navigator.userAgent
+        );
+      e
+        ? window.android.stopGyroscope()
+        : t && sensors.calliOSFunction("stopGyroscope");
+    },
+    getGyroscope: function () {
+      var is_Androidwebview = window.android && window.android.isGyroscope(),
+        is_iOSwebview = /(iPhone|iPod|iPad).*AppleWebKit(?!.*Safari)/i.test(
+          navigator.userAgent
+        );
+      if (is_Androidwebview) {
+        var value = eval(window.android.getGyroscope());
+        return window.innerWidth > window.innerHeight
+          ? value
+          : { x: value.y, y: -value.x, z: value.z };
+      }
+      return is_iOSwebview ? sensors.iOS_gyroscope : { x: 0, y: 0, z: 0 };
+    },
+    isGravity: function () {
+      var e = window.android && window.android.isGravity();
+      return e;
+    },
+    runGravity: function () {
+      var e = window.android && window.android.isGravity();
+      e && window.android.runGravity();
+    },
+    stopGravity: function () {
+      var e = window.android && window.android.isGravity();
+      e && window.android.stopGravity();
+    },
+    getGravity: function () {
+      var e = window.android && window.android.isGravity();
+      return e ? window.android.getGravity() : { x: 0, y: 0, z: 0 };
+    },
+    isLinearAcceleration: function () {
+      var e = window.android && window.android.isLinearAcceleration();
+      return e;
+    },
+    runLinearAcceleration: function () {
+      var e = window.android && window.android.isLinearAcceleration();
+      e && window.android.runLinearAcceleration();
+    },
+    stopLinearAcceleration: function () {
+      var e = window.android && window.android.isLinearAcceleration();
+      e && window.android.stopLinearAcceleration();
+    },
+    getLinearAcceleration: function () {
+      var e = window.android && window.android.isLinearAcceleration();
+      return e ? window.android.getLinearAcceleration() : { x: 0, y: 0, z: 0 };
+    },
+    isRotationVector: function () {
+      var e = window.android && window.android.isRotationVector();
+      return e;
+    },
+    runRotationVector: function () {
+      var e = window.android && window.android.isRotationVector();
+      e && window.android.runRotationVector();
+    },
+    stopRotationVector: function () {
+      var e = window.android && window.android.isRotationVector();
+      e && window.android.stopRotationVector();
+    },
+    getRotationVector: function () {
+      var e = window.android && window.android.isRotationVector();
+      return e ? window.android.getRotationVector() : { x: 0, y: 0, z: 0 };
+    },
+    isMagneticField: function () {
+      var e = window.android && window.android.isMagneticField();
+      return e;
+    },
+    runMagneticField: function () {
+      var e = window.android && window.android.isMagneticField();
+      e && window.android.runMagneticField();
+    },
+    stopMagneticField: function () {
+      var e = window.android && window.android.isMagneticField();
+      e && window.android.stopMagneticField();
+    },
+    getMagneticField: function () {
+      var e = window.android && window.android.isMagneticField();
+      return e ? window.android.getMagneticField() : { x: 0, y: 0, z: 0 };
+    },
+    isAmbientTemperature: function () {
+      var e = window.android && window.android.isAmbientTemperature();
+      return e;
+    },
+    runAmbientTemperature: function () {
+      var e = window.android && window.android.isAmbientTemperature();
+      e && window.android.runAmbientTemperature();
+    },
+    stopAmbientTemperature: function () {
+      var e = window.android && window.android.isAmbientTemperature();
+      e && window.android.stopAmbientTemperature();
+    },
+    getAmbientTemperature: function () {
+      var e = window.android && window.android.isAmbientTemperature();
+      return e ? window.android.getAmbientTemperature() : 0;
+    },
+    isLight: function () {
+      var e = window.android && window.android.isLight();
+      return e;
+    },
+    runLight: function () {
+      var e = window.android && window.android.isLight();
+      e && window.android.runLight();
+    },
+    stopLight: function () {
+      var e = window.android && window.android.isLight();
+      e && window.android.stopLight();
+    },
+    getLight: function () {
+      var e = window.android && window.android.isLight();
+      return e ? window.android.getLight() : 0;
+    },
+    isPressure: function () {
+      var e = window.android && window.android.isPressure();
+      return e;
+    },
+    runPressure: function () {
+      var e = window.android && window.android.isPressure();
+      e && window.android.runPressure();
+    },
+    stopPressure: function () {
+      var e = window.android && window.android.isPressure();
+      e && window.android.stopPressure();
+    },
+    getPressure: function () {
+      var e = window.android && window.android.isPressure();
+      return e ? window.android.getPressure() : 0;
+    },
+    isHumidity: function () {
+      var e = window.android && window.android.isHumidity();
+      return e;
+    },
+    runHumidity: function () {
+      var e = window.android && window.android.isHumidity();
+      e && window.android.runHumidity();
+    },
+    stopHumidity: function () {
+      var e = window.android && window.android.isHumidity();
+      e && window.android.stopHumidity();
+    },
+    getHumidity: function () {
+      var e = window.android && window.android.isHumidity();
+      return e ? window.android.getHumidity() : 0;
+    },
+  });
+var EJSS_CORE = EJSS_CORE || {};
+(EJSS_CORE.createView = function (e) {
+  function t(e, t) {
+    return e.match("^" + t) == t;
+  }
+  var n = {},
+    r,
+    i = {},
+    s = {},
+    o = [],
+    u = [],
+    a = [],
+    f = [],
+    l = [],
+    c = [],
+    h = [],
+    p = [],
+    d = [],
+    v = [],
+    m = [],
+    g = [],
+    y = !1,
+    b = !0,
+    w = [],
+    E,
+    S;
+  return (
+    (n._1 = function () {
+      (n[e].innerHTML = ""),
+        (i = {}),
+        (s = {}),
+        (o = []),
+        (u = []),
+        (w = []),
+        (a = []),
+        (f = []),
+        (l = []),
+        (c = []),
+        (h = []),
+        (d = []),
+        (v = []),
+        (m = []),
+        (g = []),
+        (p = []),
+        (y = !1),
+        (b = !0);
+    }),
+    (n._2 = function (e) {
+      E = e;
+    }),
+    (n._3 = function (e) {
+      if (e == null || e.length <= 0) return e;
+      if (t(e, "local:")) return e;
+      if (t(e, "data:")) return e;
+      if (t(e, "http:") || t(e, "https:") || t(e, "ws:")) return e;
+      if (typeof __base64Images != "undefined") {
+        var n = __base64Images[e];
+        if (n) return n;
+      }
+      S && !t(e, S) && e.charAt(0) == "/"
+        ? (e = S + "images" + e)
+        : E && !t(e, E) && e.charAt(0) != "/" && (e = E + e);
+      if (t(window.location.protocol, "ibooks")) {
+        var r = window.location.pathname;
+        (r = r.substring(0, r.lastIndexOf("/"))),
+          t(e, "./") && (e = e.substring(2)),
+          (e = "ibooksimg://" + window.location.host + "/" + r + "/" + e);
+      }
+      return e;
+    }),
+    (n._4 = function (e) {
+      S = e;
+    }),
+    (n._5 = function (e, t) {
+      i[e] = {
+        getter: null,
+        setter: null,
+        listeners: [],
+        collectors: [],
+        value: t,
+      };
+    }),
+    (n._5s = function (e) {
+      for (var t = 0; t < e.length; t++) n._5(e[t]);
+    }),
+    (n._7 = function (e) {
+      s[e] = { action: null };
+    }),
+    (n._7s = function (e) {
+      for (var t = 0; t < e.length; t++) n._7(e[t]);
+    }),
+    (n._9 = function (e, t, r) {
+      var i = EJSS_CORE.promoteToControlElement(e(t), n, t);
+      return (
+        i.render && l.push(i),
+        i.touch && c.push(i),
+        i.dataCollected && h.push(i),
+        i.reset && a.push(i),
+        i.initialize && f.push(i),
+        i.enableEPub && d.push(i),
+        i.adjustPosition && v.push(i),
+        t && (n[t] = i),
+        r && i.setProperty("Parent", r),
+        i
+      );
+    }),
+    (n._10 = function (e) {
+      var t = i[e];
+      return t !== undefined ? t.value : undefined;
+    }),
+    (n._11 = function () {
+      n._reset(), n._15(), n._initialize(), n._update(), n._render();
+    }),
+    (n._12 = function (e) {
+      r = e;
+    }),
+    (n._13 = function (e, t, n, r) {
+      var s = i[e];
+      if (!s)
+        console.log(
+          "WARNING: view._setAccessors() - Variable not found : " + e
+        );
+      else {
+        (s.getter = t), (s.setter = n), (s.value = r);
+        var o = u.indexOf(s);
+        s.getter
+          ? s.listeners.length > 0 && o < 0 && u.push(s)
+          : o >= 0 && u.splice(o, 1),
+          (o = w.indexOf(s)),
+          s.value
+            ? s.listeners.length > 0 && o < 0 && w.push(s)
+            : o >= 0 && w.splice(o, 1);
+      }
+      return s;
+    }),
+    (n._setAction = function (e, t) {
+      var n = s[e];
+      return (
+        n
+          ? (n.action = t)
+          : console.log("WARNING: view._setAction() - Action not found : " + e),
+        n
+      );
+    }),
+    (n._14 = function (e) {
+      b = e;
+    }),
+    (n._reset = function () {
+      for (var e = 0, t = a.length; e < t; e++) a[e].reset();
+    }),
+    (n._15 = function () {
+      for (var e = 0, t = w.length; e < t; e++) {
+        var n = w[e],
+          r = n.value;
+        if (r) {
+          var i = n.listeners;
+          for (var s = 0, o = i.length; s < o; s++) i[s](r);
+        }
+      }
+    }),
+    (n._initialize = function () {
+      for (var e = 0, t = f.length; e < t; e++) f[e].initialize();
+    }),
+    (n._update = function () {
+      var e, t;
+      for (e = 0, t = u.length; e < t; e++) {
+        var n = u[e],
+          r = n.listeners,
+          i = n.getter();
+        for (var s = 0, a = r.length; s < a; s++) r[s](i);
+      }
+      for (e = 0, t = o.length; e < t; e++) {
+        var f = o[e];
+        f.propertySetter(f.getter());
+      }
+    }),
+    (n._collectData = function () {
+      var e, t;
+      for (e = 0, t = u.length; e < t; e++) {
+        var n = u[e],
+          r = n.collectors,
+          i = n.getter();
+        for (var s = 0, a = r.length; s < a; s++) r[s](i);
+      }
+      for (e = 0, t = o.length; e < t; e++) {
+        var f = o[e];
+        f.isCollector && f.propertySetter(f.getter());
+      }
+      for (e = 0, t = h.length; e < t; e++) h[e].dataCollected();
+    }),
+    (n._render = function () {
+      for (var e = 0, t = l.length; e < t; e++) l[e].render();
+    }),
+    (n._touch = function () {
+      for (var e = 0, t = c.length; e < t; e++) c[e].touch();
+    }),
+    (n._enableEPub = function () {
+      if (typeof _isEPub != "undefined" && _isEPub)
+        for (var e = 0, t = d.length; e < t; e++) d[e].enableEPub();
+    }),
+    (n._addFontResizeListener = function (e) {
+      m.push(e);
+    }),
+    (n._fontResized = function (e, t, n) {
+      for (var r = 0, i = v.length; r < i; r++) v[r].adjustPosition();
+      if (e) for (var s = 0, o = m.length; s < o; s++) m[s](e, t, n);
+    }),
+    (n._addResizeListener = function (e) {
+      g.push(e);
+    }),
+    (n._resized = function (e, t) {
+      for (var n = 0, r = v.length; n < r; n++) v[n].adjustPosition();
+      for (var i = 0, s = g.length; i < s; i++) g[i](e, t);
+    }),
+    (n._16 = function () {
+      var e = p.length;
+      if (e <= 0) return !1;
+      y = !0;
+      for (var t = 0; t < e; t++) {
+        var n = p[t];
+        n.what(n.data);
+      }
+      return (p = []), (y = !1), !0;
+    }),
+    (n._17 = function () {
+      return p.length;
+    }),
+    (n._18 = function () {
+      r && b && r();
+    }),
+    (n._19 = function (e, t, n) {
+      var r = i[e];
+      return (
+        r
+          ? (r.listeners.indexOf(t) < 0 &&
+              (r.listeners.push(t), n && r.collectors.push(t)),
+            r.getter && u.indexOf(r) < 0 && u.push(r),
+            r.value && w.indexOf(r) < 0 && w.push(r))
+          : console.log("WARNING: view._19() - Variable not found : " + e),
+        r
+      );
+    }),
+    (n._20 = function (e, t, n) {
+      var r = !1;
+      for (var i = 0, s = o.length; i < s; i++) {
+        var u = o[i];
+        if (u.propertySetter === t) {
+          (u.getter = e), (r = !0);
+          break;
+        }
+      }
+      return r || o.push({ getter: e, propertySetter: t, isCollector: n }), r;
+    }),
+    (n._21 = function (e) {
+      var t = s[e];
+      return (
+        t || console.log("WARNING: view._21() - Action not found : " + e), t
+      );
+    }),
+    (n._22 = function (e, t) {
+      if (!r) {
+        e(t);
+        return;
+      }
+      !y && b && p.push({ what: e, data: t });
+    }),
+    (n._format = function (e, t) {
+      var n = t.indexOf("."),
+        r = 0;
+      return n >= 0 && (r = Number(t.length - n - 1)), parseFloat(e).toFixed(r);
+    }),
+    (n.print = function (e) {
+      var t = document.getElementsByTagName("textarea");
+      t.length ? (t[0].innerHTML = e) : console.log(e);
+    }),
+    (n._setVisible = function (t) {
+      t
+        ? (document.getElementById(e).style.display = "inherit")
+        : (document.getElementById(e).style.display = "none");
+    }),
+    (n._switchVisibility = function () {
+      n._setVisible(document.getElementById(e).style.display == "none");
+    }),
+    (n.serialize = function () {
+      var e = {};
+      for (key in n) n[key].serialize && (e[key] = n[key].serialize());
+      return e;
+    }),
+    (n.unserialize = function (e) {
+      for (key in e)
+        n[key] && n[key].unserialize
+          ? n[key].unserialize(e[key])
+          : console.log("Impossible unserialize: " + key);
+    }),
+    (n[e] = document.getElementById(e)),
+    n
+  );
+}),
+  (EJSS_CORE.promoteToControlElement = function (e, t, n) {
+    n = n || "unnamed";
+    var r = {},
+      i = {};
+    return (
+      (e._0 = function (e) {
+        n = e;
+      }),
+      (e.getName = function () {
+        return n;
+      }),
+      (e.getResourcePath = function (e) {
+        return t._3(e);
+      }),
+      (e.registerProperty = function (t, n, i) {
+        return (
+          (r[t] = {
+            setter: n,
+            getter: i,
+            variable: null,
+            variableSetter: null,
+          }),
+          e
+        );
+      }),
+      (e.registerAction = function (t, n, r, s) {
+        return (
+          (i[t] = { action: null, helper: n, process: r }),
+          s && e.setAction(t, s),
+          e
+        );
+      }),
+      (e.setProperty = function (t, n) {
+        var s = i[t];
+        if (s) return e.setAction(t, n);
+        var o = r[t];
+        return (
+          o
+            ? o.setter(n)
+            : console.log(
+                "WARNING: ControlElement setProperty() - Property not registered : " +
+                  t +
+                  " for element : " +
+                  e.getName()
+              ),
+          e
+        );
+      }),
+      (e.setProperties = function (t) {
+        for (var n in t) e.setProperty(n, t[n]);
+        return e;
+      }),
+      (e.linkProperty = function (n, i, s) {
+        var o = r[n];
+        if (!o)
+          return (
+            console.log(
+              "WARNING: ControlElement linkProperty() - Element property not registered : " +
+                n +
+                " for element : " +
+                e.getName()
+            ),
+            e
+          );
+        if (typeof i == "string") {
+          var u = t._19(i, o.setter, e.dataCollected);
+          if (!u)
+            return (
+              console.log(
+                "WARNING: ControlElement linkProperty() - element : " +
+                  e.getName() +
+                  " - property :" +
+                  n +
+                  " - View variable not registered : " +
+                  i
+              ),
+              e
+            );
+          s !== "InputOnly" && (o.variable = u), (o.variableSetter = null);
+        } else
+          t._20(i, o.setter, e.dataCollected),
+            (o.variableSetter = s),
+            (o.variable = null);
+        return e;
+      }),
+      (e.linkProperties = function (t) {
+        for (var n in t) e.linkProperty(n, t[n]);
+        return e;
+      }),
+      (e.setAction = function (n, r) {
+        var s = i[n];
+        if (!s)
+          return (
+            console.log(
+              "WARNING: ControlElement setAction() - action not registered : " +
+                n +
+                " for element : " +
+                e.getName
+            ),
+            e
+          );
+        if (typeof r == "string") {
+          var o = t._21(r);
+          if (!o)
+            return (
+              console.log(
+                "WARNING: ControlElement setAction() - element : " +
+                  e.getName() +
+                  " - View action not registered : " +
+                  r
+              ),
+              e
+            );
+          s.action = o;
+        } else s.action = { action: r };
+        return e;
+      }),
+      (e.setActions = function (t) {
+        for (var n in t) e.setAction(n, t[n]);
+        return e;
+      }),
+      (e.invokeAction = function (n) {
+        var r = i[n];
+        if (r) {
+          r.process && t._22(r.process, null);
+          if (r.action) {
+            var s = r.helper ? r.helper() : null;
+            t._22(r.action.action, s);
+          }
+        }
+        return e;
+      }),
+      (e.propertiesChanged = function () {
+        for (var n = 0, i = arguments.length; n < i; n++) {
+          var s = r[arguments[n]];
+          if (s) {
+            var o = s.variableSetter;
+            o || (s.variable && (o = s.variable.setter)),
+              o || (s.setter && (o = s.setter)),
+              o && t._22(o, s.getter());
+          }
+        }
+        return e;
+      }),
+      (e.reportInteractions = function (n, r) {
+        var i, s;
+        if (n) for (i = 0, s = n.length; i < s; i++) e.invokeAction(n[i]);
+        if (r) for (i = 0, s = r.length; i < s; i++) e.propertiesChanged(r[i]);
+        return t._17() > 0 && t._18(), e;
+      }),
+      (e.getProperty = function (e, t) {
+        var n = r[e];
+        return n && n.getter ? n.getter() : undefined;
+      }),
+      (e.getProperties = function () {
+        return r;
+      }),
+      e.registerProperty("name", e._0, e.getName),
+      e.registerProperties && e.registerProperties(e),
+      e
+    );
+  });
+function DoubleSlitWaveParticleDuality(_topFrame, _libraryPath, _codebasePath) {
+  var _model = EJSS_CORE.createAnimation();
+  var _view;
+  var _isPlaying = false;
+  var _isPaused = true;
+  var _isMobile =
+    navigator === undefined
+      ? false
+      : navigator.userAgent.match(
+          /iPhone|iPad|iPod|Android|BlackBerry|Opera Mini|IEMobile/i
+        );
+
+  var _stringProperties = {};
+  var _tools = {
+    showInputDialog: EJSS_INTERFACE.BoxPanel.showInputDialog,
+    showOkDialog: EJSS_INTERFACE.BoxPanel.showOkDialog,
+    showOkCancelDialog: EJSS_INTERFACE.BoxPanel.showOkCancelDialog,
+  };
+
+  function _play() {
+    _isPaused = false;
+    _isPlaying = true;
+    _model.play();
+  }
+  function _pause() {
+    _isPaused = true;
+    _isPlaying = false;
+    _model.pause();
+  }
+  function _step() {
+    _pause();
+    _model.step();
+  }
+  function _reset() {
+    _model.reset();
+    _isPaused = _model.isPaused();
+    _isPlaying = _model.isPlaying();
+  }
+  function _update() {
+    _model.update();
+  }
+  function _initialize() {
+    _model.initialize();
+  }
+  function _setFPS(_fps) {
+    _model.setFPS(_fps);
+  }
+  function _setDelay(_delay) {
+    _model.setDelay(_delay);
+  }
+  function _setStepsPerDisplay(_spd) {
+    _model.setStepsPerDisplay(_spd);
+  }
+  function _setUpdateView(_updateView) {
+    _model.setUpdateView(_updateView);
+  }
+  function _setAutoplay(_auto) {
+    _model.setAutoplay(_auto);
+  }
+  function _println(_message) {
+    console.log(_message);
+  }
+
+  function _breakAfterThisPage() {
+    _model.setShouldBreak(true);
+  }
+
+  function _resetSolvers() {
+    if (_model.resetSolvers) _model.resetSolvers();
+  }
+
+  function _saveText(name, type, content) {
+    if (_model.saveText) _model.saveText(name, type, content);
+  }
+
+  function _saveState(name) {
+    if (_model.saveState) _model.saveState(name);
+  }
+
+  function _saveImage(name, panelname) {
+    if (_model.saveImage) _model.saveImage(name, panelname);
+  }
+
+  function _readState(url, type) {
+    if (_model.readState) _model.readState(url, type);
+  }
+
+  function _readText(url, type, varname) {
+    if (_model.readText) _model.readText(url, type, varname);
+  }
+
+  function _getStringProperty(propertyName) {
+    var _value = _stringProperties[propertyName];
+    if (_value === undefined) return propertyName;
+    else return _value;
+  }
+  var __pagesEnabled = [];
+  function _setPageEnabled(pageName, enabled) {
+    __pagesEnabled[pageName] = enabled;
+  }
+
+  var mode; // EjsS Model.Variables.Var Table.mode
+  var rate; // EjsS Model.Variables.Var Table.rate
+  var lambda; // EjsS Model.Variables.Var Table.lambda
+  var D; // EjsS Model.Variables.Var Table.D
+  var d; // EjsS Model.Variables.Var Table.d
+  var scale; // EjsS Model.Variables.Var Table.scale
+  var width; // EjsS Model.Variables.Var Table.width
+  var height; // EjsS Model.Variables.Var Table.height
+  var t; // EjsS Model.Variables.Var Table.t
+  var dt; // EjsS Model.Variables.Var Table.dt
+
+  var plotWidth; // EjsS Model.Variables.Drawing Vars.plotWidth
+  var plotHeight; // EjsS Model.Variables.Drawing Vars.plotHeight
+  var imageData; // EjsS Model.Variables.Drawing Vars.imageData
+  var canvas; // EjsS Model.Variables.Drawing Vars.canvas
+
+  // Particle counter variables (global scope for evolution function access)
+  var targetParticleCount = 8; // Default: 8 electrons
+  var currentParticleCount = 0;
+
+  function _serialize() {
+    return _model.serialize();
+  }
+
+  _model._userSerialize = function () {
+    return {
+      mode: mode,
+      rate: rate,
+      lambda: lambda,
+      D: D,
+      d: d,
+      scale: scale,
+      width: width,
+      height: height,
+      t: t,
+      dt: dt,
+      plotWidth: plotWidth,
+      plotHeight: plotHeight,
+      imageData: imageData,
+      canvas: canvas,
+    };
+  };
+
+  function _unserialize(json) {
+    return _model.unserialize(json);
+  }
+
+  _model._userUnserialize = function (json) {
+    if (json.mode) mode = json.mode;
+    if (json.rate) rate = json.rate;
+    if (json.lambda) lambda = json.lambda;
+    if (json.D) D = json.D;
+    if (json.d) d = json.d;
+    if (json.scale) scale = json.scale;
+    if (json.width) width = json.width;
+    if (json.height) height = json.height;
+    if (json.t) t = json.t;
+    if (json.dt) dt = json.dt;
+    if (json.plotWidth) plotWidth = json.plotWidth;
+    if (json.plotHeight) plotHeight = json.plotHeight;
+    if (json.imageData) imageData = json.imageData;
+    if (json.canvas) canvas = json.canvas;
+    _resetSolvers();
+    _model.update();
+  };
+
+  _model.addToReset(function () {
+    __pagesEnabled["Create Image Array"] = true;
+    __pagesEnabled["Evol Page"] = true;
+  });
+
+  _model.addToReset(function () {
+    mode = 0; // EjsS Model.Variables.Var Table.mode
+    rate = 50; // EjsS Model.Variables.Var Table.rate (medium speed for particle visualization)
+    targetParticleCount = 8; // Reset to default 8 electrons
+    currentParticleCount = 0; // Reset counter
+    lambda = Math.PI; // EjsS Model.Variables.Var Table.lambda
+    D = 4; // EjsS Model.Variables.Var Table.D
+    d = 20; // EjsS Model.Variables.Var Table.d
+    scale = 2; // EjsS Model.Variables.Var Table.scale
+    width = scale; // EjsS Model.Variables.Var Table.width
+    height = 2; // EjsS Model.Variables.Var Table.height
+    t = 0; // EjsS Model.Variables.Var Table.t
+    dt = 0.1; // EjsS Model.Variables.Var Table.dt
+  });
+
+  _model.addToReset(function () {
+    plotWidth = _isMobile || _isEPub ? 400 : 700; // EjsS Model.Variables.Drawing Vars.plotWidth
+    plotHeight = 300; // EjsS Model.Variables.Drawing Vars.plotHeight
+  });
+
+  _model.addToReset(function () {
+    _model.setAutoplay(false);
+    _model.setFPS(10);
+    _model.setStepsPerDisplay(1);
+  });
+
+  function getHit(x) {
+    // > CustomCode.Detector Hit:1
+    var pd =
+      Math.cos((Math.PI * x * d) / lambda) *
+      Math.cos((Math.PI * x * d) / lambda); // double slit  // > CustomCode.Detector Hit:2
+    var beta = (Math.PI * D * x) / lambda; // > CustomCode.Detector Hit:3
+    var ps = beta === 0 ? 1 : (Math.sin(beta) * Math.sin(beta)) / beta / beta; // single slit  // > CustomCode.Detector Hit:4
+    if (mode === 0) {
+      // > CustomCode.Detector Hit:5
+      return pd * ps > Math.random(); // > CustomCode.Detector Hit:6
+    } else {
+      // > CustomCode.Detector Hit:7
+      return ps > Math.random(); // > CustomCode.Detector Hit:8
+    } // > CustomCode.Detector Hit:9
+  } // > CustomCode.Detector Hit:10
+
+  function resetTime() {
+    // > CustomCode.Reset Time:1
+    t = 0; // > CustomCode.Reset Time:2
+    for (var i = 0, n = imageData.data.length; i < n; i += 4) {
+      // > CustomCode.Reset Time:3
+      imageData.data[i] = 0; // Make all pixels black  // > CustomCode.Reset Time:4
+      imageData.data[i + 1] = 0; // Make all pixels black  // > CustomCode.Reset Time:5
+      imageData.data[i + 2] = 0; // Make all pixels black  // > CustomCode.Reset Time:6
+    } // > CustomCode.Reset Time:7
+    canvas.getContext().putImageData(imageData, 0, 0); // > CustomCode.Reset Time:8
+  } // > CustomCode.Reset Time:9
+
+  _model.addToInitialization(function () {
+    if (!__pagesEnabled["Create Image Array"]) return;
+    _view.bothRadio.setChecked(mode === 0); // > Initialization.Create Image Array:1
+    _view.leftRadio.setChecked(mode === 1); // > Initialization.Create Image Array:2
+    _view.rightRadio.setChecked(mode === 2); // > Initialization.Create Image Array:3
+    canvas = _view.canvas; // > Initialization.Create Image Array:4
+    canvas.setWidth(plotWidth); // > Initialization.Create Image Array:5
+    canvas.setHeight(plotHeight); // > Initialization.Create Image Array:6
+    var ctx = canvas.getContext(); // > Initialization.Create Image Array:7
+    //console.log("w="+canvas.getWidth() + "  h="+ canvas.getHeight());  // > Initialization.Create Image Array:8
+    imageData = canvas.getContext().createImageData(plotWidth, plotHeight); // > Initialization.Create Image Array:9
+    for (var i = 3, n = imageData.data.length; i < n; i += 4)
+      imageData.data[i] = 255; // Make all pixels opaque  // > Initialization.Create Image Array:10
+    canvas.getContext().putImageData(imageData, 0, 0); // > Initialization.Create Image Array:11
+  });
+
+  _model.addToEvolution(function () {
+    if (!__pagesEnabled["Evol Page"]) return;
+
+    // Check if target reached and pause simulation
+    if (
+      targetParticleCount > 0 &&
+      currentParticleCount >= targetParticleCount
+    ) {
+      _pause();
+      return;
+    }
+
+    // Calculate how many particles to generate this step
+    var particlesToGenerate = rate;
+    if (targetParticleCount > 0) {
+      var remaining = targetParticleCount - currentParticleCount;
+      particlesToGenerate = Math.min(rate, remaining);
+    }
+
+    for (var i = 0; i < particlesToGenerate; i++) {
+      // > Evolution.Evol Page:1
+      do {
+        // > Evolution.Evol Page:2
+        var px = Math.floor(plotWidth * Math.random()); // > Evolution.Evol Page:3
+        var x = -width / 2 + (px * width) / plotWidth; // > Evolution.Evol Page:4
+        //console.log("x="+x+"  px="+px);  // > Evolution.Evol Page:5
+        var hit = getHit(x); // > Evolution.Evol Page:6
+        if (hit) {
+          // > Evolution.Evol Page:7
+          var py = Math.floor(plotHeight * Math.random()); // > Evolution.Evol Page:8
+          var index = 4 * px + 4 * plotWidth * py; // > Evolution.Evol Page:9
+          imageData.data[index + 0] = 255; //red  // > Evolution.Evol Page:10
+          imageData.data[index + 1] = 255; //green  // > Evolution.Evol Page:11
+          imageData.data[index + 2] = 255; // blue  // > Evolution.Evol Page:12
+          //console.log("px="+px+"  py="+py);  // > Evolution.Evol Page:13
+          currentParticleCount++; // Increment particle counter
+        } // > Evolution.Evol Page:14
+      } while (!hit); // keep trying until a photon is detected  // > Evolution.Evol Page:15
+    } // > Evolution.Evol Page:16
+    canvas.getContext().putImageData(imageData, 0, 0); // > Evolution.Evol Page:17
+  });
+
+  _model.addToFixedRelations(function () {
+    _isPaused = _model.isPaused();
+    _isPlaying = _model.isPlaying();
+  });
+
+  _model.addToFixedRelations(function () {
+    _isPaused = _model.isPaused();
+    _isPlaying = _model.isPlaying();
+  });
+
+  _model._resized = function (_width, _height) {
+    _view._resized(_width, _height);
+  }; // end of _resized
+  _model._fontResized = function (iBase, iSize, iDelta) {
+    _view._fontResized(iBase, iSize, iDelta);
+  }; // end of _fontResized
+
+  function _getViews() {
+    var _viewsInfo = [];
+    var _counter = 0;
+    _viewsInfo[_counter++] = { name: "HtmlView Page", width: 800, height: 600 };
+    return _viewsInfo;
+  } // end of _getViews
+
+  function _selectView(_viewNumber) {
+    _view = null;
+    _view = new DoubleSlitWaveParticleDuality_View(
+      _topFrame,
+      _viewNumber,
+      _libraryPath,
+      _codebasePath
+    );
+    var _view_super_reset = _view._reset;
+    _view._reset = function () {
+      _view_super_reset();
+      switch (_viewNumber) {
+        case -10:
+          break; // make Lint happy
+        default:
+        case 0:
+          _view.bothRadio.setAction("OnCheckOn", function () {
+            mode = 0;
+          }); // HtmlView Page setting action 'OnCheckOn' for element 'bothRadio'
+          _view.leftRadio.setAction("OnCheckOn", function () {
+            mode = 1;
+          }); // HtmlView Page setting action 'OnCheckOn' for element 'leftRadio'
+          _view.rightRadio.setAction("OnCheckOn", function () {
+            mode = 2;
+          }); // HtmlView Page setting action 'OnCheckOn' for element 'rightRadio'
+          _view.canvas.linkProperty(
+            "Height",
+            function () {
+              return plotHeight;
+            },
+            function (_v) {
+              plotHeight = _v;
+            }
+          ); // HtmlView Page linking property 'Height' for element 'canvas'
+          _view.canvas.linkProperty(
+            "Width",
+            function () {
+              return plotWidth;
+            },
+            function (_v) {
+              plotWidth = _v;
+            }
+          ); // HtmlView Page linking property 'Width' for element 'canvas'
+          _view.runPauseButton.setAction("OffClick", _pause); // HtmlView Page setting action 'OffClick' for element 'runPauseButton'
+          _view.runPauseButton.linkProperty("State", function () {
+            return _isPaused;
+          }); // HtmlView Page linking property 'State' for element 'runPauseButton'
+          _view.runPauseButton.setAction("OnClick", _play); // HtmlView Page setting action 'OnClick' for element 'runPauseButton'
+          _view.stepButton.setAction("OnClick", function () {
+            _step();
+          }); // HtmlView Page setting action 'OnClick' for element 'stepButton'
+          _view.resetTime.setAction("OnClick", function () {
+            resetTime();
+            currentParticleCount = 0;
+          }); // HtmlView Page setting action 'OnClick' for element 'resetTime'
+          _view.resetButton.setAction("OnClick", function () {
+            _reset();
+            currentParticleCount = 0;
+            _view.particleSelector.setValue(8);
+            targetParticleCount = 8;
+          }); // HtmlView Page setting action 'OnClick' for element 'resetButton'
+          _view.separationField.linkProperty(
+            "Value",
+            function () {
+              return d;
+            },
+            function (_v) {
+              d = _v;
+            }
+          ); // HtmlView Page linking property 'Value' for element 'separationField'
+          _view.slitWidhtField.linkProperty(
+            "Value",
+            function () {
+              return D;
+            },
+            function (_v) {
+              D = _v;
+            }
+          ); // HtmlView Page linking property 'Value' for element 'slitWidhtField'
+
+          // Particle selector linking - variables now declared globally above
+          _view.particleSelector.setAction("OnChange", function () {
+            targetParticleCount = _view.particleSelector.getValue();
+            currentParticleCount = 0;
+            resetTime(); // Clear detector screen
+            _pause(); // Stop if already running
+            rate = 50; // Medium speed for visualization
+            // Auto-start to show the selected electron count
+            setTimeout(function () {
+              if (targetParticleCount > 0) {
+                _play();
+              }
+            }, 200);
+          });
+
+          // Set default to 8 electrons (first image shows just 8 dots)
+          _view.particleSelector.setValue(8);
+          targetParticleCount = 8;
+
+          break;
+      } // end of switch
+    }; // end of new reset
+
+    _model.setView(_view);
+    _model.reset();
+    _view._enableEPub();
+  } // end of _selectView
+
+  _model.setAutoplay(false);
+  _model.setFPS(10);
+  _model.setStepsPerDisplay(1);
+  _selectView(_model._autoSelectView(_getViews())); // this includes _model.reset()
+  return _model;
+}
+
+function DoubleSlitWaveParticleDuality_View(
+  _topFrame,
+  _viewNumber,
+  _libraryPath,
+  _codebasePath
+) {
+  var _view;
+  switch (_viewNumber) {
+    case -10:
+      break; // make Lint happy
+    default:
+    case 0:
+      _view = DoubleSlitWaveParticleDuality_View_0(_topFrame);
+      break;
+  } // end of switch
+
+  if (_codebasePath) _view._2(_codebasePath);
+  if (_libraryPath) _view._4(_libraryPath);
+  return _view;
+} // end of main function
+
+function DoubleSlitWaveParticleDuality_View_0(_topFrame) {
+  var _view = EJSS_CORE.createView(_topFrame);
+
+  _view._reset = function () {
+    _view._1();
+    _view._9(EJSS_INTERFACE.wrappedPanel, "wrappedPanel", _view._topFrame); // EJsS HtmlView.HtmlView Page: declaration of element 'wrappedPanel'
+
+    _view._9(EJSS_INTERFACE.panel, "radioPanel", _view.wrappedPanel); // EJsS HtmlView.HtmlView Page: declaration of element 'radioPanel'
+
+    _view
+      ._9(EJSS_INTERFACE.radioButton, "bothRadio", _view.radioPanel) // EJsS HtmlView.HtmlView Page: declaration of element 'bothRadio'
+      .setProperty("Text", "both"); // EJsS HtmlView.HtmlView Page: setting property 'Text' for element 'bothRadio'
+
+    _view
+      ._9(EJSS_INTERFACE.radioButton, "leftRadio", _view.radioPanel) // EJsS HtmlView.HtmlView Page: declaration of element 'leftRadio'
+      .setProperty("Text", "left"); // EJsS HtmlView.HtmlView Page: setting property 'Text' for element 'leftRadio'
+
+    _view
+      ._9(EJSS_INTERFACE.radioButton, "rightRadio", _view.radioPanel) // EJsS HtmlView.HtmlView Page: declaration of element 'rightRadio'
+      .setProperty("Text", "right"); // EJsS HtmlView.HtmlView Page: setting property 'Text' for element 'rightRadio'
+
+    _view._9(EJSS_INTERFACE.panel, "plotPanel", _view.wrappedPanel); // EJsS HtmlView.HtmlView Page: declaration of element 'plotPanel'
+
+    _view._9(EJSS_INTERFACE.canvas, "canvas", _view.plotPanel); // EJsS HtmlView.HtmlView Page: declaration of element 'canvas'
+
+    _view
+      ._9(EJSS_INTERFACE.panel, "controlPanel", _view.wrappedPanel) // EJsS HtmlView.HtmlView Page: declaration of element 'controlPanel'
+      .setProperty("CSS", { display: "block" }); // EJsS HtmlView.HtmlView Page: setting property 'CSS' for element 'controlPanel'
+
+    _view
+      ._9(EJSS_INTERFACE.panel, "buttonPanel", _view.controlPanel) // EJsS HtmlView.HtmlView Page: declaration of element 'buttonPanel'
+      .setProperty("CSS", { display: "inline-block" }); // EJsS HtmlView.HtmlView Page: setting property 'CSS' for element 'buttonPanel'
+
+    _view
+      ._9(EJSS_INTERFACE.twoStateButton, "runPauseButton", _view.buttonPanel) // EJsS HtmlView.HtmlView Page: declaration of element 'runPauseButton'
+      .setProperty(
+        "ImageOnUrl",
+        "/org/opensourcephysics/resources/controls/images/play.gif"
+      ) // EJsS HtmlView.HtmlView Page: setting property 'ImageOnUrl' for element 'runPauseButton'
+      .setProperty(
+        "ImageOffUrl",
+        "/org/opensourcephysics/resources/controls/images/pause.gif"
+      ); // EJsS HtmlView.HtmlView Page: setting property 'ImageOffUrl' for element 'runPauseButton'
+
+    _view
+      ._9(EJSS_INTERFACE.button, "stepButton", _view.buttonPanel) // EJsS HtmlView.HtmlView Page: declaration of element 'stepButton'
+      .setProperty(
+        "ImageUrl",
+        "/org/opensourcephysics/resources/controls/images/stepforward.gif"
+      ); // EJsS HtmlView.HtmlView Page: setting property 'ImageUrl' for element 'stepButton'
+
+    _view
+      ._9(EJSS_INTERFACE.button, "resetTime", _view.buttonPanel) // EJsS HtmlView.HtmlView Page: declaration of element 'resetTime'
+      .setProperty(
+        "ImageUrl",
+        "/org/opensourcephysics/resources/controls/images/reset1.gif"
+      ); // EJsS HtmlView.HtmlView Page: setting property 'ImageUrl' for element 'resetTime'
+
+    _view
+      ._9(EJSS_INTERFACE.button, "resetButton", _view.buttonPanel) // EJsS HtmlView.HtmlView Page: declaration of element 'resetButton'
+      .setProperty(
+        "ImageUrl",
+        "/org/opensourcephysics/resources/controls/images/reset.gif"
+      ); // EJsS HtmlView.HtmlView Page: setting property 'ImageUrl' for element 'resetButton'
+
+    _view
+      ._9(EJSS_INTERFACE.panel, "ioPanel", _view.controlPanel) // EJsS HtmlView.HtmlView Page: declaration of element 'ioPanel'
+      .setProperty("CSS", { display: "inline-block" }); // EJsS HtmlView.HtmlView Page: setting property 'CSS' for element 'ioPanel'
+
+    _view
+      ._9(EJSS_INTERFACE.panel, "separationPanel", _view.ioPanel) // EJsS HtmlView.HtmlView Page: declaration of element 'separationPanel'
+      .setProperty("CSS", { display: "inline-block" }); // EJsS HtmlView.HtmlView Page: setting property 'CSS' for element 'separationPanel'
+
+    _view
+      ._9(
+        EJSS_INTERFACE.imageAndTextButton,
+        "separationLabel",
+        _view.separationPanel
+      ) // EJsS HtmlView.HtmlView Page: declaration of element 'separationLabel'
+      .setProperty("Text", " d="); // EJsS HtmlView.HtmlView Page: setting property 'Text' for element 'separationLabel'
+
+    _view
+      ._9(EJSS_INTERFACE.numberField, "separationField", _view.separationPanel) // EJsS HtmlView.HtmlView Page: declaration of element 'separationField'
+      .setProperty("Width", 35) // EJsS HtmlView.HtmlView Page: setting property 'Width' for element 'separationField'
+      .setProperty("Format", "0.0"); // EJsS HtmlView.HtmlView Page: setting property 'Format' for element 'separationField'
+
+    _view
+      ._9(EJSS_INTERFACE.panel, "slitWidthPanel", _view.ioPanel) // EJsS HtmlView.HtmlView Page: declaration of element 'slitWidthPanel'
+      .setProperty("CSS", { display: "inline-block" }); // EJsS HtmlView.HtmlView Page: setting property 'CSS' for element 'slitWidthPanel'
+
+    _view
+      ._9(
+        EJSS_INTERFACE.imageAndTextButton,
+        "slitWidthLabel",
+        _view.slitWidthPanel
+      ) // EJsS HtmlView.HtmlView Page: declaration of element 'slitWidthLabel'
+      .setProperty("Text", " D="); // EJsS HtmlView.HtmlView Page: setting property 'Text' for element 'slitWidthLabel'
+
+    _view
+      ._9(EJSS_INTERFACE.numberField, "slitWidhtField", _view.slitWidthPanel) // EJsS HtmlView.HtmlView Page: declaration of element 'slitWidhtField'
+      .setProperty("Width", 35) // EJsS HtmlView.HtmlView Page: setting property 'Width' for element 'slitWidhtField'
+      .setProperty("Format", "0.0"); // EJsS HtmlView.HtmlView Page: setting property 'Format' for element 'slitWidhtField'
+
+    _view
+      ._9(EJSS_INTERFACE.panel, "particlePanel", _view.ioPanel) // EJsS HtmlView.HtmlView Page: declaration of element 'particlePanel'
+      .setProperty("CSS", { display: "inline-block" }); // EJsS HtmlView.HtmlView Page: setting property 'CSS' for element 'particlePanel'
+
+    _view
+      ._9(
+        EJSS_INTERFACE.imageAndTextButton,
+        "particleLabel",
+        _view.particlePanel
+      ) // EJsS HtmlView.HtmlView Page: declaration of element 'particleLabel'
+      .setProperty("Text", " Electrons: "); // EJsS HtmlView.HtmlView Page: setting property 'Text' for element 'particleLabel'
+
+    // Create particle number selector dropdown
+    var particleSelect = document.createElement("select");
+    particleSelect.id = "particleSelector";
+    particleSelect.style.width = "80px";
+    particleSelect.style.fontSize = "12px";
+
+    var options = [
+      { value: 8, text: "8 electrons" },
+      { value: 270, text: "270 electrons" },
+      { value: 2000, text: "2000 electrons" },
+      { value: 6000, text: "6000 electrons" },
+      { value: 12000, text: "12000 electrons" },
+    ];
+
+    for (var i = 0; i < options.length; i++) {
+      var opt = document.createElement("option");
+      opt.value = options[i].value;
+      opt.text = options[i].text;
+      particleSelect.appendChild(opt);
+    }
+
+    document
+      .getElementById(_view.particlePanel.getName())
+      .appendChild(particleSelect);
+
+    // Store reference in _view for later access
+    _view.particleSelector = {
+      getDOMElement: function () {
+        return particleSelect;
+      },
+      getValue: function () {
+        return parseInt(particleSelect.value);
+      },
+      setValue: function (v) {
+        particleSelect.value = v;
+      },
+      setAction: function (actionName, callback) {
+        if (actionName === "OnChange") {
+          particleSelect.onchange = callback;
+        }
+      },
+    };
+
+    _view
+      ._9(EJSS_INTERFACE.panel, "narrativePanel", _view._topFrame) // EJsS HtmlView.HtmlView Page: declaration of element 'narrativePanel'
+      .setProperty(
+        "Html",
+        '<h1>Double Slit Wave-Particle Duality</h1> <p>The Double Slit Wave-Particle Duality Model demonstrates how matter and light display both wave- and particle-like properties in single and  <a href="http://en.wikipedia.org/wiki/Double-slit_experiment">double slit </a> experiments. The simulation shows a detector screen placed behind an aperture with one or two open slits. Particles (electrons or photons) pass through the experiment one at a time and their impact is recorded on the screen. Although it is at first difficult to discern a pattern, a <a href="http://en.wikipedia.org/wiki/Diffraction">diffraction</a> (interference) pattern eventually emerges suggesting that each particle is interfering with itself. The particle seems be going through both slits as if it were a wave but is detected (observed) at only one location as if were a particle. The particle interfering with itself as if it were simultaneously passing through both slits.</p> 		 <p>Classical wave theory predicts the <a href="http://en.wikipedia.org/wiki/Fraunhofer_diffraction">Fraunhofer diffraction</a> pattern I(&#952;) if the viewing distance is large compared to the slit width D or slit separation d.</p> 	 <p><img src="./DoubleSlitWaveParticleDuality/fraunhofer_eqn.gif" /></p> 		 <p>Quantum mechanics interprets I(&#952;) as the probably of finding the particle (photon or electron) striking the screen. Photons or electrons can each behave like <a href="http://en.wikipedia.org/wiki/Wave_particle_duality">particles or waves</a>, but not at the same time.</p> <h3>References</h3> <ul> <li><p>Stefano Frabboni, Cesare Frigeri, Gian Carlo Gazzadi and Giulio Pozzi,  <a href="http://dx.doi.org/10.1119/1.3560429">Two and three slit electron interference and diffraction experiments</a>, Am. J. Phys. 79 (6) 615-618 92011). </p></li> <li><p>Bradley S. Ambrose, Peter S. Shaffer, Richard N. Steinberg and Lillian C. McDermott, <a href="http://dx.doi.org/10.1119/1.19210">An investigation of student understanding of single-slit diffraction and double-slit interference</a>, Am. J. Phys. 67 (2) 146-155 (1999). </p></li> </ul>'
+      ); // EJsS HtmlView.HtmlView Page: setting property 'Html' for element 'narrativePanel'
+  };
+
+  return _view;
+}

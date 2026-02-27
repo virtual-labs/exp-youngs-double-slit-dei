@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Double-Slit Experiment with Water Waves</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to bottom, #f5f5f5, #e0e0e0);
+            min-height: 100vh;
+            display: flex;
+            padding: 0;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            width: 280px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px 20px;
+            box-shadow: 4px 0 15px rgba(0, 0, 0, 0.3);
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 1000;
+            transition: width 0.3s ease, padding 0.3s ease;
+        }
+
+        /* Sidebar Toggle Button */
+        .sidebar-toggle {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 35px;
+            height: 35px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 8px;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+
+        .sidebar-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Collapsed Sidebar State */
+        .sidebar.collapsed {
+            width: 80px;
+            padding: 30px 10px;
+        }
+
+        .sidebar.collapsed h2 {
+            display: none;
+        }
+
+        .sidebar.collapsed .nav-item {
+            padding: 15px 10px;
+        }
+
+        .sidebar.collapsed .nav-item:first-of-type {
+            margin-top: 50px;
+        }
+
+        .sidebar.collapsed .nav-item .experiment-number {
+            font-size: 14px;
+            margin-bottom: 0;
+        }
+
+        .sidebar.collapsed .nav-item .experiment-type {
+            display: none;
+        }
+
+        .sidebar.collapsed .nav-item:hover {
+            transform: translateX(0);
+        }
+
+        .sidebar h2 {
+            font-size: 24px;
+            margin-bottom: 30px;
+            margin-top: 30px;
+            text-align: center;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            transition: opacity 0.3s ease;
+        }
+
+        .sidebar .nav-item {
+            display: block;
+            padding: 15px 20px;
+            margin-bottom: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            text-align: center;
+        }
+
+        .sidebar .nav-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(5px);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .sidebar .nav-item.active {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            border-color: white;
+        }
+
+        .sidebar .nav-item .experiment-number {
+            display: block;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            transition: font-size 0.3s ease;
+        }
+
+        .sidebar .nav-item .experiment-type {
+            font-size: 14px;
+            opacity: 0.9;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Main Content Area */
+        .main-content {
+            margin-left: 280px;
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: margin-left 0.3s ease;
+        }
+
+        .main-content.expanded {
+            margin-left: 80px;
+        }
+
+        .header {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.8;
+        }
+
+        .container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .canvas-container {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .canvas-wrapper {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .canvas-wrapper h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        canvas {
+            border: 3px solid #667eea;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            display: block;
+            width: 100%;
+            background: #000;
+        }
+
+        .controls {
+            background: #f8f9fa;
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: flex-start;
+        }
+
+        .controls h3 {
+            width: 100%;
+            margin-bottom: 5px;
+        }
+
+        .buttons-container {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .sliders-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-left: auto;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .slider-group {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 4px;
+        }
+
+        .slider-group label {
+            white-space: nowrap;
+            font-size: 12px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .control-group {
+            flex: 0 0 auto;
+            margin-bottom: 0;
+        }
+
+        .control-group label {
+            display: block;
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .control-row {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 10px rgba(102, 126, 234, 0.3);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        button.secondary {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        button.stop {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+
+        input[type="range"] {
+            width: 140px;
+            cursor: pointer;
+        }
+
+        .value-display {
+            background: white;
+            padding: 5px 12px;
+            border-radius: 5px;
+            border: 2px solid #667eea;
+            min-width: 60px;
+            text-align: center;
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        .info-box {
+            background: #e7f3ff;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .info-box h4 {
+            color: #667eea;
+            margin-bottom: 8px;
+        }
+
+        .info-box p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        #graphCanvas {
+            background: white !important;
+        }
+
+        .legend {
+            display: flex;
+            gap: 20px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Sidebar Navigation -->
+    <div class="sidebar" id="sidebar">
+        <button class="sidebar-toggle" id="sidebarToggle" title="Toggle Sidebar">☰</button>
+        <h2>Double Slit Experiments</h2>
+        <a href="index.html" class="nav-item">
+            <span class="experiment-number">Exp 1</span>
+            <span class="experiment-type">Classical Particles: sand</span>
+        </a>
+        <a href="exp2.html" class="nav-item active">
+            <span class="experiment-number">Exp 2</span>
+            <span class="experiment-type">Classical Wave: Water</span>
+        </a>
+        <a href="exp3.html" class="nav-item">
+            <span class="experiment-number">Exp 3</span>
+            <span class="experiment-type">Quantum Object: Electron or Photon</span>
+        </a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- <div class="header">
+            <h1>🌊 Double-Slit Experiment with Water Waves</h1>
+            <p>Observe interference patterns created by water waves passing through two slits</p>
+        </div> -->
+
+        <div class="container">
+            <!-- Controls at the top -->
+            <div class="controls">
+                <h3 style="color: #667eea; margin-bottom: 5px;">🎮 Controls</h3>
+
+                <!-- Buttons on the left -->
+                <div class="buttons-container">
+                    <button id="startBtn">▶️ Start</button>
+                    <button id="stopBtn" class="stop">⏸️ Stop</button>
+                    <button id="resetBtn" class="secondary">🔄 Reset</button>
+                </div>
+
+                <!-- Sliders on the right -->
+                <div class="sliders-container">
+                    <div class="slider-group">
+                        <label>Frequency: <span id="freqValue" class="value-display">5 Hz</span></label>
+                        <input type="range" id="frequencySlider" min="1" max="15" value="5" step="0.5">
+                    </div>
+
+                    <div class="slider-group">
+                        <label>Amplitude: <span id="ampValue" class="value-display">20</span></label>
+                        <input type="range" id="amplitudeSlider" min="5" max="40" value="20" step="1">
+                    </div>
+
+                    <div class="slider-group">
+                        <label>Slit Sep: <span id="slitValue" class="value-display">80 px</span></label>
+                        <input type="range" id="slitSlider" min="40" max="150" value="80" step="5">
+                    </div>
+
+                    <div class="slider-group">
+                        <label>Slit Width: <span id="widthValue" class="value-display">30 px</span></label>
+                        <input type="range" id="widthSlider" min="15" max="60" value="30" step="5">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Simulation canvases -->
+            <div class="canvas-container">
+                <div class="canvas-wrapper">
+                    <h3>Water Wave Simulation</h3>
+                    <canvas id="waveCanvas" width="600" height="400"></canvas>
+                    <div class="legend">
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #00ff00;"></div>
+                            <span>Needle (Wave Source)</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #ffffff;"></div>
+                            <span>Wall with Slits</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #ffff00;"></div>
+                            <span>Screen</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="canvas-wrapper">
+                    <h3>Intensity Graph</h3>
+                    <canvas id="graphCanvas" width="600" height="400"></canvas>
+                    <button id="showGraphBtn" class="secondary" style="margin-top: 10px;">
+                        📊 Show Intensity Graph
+                    </button>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h4>🔬 Procedure:</h4>
+                <ol style="margin: 10px 0 0 20px; line-height: 1.8; color: #555;">
+                    <li><strong>Start the Simulation:</strong> Click the "Start" button to begin the wave oscillation
+                        from the needle source.</li>
+                    <li><strong>Observe Wave Propagation:</strong> Watch as circular waves emanate from the oscillating
+                        needle and travel toward the wall with two slits.</li>
+                    <li><strong>Wave Diffraction:</strong> Notice how waves pass through both slits and spread out
+                        (diffract) on the other side.</li>
+                    <li><strong>Interference Pattern:</strong> Observe the interference pattern forming on the screen as
+                        waves from both slits overlap - bright bands appear where waves add up (constructive
+                        interference) and dark bands where they cancel (destructive interference).</li>
+                    <li><strong>Adjust Parameters:</strong> Use the sliders to modify wave frequency, amplitude, slit
+                        separation, and slit width to see how they affect the interference pattern.</li>
+                    <li><strong>View Intensity Graph:</strong> Click "Show Intensity Graph" to visualize the wave
+                        intensity distribution across the screen.</li>
+                    <li><strong>Reset:</strong> Use the "Reset" button to restart the simulation with default settings.
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <script>
+            // Canvas setup
+            const waveCanvas = document.getElementById('waveCanvas');
+            const waveCtx = waveCanvas.getContext('2d');
+            const graphCanvas = document.getElementById('graphCanvas');
+            const graphCtx = graphCanvas.getContext('2d');
+
+            // Controls
+            const startBtn = document.getElementById('startBtn');
+            const stopBtn = document.getElementById('stopBtn');
+            const resetBtn = document.getElementById('resetBtn');
+            const showGraphBtn = document.getElementById('showGraphBtn');
+            const frequencySlider = document.getElementById('frequencySlider');
+            const amplitudeSlider = document.getElementById('amplitudeSlider');
+            const slitSlider = document.getElementById('slitSlider');
+            const widthSlider = document.getElementById('widthSlider');
+
+            // Simulation state
+            let isRunning = false;
+            let time = 0;
+            let animationId = null;
+
+            // Parameters
+            let frequency = 5;
+            let amplitude = 20;
+            let slitSeparation = 80;
+            let slitWidth = 30;
+
+            // Positions
+            const needleX = 100;
+            const needleY = waveCanvas.height / 2;
+            const wallX = 300;
+            const screenX = 550;
+
+            // Wave data for intensity calculation
+            let screenIntensity = new Array(waveCanvas.height).fill(0);
+
+            // Event Listeners
+            startBtn.addEventListener('click', startSimulation);
+            stopBtn.addEventListener('click', stopSimulation);
+            resetBtn.addEventListener('click', resetSimulation);
+            showGraphBtn.addEventListener('click', drawIntensityGraph);
+
+            frequencySlider.addEventListener('input', (e) => {
+                frequency = parseFloat(e.target.value);
+                document.getElementById('freqValue').textContent = frequency + ' Hz';
+            });
+
+            amplitudeSlider.addEventListener('input', (e) => {
+                amplitude = parseFloat(e.target.value);
+                document.getElementById('ampValue').textContent = amplitude;
+            });
+
+            slitSlider.addEventListener('input', (e) => {
+                slitSeparation = parseFloat(e.target.value);
+                document.getElementById('slitValue').textContent = slitSeparation + ' px';
+            });
+
+            widthSlider.addEventListener('input', (e) => {
+                slitWidth = parseFloat(e.target.value);
+                document.getElementById('widthValue').textContent = slitWidth + ' px';
+            });
+
+            function startSimulation() {
+                if (!isRunning) {
+                    isRunning = true;
+                    animate();
+                }
+            }
+
+            function stopSimulation() {
+                isRunning = false;
+                if (animationId) {
+                    cancelAnimationFrame(animationId);
+                }
+            }
+
+            function resetSimulation() {
+                stopSimulation();
+                time = 0;
+                screenIntensity.fill(0);
+                drawScene();
+            }
+
+            function animate() {
+                if (!isRunning) return;
+
+                time += 0.05;
+                drawScene();
+                animationId = requestAnimationFrame(animate);
+            }
+
+            function drawScene() {
+                // Draw water background with gradient (realistic water tank)
+                const waterGradient = waveCtx.createLinearGradient(0, 0, 0, waveCanvas.height);
+                waterGradient.addColorStop(0, '#001a33');
+                waterGradient.addColorStop(0.5, '#003366');
+                waterGradient.addColorStop(1, '#001a33');
+                waveCtx.fillStyle = waterGradient;
+                waveCtx.fillRect(0, 0, waveCanvas.width, waveCanvas.height);
+
+                // Draw waves emanating from needle
+                drawWaves();
+
+                // Draw needle
+                drawNeedle();
+
+                // Draw wall with slits
+                drawWall();
+
+                // Draw screen
+                drawScreen();
+
+                // Calculate and accumulate intensity
+                calculateIntensity();
+            }
+
+            function drawWaves() {
+                const waveSpeed = 2;
+                const wavelength = 40;
+                const numWaves = 15;
+
+                for (let i = 0; i < numWaves; i++) {
+                    const radius = (time * waveSpeed * 10 - i * wavelength) % (waveCanvas.width * 1.5);
+
+                    if (radius > 0) {
+                        // Calculate wave amplitude decay with distance
+                        const decay = Math.max(0, 1 - radius / (waveCanvas.width * 0.8));
+                        const alpha = decay * 0.6;
+
+                        // Draw needle waves ONLY up to the wall (not beyond)
+                        const maxRadius = wallX - needleX - 10; // Stop before wall
+                        if (radius <= maxRadius && radius > 3) { // Ensure radius is large enough for gradient
+                            // Create realistic water wave effect with gradient
+                            const innerRadius = Math.max(0, radius - 2);
+                            const outerRadius = radius + 2;
+
+                            const gradient = waveCtx.createRadialGradient(
+                                needleX, needleY, innerRadius,
+                                needleX, needleY, outerRadius
+                            );
+                            gradient.addColorStop(0, `rgba(100, 200, 255, ${alpha * 0.3})`);
+                            gradient.addColorStop(0.5, `rgba(50, 150, 255, ${alpha})`);
+                            gradient.addColorStop(1, `rgba(100, 200, 255, ${alpha * 0.3})`);
+
+                            waveCtx.strokeStyle = gradient;
+                            waveCtx.lineWidth = 4.5; // Increased from 3 to 4.5
+                            waveCtx.beginPath();
+                            waveCtx.arc(needleX, needleY, radius, 0, Math.PI * 2);
+                            waveCtx.stroke();
+
+                            // Add inner shadow for depth (only if radius is large enough)
+                            if (radius > 2) {
+                                waveCtx.strokeStyle = `rgba(150, 220, 255, ${alpha * 0.4})`;
+                                waveCtx.lineWidth = 1.5; // Increased from 1 to 1.5
+                                waveCtx.beginPath();
+                                waveCtx.arc(needleX, needleY, radius - 1, 0, Math.PI * 2);
+                                waveCtx.stroke();
+                            }
+                        }
+
+                        // Draw waves passing through slits (RED waves - these go to screen)
+                        drawSlitWaves(radius, alpha);
+                    }
+                }
+            }
+
+            function drawSlitWaves(radius, alpha) {
+                const slit1Y = needleY - slitSeparation / 2;
+                const slit2Y = needleY + slitSeparation / 2;
+
+                // Check if wave reached the slits
+                const distToWall = Math.abs(wallX - needleX);
+
+                if (radius >= distToWall) {
+                    const slitRadius = radius - distToWall;
+
+                    // Only draw slit waves that haven't reached the screen yet
+                    const maxSlitRadius = screenX - wallX;
+
+                    // Waves from slit 1 (RED - realistic water wave from slit)
+                    if (Math.abs(slit1Y - needleY) <= radius && slitRadius <= maxSlitRadius && slitRadius > 3) {
+                        // Create gradient for realistic wave effect
+                        const innerRadius1 = Math.max(0, slitRadius - 2);
+                        const outerRadius1 = slitRadius + 2;
+
+                        const gradient1 = waveCtx.createRadialGradient(
+                            wallX, slit1Y, innerRadius1,
+                            wallX, slit1Y, outerRadius1
+                        );
+                        gradient1.addColorStop(0, `rgba(255, 150, 150, ${alpha * 0.2})`);
+                        gradient1.addColorStop(0.5, `rgba(255, 80, 80, ${alpha * 0.6})`);
+                        gradient1.addColorStop(1, `rgba(255, 150, 150, ${alpha * 0.2})`);
+
+                        waveCtx.strokeStyle = gradient1;
+                        waveCtx.lineWidth = 4; // Increased from 2.5 to 4
+                        waveCtx.beginPath();
+                        waveCtx.arc(wallX, slit1Y, slitRadius, 0, Math.PI * 2);
+                        waveCtx.stroke();
+
+                        // Inner highlight (only if radius is large enough)
+                        if (slitRadius > 2) {
+                            waveCtx.strokeStyle = `rgba(255, 200, 200, ${alpha * 0.3})`;
+                            waveCtx.lineWidth = 1.5; // Increased from 1 to 1.5
+                            waveCtx.beginPath();
+                            waveCtx.arc(wallX, slit1Y, slitRadius - 1, 0, Math.PI * 2);
+                            waveCtx.stroke();
+                        }
+                    }
+
+                    // Waves from slit 2 (RED - realistic water wave from slit)
+                    if (Math.abs(slit2Y - needleY) <= radius && slitRadius <= maxSlitRadius && slitRadius > 3) {
+                        // Create gradient for realistic wave effect
+                        const innerRadius2 = Math.max(0, slitRadius - 2);
+                        const outerRadius2 = slitRadius + 2;
+
+                        const gradient2 = waveCtx.createRadialGradient(
+                            wallX, slit2Y, innerRadius2,
+                            wallX, slit2Y, outerRadius2
+                        );
+                        gradient2.addColorStop(0, `rgba(255, 150, 150, ${alpha * 0.2})`);
+                        gradient2.addColorStop(0.5, `rgba(255, 80, 80, ${alpha * 0.6})`);
+                        gradient2.addColorStop(1, `rgba(255, 150, 150, ${alpha * 0.2})`);
+
+                        waveCtx.strokeStyle = gradient2;
+                        waveCtx.lineWidth = 4; // Increased from 2.5 to 4
+                        waveCtx.beginPath();
+                        waveCtx.arc(wallX, slit2Y, slitRadius, 0, Math.PI * 2);
+                        waveCtx.stroke();
+
+                        // Inner highlight (only if radius is large enough)
+                        if (slitRadius > 2) {
+                            waveCtx.strokeStyle = `rgba(255, 200, 200, ${alpha * 0.3})`;
+                            waveCtx.lineWidth = 1.5; // Increased from 1 to 1.5
+                            waveCtx.beginPath();
+                            waveCtx.arc(wallX, slit2Y, slitRadius - 1, 0, Math.PI * 2);
+                            waveCtx.stroke();
+                        }
+                    }
+                }
+            }
+
+            function drawNeedle() {
+                // Needle oscillating (vertical vibration)
+                const oscillation = Math.sin(time * frequency) * 5;
+
+                // Draw needle holder/rod above water
+                waveCtx.strokeStyle = '#888';
+                waveCtx.lineWidth = 4;
+                waveCtx.beginPath();
+                waveCtx.moveTo(needleX, 0);
+                waveCtx.lineTo(needleX, needleY + oscillation - 15);
+                waveCtx.stroke();
+
+                // Draw needle tip in water (realistic metal tip)
+                const needleTipGradient = waveCtx.createRadialGradient(
+                    needleX, needleY + oscillation, 0,
+                    needleX, needleY + oscillation, 12
+                );
+                needleTipGradient.addColorStop(0, '#ffff00');
+                needleTipGradient.addColorStop(0.5, '#00ff00');
+                needleTipGradient.addColorStop(1, '#00cc00');
+
+                waveCtx.fillStyle = needleTipGradient;
+                waveCtx.beginPath();
+                waveCtx.arc(needleX, needleY + oscillation, 10, 0, Math.PI * 2);
+                waveCtx.fill();
+
+                // Metallic shine effect
+                waveCtx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+                waveCtx.beginPath();
+                waveCtx.arc(needleX - 2, needleY + oscillation - 2, 4, 0, Math.PI * 2);
+                waveCtx.fill();
+
+                // Outer glow
+                waveCtx.strokeStyle = 'rgba(0, 255, 0, 0.4)';
+                waveCtx.lineWidth = 2;
+                waveCtx.beginPath();
+                waveCtx.arc(needleX, needleY + oscillation, 13, 0, Math.PI * 2);
+                waveCtx.stroke();
+
+                // Needle label with background
+                waveCtx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+                waveCtx.fillRect(needleX - 28, needleY - 35, 56, 18);
+                waveCtx.fillStyle = '#00ff00';
+                waveCtx.font = 'bold 12px Arial';
+                waveCtx.fillText('Needle', needleX - 22, needleY - 22);
+            }
+
+            function drawWall() {
+                const slit1Y = needleY - slitSeparation / 2;
+                const slit2Y = needleY + slitSeparation / 2;
+
+                // Draw wall with 3D effect and metallic gradient
+                const wallGradient = waveCtx.createLinearGradient(wallX - 10, 0, wallX + 10, 0);
+                wallGradient.addColorStop(0, '#999');
+                wallGradient.addColorStop(0.3, '#fff');
+                wallGradient.addColorStop(0.7, '#fff');
+                wallGradient.addColorStop(1, '#999');
+
+                waveCtx.fillStyle = wallGradient;
+
+                // Top section
+                waveCtx.fillRect(wallX - 8, 0, 16, slit1Y - slitWidth / 2);
+                // Middle section (between slits)
+                waveCtx.fillRect(wallX - 8, slit1Y + slitWidth / 2, 16, slit2Y - slit1Y - slitWidth);
+                // Bottom section
+                waveCtx.fillRect(wallX - 8, slit2Y + slitWidth / 2, 16, waveCanvas.height - (slit2Y + slitWidth / 2));
+
+                // Add shadow/3D effect
+                waveCtx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+                waveCtx.fillRect(wallX + 8, 0, 4, slit1Y - slitWidth / 2);
+                waveCtx.fillRect(wallX + 8, slit1Y + slitWidth / 2, 4, slit2Y - slit1Y - slitWidth);
+                waveCtx.fillRect(wallX + 8, slit2Y + slitWidth / 2, 4, waveCanvas.height - (slit2Y + slitWidth / 2));
+
+                // Highlight slits with glow
+                waveCtx.strokeStyle = 'rgba(100, 200, 255, 0.5)';
+                waveCtx.lineWidth = 2;
+                waveCtx.strokeRect(wallX - 8, slit1Y - slitWidth / 2, 16, slitWidth);
+                waveCtx.strokeRect(wallX - 8, slit2Y - slitWidth / 2, 16, slitWidth);
+
+                // Wall label with background
+                waveCtx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+                waveCtx.fillRect(wallX - 22, 8, 44, 18);
+                waveCtx.fillStyle = '#fff';
+                waveCtx.font = 'bold 12px Arial';
+                waveCtx.fillText('Wall', wallX - 15, 20);
+            }
+
+            function drawScreen() {
+                // Draw screen with gradient for 3D effect
+                const screenGradient = waveCtx.createLinearGradient(screenX - 8, 0, screenX + 8, 0);
+                screenGradient.addColorStop(0, '#ffaa00');
+                screenGradient.addColorStop(0.3, '#ffff00');
+                screenGradient.addColorStop(0.7, '#ffff00');
+                screenGradient.addColorStop(1, '#ffaa00');
+
+                waveCtx.fillStyle = screenGradient;
+                waveCtx.fillRect(screenX - 4, 0, 8, waveCanvas.height);
+
+                // Add highlight
+                waveCtx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+                waveCtx.fillRect(screenX - 3, 0, 2, waveCanvas.height);
+
+                // Add shadow
+                waveCtx.fillStyle = 'rgba(0, 0, 0, 0.2)';
+                waveCtx.fillRect(screenX + 2, 0, 2, waveCanvas.height);
+
+                // Screen label with background
+                waveCtx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+                waveCtx.fillRect(screenX - 32, 8, 64, 18);
+                waveCtx.fillStyle = '#ffff00';
+                waveCtx.font = 'bold 12px Arial';
+                waveCtx.fillText('Screen', screenX - 25, 20);
+
+                // Draw intensity pattern on screen
+                drawScreenPattern();
+            }
+
+            function calculateIntensity() {
+                const slit1Y = needleY - slitSeparation / 2;
+                const slit2Y = needleY + slitSeparation / 2;
+                const k = 2 * Math.PI / 40; // wave number
+                const centerY = needleY; // Center of screen
+
+                for (let y = 0; y < waveCanvas.height; y++) {
+                    // Calculate path difference from both slits
+                    const r1 = Math.sqrt(Math.pow(screenX - wallX, 2) + Math.pow(y - slit1Y, 2));
+                    const r2 = Math.sqrt(Math.pow(screenX - wallX, 2) + Math.pow(y - slit2Y, 2));
+
+                    const pathDiff = r2 - r1;
+                    const phase = k * pathDiff;
+
+                    // Classic double-slit interference formula: I = 4 * I0 * cos²(δ/2)
+                    // where δ is the phase difference
+                    const cosTerm = Math.cos(phase / 2);
+                    let intensity = 4 * Math.pow(cosTerm, 2);
+
+                    // Apply envelope function - Gaussian decay from center
+                    // This creates the pattern: highest at center, decreasing on sides
+                    const distanceFromCenter = Math.abs(y - centerY);
+                    const envelopeWidth = waveCanvas.height / 3; // Adjust spread
+                    const envelope = Math.exp(-Math.pow(distanceFromCenter / envelopeWidth, 2));
+
+                    intensity = intensity * envelope;
+
+                    // Accumulate intensity over time for better visualization
+                    screenIntensity[y] = screenIntensity[y] * 0.95 + intensity * 0.05;
+                }
+            }
+
+            function drawScreenPattern() {
+                const maxIntensity = Math.max(...screenIntensity);
+
+                for (let y = 0; y < waveCanvas.height; y++) {
+                    const normalized = screenIntensity[y] / (maxIntensity || 1);
+
+                    // Use warm color gradient for interference pattern (more realistic)
+                    const r = Math.floor(100 + normalized * 155);
+                    const g = Math.floor(50 + normalized * 205);
+                    const b = Math.floor(normalized * 100);
+
+                    waveCtx.fillStyle = `rgba(${r}, ${g}, ${b}, ${0.3 + normalized * 0.7})`;
+                    waveCtx.fillRect(screenX - 3, y, 6, 1);
+
+                    // Add bright spots at maxima
+                    if (normalized > 0.7) {
+                        waveCtx.fillStyle = `rgba(255, 255, 200, ${normalized * 0.5})`;
+                        waveCtx.fillRect(screenX - 4, y, 8, 1);
+                    }
+                }
+            }
+
+            function drawIntensityGraph() {
+                // Clear graph canvas
+                graphCtx.fillStyle = '#fff';
+                graphCtx.fillRect(0, 0, graphCanvas.width, graphCanvas.height);
+
+                // Draw grid
+                drawGrid();
+
+                // Draw axes
+                drawAxes();
+
+                // Draw intensity curve
+                drawIntensityCurve();
+
+                // Draw labels
+                drawLabels();
+            }
+
+            function drawGrid() {
+                graphCtx.strokeStyle = '#e0e0e0';
+                graphCtx.lineWidth = 1;
+
+                // Vertical grid lines
+                for (let x = 0; x <= graphCanvas.width; x += 50) {
+                    graphCtx.beginPath();
+                    graphCtx.moveTo(x, 0);
+                    graphCtx.lineTo(x, graphCanvas.height);
+                    graphCtx.stroke();
+                }
+
+                // Horizontal grid lines
+                for (let y = 0; y <= graphCanvas.height; y += 50) {
+                    graphCtx.beginPath();
+                    graphCtx.moveTo(0, y);
+                    graphCtx.lineTo(graphCanvas.width, y);
+                    graphCtx.stroke();
+                }
+            }
+
+            function drawAxes() {
+                graphCtx.strokeStyle = '#333';
+                graphCtx.lineWidth = 2;
+
+                // Y-axis
+                graphCtx.beginPath();
+                graphCtx.moveTo(50, 20);
+                graphCtx.lineTo(50, graphCanvas.height - 30);
+                graphCtx.stroke();
+
+                // X-axis
+                graphCtx.beginPath();
+                graphCtx.moveTo(50, graphCanvas.height - 30);
+                graphCtx.lineTo(graphCanvas.width - 20, graphCanvas.height - 30);
+                graphCtx.stroke();
+            }
+
+            function drawIntensityCurve() {
+                const maxIntensity = Math.max(...screenIntensity);
+                const graphHeight = (graphCanvas.height - 50) * 0.7; // Reduced to 70% to show lower peaks
+                const graphWidth = graphCanvas.width - 70;
+
+                graphCtx.strokeStyle = '#667eea';
+                graphCtx.lineWidth = 3;
+                graphCtx.beginPath();
+
+                for (let i = 0; i < screenIntensity.length; i++) {
+                    const x = 50 + (i / screenIntensity.length) * graphWidth;
+                    const normalized = screenIntensity[i] / (maxIntensity || 1);
+                    const y = graphCanvas.height - 30 - (normalized * graphHeight);
+
+                    if (i === 0) {
+                        graphCtx.moveTo(x, y);
+                    } else {
+                        graphCtx.lineTo(x, y);
+                    }
+                }
+
+                graphCtx.stroke();
+
+                // Fill area under curve
+                graphCtx.fillStyle = 'rgba(102, 126, 234, 0.2)';
+                graphCtx.lineTo(graphCanvas.width - 20, graphCanvas.height - 30);
+                graphCtx.lineTo(50, graphCanvas.height - 30);
+                graphCtx.closePath();
+                graphCtx.fill();
+            }
+
+            function drawLabels() {
+                graphCtx.fillStyle = '#333';
+                graphCtx.font = 'bold 14px Arial';
+
+                // Y-axis label
+                graphCtx.save();
+                graphCtx.translate(15, graphCanvas.height / 2);
+                graphCtx.rotate(-Math.PI / 2);
+                graphCtx.textAlign = 'center';
+                graphCtx.fillText('Intensity', 0, 0);
+                graphCtx.restore();
+
+                // X-axis label
+                graphCtx.textAlign = 'center';
+                graphCtx.fillText('Screen Position (Y-axis)', graphCanvas.width / 2, graphCanvas.height - 5);
+
+                // Title
+                graphCtx.font = 'bold 16px Arial';
+                graphCtx.fillStyle = '#667eea';
+                graphCtx.fillText('Interference Pattern Intensity', graphCanvas.width / 2, 15);
+
+                // Max intensity markers
+                graphCtx.font = '10px Arial';
+                graphCtx.fillStyle = '#666';
+                graphCtx.textAlign = 'right';
+                graphCtx.fillText('Max', 45, 25);
+                graphCtx.fillText('0', 45, graphCanvas.height - 30);
+            }
+
+            // Initial draw
+            drawScene();
+        </script>
+    </div>
+    <script>
+        // Sidebar Toggle Functionality
+        document.getElementById('sidebarToggle').addEventListener('click', function () {
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.querySelector('.main-content');
+
+            sidebar.classList.toggle('collapsed');
+            mainContent.classList.toggle('expanded');
+
+            if (sidebar.classList.contains('collapsed')) {
+                this.textContent = '→';
+                this.title = 'Expand Sidebar';
+            } else {
+                this.textContent = '☰';
+                this.title = 'Collapse Sidebar';
+            }
+        });
+    </script>
+</body>
+
+</html>
