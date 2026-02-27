@@ -10,19 +10,20 @@ When light interacts with obstacles or openings comparable to its wavelength (**
 
 <div align="center">
 
-![Fig. 1 Diffraction Pattern by Single-slit](images/theory_fig1.png)
+![Fig. 1 Diffraction Pattern by Single-Slit](images/theory_fig1.png)
 
-*Fig. 1 Diffraction Pattern by Single-slit*
+*Fig. 1 Diffraction Pattern by Single-Slit*
 
 </div>
 
-### Key properties of waves that light exhibits:
+###  Phenomena explained through the wave nature of light:
+* Reflection
+* Refraction  
+* Dispersion
 * Diffraction
 * Interference
-* Superposition
 * Polarization
 
-These behaviours form the basis of this experiment.
 
 ---
 
@@ -55,7 +56,7 @@ If the screen is at distance **D** from the slit:
     * Narrower slit → wider diffraction pattern.
     * Longer wavelength → greater spreading.
 
-> **Note:** This experiment demonstrates the wave nature of light and diffraction due to a double aperture.
+> **Note:** This experiment demonstrates the wave nature of light.
 
 ---
 
@@ -115,7 +116,7 @@ This modern experiment shows that matter also behaves like waves (matter waves o
 * Electrons fired one at a time still produce an interference pattern, which shows electrons behave like probability waves.
 * If we measure which slit the electron passes through **(with detector):**
     * The interference pattern *disappears*.
-    * Only two clump patterns remain (each corresponding to one slit).
+    * Only two humps remain (each corresponding to one slit-classically expected).
     * The electron behaves like a classical particle.
     * Measurement collapses the wave function.
 
